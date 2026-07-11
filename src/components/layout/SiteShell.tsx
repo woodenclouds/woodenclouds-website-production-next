@@ -16,6 +16,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isContact = pathname === "/contact";
   const isBlogDetail = pathname.startsWith("/blog/");
+  const isTechnology =
+    pathname === "/services/technology" || pathname.startsWith("/services/technology/");
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
@@ -44,10 +46,17 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           isDarkPage
             ? pathname === "/solutions"
               ? "min-h-screen bg-[#0a1f38]"
-              : isWorks || isPartner || isAbout || isDedicatedTeam || isContact || isBlogDetail
+              : isWorks ||
+                  isPartner ||
+                  isAbout ||
+                  isDedicatedTeam ||
+                  isContact ||
+                  isBlogDetail
                 ? "min-h-screen bg-[#05070b] text-white"
                 : "min-h-screen bg-black text-white"
-            : "min-h-screen bg-paper text-ink"
+            : isTechnology
+              ? "min-h-screen bg-white text-ink"
+              : "min-h-screen bg-paper text-ink"
         }
       >
         <Navbar />
