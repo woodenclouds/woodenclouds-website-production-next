@@ -8,56 +8,39 @@ export const metadata: Metadata = { title: "Technology" };
 export default function TechnologyPage() {
   return (
     <>
-      <Breadcrumb
-        items={[
-          { label: "Services", href: "/services" },
-          { label: "Technology" },
-        ]}
-      />
-      <section className="section-padding">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <h2 className="fz-40 fw-300 mb-30">Technology</h2>
-              <img
-                src="/assets/user/imgs/services/technology-bg.jpg"
-                alt="Technology"
-                className="radius-10 mb-30"
-              />
-            </div>
-            <div className="col-lg-5 offset-lg-1 valign">
-              <div>
-                <h3 className="fw-300 mb-20">
-                  Empower Your Business with Innovative Technology Solutions
-                </h3>
-                <p>
-                  At Woodenclouds, we specialize in crafting bespoke technology solutions — from
-                  website development and mobile app creation to custom software solutions and
-                  e-commerce platforms.
-                </p>
-              </div>
-            </div>
+      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Technology" }]} />
+      <section className="wc-section">
+        <div className="wc-container grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <h2 className="mb-6 text-4xl font-light">Technology</h2>
+            <img
+              src="/assets/user/imgs/services/technology-bg.jpg"
+              alt="Technology"
+              className="rounded-xl"
+            />
+          </div>
+          <div>
+            <h3 className="mb-4 text-2xl font-light">
+              Empower Your Business with Innovative Technology Solutions
+            </h3>
+            <p className="text-sm font-light leading-relaxed text-muted">
+              At Woodenclouds, we specialize in crafting bespoke technology solutions — from website
+              development and mobile app creation to custom software solutions and e-commerce
+              platforms.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="serv-box section-padding pt-0">
-        <div className="container">
-          <div className="row">
-            {technologyServices.map((card) => (
-              <div className="col-lg-4 col-md-6" key={card.title}>
-                <Link href={card.href}>
-                  <div className="serv-item md-mb50 radius-10" style={{ marginBottom: 40 }}>
-                    <div className="mb-20">
-                      <img src={card.image} alt={card.title} />
-                    </div>
-                    <h5 className="fz-22 mb-10 fw-300">{card.title}</h5>
-                    <p>{card.description}</p>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+      <section className="wc-section pt-0">
+        <div className="wc-container grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {technologyServices.map((card) => (
+            <Link key={card.title} href={card.href} className="group rounded-xl bg-white p-5">
+              <img src={card.image} alt={card.title} className="mb-5 w-full rounded-lg object-contain" />
+              <h5 className="mb-2 text-xl font-light">{card.title}</h5>
+              <p className="text-sm font-light text-muted">{card.description}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

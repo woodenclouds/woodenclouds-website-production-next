@@ -26,7 +26,7 @@ export function HomeHero() {
   return (
     <header className="wc-hero">
       <Swiper
-        className="wc-hero-swiper"
+        className="h-full"
         modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
@@ -45,14 +45,14 @@ export function HomeHero() {
               <img src={slide.image} alt={slide.alt} />
               <div className="wc-hero-overlay" />
             </div>
-            <div className="container wc-hero-content">
+            <div className="wc-container wc-hero-content">
               <div className="wc-hero-copy">
                 <p className="wc-hero-brand">Woodenclouds</p>
                 <h1>{slide.headline}</h1>
                 <p className="wc-hero-lede">{slide.lede}</p>
                 <Link href={slide.cta.href} className="wc-hero-cta">
                   {slide.cta.label}
-                  <span aria-hidden="true">→</span>
+                  <span aria-hidden>→</span>
                 </Link>
               </div>
             </div>
@@ -61,47 +61,45 @@ export function HomeHero() {
       </Swiper>
 
       <div className="wc-hero-chrome">
-        <div className="wc-hero-progress" aria-hidden="true">
-          <span
-            key={progressKey}
-            className="wc-hero-progress-bar is-running"
-            id="wcHeroProgressBar"
-          />
-        </div>
-        <div className="wc-hero-chrome-row">
-          <button
-            type="button"
-            className="wc-hero-nav wc-hero-prev"
-            aria-label="Previous slide"
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
-            ←
-          </button>
-          <span className="wc-hero-index" id="wcHeroIndex">
-            {pad(index + 1)} / {pad(total)}
-          </span>
-          <button
-            type="button"
-            className="wc-hero-nav wc-hero-next"
-            aria-label="Next slide"
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            →
-          </button>
-          <button
-            type="button"
-            className="wc-hero-scroll"
-            aria-label="Scroll to services"
-            onClick={() => {
-              document.querySelector(".serv-box")?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }}
-          >
-            <span className="wc-hero-scroll-line" />
-            Scroll
-          </button>
+        <div className="wc-container">
+          <div className="wc-hero-progress" aria-hidden>
+            <span key={progressKey} className="wc-hero-progress-bar is-running" />
+          </div>
+          <div className="wc-hero-chrome-row">
+            <button
+              type="button"
+              className="wc-hero-nav"
+              aria-label="Previous slide"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              ←
+            </button>
+            <span className="wc-hero-index">
+              {pad(index + 1)} / {pad(total)}
+            </span>
+            <button
+              type="button"
+              className="wc-hero-nav"
+              aria-label="Next slide"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              →
+            </button>
+            <button
+              type="button"
+              className="wc-hero-scroll"
+              aria-label="Scroll to services"
+              onClick={() => {
+                document.getElementById("services")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+            >
+              <span className="wc-hero-scroll-line" />
+              Scroll
+            </button>
+          </div>
         </div>
       </div>
     </header>

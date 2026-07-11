@@ -30,25 +30,23 @@ export default async function TechSubPage({ params }: Props) {
           { label: page.title },
         ]}
       />
-      <section className="section-padding">
-        <div className="container">
-          <h3 className="fw-300 mb-20">{page.title}</h3>
-          <p className="mb-50" style={{ maxWidth: 780 }}>
+      <section className="wc-section">
+        <div className="wc-container">
+          <h3 className="mb-4 text-3xl font-light md:text-4xl">{page.title}</h3>
+          <p className="mb-12 max-w-3xl text-sm font-light leading-relaxed text-muted">
             {page.description}
           </p>
 
           {page.logos.length > 0 && (
             <>
-              <h4 className="fw-300 mb-30">Technologies we used</h4>
-              <div className="row mb-50">
+              <h4 className="mb-6 text-xl font-light">Technologies we used</h4>
+              <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                 {page.logos.map((logo) => (
-                  <div className="col-md-3 col-6" key={logo.alt}>
-                    <div
-                      className="item mb-30 text-center"
-                      style={{ background: "#fff", padding: 20, borderRadius: 10 }}
-                    >
-                      <img src={logo.src} alt={logo.alt} style={{ maxHeight: 56, objectFit: "contain" }} />
-                    </div>
+                  <div
+                    key={logo.alt}
+                    className="flex aspect-[5/3] items-center justify-center rounded-xl bg-white p-5"
+                  >
+                    <img src={logo.src} alt={logo.alt} className="max-h-12 object-contain" />
                   </div>
                 ))}
               </div>
@@ -57,19 +55,17 @@ export default async function TechSubPage({ params }: Props) {
 
           {page.platforms && (
             <>
-              <h4 className="fw-300 mb-30">Platforms</h4>
-              <div className="row mb-50">
+              <h4 className="mb-6 text-xl font-light">Platforms</h4>
+              <div className="mb-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {page.platforms.map((platform) => (
-                  <div className="col-lg-3 col-md-6" key={platform.title}>
-                    <div className="item mb-30" style={{ background: "#fff", padding: 24, borderRadius: 10 }}>
-                      <img
-                        src={platform.image}
-                        alt={platform.title}
-                        style={{ maxHeight: 48, marginBottom: 16, objectFit: "contain" }}
-                      />
-                      <h6 className="fw-400 mb-10">{platform.title}</h6>
-                      <p className="fz-14">{platform.description}</p>
-                    </div>
+                  <div key={platform.title} className="rounded-xl bg-white p-6">
+                    <img
+                      src={platform.image}
+                      alt={platform.title}
+                      className="mb-4 max-h-10 object-contain"
+                    />
+                    <h6 className="mb-2 font-medium">{platform.title}</h6>
+                    <p className="text-sm font-light text-muted">{platform.description}</p>
                   </div>
                 ))}
               </div>
@@ -77,7 +73,6 @@ export default async function TechSubPage({ params }: Props) {
           )}
         </div>
       </section>
-
       <FaqList faqs={page.faqs} />
       <EnquireCta />
     </>

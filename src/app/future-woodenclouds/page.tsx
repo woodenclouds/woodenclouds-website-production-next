@@ -14,88 +14,94 @@ export default function FutureWoodencloudsPage() {
   return (
     <>
       <PageHeader title="Future Woodenclouds" />
-      <section className="section-padding">
-        <div className="container">
-          <div className="row mb-80">
-            <div className="col-lg-6">
-              <div className="row">
-                <div className="col-6">
-                  <img src="/assets/user/imgs/about/about-img1.jpg" alt="" className="radius-10 mb-20" />
-                </div>
-                <div className="col-6">
-                  <img src="/assets/user/imgs/team-work.jpg" alt="" className="radius-10 mb-20" />
-                </div>
-              </div>
+      <section className="wc-section pt-0">
+        <div className="wc-container space-y-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="grid grid-cols-2 gap-4">
+              <img src="/assets/user/imgs/about/about-img1.jpg" alt="" className="rounded-xl" />
+              <img src="/assets/user/imgs/team-work.jpg" alt="" className="mt-8 rounded-xl" />
             </div>
-            <div className="col-lg-5 offset-lg-1 valign">
-              <p>
-                At Future Woodenclouds, we&apos;re not just an IT service company; we&apos;re
-                architects of innovation. We unite developers, designers, marketers, and creative
-                thinkers to shape what comes next.
-              </p>
-            </div>
+            <p className="text-sm font-light leading-relaxed text-muted">
+              At Future Woodenclouds, we&apos;re not just an IT service company; we&apos;re
+              architects of innovation. We unite developers, designers, marketers, and creative
+              thinkers to shape what comes next.
+            </p>
           </div>
 
-          <div className="mb-80">
-            <h3 className="fw-300 mb-20">Our Vision</h3>
-            <p style={{ maxWidth: 780 }}>
+          <div>
+            <h3 className="mb-4 text-2xl font-light">Our Vision</h3>
+            <p className="max-w-3xl text-sm font-light leading-relaxed text-muted">
               Imagine a world where creativity and technology converge — where the brightest minds
               in India come together to revolutionize the IT industry.
             </p>
           </div>
 
-          <div className="row mb-80">
-            <div className="col-lg-6">
-              <h3 className="fw-300 mb-20">Phase 01 — Building the Foundation</h3>
-              <p>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h3 className="mb-4 text-2xl font-light">Phase 01 — Building the Foundation</h3>
+              <p className="text-sm font-light leading-relaxed text-muted">
                 We are assembling a team of 10,000 passionate individuals — from freelancers to
                 BDEs, sales and marketing talent, and designers — to build the foundation of Future
                 Woodenclouds.
               </p>
             </div>
-            <div className="col-lg-5 offset-lg-1">
-              <div className="row">
-                <div className="col-6">
-                  <img src="/assets/user/imgs/img1.jpg" alt="" className="radius-10" />
-                </div>
-                <div className="col-6">
-                  <img src="/assets/user/imgs/img2.jpg" alt="" className="radius-10" />
-                </div>
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              <img src="/assets/user/imgs/img1.jpg" alt="" className="rounded-xl" />
+              <img src="/assets/user/imgs/img2.jpg" alt="" className="rounded-xl" />
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-lg-6">
-              <h3 className="fw-300 mb-30">Join the Revolution</h3>
-              {done ? (
-                <div className="alert alert-success">
-                  Thanks for joining! (Demo mode — API coming soon.)
+          <div className="max-w-xl">
+            <h3 className="mb-6 text-2xl font-light">Join the Revolution</h3>
+            {done ? (
+              <p className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800">
+                Thanks for joining! (Demo mode — API coming soon.)
+              </p>
+            ) : (
+              <form onSubmit={onSubmit} className="space-y-4 rounded-2xl bg-white p-6 md:p-8">
+                <div>
+                  <label className="wc-label" htmlFor="name">
+                    Full Name*
+                  </label>
+                  <input className="wc-input" id="name" name="name" required placeholder="Name" />
                 </div>
-              ) : (
-                <form onSubmit={onSubmit} className="wc-quote-form">
-                  <div className="form-group mb-30">
-                    <label htmlFor="name">Full Name*</label>
-                    <input id="name" name="name" required placeholder="Name" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="phone">Phone*</label>
-                    <input id="phone" name="phone" required placeholder="Phone" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="email">Email*</label>
-                    <input id="email" name="email" type="email" required placeholder="Email" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="message">Message*</label>
-                    <textarea id="message" name="message" rows={4} required placeholder="Message" />
-                  </div>
-                  <button type="submit" className="butn butn-md butn-bord radius-30">
-                    <span className="text">Submit</span>
-                  </button>
-                </form>
-              )}
-            </div>
+                <div>
+                  <label className="wc-label" htmlFor="phone">
+                    Phone*
+                  </label>
+                  <input className="wc-input" id="phone" name="phone" required placeholder="Phone" />
+                </div>
+                <div>
+                  <label className="wc-label" htmlFor="email">
+                    Email*
+                  </label>
+                  <input
+                    className="wc-input"
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Email"
+                  />
+                </div>
+                <div>
+                  <label className="wc-label" htmlFor="message">
+                    Message*
+                  </label>
+                  <textarea
+                    className="wc-input"
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    placeholder="Message"
+                  />
+                </div>
+                <button type="submit" className="wc-btn wc-btn-solid">
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

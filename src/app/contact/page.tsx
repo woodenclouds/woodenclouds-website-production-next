@@ -15,67 +15,95 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader subtitle="Get In Touch" title="Let's get in touch with us." />
-      <section className="contact section-padding">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5">
-              <p className="mb-40">
-                If you would like to work with us or just want to get in touch, we’d love to hear
-                from you!
+      <section className="wc-section pt-0">
+        <div className="wc-container grid gap-12 lg:grid-cols-2">
+          <div>
+            <p className="mb-8 max-w-md text-sm font-light leading-relaxed text-muted">
+              If you would like to work with us or just want to get in touch, we’d love to hear from
+              you!
+            </p>
+            <div className="space-y-6 text-sm">
+              <div>
+                <h6 className="mb-1 font-medium">General Enquiry</h6>
+                <a href={site.phoneHref} className="text-muted hover:text-ink">
+                  {site.phone}
+                </a>
+              </div>
+              <div>
+                <h6 className="mb-1 font-medium">Email</h6>
+                <a href={`mailto:${site.email}`} className="text-muted hover:text-ink">
+                  {site.email}
+                </a>
+              </div>
+              <div>
+                <h6 className="mb-1 font-medium">HR Enquiry</h6>
+                <a href={`mailto:${site.careersEmail}`} className="text-muted hover:text-ink">
+                  {site.careersEmail}
+                </a>
+              </div>
+            </div>
+            <div className="mt-10 flex gap-5 text-sm">
+              <a href={site.social.linkedin} target="_blank" rel="noreferrer" className="hover:underline">
+                LinkedIn
+              </a>
+              <a href={site.social.facebook} target="_blank" rel="noreferrer" className="hover:underline">
+                Facebook
+              </a>
+              <a href={site.social.instagram} target="_blank" rel="noreferrer" className="hover:underline">
+                Instagram
+              </a>
+            </div>
+          </div>
+          <div>
+            {done ? (
+              <p className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800">
+                Thanks! Your message was received. (Demo mode — API coming soon.)
               </p>
-              <div className="mb-30">
-                <h6 className="mb-10">General Enquiry</h6>
-                <a href={site.phoneHref}>{site.phone}</a>
-              </div>
-              <div className="mb-30">
-                <h6 className="mb-10">Email</h6>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-              </div>
-              <div className="mb-30">
-                <h6 className="mb-10">HR Enquiry</h6>
-                <a href={`mailto:${site.careersEmail}`}>{site.careersEmail}</a>
-              </div>
-              <div className="social mt-40">
-                <a href={site.social.linkedin} target="_blank" rel="noreferrer" className="me-3">
-                  LinkedIn
-                </a>
-                <a href={site.social.facebook} target="_blank" rel="noreferrer" className="me-3">
-                  Facebook
-                </a>
-                <a href={site.social.instagram} target="_blank" rel="noreferrer">
-                  Instagram
-                </a>
-              </div>
-            </div>
-            <div className="col-lg-6 offset-lg-1">
-              {done ? (
-                <div className="alert alert-success">
-                  Thanks! Your message was received. (Demo mode — API coming soon.)
+            ) : (
+              <form onSubmit={onSubmit} className="space-y-4 rounded-2xl bg-white p-6 md:p-8">
+                <div>
+                  <label className="wc-label" htmlFor="name">
+                    Full Name*
+                  </label>
+                  <input className="wc-input" id="name" name="name" required placeholder="Name" />
                 </div>
-              ) : (
-                <form onSubmit={onSubmit} className="wc-quote-form">
-                  <div className="form-group mb-30">
-                    <label htmlFor="name">Full Name*</label>
-                    <input id="name" name="name" required placeholder="Name" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="phone">Phone*</label>
-                    <input id="phone" name="phone" required placeholder="Phone" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="email">Email*</label>
-                    <input id="email" name="email" type="email" required placeholder="Email" />
-                  </div>
-                  <div className="form-group mb-30">
-                    <label htmlFor="message">Message*</label>
-                    <textarea id="message" name="message" rows={5} required placeholder="Message" />
-                  </div>
-                  <button type="submit" className="butn butn-md butn-bord radius-30">
-                    <span className="text">Let&apos;s Talk</span>
-                  </button>
-                </form>
-              )}
-            </div>
+                <div>
+                  <label className="wc-label" htmlFor="phone">
+                    Phone*
+                  </label>
+                  <input className="wc-input" id="phone" name="phone" required placeholder="Phone" />
+                </div>
+                <div>
+                  <label className="wc-label" htmlFor="email">
+                    Email*
+                  </label>
+                  <input
+                    className="wc-input"
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Email"
+                  />
+                </div>
+                <div>
+                  <label className="wc-label" htmlFor="message">
+                    Message*
+                  </label>
+                  <textarea
+                    className="wc-input"
+                    id="message"
+                    name="message"
+                    rows={5}
+                    required
+                    placeholder="Message"
+                  />
+                </div>
+                <button type="submit" className="wc-btn wc-btn-solid">
+                  Let&apos;s Talk
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

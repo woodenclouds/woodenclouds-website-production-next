@@ -26,77 +26,70 @@ export default async function BlogDetailsPage({ params }: Props) {
   const recent = blogs.filter((b) => b.slug !== slug).slice(0, 2);
 
   return (
-    <section className="blog-details section-padding">
-      <div className="container mt-80">
-        <div className="row">
-          <div className="col-lg-8">
-            <h1 className="fz-40 fw-300 mb-20">{blog.title}</h1>
-            <div className="info mb-30" style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-              <div>
-                <span className="fz-12 opacity-7">Author</span>
-                <p>Woodenclouds</p>
-              </div>
-              <div>
-                <span className="fz-12 opacity-7">Published</span>
-                <p>{formatBlogDate(blog.createdAt)}</p>
-              </div>
-              <div>
-                <span className="fz-12 opacity-7">Last Updated</span>
-                <p>{formatBlogDate(blog.updatedAt)}</p>
-              </div>
+    <section className="wc-section">
+      <div className="wc-container grid gap-12 lg:grid-cols-12">
+        <article className="lg:col-span-8">
+          <h1 className="mb-6 text-3xl font-light md:text-4xl">{blog.title}</h1>
+          <div className="mb-8 flex flex-wrap gap-8 text-sm">
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted">Author</p>
+              <p>Woodenclouds</p>
             </div>
-            <img src={blog.image} alt={blog.title} className="radius-10 mb-40 w-100" />
-            <div
-              className="content"
-              dangerouslySetInnerHTML={{ __html: blog.description }}
-            />
-            <div className="tags mt-40 mb-40">
-              {blog.tags.map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    display: "inline-block",
-                    marginRight: 10,
-                    padding: "6px 12px",
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    borderRadius: 20,
-                    fontSize: 13,
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted">Published</p>
+              <p>{formatBlogDate(blog.createdAt)}</p>
             </div>
-            <div className="next-prv-post d-flex" style={{ justifyContent: "space-between", gap: 20 }}>
-              {prev ? (
-                <Link href={`/blog/${prev.slug}`}>
-                  <span className="fz-12 opacity-7">Previous</span>
-                  <h6 className="fw-300">{prev.title}</h6>
-                </Link>
-              ) : (
-                <span />
-              )}
-              {next && (
-                <Link href={`/blog/${next.slug}`} style={{ textAlign: "right" }}>
-                  <span className="fz-12 opacity-7">Next</span>
-                  <h6 className="fw-300">{next.title}</h6>
-                </Link>
-              )}
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted">Last Updated</p>
+              <p>{formatBlogDate(blog.updatedAt)}</p>
             </div>
           </div>
-          <div className="col-lg-3 offset-lg-1">
-            <h5 className="fw-300 mb-30">Recent Posts</h5>
-            {recent.map((item) => (
-              <div className="mb-30" key={item.slug}>
-                <Link href={`/blog/${item.slug}`}>
-                  <img src={item.image} alt={item.title} className="radius-10 mb-10 w-100" />
-                  <h6 className="fw-300">{item.title}</h6>
-                  <span className="fz-12 opacity-7">{formatBlogDate(item.createdAt)}</span>
-                </Link>
-              </div>
+          <img src={blog.image} alt={blog.title} className="mb-8 w-full rounded-xl" />
+          <div
+            className="prose prose-neutral max-w-none text-sm font-light leading-relaxed text-ink/80"
+            dangerouslySetInnerHTML={{ __html: blog.description }}
+          />
+          <div className="mt-8 flex flex-wrap gap-2">
+            {blog.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-line-dark px-3 py-1 text-xs text-muted"
+              >
+                {tag}
+              </span>
             ))}
           </div>
-        </div>
+          <div className="mt-12 flex justify-between gap-6 border-t border-line-dark pt-8">
+            {prev ? (
+              <Link href={`/blog/${prev.slug}`} className="max-w-[45%]">
+                <span className="text-xs uppercase tracking-wider text-muted">Previous</span>
+                <h6 className="mt-1 text-sm font-light">{prev.title}</h6>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link href={`/blog/${next.slug}`} className="max-w-[45%] text-right">
+                <span className="text-xs uppercase tracking-wider text-muted">Next</span>
+                <h6 className="mt-1 text-sm font-light">{next.title}</h6>
+              </Link>
+            )}
+          </div>
+        </article>
+        <aside className="lg:col-span-3 lg:col-start-10">
+          <h5 className="mb-6 text-lg font-light">Recent Posts</h5>
+          <div className="space-y-6">
+            {recent.map((item) => (
+              <Link key={item.slug} href={`/blog/${item.slug}`} className="block">
+                <img src={item.image} alt={item.title} className="mb-3 w-full rounded-xl" />
+                <h6 className="text-sm font-light">{item.title}</h6>
+                <span className="mt-1 block text-xs text-muted">
+                  {formatBlogDate(item.createdAt)}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </aside>
       </div>
     </section>
   );

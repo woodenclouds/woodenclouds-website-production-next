@@ -9,45 +9,39 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader subtitle="Our Team" title="Team Woodenclouds" />
-      <section className="team section-padding">
-        <div className="container">
-          <div className="text-center mb-50">
-            <Link href="/career" className="butn butn-md butn-bord radius-30">
-              <span className="text">Join Our Team</span>
+      <section className="wc-section pt-0">
+        <div className="wc-container">
+          <div className="mb-12 text-center">
+            <Link href="/career" className="wc-btn wc-btn-dark">
+              Join Our Team
             </Link>
           </div>
 
-          <h3 className="fw-300 mb-40">Board of Directors</h3>
-          <div className="row mb-80">
+          <h3 className="mb-8 text-2xl font-light">Board of Directors</h3>
+          <div className="mb-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {boardOfDirectors.map((member) => (
-              <div className="col-lg-4 col-md-6" key={member.name}>
-                <div className="item mb-40 text-center">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="radius-10 mb-20"
-                    style={{ width: "100%", aspectRatio: "1", objectFit: "cover" }}
-                  />
-                  <h5 className="fw-300">{member.name}</h5>
-                </div>
+              <div key={member.name} className="text-center">
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="mb-4 aspect-square w-full rounded-xl object-cover"
+                />
+                <h5 className="text-lg font-light">{member.name}</h5>
               </div>
             ))}
           </div>
 
-          <h3 className="fw-300 mb-40">Our Team</h3>
-          <div className="row">
+          <h3 className="mb-8 text-2xl font-light">Our Team</h3>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {teamMembers.map((member) => (
-              <div className="col-lg-3 col-md-6" key={member.name}>
-                <div className="item mb-40 text-center">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="radius-10 mb-20"
-                    style={{ width: "100%", aspectRatio: "1", objectFit: "cover" }}
-                  />
-                  <h6 className="fw-300">{member.name}</h6>
-                  {member.role && <p className="fz-14 opacity-7">{member.role}</p>}
-                </div>
+              <div key={member.name} className="text-center">
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="mb-4 aspect-square w-full rounded-xl object-cover"
+                />
+                <h6 className="font-light">{member.name}</h6>
+                {member.role && <p className="mt-1 text-sm text-muted">{member.role}</p>}
               </div>
             ))}
           </div>

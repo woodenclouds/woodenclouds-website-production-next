@@ -8,34 +8,27 @@ export default function BusinessSupportPage() {
   return (
     <>
       <Breadcrumb
-        items={[
-          { label: "Services", href: "/services" },
-          { label: "Startup & Business Support" },
-        ]}
+        items={[{ label: "Services", href: "/services" }, { label: "Startup & Business Support" }]}
       />
-      <section className="section-padding">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6">
-              <h2 className="fz-40 fw-300 mb-30">Startup & Business Support</h2>
-              <img
-                src="/assets/user/imgs/services/technology-bg.jpg"
-                alt="Business support"
-                className="radius-10"
-              />
-            </div>
-            <div className="col-lg-5 offset-lg-1 valign">
-              <div>
-                <h3 className="fw-300 mb-20">
-                  Empower Your Business with Innovative Technology Solutions
-                </h3>
-                <p>
-                  At Woodenclouds, we specialize in crafting bespoke technology solutions — from
-                  website development and mobile app creation to custom software solutions and
-                  e-commerce platforms.
-                </p>
-              </div>
-            </div>
+      <section className="wc-section">
+        <div className="wc-container grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <h2 className="mb-6 text-4xl font-light">Startup & Business Support</h2>
+            <img
+              src="/assets/user/imgs/services/technology-bg.jpg"
+              alt="Business support"
+              className="rounded-xl"
+            />
+          </div>
+          <div>
+            <h3 className="mb-4 text-2xl font-light">
+              Empower Your Business with Innovative Technology Solutions
+            </h3>
+            <p className="text-sm font-light leading-relaxed text-muted">
+              At Woodenclouds, we specialize in crafting bespoke technology solutions — from website
+              development and mobile app creation to custom software solutions and e-commerce
+              platforms.
+            </p>
           </div>
         </div>
       </section>

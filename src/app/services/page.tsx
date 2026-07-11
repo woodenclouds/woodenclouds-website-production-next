@@ -9,47 +9,43 @@ export const metadata: Metadata = { title: "Services" };
 export default function ServicesPage() {
   return (
     <>
-      <header className="page-header section-padding pb-0">
-        <div className="container mt-80">
-          <div className="row">
-            <div className="col-lg-8">
-              <h6 className="sub-title">What We Do?</h6>
-              <h1 className="fz-55">Empowering Your Business with Technology Solutions</h1>
-            </div>
-          </div>
+      <header className="bg-paper pb-0 pt-16 md:pt-24">
+        <div className="wc-container">
+          <p className="mb-3 text-sm uppercase tracking-wider text-muted">What We Do?</p>
+          <h1 className="max-w-3xl text-4xl font-light md:text-5xl">
+            Empowering Your Business with Technology Solutions
+          </h1>
         </div>
-        <div className="container-fluid mt-50">
+        <div className="mt-10 px-0 md:px-8">
           <video
             src="/assets/user/videos/video3.mp4"
             autoPlay
             muted
             loop
             playsInline
-            style={{ width: "100%", maxHeight: 520, objectFit: "cover", borderRadius: 10 }}
+            className="max-h-[520px] w-full object-cover md:rounded-xl"
           />
         </div>
       </header>
 
-      <section className="serv-box section-padding">
-        <div className="container">
-          <div className="sec-lg-head mb-50">
-            <h2 className="fz-40 fw-300">
-              Featured <span className="wc-text-gradient">Services</span>
-            </h2>
-          </div>
-          <div className="row">
+      <section className="wc-section">
+        <div className="wc-container">
+          <h2 className="mb-10 text-3xl font-light md:text-4xl">
+            Featured <span className="wc-gradient-text">Services</span>
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3">
             {homeServiceCards.map((card) => (
-              <div className="col-lg-4" key={card.title}>
-                <Link href={card.href}>
-                  <div className="serv-item md-mb50 radius-10">
-                    <div className="mb-20">
-                      <img src={card.image} alt={card.title} />
-                    </div>
-                    <h5 className="fz-22 mb-10 pb-10 bord-thin-bottom fw-300">{card.title}</h5>
-                    <p>{card.description}</p>
-                  </div>
-                </Link>
-              </div>
+              <Link key={card.title} href={card.href} className="group block">
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <h5 className="mt-5 border-b border-line-dark pb-3 text-xl font-light">{card.title}</h5>
+                <p className="mt-3 text-sm font-light leading-relaxed text-muted">{card.description}</p>
+              </Link>
             ))}
           </div>
         </div>

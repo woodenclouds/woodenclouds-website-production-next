@@ -29,46 +29,36 @@ const blocks = [
 export default function DedicatedTeamPage() {
   return (
     <>
-      <PageHeader
-        title='Your Comprehensive Business Solution: Dedicated Teams for Product Development, Design, Implementation, and Marketing'
-      />
-
-      <section className="section-padding">
-        <div className="container">
+      <PageHeader title="Your Comprehensive Business Solution: Dedicated Teams for Product Development, Design, Implementation, and Marketing" />
+      <section className="wc-section pt-0">
+        <div className="wc-container space-y-16">
           {blocks.map((block, i) => (
-            <div className="row mb-80 align-items-center" key={block.title}>
-              <div className={`col-lg-6 ${i % 2 === 1 ? "order-lg-2" : ""}`}>
-                <img src={block.image} alt={block.title} className="radius-10" />
-              </div>
-              <div className={`col-lg-5 ${i % 2 === 1 ? "order-lg-1" : "offset-lg-1"} valign`}>
-                <div>
-                  <h3 className="fw-300 mb-20">{block.title}</h3>
-                  <p>{block.body}</p>
-                </div>
+            <div
+              key={block.title}
+              className={`grid items-center gap-10 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+            >
+              <img src={block.image} alt={block.title} className="rounded-xl" />
+              <div>
+                <h3 className="mb-4 text-2xl font-light">{block.title}</h3>
+                <p className="text-sm font-light leading-relaxed text-muted">{block.body}</p>
               </div>
             </div>
           ))}
 
-          <div className="sec-lg-head mb-40">
-            <h3 className="fw-300">The Dedicated Team Advantage</h3>
-          </div>
-          <div className="row">
-            {["End-to-End Solutions", "Holistic Approach", "Flexible Scaling", "Cost-Effective"].map(
-              (item) => (
-                <div className="col-md-3 col-6" key={item}>
-                  <div
-                    className="item mb-30"
-                    style={{ background: "#f1f3f5", padding: 24, borderRadius: 10 }}
-                  >
-                    <h6 className="fw-400">{item}</h6>
+          <div>
+            <h3 className="mb-6 text-2xl font-light">The Dedicated Team Advantage</h3>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+              {["End-to-End Solutions", "Holistic Approach", "Flexible Scaling", "Cost-Effective"].map(
+                (item) => (
+                  <div key={item} className="rounded-xl bg-white p-5 text-sm font-medium">
+                    {item}
                   </div>
-                </div>
-              ),
-            )}
+                ),
+              )}
+            </div>
           </div>
         </div>
       </section>
-
       <EnquireCta background="/assets/user/imgs/team-01.jpg" />
     </>
   );

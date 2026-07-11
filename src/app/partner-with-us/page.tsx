@@ -8,32 +8,29 @@ export default function PartnerPage() {
   return (
     <>
       <PageHeader subtitle="Partnership Program" title="Partner with us" />
-      <section className="section-padding">
-        <div className="container">
-          <p className="mb-50" style={{ maxWidth: 720 }}>
+      <section className="wc-section pt-0">
+        <div className="wc-container">
+          <p className="mb-10 max-w-2xl text-sm font-light leading-relaxed text-muted">
             Unlock the power of collaboration with Woodenclouds. Our diverse partnership programs
             are built for growth and expansion in the digital landscape.
           </p>
-          <div className="row">
+          <div className="grid gap-6 md:grid-cols-3">
             {partnerPrograms.map((program) => (
-              <div className="col-lg-4" key={program.title}>
-                <div
-                  className="item md-mb50"
-                  style={{ background: "#fff", padding: 30, borderRadius: 10, marginBottom: 30 }}
-                >
-                  <h5 className="fw-300 mb-15">{program.title}</h5>
-                  <p>{program.description}</p>
-                </div>
+              <div key={program.title} className="rounded-xl bg-white p-7">
+                <h5 className="mb-3 text-xl font-light">{program.title}</h5>
+                <p className="text-sm font-light text-muted">{program.description}</p>
               </div>
             ))}
           </div>
-          <div className="mt-50">
-            <p className="mb-20">
+          <div className="mt-12">
+            <p className="mb-4 text-sm text-muted">
               For more details, contact us at{" "}
-              <a href={`mailto:${site.email}`}>{site.email}</a>
+              <a href={`mailto:${site.email}`} className="text-ink underline">
+                {site.email}
+              </a>
             </p>
-            <a href={`mailto:${site.email}`} className="butn butn-md butn-bord radius-30">
-              <span className="text">Mail Us</span>
+            <a href={`mailto:${site.email}`} className="wc-btn wc-btn-dark">
+              Mail Us
             </a>
           </div>
         </div>

@@ -22,71 +22,60 @@ export default async function WorkDetailsPage({ params }: Props) {
 
   return (
     <>
-      <header className="page-header section-padding pb-0">
-        <div className="container mt-80">
-          <h1 className="fz-55 mb-30">{work.title}</h1>
-          <div className="row">
-            <div className="col-md-3">
-              <h6 className="sub-title mb-10">Client</h6>
-              <p>{work.client}</p>
+      <header className="bg-paper pb-8 pt-16 md:pt-24">
+        <div className="wc-container">
+          <h1 className="mb-8 text-4xl font-light md:text-5xl">{work.title}</h1>
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
+            <div>
+              <p className="mb-1 text-xs uppercase tracking-wider text-muted">Client</p>
+              <p className="text-sm">{work.client}</p>
             </div>
-            <div className="col-md-3">
-              <h6 className="sub-title mb-10">Location</h6>
-              <p>{work.location}</p>
+            <div>
+              <p className="mb-1 text-xs uppercase tracking-wider text-muted">Location</p>
+              <p className="text-sm">{work.location}</p>
             </div>
-            <div className="col-md-3">
-              <h6 className="sub-title mb-10">Category</h6>
-              <p>{work.category}</p>
+            <div>
+              <p className="mb-1 text-xs uppercase tracking-wider text-muted">Category</p>
+              <p className="text-sm">{work.category}</p>
             </div>
             {work.technology && (
-              <div className="col-md-3">
-                <h6 className="sub-title mb-10">Technology</h6>
-                <p>{work.technology}</p>
+              <div>
+                <p className="mb-1 text-xs uppercase tracking-wider text-muted">Technology</p>
+                <p className="text-sm">{work.technology}</p>
               </div>
             )}
           </div>
         </div>
       </header>
 
-      <section className="section-padding">
-        <div className="container">
-          <img src={work.image1} alt={work.title} className="radius-10 mb-50 w-100" />
-          <h3 className="fw-300 mb-20">{work.title1}</h3>
-          <p className="mb-40" style={{ maxWidth: 780 }}>
+      <section className="wc-section pt-0">
+        <div className="wc-container">
+          <img src={work.image1} alt={work.title} className="mb-10 w-full rounded-xl" />
+          <h3 className="mb-4 text-2xl font-light">{work.title1}</h3>
+          <p className="mb-10 max-w-3xl text-sm font-light leading-relaxed text-muted">
             {work.description1}
           </p>
 
           {(work.image2 || work.image3 || work.image4) && (
-            <div className="row mb-50">
+            <div className="mb-10 grid gap-4 md:grid-cols-3">
               {[work.image2, work.image3, work.image4].filter(Boolean).map((src) => (
-                <div className="col-md-4" key={src}>
-                  <img src={src!} alt="" className="radius-10 mb-30 w-100" />
-                </div>
+                <img key={src} src={src!} alt="" className="w-full rounded-xl" />
               ))}
             </div>
           )}
 
-          <p className="text-center mb-50" style={{ maxWidth: 720, margin: "0 auto 50px" }}>
+          <p className="mx-auto mb-10 max-w-2xl text-center text-sm font-light leading-relaxed text-muted">
             {work.description2}
           </p>
 
-          {work.image5 && (
-            <img src={work.image5} alt="" className="radius-10 mb-50 w-100" />
-          )}
+          {work.image5 && <img src={work.image5} alt="" className="mb-10 w-full rounded-xl" />}
 
-          <div className="row align-items-center">
-            {work.image6 && (
-              <div className="col-lg-6">
-                <img src={work.image6} alt="" className="radius-10" />
-              </div>
-            )}
-            <div className={`col-lg-5 ${work.image6 ? "offset-lg-1" : ""}`}>
-              <p>{work.description3}</p>
-            </div>
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            {work.image6 && <img src={work.image6} alt="" className="rounded-xl" />}
+            <p className="text-sm font-light leading-relaxed text-muted">{work.description3}</p>
           </div>
         </div>
       </section>
-
       <EnquireCta />
     </>
   );

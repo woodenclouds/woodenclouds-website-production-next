@@ -9,31 +9,34 @@ export default function BlogPage() {
   return (
     <>
       <PageHeader subtitle="Our Blog" title="Blog" />
-      <section className="blog-list section-padding">
-        <div className="container">
-          <div className="row">
-            {blogs.map((blog) => (
-              <div className="col-lg-4 col-md-6" key={blog.slug}>
-                <div className="item mb-50">
-                  <Link href={`/blog/${blog.slug}`}>
-                    <div className="img">
-                      <img src={blog.image} alt={blog.title} className="radius-10" />
-                    </div>
-                  </Link>
-                  <div className="cont mt-20">
-                    <span className="date fz-12 opacity-7">{formatBlogDate(blog.createdAt)}</span>
-                    <h5 className="fw-300 mt-10">
-                      <Link href={`/blog/${blog.slug}`}>{blog.title}</Link>
-                    </h5>
-                    <p className="mt-10">{blog.excerpt}</p>
-                    <Link href={`/blog/${blog.slug}`} className="mt-15 d-inline-block">
-                      Read More →
-                    </Link>
-                  </div>
+      <section className="wc-section pt-0">
+        <div className="wc-container grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {blogs.map((blog) => (
+            <article key={blog.slug} className="group">
+              <Link href={`/blog/${blog.slug}`}>
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
                 </div>
-              </div>
-            ))}
-          </div>
+              </Link>
+              <p className="mt-4 text-xs uppercase tracking-wider text-muted">
+                {formatBlogDate(blog.createdAt)}
+              </p>
+              <h5 className="mt-2 text-xl font-light">
+                <Link href={`/blog/${blog.slug}`}>{blog.title}</Link>
+              </h5>
+              <p className="mt-2 text-sm font-light text-muted">{blog.excerpt}</p>
+              <Link
+                href={`/blog/${blog.slug}`}
+                className="mt-4 inline-block text-sm text-ink/70 hover:text-ink"
+              >
+                Read More →
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
     </>

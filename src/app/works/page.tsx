@@ -7,7 +7,6 @@ import { PageHeader, EnquireCta } from "@/components/shared/PageBits";
 
 export default function WorksPage() {
   const [filter, setFilter] = useState<(typeof workCategories)[number]>("All");
-
   const filtered = useMemo(
     () => (filter === "All" ? works : works.filter((w) => w.category === filter)),
     [filter],
@@ -16,44 +15,37 @@ export default function WorksPage() {
   return (
     <>
       <PageHeader subtitle="Our Works" title="Portfolio" />
-      <section className="portfolio section-padding">
-        <div className="container">
-          <div className="filtering mb-50">
-            <div className="filter" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              {workCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setFilter(cat)}
-                  className={filter === cat ? "active" : ""}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    borderBottom: filter === cat ? "2px solid currentColor" : "2px solid transparent",
-                    padding: "6px 0",
-                    cursor: "pointer",
-                  }}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+      <section className="wc-section pt-0">
+        <div className="wc-container">
+          <div className="mb-10 flex flex-wrap gap-4">
+            {workCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setFilter(cat)}
+                className={`border-b-2 pb-1 text-sm transition ${
+                  filter === cat
+                    ? "border-ink text-ink"
+                    : "border-transparent text-muted hover:text-ink"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
-          <div className="row">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((work) => (
-              <div className="col-lg-4 col-md-6" key={work.slug}>
-                <Link href={`/works/${work.slug}`}>
-                  <div className="item mb-40">
-                    <div className="img">
-                      <img src={work.thumbnail} alt={work.title} className="radius-10" />
-                    </div>
-                    <div className="cont mt-20">
-                      <span className="fz-13 opacity-7">{work.category}</span>
-                      <h6 className="fw-300 mt-5">{work.title}</h6>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+              <Link key={work.slug} href={`/works/${work.slug}`} className="group block">
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src={work.thumbnail}
+                    alt={work.title}
+                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <p className="mt-4 text-xs uppercase tracking-wider text-muted">{work.category}</p>
+                <h6 className="mt-1 text-lg font-light">{work.title}</h6>
+              </Link>
             ))}
           </div>
         </div>

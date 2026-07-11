@@ -20,114 +20,115 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
 
   return (
     <div
-      className="modal fade show"
-      id="getAQuote"
-      style={{ display: "block", background: "rgba(0,0,0,0.55)" }}
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4"
       role="dialog"
       aria-modal="true"
+      onClick={onClose}
     >
-      <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title text-black">Get a Quote</h5>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={() => {
-                setSubmitted(false);
-                onClose();
-              }}
-            />
-          </div>
-          <div className="contact-crev wc-quote-form" style={{ padding: "25px 10px" }}>
-            <div className="container text-black">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="full-width">
-                    {submitted ? (
-                      <div className="messages">
-                        <div className="alert alert-success">
-                          Thanks! Your quote request has been received. (Demo mode — API coming soon.)
-                        </div>
-                      </div>
-                    ) : (
-                      <form onSubmit={handleSubmit}>
-                        <div className="controls row pt-10">
-                          <div className="col-lg-12">
-                            <div className="form-group mb-30 text-black">
-                              <label htmlFor="quote-name">Full Name*</label>
-                              <input type="text" name="name" placeholder="Name" id="quote-name" required />
-                            </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-group mb-30">
-                              <label htmlFor="quote-phone">Phone*</label>
-                              <input type="tel" name="phone" placeholder="Phone" id="quote-phone" required />
-                            </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-group mb-30">
-                              <label htmlFor="quote-email">Email*</label>
-                              <input type="email" name="email" placeholder="Email" id="quote-email" required />
-                            </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-group mb-30">
-                              <label htmlFor="quote-subject">Subject*</label>
-                              <select name="subject" id="quote-subject" required defaultValue="">
-                                <option value="" disabled>
-                                  --SELECT--
-                                </option>
-                                {quoteSubjects.map((s) => (
-                                  <option key={s} value={s}>
-                                    {s}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-group mb-30">
-                              <label htmlFor="quote-budget">Budget*</label>
-                              <select name="budget" id="quote-budget" required defaultValue="">
-                                <option value="" disabled>
-                                  --SELECT--
-                                </option>
-                                {quoteBudgets.map((b) => (
-                                  <option key={b} value={b}>
-                                    {b}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <div className="form-group">
-                              <label htmlFor="quote-message">Message*</label>
-                              <textarea
-                                name="message"
-                                placeholder="Message"
-                                rows={4}
-                                id="quote-message"
-                                required
-                              />
-                            </div>
-                            <div className="mt-30">
-                              <button type="submit" className="butn butn-md butn-bord radius-30 float-end">
-                                <span className="text">Submit</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    )}
-                  </div>
-                </div>
+      <div
+        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 text-ink shadow-2xl md:p-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="mb-6 flex items-center justify-between">
+          <h5 className="text-xl font-medium">Get a Quote</h5>
+          <button
+            type="button"
+            className="text-2xl leading-none text-ink/50 hover:text-ink"
+            aria-label="Close"
+            onClick={() => {
+              setSubmitted(false);
+              onClose();
+            }}
+          >
+            ×
+          </button>
+        </div>
+
+        {submitted ? (
+          <p className="rounded-xl bg-green-50 px-4 py-3 text-sm text-green-800">
+            Thanks! Your quote request has been received. (Demo mode — API coming soon.)
+          </p>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="wc-label" htmlFor="quote-name">
+                Full Name*
+              </label>
+              <input className="wc-input" id="quote-name" name="name" required placeholder="Name" />
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="wc-label" htmlFor="quote-phone">
+                  Phone*
+                </label>
+                <input className="wc-input" id="quote-phone" name="phone" required placeholder="Phone" />
+              </div>
+              <div>
+                <label className="wc-label" htmlFor="quote-email">
+                  Email*
+                </label>
+                <input
+                  className="wc-input"
+                  id="quote-email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Email"
+                />
               </div>
             </div>
-          </div>
-        </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label className="wc-label" htmlFor="quote-subject">
+                  Subject*
+                </label>
+                <select className="wc-input" id="quote-subject" name="subject" required defaultValue="">
+                  <option value="" disabled>
+                    --SELECT--
+                  </option>
+                  {quoteSubjects.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="wc-label" htmlFor="quote-budget">
+                  Budget*
+                </label>
+                <select className="wc-input" id="quote-budget" name="budget" required defaultValue="">
+                  <option value="" disabled>
+                    --SELECT--
+                  </option>
+                  {quoteBudgets.map((b) => (
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="wc-label" htmlFor="quote-message">
+                Message*
+              </label>
+              <textarea
+                className="wc-input"
+                id="quote-message"
+                name="message"
+                rows={4}
+                required
+                placeholder="Message"
+              />
+            </div>
+            <div className="flex justify-end pt-2">
+              <button type="submit" className="wc-btn wc-btn-solid">
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

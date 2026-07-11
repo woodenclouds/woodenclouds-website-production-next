@@ -3,49 +3,38 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import { getFeaturedWorks } from "@/data/works";
 import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
 import { clients, brands } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import "swiper/css";
-import "swiper/css/navigation";
 
 export function HomeServices() {
   return (
-    <section className="serv-box section-padding" style={{ paddingTop: 100 }}>
-      <div className="container">
-        <div className="sec-lg-head mb-30">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="position-re">
-                <h2 className="fz-40 fw-300">
-                  Our <span className="wc-text-gradient">Services</span>
-                </h2>
+    <section id="services" className="wc-section bg-ink text-white">
+      <div className="wc-container">
+        <h2 className="mb-10 text-3xl font-light md:text-4xl">
+          Our <span className="wc-gradient-text">Services</span>
+        </h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {homeServiceCards.map((card) => (
+            <Link key={card.title} href={card.href} className="group block">
+              <div className="overflow-hidden rounded-xl">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                />
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          {homeServiceCards.map((card, i) => (
-            <div className="col-lg-4" key={card.title}>
-              <Link href={card.href}>
-                <div className={`serv-item radius-10${i < 2 ? " md-mb50" : ""}`}>
-                  <div className="mb-20" style={{ width: "100%" }}>
-                    <img src={card.image} alt={card.title} />
-                  </div>
-                  <h5 className="fz-22 mb-10 pb-10 bord-thin-bottom fw-300 wc-text-gradient">
-                    {card.title}
-                  </h5>
-                  <p>{card.description}</p>
-                  <span className="mt-30" style={{ display: "inline-block" }}>
-                    <span className="mr-15">Read More</span>
-                    <i className="fas fa-long-arrow-alt-right" />
-                  </span>
-                </div>
-              </Link>
-            </div>
+              <h5 className="wc-gradient-text mt-5 border-b border-white/15 pb-3 text-xl font-light">
+                {card.title}
+              </h5>
+              <p className="mt-3 text-sm font-light leading-relaxed text-white/70">{card.description}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm text-white/80 group-hover:text-white">
+                Read More <span aria-hidden>→</span>
+              </span>
+            </Link>
           ))}
         </div>
       </div>
@@ -58,55 +47,36 @@ export function HomeWorks() {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="work-carsouel section-padding position-re o-hidden">
-      <div className="container">
-        <div className="sec-lg-head mb-30">
-          <div className="row">
-            <div className="col-lg-6">
-              <h3 className="fz-40 fw-300">
-                <span className="sideup-text">
-                  <span className="up-text">Recent Projects.</span>
-                </span>
-              </h3>
-            </div>
-            <div className="col-lg-6 d-flex align-items-center">
-              <div className="full-width">
-                <div className="d-flex justify-content-end justify-end">
-                  <div className="swiper-controls arrow-out d-flex">
-                    <button
-                      type="button"
-                      className="swiper-button-prev"
-                      aria-label="Previous slide"
-                      onClick={() => swiperRef.current?.slidePrev()}
-                      style={{ position: "static", margin: 0 }}
-                    >
-                      <span className="left">←</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="swiper-button-next ml-50"
-                      aria-label="Next slide"
-                      onClick={() => swiperRef.current?.slideNext()}
-                      style={{ position: "static", marginLeft: 50 }}
-                    >
-                      <span className="right">→</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="wc-section overflow-hidden bg-ink text-white">
+      <div className="wc-container mb-8 flex items-end justify-between gap-4">
+        <h3 className="text-3xl font-light md:text-4xl">Recent Projects.</h3>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            className="wc-hero-nav"
+            aria-label="Previous"
+            onClick={() => swiperRef.current?.slidePrev()}
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            className="wc-hero-nav"
+            aria-label="Next"
+            onClick={() => swiperRef.current?.slideNext()}
+          >
+            →
+          </button>
         </div>
       </div>
-      <div className="container-fluid rest">
+      <div className="px-4 md:px-6">
         <Swiper
-          modules={[Navigation]}
           onSwiper={(s) => {
             swiperRef.current = s;
           }}
           loop
-          spaceBetween={40}
-          speed={1000}
+          spaceBetween={24}
+          speed={800}
           centeredSlides
           breakpoints={{
             0: { slidesPerView: 1.15 },
@@ -116,16 +86,17 @@ export function HomeWorks() {
         >
           {works.map((work) => (
             <SwiperSlide key={work.slug}>
-              <div className="item">
-                <div className="img">
-                  <img src={work.thumbnail} alt={work.title} />
-                  <div className="cont">
-                    <span className="mb-5">{work.category}</span>
-                    <h6 className="fz-18">{work.title}</h6>
-                  </div>
-                  <Link href={`/works/${work.slug}`} className="plink" />
+              <Link href={`/works/${work.slug}`} className="group relative block overflow-hidden rounded-xl">
+                <img
+                  src={work.thumbnail}
+                  alt={work.title}
+                  className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5">
+                  <span className="text-xs uppercase tracking-wider text-white/70">{work.category}</span>
+                  <h6 className="mt-1 text-lg font-light">{work.title}</h6>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -136,61 +107,49 @@ export function HomeWorks() {
 
 export function HomeClients() {
   return (
-    <section className="testim-vrt sub-bg section-padding">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-5 valign">
-            <div className="cont">
-              <div>
-                <h6 className="sub-title mb-15">Since From 2020</h6>
-                <h3 className="fw-500">Our Clients</h3>
-                <div className="text mt-10 pb-30 bord-thin-bottom">
-                  <p>
-                    Explore our clients&apos; experiences and discover our trusted support every step
-                    of the way.
-                  </p>
-                </div>
-                <div className="stauts d-flex mt-20">
-                  <div className="item d-flex align-items-center mt-30">
-                    <h2 className="mr-20 fw-500">50+</h2>
-                    <p className="fz-14">
-                      Happy Clients <br /> Around the World
-                    </p>
-                  </div>
-                  <div className="item d-flex align-items-center ml-auto mt-30">
-                    <h2 className="mr-20 fw-500">100+</h2>
-                    <p className="fz-14">
-                      Projects <br /> Already Completed
-                    </p>
-                  </div>
-                </div>
-              </div>
+    <section className="wc-section bg-ink-soft text-white">
+      <div className="wc-container grid items-center gap-12 lg:grid-cols-2">
+        <div>
+          <p className="mb-3 text-sm uppercase tracking-wider text-white/60">Since From 2020</p>
+          <h3 className="text-3xl font-medium">Our Clients</h3>
+          <p className="mt-4 max-w-md border-b border-white/15 pb-8 text-sm font-light leading-relaxed text-white/70">
+            Explore our clients&apos; experiences and discover our trusted support every step of the
+            way.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-10">
+            <div>
+              <p className="text-4xl font-medium">50+</p>
+              <p className="mt-1 text-xs text-white/60">
+                Happy Clients
+                <br />
+                Around the World
+              </p>
+            </div>
+            <div>
+              <p className="text-4xl font-medium">100+</p>
+              <p className="mt-1 text-xs text-white/60">
+                Projects
+                <br />
+                Already Completed
+              </p>
             </div>
           </div>
-          <div className="block-sec col-lg-6 offset-lg-1">
-            <div className="clients md-mb50">
-              <div className="row">
-                {clients.map((client) => (
-                  <div className="col-md-4 col-6" key={client.name}>
-                    <div className="item mt-30">
-                      <div className="img">
-                        <a href="#">
-                          <img src={client.logo} alt={client.name} />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                <div className="col-md-4 col-6">
-                  <div className="item mt-30">
-                    <div className="img">
-                      <Link href="/clients">View More</Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {clients.map((client) => (
+            <div
+              key={client.name}
+              className="flex aspect-square items-center justify-center rounded-xl bg-white/5 p-6"
+            >
+              <img src={client.logo} alt={client.name} className="max-h-12 object-contain opacity-80" />
             </div>
-          </div>
+          ))}
+          <Link
+            href="/clients"
+            className="flex aspect-square items-center justify-center rounded-xl border border-white/15 text-sm text-white/80 hover:bg-white/5"
+          >
+            View More
+          </Link>
         </div>
       </div>
     </section>
@@ -200,64 +159,38 @@ export function HomeClients() {
 export function HomeFuture() {
   return (
     <section
-      className="sec-img section-padding bg-img"
-      style={{
-        overflow: "hidden",
-        backgroundImage: "url(/assets/user/imgs/background/1.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="wc-section relative overflow-hidden bg-cover bg-center text-white"
+      style={{ backgroundImage: "url(/assets/user/imgs/background/1.jpg)" }}
     >
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-4">
-            <div className="expr-box md-mb50">
-              <h6 className="text-u fz-16 mb-40">Woodenclouds</h6>
-              <div>
-                <p className="fz-14 fw-300 line-height-1 mb-15">
-                  Desiging your <br /> digital future
-                </p>
-                <h2 className="fz-80 line-height-1">WC</h2>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-5 offset-lg-1">
-            <div className="cont">
-              <h3 className="fw-300 text-u">
-                Future <span className="wc-text-gradient">Woodenclouds</span>
-              </h3>
-              <p>
-                Future Woodenclouds: We&apos;re not just a tech company. We bring together smart
-                people from all fields to use technology to make big changes. Our goal is to build a
-                team of talented developers, designers, marketers, and creative thinkers. Together,
-                we&apos;ll make the digital world even better.
-              </p>
-            </div>
-            <div className="offset-lg-1 valign">
-              <div className="ml-auto explore">
-                <Link href="/future-woodenclouds">
-                  <div className="circle-button">
-                    <div className="rotate-circle fz-30 text-u">
-                      <svg className="textcircle" viewBox="0 0 500 500">
-                        <defs>
-                          <path
-                            id="textcircle1"
-                            d="M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z"
-                          />
-                        </defs>
-                        <text>
-                          <textPath xlinkHref="#textcircle1" textLength="900">
-                            Explore More - Explore More -
-                          </textPath>
-                        </text>
-                      </svg>
-                    </div>
-                    <div className="arrow">→</div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
+      <div className="absolute inset-0 bg-black/55" />
+      <div className="wc-container relative grid gap-10 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <p className="mb-8 text-xs uppercase tracking-[0.2em]">Woodenclouds</p>
+          <p className="mb-3 text-sm font-light leading-tight">
+            Desiging your
+            <br />
+            digital future
+          </p>
+          <p className="text-7xl font-light leading-none">WC</p>
+        </div>
+        <div className="lg:col-span-6 lg:col-start-6">
+          <h3 className="text-2xl font-light uppercase md:text-3xl">
+            Future <span className="wc-gradient-text">Woodenclouds</span>
+          </h3>
+          <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-white/75">
+            Future Woodenclouds: We&apos;re not just a tech company. We bring together smart people
+            from all fields to use technology to make big changes. Our goal is to build a team of
+            talented developers, designers, marketers, and creative thinkers. Together, we&apos;ll
+            make the digital world even better.
+          </p>
+          <Link
+            href="/future-woodenclouds"
+            className="mt-10 inline-flex h-28 w-28 items-center justify-center rounded-full border border-white/30 text-xs uppercase tracking-widest hover:bg-white/10"
+          >
+            Explore
+            <br />
+            More →
+          </Link>
         </div>
       </div>
     </section>
@@ -268,54 +201,34 @@ export function HomeBlogs() {
   const blogs = getFeaturedBlogs(2);
 
   return (
-    <section className="blog-list-half crev section-padding" style={{ padding: "120px 0" }}>
-      <div className="container">
-        <div className="sec-lg-head mb-30">
-          <div className="row">
-            <div className="col-lg-8">
-              <h2>
-                <span className="rotate-text fw-300">Insights from Woodenclouds</span>
-              </h2>
-            </div>
-            <div className="col-lg-4 d-flex align-items-center">
-              <div className="full-width d-flex justify-content-end justify-end">
-                <div className="vew-all">
-                  <Link href="/blog">
-                    View All <span>→</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="wc-section bg-ink text-white">
+      <div className="wc-container">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="text-3xl font-light md:text-4xl">Insights from Woodenclouds</h2>
+          <Link href="/blog" className="text-sm text-white/70 hover:text-white">
+            View All →
+          </Link>
         </div>
-        <div className="row">
+        <div className="grid gap-8 md:grid-cols-2">
           {blogs.map((blog) => (
-            <div className="col-lg-6" key={blog.slug}>
-              <div className="item md-mb80">
-                <div className="row rest">
-                  <div className="col-md-6">
-                    <Link href={`/blog/${blog.slug}`}>
-                      <div className="img">
-                        <img src={blog.image} alt={blog.title} />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="col-md-6 valign">
-                    <Link href={`/blog/${blog.slug}`}>
-                      <div className="cont">
-                        <span className="date fz-12 ls1 text-u opacity-7 mb-15">
-                          {formatBlogDate(blog.createdAt)}
-                        </span>
-                        <h5 className="fw-300">{blog.title}</h5>
-                        <div className="tags colorbg mt-15">
-                          <span>View Details</span>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
+            <Link key={blog.slug} href={`/blog/${blog.slug}`} className="group grid gap-5 sm:grid-cols-2">
+              <div className="overflow-hidden rounded-xl">
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                />
               </div>
-            </div>
+              <div className="flex flex-col justify-center">
+                <span className="text-xs uppercase tracking-wider text-white/50">
+                  {formatBlogDate(blog.createdAt)}
+                </span>
+                <h5 className="mt-3 text-xl font-light leading-snug group-hover:text-white/90">
+                  {blog.title}
+                </h5>
+                <span className="mt-4 text-sm text-white/60">View Details</span>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -325,29 +238,21 @@ export function HomeBlogs() {
 
 export function HomeBrands() {
   return (
-    <section className="block-sec section-padding">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="clients md-mb50">
-              <div className="mb-20">
-                <h3 className="fw-300">Our Brands</h3>
-              </div>
-              <div className="row">
-                {brands.map((brand, i) => (
-                  <div className="col-md-3 col-6" key={`${brand.name}-${i}`}>
-                    <div className="item mt-30">
-                      <div className="img">
-                        <a href={brand.href} target="_blank" rel="noreferrer">
-                          <img src={brand.logo} alt={brand.name} />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+    <section className="wc-section bg-ink text-white">
+      <div className="wc-container">
+        <h3 className="mb-8 text-3xl font-light">Our Brands</h3>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+          {brands.map((brand, i) => (
+            <a
+              key={`${brand.name}-${i}`}
+              href={brand.href}
+              target="_blank"
+              rel="noreferrer"
+              className="flex aspect-[5/3] items-center justify-center rounded-xl bg-white/5 p-6"
+            >
+              <img src={brand.logo} alt={brand.name} className="max-h-10 object-contain opacity-80" />
+            </a>
+          ))}
         </div>
       </div>
     </section>
