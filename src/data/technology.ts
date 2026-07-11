@@ -27,7 +27,7 @@ export const technologyCapabilities = [
     tagline: "Presence that converts",
     description:
       "Brochure sites and marketing experiences built for speed, clarity, and the moments that turn visitors into customers.",
-    image: "/services/technology/website.png",
+    image: "/patterns/tech/tech-pattern-01.png",
     href: "/services/technology/website-development",
   },
   {
@@ -35,7 +35,7 @@ export const technologyCapabilities = [
     tagline: "Software shaped around work",
     description:
       "CRMs, dashboards, and custom web apps designed around how your teams actually operate — not generic templates.",
-    image: "/services/technology/web-application.png",
+    image: "/patterns/tech/tech-pattern-02.png",
     href: "/services/technology/web-application-development",
   },
   {
@@ -43,7 +43,7 @@ export const technologyCapabilities = [
     tagline: "Apps people return to",
     description:
       "Native and cross-platform products for iOS and Android with calm interfaces, reliable performance, and lasting polish.",
-    image: "/services/technology/mobile-app.png",
+    image: "/patterns/tech/tech-pattern-03.png",
     href: "/services/technology/mobile-app-development",
   },
   {
@@ -51,7 +51,7 @@ export const technologyCapabilities = [
     tagline: "Systems that fit your ops",
     description:
       "ERP, CRM, and bespoke platforms built around your workflows — secure, integrable, and ready to evolve.",
-    image: "/services/technology/software.png",
+    image: "/patterns/tech/tech-pattern-04.png",
     href: "/services/technology/custom-software-development",
   },
   {
@@ -59,7 +59,7 @@ export const technologyCapabilities = [
     tagline: "Commerce built to grow",
     description:
       "Storefronts and commerce backends tuned for conversion, multi-channel selling, and long-term scale.",
-    image: "/services/technology/ecommerce.png",
+    image: "/patterns/tech/tech-pattern-05.png",
     href: "/services/technology/ecommerce-development",
   },
   {
@@ -67,7 +67,7 @@ export const technologyCapabilities = [
     tagline: "Tools that extend the workflow",
     description:
       "Browser extensions and plugins that remove friction, connect systems, and keep teams in flow.",
-    image: "/services/technology/extension.png",
+    image: "/patterns/tech/tech-pattern-06.png",
     href: "/services/technology/extension-development",
   },
 ];
@@ -131,7 +131,7 @@ export const techPages: TechDetail[] = [
     tagline: "Sites built to convert and endure",
     description:
       "From brochure presence to conversion-led marketing sites — responsive, fast, and shaped around the journeys that grow your business.",
-    image: "/services/technology/website.png",
+    image: "/patterns/tech/tech-pattern-01.png",
     highlights: [
       "Responsive, conversion-led UX",
       "Performance and SEO foundations",
@@ -171,7 +171,7 @@ export const techPages: TechDetail[] = [
     tagline: "Software shaped around how you work",
     description:
       "Custom web applications for startups and established teams — secure, usable, and built with transparent collaboration at every step.",
-    image: "/services/technology/web-application.png",
+    image: "/patterns/tech/tech-pattern-02.png",
     highlights: [
       "Role-based product flows",
       "API-first architecture",
@@ -211,7 +211,7 @@ export const techPages: TechDetail[] = [
     tagline: "Apps people return to",
     description:
       "Bespoke mobile products that streamline processes, deepen engagement, and bring new ideas to market on iOS and Android.",
-    image: "/services/technology/mobile-app.png",
+    image: "/patterns/tech/tech-pattern-03.png",
     highlights: [
       "iOS, Android, and cross-platform",
       "Shared design systems",
@@ -248,7 +248,7 @@ export const techPages: TechDetail[] = [
     tagline: "Systems built around your operations",
     description:
       "Bespoke software to automate operations, streamline workflows, and unlock innovation across your organization.",
-    image: "/services/technology/software.png",
+    image: "/patterns/tech/tech-pattern-04.png",
     highlights: [
       "Discovery-led requirements",
       "Integrations with existing tools",
@@ -289,7 +289,7 @@ export const techPages: TechDetail[] = [
     tagline: "Commerce engineered for conversion",
     description:
       "Immersive storefronts with refined UX, resilient backends, and the integrations your commerce team needs to grow.",
-    image: "/services/technology/ecommerce.png",
+    image: "/patterns/tech/tech-pattern-05.png",
     highlights: [
       "Conversion-focused storefronts",
       "Payments and inventory sync",
@@ -343,7 +343,7 @@ export const techPages: TechDetail[] = [
     tagline: "Small tools with outsized impact",
     description:
       "Chrome, Firefox, and Edge extensions that streamline workflows and improve everyday digital experiences.",
-    image: "/services/technology/extension.png",
+    image: "/patterns/tech/tech-pattern-06.png",
     highlights: [
       "Chrome, Firefox, and Edge",
       "Workflow automation",

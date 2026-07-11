@@ -62,24 +62,29 @@ export function TechnologyView() {
             </p>
           </header>
 
-          <div className="wc-tech-list">
+          <ul className="wc-tech-grid">
             {technologyCapabilities.map((card, i) => (
-              <Link key={card.title} href={card.href} className="wc-tech-row">
-                <span className="wc-tech-row-index">{String(i + 1).padStart(2, "0")}</span>
-                <div className="wc-tech-row-copy">
-                  <div className="wc-tech-row-heading">
-                    <h3>{card.title}</h3>
-                    <p className="wc-tech-row-tagline">{card.tagline}</p>
+              <li key={card.title}>
+                <Link href={card.href} className="wc-tech-card">
+                  <div className="wc-tech-card-media" aria-hidden>
+                    <img src={card.image} alt="" draggable={false} />
                   </div>
-                  <p className="wc-tech-row-desc">{card.description}</p>
-                </div>
-                <span className="wc-tech-row-go">
-                  Explore
-                  <span aria-hidden>→</span>
-                </span>
-              </Link>
+                  <div className="wc-tech-card-body">
+                    <span className="wc-tech-card-index">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="wc-tech-card-title">{card.title}</h3>
+                    <p className="wc-tech-card-tagline">{card.tagline}</p>
+                    <p className="wc-tech-card-desc">{card.description}</p>
+                    <span className="wc-tech-card-go">
+                      Explore
+                      <span aria-hidden>→</span>
+                    </span>
+                  </div>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
