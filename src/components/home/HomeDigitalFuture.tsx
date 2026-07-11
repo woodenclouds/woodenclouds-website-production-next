@@ -93,15 +93,15 @@ export function HomeDigitalFuture() {
               Woodenclouds
             </p>
 
-            <h2 className="text-[clamp(2.4rem,7vw,5.4rem)] font-medium leading-[1.08] tracking-[-0.03em]">
-              <span className="wc-type-line block min-h-[1.15em] text-white">
+            <h2 className="wc-digital-title text-[clamp(2.4rem,7vw,5.4rem)] font-light leading-[1.08] tracking-[-0.03em]">
+              <span className="wc-type-line block min-h-[1.15em] text-white/90">
                 {typed1}
                 {showCaret1 && <span className="wc-type-caret" aria-hidden />}
               </span>
               <span
                 className={`wc-type-line mt-1 block min-h-[1.15em] ${allDone ? "wc-type-glow" : ""}`}
               >
-                <span className="wc-gradient-text">{typed2}</span>
+                <span className="wc-type-future">{typed2}</span>
                 {showCaret2 && (
                   <span className="wc-type-caret wc-type-caret--accent" aria-hidden />
                 )}

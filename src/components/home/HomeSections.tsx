@@ -127,8 +127,10 @@ export function HomeWorks() {
 
 export function HomeClients() {
   return (
-    <section className="wc-section bg-[#111] text-white">
-      <div className="wc-container grid items-center gap-12 lg:grid-cols-2">
+    <section className="wc-clients wc-section text-white">
+      <div className="wc-clients-bg" aria-hidden />
+
+      <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-2">
         <div>
           <p className="mb-3 text-sm uppercase tracking-wider text-white/60">Since From 2020</p>
           <h3 className="text-3xl font-medium">Our Clients</h3>
@@ -159,14 +161,14 @@ export function HomeClients() {
           {clients.map((client) => (
             <div
               key={client.name}
-              className="flex aspect-square items-center justify-center rounded-xl bg-white/5 p-6"
+              className="wc-clients-tile flex aspect-square items-center justify-center rounded-xl p-6"
             >
               <img src={client.logo} alt={client.name} className="max-h-12 object-contain opacity-80" />
             </div>
           ))}
           <Link
             href="/clients"
-            className="flex aspect-square items-center justify-center rounded-xl border border-white/15 text-sm text-white/80 hover:bg-white/5"
+            className="wc-clients-more flex aspect-square items-center justify-center rounded-xl text-sm text-white/80"
           >
             View More
           </Link>

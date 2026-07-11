@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/services", label: "Services" },
+  { href: "/solutions", label: "Solutions" },
   { href: "/partner-with-us", label: "Partner with us" },
   { href: "/services/dedicated-team", label: "Hire dedicated team" },
   { href: "/works", label: "Works" },
@@ -16,6 +17,7 @@ const links = [
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isDarkPage = isHome || pathname === "/services";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -37,7 +39,7 @@ export function Navbar() {
     };
   }, [open]);
 
-  const shell = isHome
+  const shell = isDarkPage
     ? scrolled
       ? "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
       : "absolute top-0 border-b border-white/10 bg-transparent"
