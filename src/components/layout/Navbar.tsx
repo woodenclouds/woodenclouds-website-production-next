@@ -20,10 +20,16 @@ export function Navbar() {
   const isSolutions = pathname === "/solutions";
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
+  const isAbout = pathname === "/about";
   const isDarkPage =
-    isHome || pathname === "/services" || isSolutions || isWorks || isPartner;
+    isHome ||
+    pathname === "/services" ||
+    isSolutions ||
+    isWorks ||
+    isPartner ||
+    isAbout;
   /** Light content below hero — scrolled bar should be white */
-  const lightOnScroll = isPartner || isWorks;
+  const lightOnScroll = isPartner || isWorks || isAbout;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
