@@ -49,9 +49,6 @@ export function ServicesView() {
 
         <div className="wc-svc-hero-ui">
           <div className="wc-container">
-            <p className="wc-svc-hero-brand">
-              Woodenclouds <span>Services</span>
-            </p>
             <h1 className="wc-svc-hero-title">
               Built to ship.
               <br />

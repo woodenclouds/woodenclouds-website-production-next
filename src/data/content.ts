@@ -359,17 +359,17 @@ export const partnerPrograms = [
   {
     title: "Outsourcing Partnership Program",
     description:
-      "Outsource projects across software and digital marketing so your team can focus on core competencies.",
+      "Outsource projects to Woodenclouds and get dedicated expertise across software and digital marketing. Focus on your core work while we deliver on time with quality you can stand behind.",
   },
   {
     title: "Affiliate Partnership",
     description:
-      "Refer clients to Woodenclouds and earn rewards for every successful conversion.",
+      "Refer clients to Woodenclouds and earn rewards for every successful conversion. A simple way for individuals and businesses to monetize their network.",
   },
   {
     title: "Business Partnerships",
     description:
-      "Explore joint ventures, co-marketing, and strategic alliances that expand reach for both sides.",
+      "Explore joint ventures, co-marketing, and strategic alliances that expand reach for both sides. Leverage our expertise to unlock new markets and stay ahead.",
   },
 ];
 
