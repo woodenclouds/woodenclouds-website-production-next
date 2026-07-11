@@ -144,27 +144,48 @@ export function TechnologyDetailView({ page }: { page: TechDetail }) {
 
       <section className="wc-tech-faq">
         <div className="wc-container">
-          <header className="wc-tech-section-head wc-tech-section-head--list">
-            <p className="wc-tech-kicker">FAQs</p>
-            <h2 className="wc-tech-section-title">Common questions</h2>
-          </header>
-          <div className="wc-tech-faq-list">
-            {page.faqs.map((faq, index) => {
-              const isOpen = openFaq === index;
-              return (
-                <div key={faq.question} className="wc-tech-faq-item">
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => setOpenFaq(isOpen ? -1 : index)}
+          <div className="wc-tech-faq-layout">
+            <div className="wc-tech-faq-intro">
+              <p className="wc-tech-kicker">FAQs</p>
+              <h2 className="wc-tech-section-title">
+                Answers before you{" "}
+                <span className="wc-gradient-text">start</span>
+              </h2>
+              <p className="wc-tech-faq-copy">
+                Quick context on scope, stack, and what happens after launch — ask anything else when
+                you reach out.
+              </p>
+              <a href={`mailto:${site.email}`} className="wc-tech-faq-mail">
+                {site.email}
+              </a>
+            </div>
+
+            <div className="wc-tech-faq-list">
+              {page.faqs.map((faq, index) => {
+                const isOpen = openFaq === index;
+                return (
+                  <div
+                    key={faq.question}
+                    className={`wc-tech-faq-item${isOpen ? " is-open" : ""}`}
                   >
-                    <span>{faq.question}</span>
-                    <span aria-hidden>{isOpen ? "−" : "+"}</span>
-                  </button>
-                  {isOpen ? <div className="wc-tech-faq-answer">{faq.answer}</div> : null}
-                </div>
-              );
-            })}
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                    >
+                      <span className="wc-tech-faq-index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="wc-tech-faq-question">{faq.question}</span>
+                      <span className="wc-tech-faq-toggle" aria-hidden>
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    {isOpen ? <div className="wc-tech-faq-answer">{faq.answer}</div> : null}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

@@ -105,39 +105,6 @@ export const processSteps = [
   "Support & Maintenance",
 ];
 
-export const digitalMarketingServices: ServiceCard[] = [
-  {
-    title: "Brand Identity Development",
-    description: "Craft a distinctive brand system that feels consistent across every touchpoint.",
-    image: "/backgrounds/1.jpg",
-    href: "/services/digital-marketing",
-  },
-  {
-    title: "Digital Marketing Campaigns",
-    description: "Performance campaigns that connect the right message to the right audience.",
-    image: "/backgrounds/1.jpg",
-    href: "/services/digital-marketing",
-  },
-  {
-    title: "Social Media Management",
-    description: "Always-on social presence with content, community, and growth in mind.",
-    image: "/backgrounds/1.jpg",
-    href: "/services/digital-marketing",
-  },
-  {
-    title: "Content Creation",
-    description: "Stories, visuals, and copy that make your brand memorable.",
-    image: "/backgrounds/1.jpg",
-    href: "/services/digital-marketing",
-  },
-  {
-    title: "SEO Optimization",
-    description: "Technical and content SEO that helps the right people find you.",
-    image: "/backgrounds/1.jpg",
-    href: "/services/digital-marketing",
-  },
-];
-
 export const partnerPrograms = [
   {
     id: "outsourcing",

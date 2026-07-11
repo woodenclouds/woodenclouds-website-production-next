@@ -18,6 +18,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");
+  const isDigitalMarketing = pathname === "/services/digital-marketing";
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
@@ -27,7 +28,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isAbout ||
     isDedicatedTeam ||
     isContact ||
-    isBlogDetail;
+    isBlogDetail ||
+    isDigitalMarketing;
 
   useLayoutEffect(() => {
     document.body.classList.toggle("is-home", isHome);
@@ -51,7 +53,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   isAbout ||
                   isDedicatedTeam ||
                   isContact ||
-                  isBlogDetail
+                  isBlogDetail ||
+                  isDigitalMarketing
                 ? "min-h-screen bg-[#05070b] text-white"
                 : "min-h-screen bg-black text-white"
             : isTechnology

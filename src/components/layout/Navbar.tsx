@@ -24,6 +24,7 @@ export function Navbar() {
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isContact = pathname === "/contact";
   const isBlogDetail = pathname.startsWith("/blog/");
+  const isDigitalMarketing = pathname === "/services/digital-marketing";
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
@@ -33,10 +34,17 @@ export function Navbar() {
     isAbout ||
     isDedicatedTeam ||
     isContact ||
-    isBlogDetail;
+    isBlogDetail ||
+    isDigitalMarketing;
   /** Light content below hero — scrolled bar should be white */
   const lightOnScroll =
-    isPartner || isWorks || isAbout || isDedicatedTeam || isContact || isBlogDetail;
+    isPartner ||
+    isWorks ||
+    isAbout ||
+    isDedicatedTeam ||
+    isContact ||
+    isBlogDetail ||
+    isDigitalMarketing;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
