@@ -431,7 +431,7 @@
 .wc-insights {
   position: relative;
   overflow: hidden;
-  background: #08090d;
+  background: #000;
 }
 
 .wc-insights-bg {
@@ -439,21 +439,20 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 60% at 0% 30%, rgba(120, 50, 140, 0.28), transparent 62%),
-    radial-gradient(ellipse 50% 55% at 100% 75%, rgba(35, 90, 160, 0.3), transparent 60%),
-    radial-gradient(ellipse 40% 35% at 60% 0%, rgba(40, 70, 130, 0.1), transparent 70%),
-    #08090d;
+    radial-gradient(ellipse 60% 70% at 0% 50%, rgba(41, 119, 212, 0.16), transparent 65%),
+    radial-gradient(ellipse 55% 60% at 100% 40%, rgba(91, 157, 232, 0.12), transparent 62%),
+    #000;
 }
 
 .wc-insights-bg::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10%;
   background:
-    radial-gradient(ellipse 40% 50% at 10% 40%, rgba(140, 60, 150, 0.2), transparent 70%),
-    radial-gradient(ellipse 38% 45% at 92% 80%, rgba(40, 100, 170, 0.22), transparent 68%);
-  filter: blur(40px);
-  opacity: 0.85;
+    radial-gradient(ellipse 45% 50% at 15% 60%, rgba(91, 157, 232, 0.1), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 90% 30%, rgba(41, 119, 212, 0.08), transparent 68%);
+  filter: blur(48px);
+  opacity: 0.9;
 }
 
 /* Services — editorial rows */
