@@ -3221,6 +3221,72 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   }
 }
 
+/* Blog detail — editorial extras on work-detail skeleton */
+.wc-blog-pull {
+  margin: 0 auto 3.5rem;
+  max-width: 34rem;
+  padding: 0;
+  border: none;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.wc-blog-pull::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin: 0 auto 1.25rem;
+  background: linear-gradient(90deg, var(--color-accent-deep), var(--color-accent-soft));
+}
+
+.wc-blog-principles {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0 0 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .wc-blog-principles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.wc-blog-principle {
+  padding: 1.75rem 0 0;
+  border-top: 1px solid var(--color-line-dark);
+}
+
+.wc-blog-principle-index {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+}
+
+.wc-blog-principle h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.15rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.wc-blog-principle p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
 /* Partner with us */
 .wc-partner-hero {
   position: relative;
@@ -4074,4 +4140,240 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   .wc-about-brand:hover {
     transform: none;
   }
+}
+
+/* Dedicated team — partner layout + brand hero signal */
+.wc-team-hero-brand {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: rgba(244, 246, 248, 0.88);
+  animation: wc-hero-in 0.75s ease both;
+}
+
+.wc-team-page .wc-partner-hero-title {
+  animation-delay: 0.06s;
+}
+
+.wc-team-page .wc-partner-hero-lede {
+  animation-delay: 0.14s;
+}
+
+.wc-team-page .wc-partner-hero-actions {
+  animation-delay: 0.22s;
+}
+
+@media (min-width: 768px) {
+  .wc-team-advantages.wc-partner-reasons-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .wc-team-advantages.wc-partner-reasons-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Contact */
+.wc-contact-page .wc-partner-hero-title {
+  animation-delay: 0.06s;
+}
+
+.wc-contact-page .wc-partner-hero-lede {
+  animation-delay: 0.14s;
+}
+
+.wc-contact-page .wc-partner-hero-actions {
+  animation-delay: 0.22s;
+}
+
+.wc-contact-channels {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-width: 42rem;
+}
+
+.wc-contact-channels li {
+  border-top: 1px solid var(--color-line-dark);
+  padding: 1.35rem 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.wc-contact-channels li:last-child {
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.wc-contact-channels span {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.wc-contact-channels a,
+.wc-contact-channels p {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.wc-contact-channels a:hover {
+  color: var(--color-accent-deep);
+}
+
+.wc-contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.wc-contact-social a {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--color-ink);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.wc-contact-social a:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.wc-contact-form-section {
+  background: #fff;
+  color: #0a0c10;
+  padding: 5rem 0 6rem;
+}
+
+.wc-contact-form-layout {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 900px) {
+  .wc-contact-form-layout {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+}
+
+.wc-contact-form-section .wc-partner-kicker.is-light {
+  color: var(--color-muted);
+}
+
+.wc-contact-form-title {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #0a0c10;
+}
+
+.wc-contact-form-copy {
+  margin: 1rem 0 0;
+  max-width: 26rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.wc-contact-form-mail {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-accent-deep);
+  text-decoration: none;
+}
+
+.wc-contact-form-mail:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.wc-contact-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.wc-contact-form-row {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .wc-contact-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wc-contact-label {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.wc-contact-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(10, 12, 16, 0.2);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #0a0c10;
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.wc-contact-input::placeholder {
+  color: rgba(10, 12, 16, 0.35);
+}
+
+.wc-contact-input:focus {
+  border-bottom-color: var(--color-accent-deep);
+}
+
+.wc-contact-input option {
+  color: #0a0c10;
+}
+
+.wc-contact-form .wc-btn {
+  justify-self: start;
+  margin-top: 0.5rem;
+}
+
+.wc-contact-success {
+  margin: 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(10, 12, 16, 0.12);
+  border-bottom: 1px solid rgba(10, 12, 16, 0.12);
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--color-ink);
 }

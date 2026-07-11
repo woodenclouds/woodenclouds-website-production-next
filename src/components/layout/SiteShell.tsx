@@ -13,13 +13,19 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
+  const isDedicatedTeam = pathname === "/services/dedicated-team";
+  const isContact = pathname === "/contact";
+  const isBlogDetail = pathname.startsWith("/blog/");
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
     pathname === "/solutions" ||
     isWorks ||
     isPartner ||
-    isAbout;
+    isAbout ||
+    isDedicatedTeam ||
+    isContact ||
+    isBlogDetail;
 
   useLayoutEffect(() => {
     document.body.classList.toggle("is-home", isHome);
@@ -38,7 +44,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           isDarkPage
             ? pathname === "/solutions"
               ? "min-h-screen bg-[#0a1f38]"
-              : isWorks || isPartner || isAbout
+              : isWorks || isPartner || isAbout || isDedicatedTeam || isContact || isBlogDetail
                 ? "min-h-screen bg-[#05070b] text-white"
                 : "min-h-screen bg-black text-white"
             : "min-h-screen bg-paper text-ink"

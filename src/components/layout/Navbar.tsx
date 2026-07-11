@@ -21,15 +21,22 @@ export function Navbar() {
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
+  const isDedicatedTeam = pathname === "/services/dedicated-team";
+  const isContact = pathname === "/contact";
+  const isBlogDetail = pathname.startsWith("/blog/");
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
     isSolutions ||
     isWorks ||
     isPartner ||
-    isAbout;
+    isAbout ||
+    isDedicatedTeam ||
+    isContact ||
+    isBlogDetail;
   /** Light content below hero — scrolled bar should be white */
-  const lightOnScroll = isPartner || isWorks || isAbout;
+  const lightOnScroll =
+    isPartner || isWorks || isAbout || isDedicatedTeam || isContact || isBlogDetail;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

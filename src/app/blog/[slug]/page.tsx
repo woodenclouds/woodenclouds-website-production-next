@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogs, formatBlogDate, getBlogBySlug } from "@/data/blogs";
+import { EnquireCta } from "@/components/shared/PageBits";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -12,7 +13,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const blog = getBlogBySlug(slug);
-  return { title: blog?.title ?? "Blog" };
+  return {
+    title: blog?.title ?? "Blog",
+    description: blog?.excerpt,
+  };
 }
 
 export default async function BlogDetailsPage({ params }: Props) {
@@ -20,77 +24,126 @@ export default async function BlogDetailsPage({ params }: Props) {
   const blog = getBlogBySlug(slug);
   if (!blog) notFound();
 
+  const gallery = [blog.image2, blog.image3, blog.image4].filter(Boolean) as string[];
   const index = blogs.findIndex((b) => b.slug === slug);
   const prev = index > 0 ? blogs[index - 1] : null;
   const next = index < blogs.length - 1 ? blogs[index + 1] : null;
-  const recent = blogs.filter((b) => b.slug !== slug).slice(0, 2);
 
   return (
-    <section className="wc-section">
-      <div className="wc-container grid gap-12 lg:grid-cols-12">
-        <article className="lg:col-span-8">
-          <h1 className="mb-6 text-3xl font-light md:text-4xl">{blog.title}</h1>
-          <div className="mb-8 flex flex-wrap gap-8 text-sm">
-            <div>
-              <p className="text-xs uppercase tracking-wider text-muted">Author</p>
-              <p>Woodenclouds</p>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-wider text-muted">Published</p>
-              <p>{formatBlogDate(blog.createdAt)}</p>
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-wider text-muted">Last Updated</p>
-              <p>{formatBlogDate(blog.updatedAt)}</p>
-            </div>
+    <>
+      <header className="wc-work-detail-hero">
+        <div className="wc-work-detail-hero-media" aria-hidden>
+          <img src={blog.image} alt="" />
+        </div>
+        <div className="wc-work-detail-hero-overlay" aria-hidden />
+        <div className="wc-work-detail-hero-ui">
+          <div className="wc-container">
+            <Link href="/blog" className="wc-work-detail-back">
+              ← All posts
+            </Link>
+            <p className="wc-work-detail-brand">
+              <span>Woodenclouds</span> · Journal
+            </p>
+            <h1 className="wc-work-detail-title">{blog.title}</h1>
+            <p className="wc-work-detail-lede">{blog.excerpt}</p>
           </div>
-          <img src={blog.image} alt={blog.title} className="mb-8 w-full rounded-xl" />
-          <div
-            className="prose prose-neutral max-w-none text-sm font-light leading-relaxed text-ink/80"
-            dangerouslySetInnerHTML={{ __html: blog.description }}
-          />
-          <div className="mt-8 flex flex-wrap gap-2">
-            {blog.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-line-dark px-3 py-1 text-xs text-muted"
-              >
-                {tag}
-              </span>
-            ))}
+        </div>
+      </header>
+
+      <section className="wc-work-detail-meta">
+        <div className="wc-container">
+          <dl className="wc-work-detail-meta-grid">
+            <div>
+              <dt>Published</dt>
+              <dd>{formatBlogDate(blog.createdAt)}</dd>
+            </div>
+            <div>
+              <dt>Updated</dt>
+              <dd>{formatBlogDate(blog.updatedAt)}</dd>
+            </div>
+            <div>
+              <dt>Read time</dt>
+              <dd>{blog.readMinutes} min</dd>
+            </div>
+            <div>
+              <dt>Topics</dt>
+              <dd>{blog.tags.join(" · ")}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="wc-work-detail-body">
+        <div className="wc-container">
+          <p className="wc-work-detail-copy">{blog.description1}</p>
+
+          {gallery.length > 0 && (
+            <div className={`wc-work-detail-gallery cols-${Math.min(gallery.length, 3)}`}>
+              {gallery.map((src) => (
+                <img key={src} src={src} alt="" />
+              ))}
+            </div>
+          )}
+
+          {blog.pullQuote && <blockquote className="wc-blog-pull">{blog.pullQuote}</blockquote>}
+
+          {blog.principles && blog.principles.length > 0 && (
+            <div className="wc-blog-principles">
+              {blog.principles.map((item, i) => (
+                <article key={item.title} className="wc-blog-principle">
+                  <span className="wc-blog-principle-index">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
+            </div>
+          )}
+
+          <p className="wc-work-detail-copy is-center">{blog.description2}</p>
+
+          {blog.image5 && (
+            <figure className="wc-work-detail-figure">
+              <img src={blog.image5} alt="" />
+            </figure>
+          )}
+
+          <div className="wc-work-detail-split">
+            {blog.image6 && (
+              <figure>
+                <img src={blog.image6} alt="" />
+              </figure>
+            )}
+            <p className="wc-work-detail-copy">{blog.description3}</p>
           </div>
-          <div className="mt-12 flex justify-between gap-6 border-t border-line-dark pt-8">
+        </div>
+      </section>
+
+      <nav className="wc-work-detail-nav" aria-label="Adjacent posts">
+        <div className="wc-container">
+          <div className="wc-work-detail-nav-row">
             {prev ? (
-              <Link href={`/blog/${prev.slug}`} className="max-w-[45%]">
-                <span className="text-xs uppercase tracking-wider text-muted">Previous</span>
-                <h6 className="mt-1 text-sm font-light">{prev.title}</h6>
+              <Link href={`/blog/${prev.slug}`} className="wc-work-detail-nav-link">
+                <span>Previous</span>
+                <strong>{prev.title}</strong>
               </Link>
             ) : (
               <span />
             )}
-            {next && (
-              <Link href={`/blog/${next.slug}`} className="max-w-[45%] text-right">
-                <span className="text-xs uppercase tracking-wider text-muted">Next</span>
-                <h6 className="mt-1 text-sm font-light">{next.title}</h6>
+            {next ? (
+              <Link href={`/blog/${next.slug}`} className="wc-work-detail-nav-link is-next">
+                <span>Next</span>
+                <strong>{next.title}</strong>
               </Link>
+            ) : (
+              <span />
             )}
           </div>
-        </article>
-        <aside className="lg:col-span-3 lg:col-start-10">
-          <h5 className="mb-6 text-lg font-light">Recent Posts</h5>
-          <div className="space-y-6">
-            {recent.map((item) => (
-              <Link key={item.slug} href={`/blog/${item.slug}`} className="block">
-                <img src={item.image} alt={item.title} className="mb-3 w-full rounded-xl" />
-                <h6 className="text-sm font-light">{item.title}</h6>
-                <span className="mt-1 block text-xs text-muted">
-                  {formatBlogDate(item.createdAt)}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </aside>
-      </div>
-    </section>
+        </div>
+      </nav>
+
+      <EnquireCta buttonLabel="Start a conversation" />
+    </>
   );
 }

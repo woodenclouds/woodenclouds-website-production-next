@@ -1,13 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { site } from "@/data/content";
 import { useQuote } from "./QuoteProvider";
 
 export function Footer() {
-  const pathname = usePathname();
-  const lightFab = pathname === "/services/dedicated-team";
   const { openQuote } = useQuote();
 
   return (
@@ -15,7 +12,7 @@ export function Footer() {
       <button
         type="button"
         onClick={openQuote}
-        className={`wc-quote-fab ${lightFab ? "wc-quote-fab--light" : "wc-quote-fab--dark"}`}
+        className="wc-quote-fab wc-quote-fab--dark"
         aria-label="Get a Quote"
       >
         <span className="inline-flex items-center gap-2 text-[15px]">
