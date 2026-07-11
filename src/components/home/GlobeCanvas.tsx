@@ -468,8 +468,8 @@ function PointGlobe({
       const mat = core.current.material as THREE.PointsMaterial;
       if (showConnections) {
         // Soft dotted globe only at top — connections stay off until scroll
-        mat.opacity = 0.48 + p * 0.08 + Math.sin(t * 0.9) * 0.02;
-        mat.size = 0.03 + p * 0.003 + Math.sin(t * 1.4) * 0.001;
+        mat.opacity = 0.58 + p * 0.08 + Math.sin(t * 0.9) * 0.025;
+        mat.size = 0.034 + p * 0.003 + Math.sin(t * 1.4) * 0.001;
       } else {
         mat.opacity = 0.42 + p * 0.3 + Math.sin(t * 0.9) * 0.03;
         mat.size = 0.015 + p * 0.01 + Math.sin(t * 1.4) * 0.0015;
@@ -479,10 +479,10 @@ function PointGlobe({
     if (shell.current) {
       const mat = shell.current.material as THREE.PointsMaterial;
       mat.opacity = showConnections
-        ? 0.26 + p * 0.1 + Math.sin(t * 0.6 + 1) * 0.02
+        ? 0.34 + p * 0.1 + Math.sin(t * 0.6 + 1) * 0.025
         : 0.24 + p * 0.22 + Math.sin(t * 0.6 + 1) * 0.04;
       mat.size = showConnections
-        ? 0.034 + p * 0.004
+        ? 0.038 + p * 0.004
         : 0.03;
       shell.current.rotation.y = -t * 0.04;
     }
@@ -516,11 +516,11 @@ function PointGlobe({
           <bufferAttribute attach="attributes-position" args={[corePos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={showConnections ? 0.03 : 0.016}
-          color={showConnections ? "#d8e4f5" : "#b4c6e8"}
+          size={showConnections ? 0.034 : 0.016}
+          color={showConnections ? "#e4ecf8" : "#b4c6e8"}
           map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.5 : 0.55}
+          opacity={showConnections ? 0.6 : 0.55}
           sizeAttenuation
           depthWrite={false}
         />
@@ -531,11 +531,11 @@ function PointGlobe({
           <bufferAttribute attach="attributes-position" args={[shellPos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={showConnections ? 0.034 : 0.03}
-          color={showConnections ? "#a8c4e8" : "#7aa8e8"}
+          size={showConnections ? 0.038 : 0.03}
+          color={showConnections ? "#b8d0ee" : "#7aa8e8"}
           map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.28 : 0.28}
+          opacity={showConnections ? 0.36 : 0.28}
           sizeAttenuation
           depthWrite={false}
         />
