@@ -7257,6 +7257,17 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   max-width: 52rem;
 }
 
+/* Shared glass surface */
+.wc-fw-glass {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(1.35);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+}
+
 .wc-fw-hero {
   position: relative;
   display: flex;
@@ -7278,6 +7289,10 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 
 .wc-fw-hero-ui .wc-btn {
   pointer-events: auto;
+}
+
+.wc-fw-hero-actions .wc-btn-light {
+  background: transparent;
 }
 
 .wc-fw-brand {
@@ -7364,8 +7379,8 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   z-index: 1;
   padding: 6.5rem 0;
   color: #fff;
-  background: rgba(0, 0, 0, 0.22);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .wc-fw-section--open {
@@ -7375,7 +7390,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 
 .wc-fw-section--join {
   padding-bottom: 8rem;
-  background: rgba(0, 0, 0, 0.35);
+  background: transparent;
 }
 
 .wc-fw-kicker {
@@ -7415,35 +7430,54 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   width: 100%;
   max-width: 32rem;
   margin: 2rem auto 0;
-  padding: 1.25rem 1.5rem;
+  padding: 1.35rem 1.6rem;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.65;
   text-align: center;
-  color: rgba(210, 224, 255, 0.9);
+  color: rgba(210, 224, 255, 0.92);
+  border-radius: 1rem;
   border: 1px solid rgba(140, 180, 235, 0.22);
-  background: rgba(20, 40, 70, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
 }
 
-/* Meaning stack — centered block, readable left text inside */
+/* Meaning stack — glass panel */
 .wc-fw-stack {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 34rem;
   margin-top: 3.25rem;
+  padding: 0.35rem 1.35rem;
   text-align: left;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(1.35);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
 }
 
 .wc-fw-stack-item {
   display: flex;
   gap: 1.1rem;
-  padding: 1.4rem 0;
+  padding: 1.35rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.wc-fw-stack-item:first-child {
+  border-top: none;
+}
+
 .wc-fw-stack-item:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none;
 }
 
 .wc-fw-stack-num {
@@ -7497,9 +7531,16 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 
 .wc-fw-step {
   min-width: 0;
-  padding: 1.1rem 0.85rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 1.25rem 1rem 1.15rem;
   text-align: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
 }
 
 .wc-fw-step span {
@@ -7544,9 +7585,26 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 
 .wc-fw-cat {
   min-width: 0;
-  padding: 1.1rem 0.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.35rem 1.1rem 1.25rem;
   text-align: center;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.wc-fw-cat:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 .wc-fw-cat h3 {
@@ -7597,12 +7655,16 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   width: 100%;
   max-width: 28rem;
   margin-top: 2.5rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(8, 10, 16, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  padding: 1.6rem;
   text-align: left;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
 }
 
 .wc-fw-join-panel .wc-contact-form {

@@ -72,7 +72,7 @@ export function Navbar() {
   const lightNav = !isDarkPage || inverted;
   const shell = isFuture
     ? scrolled
-      ? "fixed top-0 border-b border-white/10 bg-black/25 backdrop-blur-md"
+      ? "fixed top-0 border-b border-white/10 bg-transparent backdrop-blur-md"
       : "absolute top-0 border-b border-transparent bg-transparent"
     : isSolutions
       ? "absolute top-0 border-b border-white/10 bg-transparent"
