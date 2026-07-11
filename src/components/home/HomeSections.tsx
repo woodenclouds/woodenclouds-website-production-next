@@ -164,12 +164,12 @@ export function HomeClients() {
 
 export function HomeFuture() {
   return (
-    <section className="relative min-h-[720px] overflow-hidden bg-[#03050a] py-20 text-white md:min-h-[780px] md:py-28">
+    <section className="relative min-h-[100svh] overflow-hidden bg-[#02040a] py-20 text-white md:py-28">
       <FutureCanvas />
 
-      <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-12">
+      <div className="wc-container relative z-10 grid min-h-[70vh] items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <div className="relative aspect-square max-w-md border border-white/80 p-8 md:p-10">
+          <div className="relative aspect-square max-w-md border border-white p-8 shadow-[0_0_60px_rgba(91,157,232,0.08)] md:p-10">
             <p className="text-xs uppercase tracking-[0.22em]">Woodenclouds</p>
             <p className="mt-6 text-sm font-light leading-snug text-white/80">
               Designing your
@@ -183,7 +183,7 @@ export function HomeFuture() {
                   C
                   <span
                     aria-hidden
-                    className="absolute -right-3 top-1/2 h-[0.72em] w-[0.72em] -translate-y-1/2 rounded-full bg-white/25"
+                    className="absolute -right-3 top-1/2 h-[0.72em] w-[0.72em] -translate-y-1/2 rounded-full bg-white/20 backdrop-blur-[1px]"
                   />
                 </span>
               </span>
@@ -192,17 +192,17 @@ export function HomeFuture() {
         </div>
 
         <div className="lg:col-span-6 lg:col-start-6">
-          <h3 className="text-2xl font-light uppercase tracking-wide md:text-4xl">
+          <h3 className="text-3xl font-light uppercase tracking-wide md:text-5xl">
             Future <span className="wc-gradient-text">Woodenclouds</span>
           </h3>
-          <p className="mt-6 max-w-xl text-sm font-light leading-relaxed text-white/75 md:text-[15px]">
+          <p className="mt-6 max-w-xl text-sm font-light leading-relaxed text-white/80 md:text-base">
             Future Woodenclouds: We&apos;re not just a tech company. We bring together smart people
             from all fields to use technology to make big changes. Our goal is to build a team of
             talented developers, designers, marketers, and creative thinkers. Together, we&apos;ll
             make the digital world even better.
           </p>
 
-          <Link href="/future-woodenclouds" className="wc-explore-orbit mt-12 inline-flex">
+          <Link href="/future-woodenclouds" className="wc-explore-orbit mt-14 inline-flex">
             <span className="wc-explore-orbit__ring" aria-hidden>
               <svg viewBox="0 0 200 200" className="h-full w-full">
                 <defs>

@@ -18,6 +18,7 @@ export function HomeHero() {
   const [index, setIndex] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
   const slide = heroSlides[index] ?? heroSlides[0];
+  const next = heroSlides[(index + 1) % heroSlides.length] ?? heroSlides[0];
   const total = heroSlides.length;
 
   useEffect(() => {
@@ -63,13 +64,40 @@ export function HomeHero() {
               <span aria-hidden>→</span>
             </Link>
           </div>
+
+          <button
+            type="button"
+            className="wc-hero-next"
+            aria-label={`Next slide: ${next.teaser}`}
+            onClick={() => swiperRef.current?.slideNext()}
+          >
+            <span className="wc-hero-next-thumb">
+              <img src={next.image} alt="" draggable={false} />
+            </span>
+            <span className="wc-hero-next-body">
+              <span className="wc-hero-next-label">Next</span>
+              <span className="wc-hero-next-title">{next.teaser}</span>
+              <span className="wc-hero-next-segments" aria-hidden>
+                {heroSlides.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`wc-hero-next-seg${i === index ? " is-active" : ""}`}
+                  >
+                    {i === index ? (
+                      <span
+                        key={progressKey}
+                        className="wc-hero-next-seg-fill is-running"
+                      />
+                    ) : null}
+                  </span>
+                ))}
+              </span>
+            </span>
+          </button>
         </div>
 
         <div className="wc-hero-chrome">
           <div className="wc-container">
-            <div className="wc-hero-progress" aria-hidden>
-              <span key={progressKey} className="wc-hero-progress-bar is-running" />
-            </div>
             <div className="wc-hero-chrome-row">
               <button
                 type="button"
@@ -93,7 +121,7 @@ export function HomeHero() {
               <button
                 type="button"
                 className="wc-hero-scroll"
-                aria-label="Scroll to services"
+                aria-label="Scroll to next section"
                 onClick={() => {
                   document.getElementById("digital-future")?.scrollIntoView({
                     behavior: "smooth",
@@ -101,8 +129,10 @@ export function HomeHero() {
                   });
                 }}
               >
-                <span className="wc-hero-scroll-line" />
-                Scroll
+                <span className="wc-hero-scroll-chevs" aria-hidden>
+                  <span />
+                  <span />
+                </span>
               </button>
             </div>
           </div>
