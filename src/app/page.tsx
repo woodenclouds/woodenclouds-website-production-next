@@ -1,4 +1,5 @@
 import { HomeHero } from "@/components/home/HomeHero";
+import { HomeDigitalFuture } from "@/components/home/HomeDigitalFuture";
 import {
   HomeServices,
   HomeWorks,
@@ -12,6 +13,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <HomeDigitalFuture />
       <HomeServices />
       <HomeWorks />
       <HomeClients />

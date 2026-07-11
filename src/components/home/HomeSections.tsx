@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
@@ -9,6 +10,11 @@ import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
 import { clients, brands } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import "swiper/css";
+
+const FutureCanvas = dynamic(
+  () => import("./FutureCanvas").then((m) => m.FutureCanvas),
+  { ssr: false },
+);
 
 export function HomeServices() {
   return (
@@ -158,38 +164,64 @@ export function HomeClients() {
 
 export function HomeFuture() {
   return (
-    <section
-      className="wc-section relative overflow-hidden bg-cover bg-center text-white"
-      style={{ backgroundImage: "url(/backgrounds/1.jpg)" }}
-    >
-      <div className="absolute inset-0 bg-black/55" />
-      <div className="wc-container relative grid gap-10 lg:grid-cols-12">
+    <section className="relative min-h-[720px] overflow-hidden bg-[#03050a] py-20 text-white md:min-h-[780px] md:py-28">
+      <FutureCanvas />
+
+      <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="mb-8 text-xs uppercase tracking-[0.2em]">Woodenclouds</p>
-          <p className="mb-3 text-sm font-light leading-tight">
-            Desiging your
-            <br />
-            digital future
-          </p>
-          <p className="text-7xl font-light leading-none">WC</p>
+          <div className="relative aspect-square max-w-md border border-white/80 p-8 md:p-10">
+            <p className="text-xs uppercase tracking-[0.22em]">Woodenclouds</p>
+            <p className="mt-6 text-sm font-light leading-snug text-white/80">
+              Designing your
+              <br />
+              digital future
+            </p>
+            <div className="absolute bottom-8 left-8 right-8 flex items-end">
+              <span className="relative text-[clamp(5rem,14vw,8.5rem)] font-light leading-none tracking-tight">
+                W
+                <span className="relative inline-block">
+                  C
+                  <span
+                    aria-hidden
+                    className="absolute -right-3 top-1/2 h-[0.72em] w-[0.72em] -translate-y-1/2 rounded-full bg-white/25"
+                  />
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
+
         <div className="lg:col-span-6 lg:col-start-6">
-          <h3 className="text-2xl font-light uppercase md:text-3xl">
+          <h3 className="text-2xl font-light uppercase tracking-wide md:text-4xl">
             Future <span className="wc-gradient-text">Woodenclouds</span>
           </h3>
-          <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-white/75">
+          <p className="mt-6 max-w-xl text-sm font-light leading-relaxed text-white/75 md:text-[15px]">
             Future Woodenclouds: We&apos;re not just a tech company. We bring together smart people
             from all fields to use technology to make big changes. Our goal is to build a team of
             talented developers, designers, marketers, and creative thinkers. Together, we&apos;ll
             make the digital world even better.
           </p>
-          <Link
-            href="/future-woodenclouds"
-            className="mt-10 inline-flex h-28 w-28 items-center justify-center rounded-full border border-white/30 text-xs uppercase tracking-widest hover:bg-white/10"
-          >
-            Explore
-            <br />
-            More →
+
+          <Link href="/future-woodenclouds" className="wc-explore-orbit mt-12 inline-flex">
+            <span className="wc-explore-orbit__ring" aria-hidden>
+              <svg viewBox="0 0 200 200" className="h-full w-full">
+                <defs>
+                  <path
+                    id="wcExploreCircle"
+                    d="M100,100 m-68,0 a68,68 0 1,1 136,0 a68,68 0 1,1 -136,0"
+                  />
+                </defs>
+                <text className="fill-white text-[11px] uppercase tracking-[0.35em]">
+                  <textPath href="#wcExploreCircle" startOffset="0%">
+                    Explore More — Explore More —
+                  </textPath>
+                </text>
+              </svg>
+            </span>
+            <span className="wc-explore-orbit__arrow" aria-hidden>
+              →
+            </span>
+            <span className="sr-only">Explore More</span>
           </Link>
         </div>
       </div>

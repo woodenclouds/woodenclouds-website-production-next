@@ -95,7 +95,7 @@ export function HomeHero() {
                 className="wc-hero-scroll"
                 aria-label="Scroll to services"
                 onClick={() => {
-                  document.getElementById("services")?.scrollIntoView({
+                  document.getElementById("digital-future")?.scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                   });
