@@ -41,9 +41,6 @@ export default async function BlogDetailsPage({ params }: Props) {
             <Link href="/blog" className="wc-work-detail-back">
               ← All posts
             </Link>
-            <p className="wc-work-detail-brand">
-              <span>Woodenclouds</span> · Journal
-            </p>
             <h1 className="wc-work-detail-title">{blog.title}</h1>
             <p className="wc-work-detail-lede">{blog.excerpt}</p>
           </div>
