@@ -6,6 +6,7 @@ import * as THREE from "three";
 
 type GlobeProps = {
   scrollProgress: React.MutableRefObject<number>;
+  showConnections?: boolean;
 };
 
 function fibonacciSphere(
@@ -47,7 +48,6 @@ function makeRing(count: number, radius: number, tiltX: number, tiltZ: number) {
     const x0 = Math.cos(a) * radius;
     const y0 = Math.sin(a) * radius;
     const z0 = 0;
-    // tilt X then Z
     const y1 = y0 * cx - z0 * sx;
     const z1 = y0 * sx + z0 * cx;
     const x2 = x0 * cz - y1 * sz;
@@ -57,6 +57,71 @@ function makeRing(count: number, radius: number, tiltX: number, tiltZ: number) {
     arr[i * 3 + 2] = z1;
   }
   return arr;
+}
+
+/** Build great-circle-ish arcs between nearby sphere nodes. */
+function buildConnectionArcs(
+  positions: Float32Array,
+  maxDist: number,
+  maxNeighbors: number,
+  segmentsPerArc = 10,
+) {
+  const count = positions.length / 3;
+  const pts: THREE.Vector3[] = [];
+  for (let i = 0; i < count; i++) {
+    pts.push(
+      new THREE.Vector3(
+        positions[i * 3],
+        positions[i * 3 + 1],
+        positions[i * 3 + 2],
+      ),
+    );
+  }
+
+  const pairs: [number, number][] = [];
+  for (let i = 0; i < count; i++) {
+    const near: { j: number; d: number }[] = [];
+    for (let j = i + 1; j < count; j++) {
+      const d = pts[i].distanceTo(pts[j]);
+      if (d > 0.01 && d < maxDist) near.push({ j, d });
+    }
+    near.sort((a, b) => a.d - b.d);
+    for (const { j } of near.slice(0, maxNeighbors)) {
+      pairs.push([i, j]);
+    }
+  }
+
+  const vertsPerArc = segmentsPerArc * 2;
+  const arr = new Float32Array(pairs.length * vertsPerArc * 3);
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const mid = new THREE.Vector3();
+  let o = 0;
+
+  for (const [i, j] of pairs) {
+    a.copy(pts[i]);
+    b.copy(pts[j]);
+    const ra = a.length();
+    const rb = b.length();
+
+    for (let s = 0; s < segmentsPerArc; s++) {
+      const t0 = s / segmentsPerArc;
+      const t1 = (s + 1) / segmentsPerArc;
+
+      for (const t of [t0, t1]) {
+        mid.lerpVectors(a, b, t).normalize();
+        // Lift arc slightly off the surface at the middle
+        const lift = 1 + Math.sin(t * Math.PI) * 0.045;
+        const r = (ra + (rb - ra) * t) * lift;
+        mid.multiplyScalar(r);
+        arr[o++] = mid.x;
+        arr[o++] = mid.y;
+        arr[o++] = mid.z;
+      }
+    }
+  }
+
+  return { positions: arr, arcCount: pairs.length, vertsPerArc };
 }
 
 function Starfield() {
@@ -98,7 +163,100 @@ function Starfield() {
   );
 }
 
-function PointGlobe({ scrollProgress }: GlobeProps) {
+function ConnectionNetwork({
+  scrollProgress,
+  nodePositions,
+  maxDist,
+  maxNeighbors,
+  segmentsPerArc = 8,
+  color = "#6aa8e8",
+  baseOpacity = 0.12,
+  peakOpacity = 0.72,
+  nodeSize = 0.05,
+}: {
+  scrollProgress: React.MutableRefObject<number>;
+  nodePositions: Float32Array;
+  maxDist: number;
+  maxNeighbors: number;
+  segmentsPerArc?: number;
+  color?: string;
+  baseOpacity?: number;
+  peakOpacity?: number;
+  nodeSize?: number;
+}) {
+  const lines = useRef<THREE.LineSegments>(null);
+  const nodes = useRef<THREE.Points>(null);
+
+  const network = useMemo(
+    () => buildConnectionArcs(nodePositions, maxDist, maxNeighbors, segmentsPerArc),
+    [nodePositions, maxDist, maxNeighbors, segmentsPerArc],
+  );
+
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    const p = scrollProgress.current;
+    // Ease toward a fully connected mesh by end of page scroll
+    const eased = p * p * (3 - 2 * p);
+    const reveal = 0.08 + eased * 0.92;
+    const opacity =
+      baseOpacity + eased * (peakOpacity - baseOpacity) + Math.sin(t * 1.15) * 0.035;
+
+    if (lines.current) {
+      const geo = lines.current.geometry;
+      const total = network.arcCount * network.vertsPerArc;
+      const visible = Math.max(2, Math.floor(total * reveal));
+      geo.setDrawRange(0, visible - (visible % 2));
+
+      const mat = lines.current.material as THREE.LineBasicMaterial;
+      mat.opacity = opacity;
+    }
+
+    if (nodes.current) {
+      const mat = nodes.current.material as THREE.PointsMaterial;
+      mat.opacity = 0.35 + eased * 0.6 + Math.sin(t * 1.4) * 0.05;
+      mat.size = nodeSize * (0.85 + eased * 0.55);
+    }
+  });
+
+  return (
+    <group>
+      <points ref={nodes}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            args={[nodePositions, 3]}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={nodeSize}
+          color="#b8d4f5"
+          transparent
+          opacity={0.55}
+          sizeAttenuation
+          depthWrite={false}
+        />
+      </points>
+
+      <lineSegments ref={lines}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            args={[network.positions, 3]}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial
+          color={color}
+          transparent
+          opacity={baseOpacity}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </lineSegments>
+    </group>
+  );
+}
+
+function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
   const group = useRef<THREE.Group>(null);
   const core = useRef<THREE.Points>(null);
   const shell = useRef<THREE.Points>(null);
@@ -110,47 +268,58 @@ function PointGlobe({ scrollProgress }: GlobeProps) {
   const shellPos = useMemo(() => fibonacciSphere(900, 2.72, 0.18, 29), []);
   const ringPosA = useMemo(() => makeRing(220, 3.05, 0.55, 0.2), []);
   const ringPosB = useMemo(() => makeRing(160, 3.35, -0.35, 0.7), []);
+  // Dense mesh + longer-range arcs for the full connected look
+  const meshNodes = useMemo(
+    () => (showConnections ? fibonacciSphere(380, 2.46, 0.03, 47) : null),
+    [showConnections],
+  );
+  const longNodes = useMemo(
+    () => (showConnections ? fibonacciSphere(120, 2.52, 0.02, 91) : null),
+    [showConnections],
+  );
 
   useFrame(({ clock }) => {
     const t = clock.elapsedTime;
     const p = scrollProgress.current;
+    const eased = p * p * (3 - 2 * p);
 
     if (group.current) {
-      group.current.rotation.y = t * 0.07 + p * 2.4;
-      group.current.rotation.x = 0.18 + Math.sin(t * 0.18) * 0.05 + p * 0.5;
-      const scale = 0.74 + p * 0.52;
+      group.current.rotation.y = t * 0.055 + p * 1.85;
+      group.current.rotation.x = 0.16 + Math.sin(t * 0.16) * 0.04 + p * 0.28;
+      // Fill the viewport; grow slightly as the network completes
+      const scale = (showConnections ? 1.12 : 0.74) + eased * 0.38;
       group.current.scale.setScalar(scale);
-      group.current.position.y = (0.5 - p) * 0.35;
-      group.current.position.z = p * 0.7;
+      group.current.position.y = showConnections ? (0.35 - p) * 0.2 : (0.5 - p) * 0.35;
+      group.current.position.z = showConnections ? eased * 0.35 : p * 0.7;
     }
 
     if (core.current) {
       const mat = core.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.28 + p * 0.55 + Math.sin(t * 0.9) * 0.04;
-      mat.size = 0.013 + p * 0.01 + Math.sin(t * 1.4) * 0.0015;
+      mat.opacity = 0.22 + eased * 0.45 + Math.sin(t * 0.9) * 0.03;
+      mat.size = 0.012 + eased * 0.008 + Math.sin(t * 1.4) * 0.0012;
     }
 
     if (shell.current) {
       const mat = shell.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.18 + p * 0.35 + Math.sin(t * 0.6 + 1) * 0.05;
+      mat.opacity = 0.14 + eased * 0.28 + Math.sin(t * 0.6 + 1) * 0.04;
       shell.current.rotation.y = -t * 0.04;
     }
 
     if (ringA.current) {
       ringA.current.rotation.z = t * 0.22;
       const mat = ringA.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.35 + Math.sin(t * 1.1) * 0.08;
+      mat.opacity = 0.28 + eased * 0.2 + Math.sin(t * 1.1) * 0.06;
     }
 
     if (ringB.current) {
       ringB.current.rotation.z = -t * 0.14;
       const mat = ringB.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.22 + Math.sin(t * 0.8 + 2) * 0.06;
+      mat.opacity = 0.18 + eased * 0.15 + Math.sin(t * 0.8 + 2) * 0.05;
     }
 
     if (glow.current) {
       const mat = glow.current.material as THREE.MeshBasicMaterial;
-      mat.opacity = 0.055 + Math.sin(t * 0.7) * 0.012 + p * 0.03;
+      mat.opacity = 0.05 + Math.sin(t * 0.7) * 0.01 + eased * 0.04;
       glow.current.scale.setScalar(1 + Math.sin(t * 0.5) * 0.03);
     }
   });
@@ -185,6 +354,34 @@ function PointGlobe({ scrollProgress }: GlobeProps) {
         />
       </points>
 
+      {meshNodes && (
+        <ConnectionNetwork
+          scrollProgress={scrollProgress}
+          nodePositions={meshNodes}
+          maxDist={1.15}
+          maxNeighbors={5}
+          segmentsPerArc={7}
+          color="#7eb4ef"
+          baseOpacity={0.1}
+          peakOpacity={0.78}
+          nodeSize={0.042}
+        />
+      )}
+
+      {longNodes && (
+        <ConnectionNetwork
+          scrollProgress={scrollProgress}
+          nodePositions={longNodes}
+          maxDist={2.1}
+          maxNeighbors={3}
+          segmentsPerArc={12}
+          color="#5b9de8"
+          baseOpacity={0.06}
+          peakOpacity={0.55}
+          nodeSize={0.065}
+        />
+      )}
+
       <points ref={ringA}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[ringPosA, 3]} />
@@ -213,7 +410,6 @@ function PointGlobe({ scrollProgress }: GlobeProps) {
         />
       </points>
 
-      {/* Soft luminous core — frames the headline */}
       <mesh ref={glow}>
         <sphereGeometry args={[1.55, 48, 48]} />
         <meshBasicMaterial
@@ -272,18 +468,22 @@ function PointerParallax({
 
 export function GlobeCanvas({
   scrollProgress,
+  showConnections = false,
 }: {
   scrollProgress: React.MutableRefObject<number>;
+  showConnections?: boolean;
 }) {
   return (
-    <div className="wc-globe absolute inset-0 z-0" aria-hidden>
-      {/* Atmospheric wash — depth behind the particle field */}
+    <div
+      className={`wc-globe absolute inset-0 z-0${showConnections ? " wc-globe--network" : ""}`}
+      aria-hidden
+    >
       <div className="wc-globe-nebula" />
       <div className="wc-globe-nebula wc-globe-nebula--secondary" />
 
       <Canvas
         className="relative z-[1] !bg-transparent"
-        camera={{ position: [0, 0, 7.2], fov: 40 }}
+        camera={{ position: [0, 0, showConnections ? 6.4 : 7.2], fov: 40 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, premultipliedAlpha: false }}
         style={{ background: "transparent" }}
@@ -292,7 +492,10 @@ export function GlobeCanvas({
         <pointLight position={[5, 2, 6]} intensity={1.1} color="#7aa8e8" />
         <pointLight position={[-4, -2, 3]} intensity={0.35} color="#4a7ab8" />
         <Starfield />
-        <PointGlobe scrollProgress={scrollProgress} />
+        <PointGlobe
+          scrollProgress={scrollProgress}
+          showConnections={showConnections}
+        />
         <PointerParallax scrollProgress={scrollProgress} />
       </Canvas>
 

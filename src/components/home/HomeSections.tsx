@@ -283,13 +283,13 @@ export function HomeFuture() {
         <div className="wc-future-copy-block">
           <p className="wc-future-kicker">Future Woodenclouds</p>
           <h2 className="wc-future-title">
-            A team built
+            Internet. A laptop.
             <br />
-            for what&apos;s next.
+            Work from anywhere.
           </h2>
           <p className="wc-future-lede">
-            We gather developers, designers, and creative minds to invent products that feel
-            inevitable — and push the digital world further.
+            Woodenclouds Connect — a company-managed remote network aggregating skilled
+            people worldwide. Built to become the number one of its kind.
           </p>
           <Link href="/future-woodenclouds" className="wc-future-cta">
             Enter Future Woodenclouds
@@ -300,15 +300,15 @@ export function HomeFuture() {
         <aside className="wc-future-aside">
           <div className="wc-future-stat">
             <span>01</span>
-            <p>Talent network</p>
+            <p>Work anywhere</p>
           </div>
           <div className="wc-future-stat">
             <span>02</span>
-            <p>Product craft</p>
+            <p>All categories</p>
           </div>
           <div className="wc-future-stat">
             <span>03</span>
-            <p>Long horizon</p>
+            <p>World #1 aim</p>
           </div>
         </aside>
       </div>

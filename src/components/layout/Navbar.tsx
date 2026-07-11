@@ -46,8 +46,7 @@ export function Navbar() {
     isDedicatedTeam ||
     isContact ||
     isBlogDetail ||
-    isDigitalMarketing ||
-    isFuture;
+    isDigitalMarketing;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -71,32 +70,40 @@ export function Navbar() {
 
   const inverted = lightOnScroll && scrolled;
   const lightNav = !isDarkPage || inverted;
-  const shell = isSolutions
-    ? "absolute top-0 border-b border-white/10 bg-transparent"
-    : isDarkPage
-      ? scrolled
-        ? inverted
-          ? "fixed top-0 border-b border-line-dark bg-white/95 backdrop-blur-md"
-          : "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
-        : "absolute top-0 border-b border-white/10 bg-transparent"
-      : "relative border-b border-line-dark bg-white";
+  const shell = isFuture
+    ? scrolled
+      ? "fixed top-0 border-b border-white/10 bg-black/25 backdrop-blur-md"
+      : "absolute top-0 border-b border-transparent bg-transparent"
+    : isSolutions
+      ? "absolute top-0 border-b border-white/10 bg-transparent"
+      : isDarkPage
+        ? scrolled
+          ? inverted
+            ? "fixed top-0 border-b border-line-dark bg-white/95 backdrop-blur-md"
+            : "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
+          : "absolute top-0 border-b border-white/10 bg-transparent"
+        : "relative border-b border-line-dark bg-white";
 
-  const linkBase = lightNav
-    ? "text-ink/65 hover:text-ink"
-    : "text-white/80 hover:text-white";
-  const linkActive = lightNav ? "text-ink" : "text-white";
-  const menuOpenBg = lightNav
-    ? "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white"
-    : "fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/95 backdrop-blur-md";
-  const burgerColor = lightNav ? "bg-ink" : "bg-white";
-  const menuText = lightNav ? "text-ink" : "text-white";
+  const linkBase = isFuture
+    ? "text-white/80 hover:text-white"
+    : lightNav
+      ? "text-ink/65 hover:text-ink"
+      : "text-white/80 hover:text-white";
+  const linkActive = isFuture || !lightNav ? "text-white" : "text-ink";
+  const menuOpenBg =
+    isFuture || !lightNav
+      ? "fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/95 backdrop-blur-md"
+      : "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white";
+  const burgerColor = isFuture || !lightNav ? "bg-white" : "bg-ink";
+  const menuText = isFuture || !lightNav ? "text-white" : "text-ink";
+  const logoLight = isFuture || !lightNav;
 
   return (
     <header className={`inset-x-0 z-50 w-full ${shell}`}>
       <div className="wc-container flex h-20 items-center justify-between gap-6">
         <Link href="/" className="relative z-50 flex shrink-0 items-center">
           <img
-            src={lightNav ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
+            src={logoLight ? "/brand/logo-light.png" : "/brand/logo-dark.png"}
             alt="Woodenclouds"
             width={200}
             height={12}

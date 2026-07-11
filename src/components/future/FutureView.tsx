@@ -1,27 +1,87 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import dynamic from "next/dynamic";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { FutureCanvas } from "@/components/home/FutureCanvas";
 import { site } from "@/data/content";
 
-const disciplines = [
+const GlobeCanvas = dynamic(
+  () => import("@/components/home/GlobeCanvas").then((m) => m.GlobeCanvas),
+  { ssr: false },
+);
+
+const meaning = [
   {
-    title: "Builders",
-    body: "Developers and freelancers who ship products with clarity and craft.",
+    num: "01",
+    title: "The idea",
+    body: "With internet and a laptop, skilled people can work from anywhere. Future Woodenclouds turns that into a real company system — not a loose marketplace.",
   },
   {
-    title: "Growth minds",
-    body: "BDEs, sales, and marketing talent who turn ideas into demand.",
+    num: "02",
+    title: "The system",
+    body: "We aggregate skilled manpower across every category into one connected pool. Woodenclouds manages matching, coordination, and delivery.",
   },
   {
-    title: "Creative thinkers",
-    body: "Designers and makers who give technology a human face.",
+    num: "03",
+    title: "The need",
+    body: "Talent should not be locked to one city. Companies need skilled remote teams — and people need a trusted path to work without borders.",
   },
 ];
 
+const steps = [
+  { num: "01", title: "Connect", body: "Skilled people join from anywhere." },
+  { num: "02", title: "Aggregate", body: "All categories, one talent pool." },
+  { num: "03", title: "Manage", body: "Woodenclouds runs the network." },
+  { num: "04", title: "Deliver", body: "Companies get remote teams they can trust." },
+];
+
+const categories = [
+  { title: "Technology", body: "Developers, engineers, QA, DevOps." },
+  { title: "Design & creative", body: "UI/UX, brand, and digital craft." },
+  { title: "Growth & business", body: "Marketing, BDE, sales, operations." },
+  { title: "Specialists", body: "Any remote-ready skilled category." },
+];
+
+function clamp(n: number, min = 0, max = 1) {
+  return Math.min(max, Math.max(min, n));
+}
+
 export function FutureView() {
   const [done, setDone] = useState(false);
+  const scrollProgress = useRef(0);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      scrollProgress.current = 1;
+      return;
+    }
+
+    let ticking = false;
+
+    const update = () => {
+      const scrollable = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1,
+      );
+      scrollProgress.current = clamp(window.scrollY / scrollable);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -30,140 +90,163 @@ export function FutureView() {
 
   return (
     <div className="wc-fw-page">
-      <header className="wc-fw-hero">
-        <FutureCanvas />
+      <div className="wc-fw-globe-bg">
+        <GlobeCanvas scrollProgress={scrollProgress} showConnections />
+      </div>
 
-        <div className="wc-fw-hero-ui">
-          <div className="wc-container">
-            <p className="wc-fw-brand">
-              Future <span>Woodenclouds</span>
-            </p>
-            <h1 className="wc-fw-hero-title">
-              A team built
-              <br />
-              for what&apos;s next.
-            </h1>
-            <p className="wc-fw-hero-lede">
-              We unite developers, designers, marketers, and creative minds to invent products that
-              feel inevitable — and push the digital world further.
-            </p>
-            <div className="wc-fw-hero-actions">
-              <a href="#join" className="wc-btn wc-btn-light">
-                Join the revolution
-                <span aria-hidden>→</span>
-              </a>
-              <a href="#mission" className="wc-btn wc-btn-light">
-                Our mission
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <a href="#mission" className="wc-fw-hero-scroll" aria-label="Scroll to mission">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
-      </header>
-
-      <section id="mission" className="wc-fw-mission">
-        <div className="wc-container">
-          <div className="wc-fw-mission-grid">
-            <div className="wc-fw-mission-visual">
-              <div className="wc-fw-mission-mosaic">
-                <img src="/about/about-img1.jpg" alt="" className="is-a" />
-                <img src="/team/team-work.jpg" alt="" className="is-b" />
-                <img src="/about/about-img2.jpg" alt="" className="is-c" />
+      <div className="wc-fw-content">
+        <header className="wc-fw-hero" aria-label="Future Woodenclouds">
+          <div className="wc-fw-hero-ui">
+            <div className="wc-fw-stage">
+              <p className="wc-fw-brand">
+                Future <span>Woodenclouds</span>
+              </p>
+              <p className="wc-fw-eyebrow">Woodenclouds Connect</p>
+              <h1 className="wc-fw-hero-title">
+                Internet. A laptop.
+                <br />
+                <span className="wc-fw-hero-accent">Work from anywhere.</span>
+              </h1>
+              <p className="wc-fw-hero-lede">
+                Building the world&apos;s #1 company-managed remote network — skilled people
+                across every category, connected and ready to work from anywhere on earth.
+              </p>
+              <div className="wc-fw-hero-actions">
+                <a href="#join" className="wc-btn wc-btn-light">
+                  Join the network
+                  <span aria-hidden>→</span>
+                </a>
+                <a href="#meaning" className="wc-btn wc-btn-light">
+                  What we mean
+                </a>
               </div>
             </div>
-            <div className="wc-fw-mission-copy">
-              <p className="wc-fw-kicker">The mission</p>
-              <h2 className="wc-fw-mission-title">Architects of innovation</h2>
-              <p className="wc-fw-mission-body">
-                Future Woodenclouds is not just another IT company. We connect the brightest minds
-                across disciplines to transform the world through technology — paving a new era of
-                digital excellence.
-              </p>
-              <p className="wc-fw-mission-body">
-                Our work is to gather talent, sharpen craft, and build products that move industries
-                forward — together.
-              </p>
+          </div>
+
+          <div className="wc-fw-hero-scroll" aria-hidden>
+            <span className="wc-fw-hero-scroll-pill">
+              <span className="wc-scroll-dot" />
+            </span>
+          </div>
+        </header>
+
+        <section id="meaning" className="wc-fw-section">
+          <div className="wc-fw-stage">
+            <p className="wc-fw-kicker">What we mean</p>
+            <h2 className="wc-fw-section-title">
+              The world changed.
+              <br />
+              Work should too.
+            </h2>
+            <p className="wc-fw-section-lede">
+              Geography no longer decides who gets to build. Future Woodenclouds makes that
+              freedom real — structured, managed, and trusted at global scale.
+            </p>
+
+            <div className="wc-fw-stack">
+              {meaning.map((item) => (
+                <article key={item.title} className="wc-fw-stack-item">
+                  <span className="wc-fw-stack-num">{item.num}</span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="wc-fw-vision">
-        <div className="wc-container">
-          <p className="wc-fw-kicker is-light">Our vision</p>
-          <h2 className="wc-fw-vision-title">
-            Creativity and technology,{" "}
-            <span className="wc-gradient-text">converging without limits.</span>
-          </h2>
-          <p className="wc-fw-vision-body">
-            Imagine a world where boundaries fall away and possibility expands. By fostering
-            collaboration among India&apos;s most talented people, we are building a powerhouse of
-            innovation that will reshape the IT industry — and everything beyond it.
-          </p>
-        </div>
-      </section>
+        <section className="wc-fw-section wc-fw-section--open">
+          <div className="wc-fw-stage wc-fw-stage--wide">
+            <p className="wc-fw-kicker">Our vision</p>
+            <h2 className="wc-fw-section-title wc-fw-section-title--lg">
+              Skill should travel
+              <br />
+              <span className="wc-gradient-text">as freely as the internet.</span>
+            </h2>
+            <p className="wc-fw-section-lede">
+              Anyone with talent, a laptop, and connection should work with the best teams
+              on earth — without leaving home, without borders in the way.
+            </p>
+            <p className="wc-fw-ambition">
+              We are building Woodenclouds Connect to become the number one remote
+              skilled-network company in the world.
+            </p>
+          </div>
+        </section>
 
-      <section className="wc-fw-phase">
-        <div className="wc-container">
-          <div className="wc-fw-phase-grid">
-            <div className="wc-fw-phase-copy">
-              <p className="wc-fw-kicker">Phase 01</p>
-              <h2 className="wc-fw-phase-title">Building the foundation</h2>
-              <p className="wc-fw-phase-body">
-                We are assembling a team of 10,000 passionate individuals across disciplines — from
-                freelancers to BDEs, from sales and marketing experts to visionary designers — to
-                drive progress and change.
-              </p>
-              <ol className="wc-fw-disciplines">
-                {disciplines.map((item, i) => (
-                  <li key={item.title}>
-                    <span>{String(i + 1).padStart(2, "0")}</span>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <div className="wc-fw-phase-visual">
-              <img src="/about/img1.jpg" alt="" className="is-main" />
-              <img src="/about/img2.jpg" alt="" className="is-accent" />
+        <section className="wc-fw-section">
+          <div className="wc-fw-stage wc-fw-stage--wide">
+            <p className="wc-fw-kicker">The model</p>
+            <h2 className="wc-fw-section-title">
+              Four steps.
+              <br />
+              One network.
+            </h2>
+            <p className="wc-fw-section-lede">
+              Not unmanaged freelancing — a company-run connect layer for global skilled
+              manpower.
+            </p>
+
+            <div className="wc-fw-steps">
+              {steps.map((step) => (
+                <article key={step.title} className="wc-fw-step">
+                  <span>{step.num}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </article>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="join" className="wc-fw-join">
-        <div className="wc-container">
-          <div className="wc-fw-join-layout">
-            <div>
-              <p className="wc-fw-kicker">Join the revolution</p>
-              <h2 className="wc-fw-join-title">
-                Ready to shape{" "}
-                <span className="wc-gradient-text">what comes next?</span>
-              </h2>
-              <p className="wc-fw-join-copy">
-                Whether you&apos;re a developer, marketer, designer, or creative thinker — Future
-                Woodenclouds welcomes you. Let&apos;s redefine what&apos;s possible.
-              </p>
-              <a href={`mailto:${site.careersEmail}`} className="wc-fw-join-mail">
-                {site.careersEmail}
-              </a>
-              <p className="wc-fw-join-alt">
-                Or explore open roles on our{" "}
-                <Link href="/career">careers page</Link>.
-              </p>
+        <section className="wc-fw-section wc-fw-section--open">
+          <div className="wc-fw-stage">
+            <p className="wc-fw-kicker">Who we connect</p>
+            <h2 className="wc-fw-section-title">
+              All categories.
+              <br />
+              One network.
+            </h2>
+            <p className="wc-fw-section-lede">
+              If you can do great work with a laptop and internet, you belong here.
+            </p>
+
+            <div className="wc-fw-cats">
+              {categories.map((item) => (
+                <article key={item.title} className="wc-fw-cat">
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </article>
+              ))}
             </div>
+          </div>
+        </section>
+
+        <section id="join" className="wc-fw-section wc-fw-section--join">
+          <div className="wc-fw-stage">
+            <p className="wc-fw-kicker">Join the network</p>
+            <h2 className="wc-fw-section-title">
+              Be part of building
+              <br />
+              <span className="wc-gradient-text">the world&apos;s #1.</span>
+            </h2>
+            <p className="wc-fw-section-lede">
+              Skilled talent ready to work from anywhere — or companies ready for managed
+              remote teams. Tell us who you are.
+            </p>
+            <a href={`mailto:${site.careersEmail}`} className="wc-fw-join-mail">
+              {site.careersEmail}
+            </a>
+            <p className="wc-fw-join-alt">
+              Or explore open roles on our <Link href="/career">careers page</Link>.
+            </p>
 
             <div className="wc-fw-join-panel">
               {done ? (
                 <p className="wc-contact-success">
-                  Thanks for joining — we&apos;ll be in touch soon.
+                  Thanks for reaching out — we&apos;ll be in touch soon.
                 </p>
               ) : (
                 <form onSubmit={onSubmit} className="wc-contact-form">
@@ -218,21 +301,21 @@ export function FutureView() {
                       className="wc-contact-input"
                       id="fw-message"
                       name="message"
-                      rows={5}
+                      rows={4}
                       required
-                      placeholder="Tell us who you are and how you want to contribute"
+                      placeholder="Your skill, or how your company wants to connect"
                     />
                   </div>
-                  <button type="submit" className="wc-btn wc-btn-dark">
-                    Join Future Woodenclouds
+                  <button type="submit" className="wc-btn wc-btn-light">
+                    Connect with us
                     <span aria-hidden>→</span>
                   </button>
                 </form>
               )}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
