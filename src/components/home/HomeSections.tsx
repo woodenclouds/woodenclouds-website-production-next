@@ -9,12 +9,15 @@ import { getFeaturedWorks } from "@/data/works";
 import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
 import { clients, brands } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
+import { solutions } from "@/data/solutions";
 import "swiper/css";
 
 const FutureCanvas = dynamic(
   () => import("./FutureCanvas").then((m) => m.FutureCanvas),
   { ssr: false },
 );
+
+const homeSolutions = solutions.slice(0, 4);
 
 export function HomeServices() {
   return (
@@ -56,6 +59,57 @@ export function HomeServices() {
               </span>
             </Link>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HomeSolutions() {
+  return (
+    <section id="solutions" className="wc-home-solutions">
+      <div className="wc-home-solutions-bg" aria-hidden />
+      <div className="wc-container relative z-10">
+        <header className="wc-home-solutions-head">
+          <p className="wc-home-solutions-kicker">Solutions</p>
+          <div className="wc-home-solutions-head-row">
+            <h2 className="wc-home-solutions-title">
+              Platforms and models
+              <br />
+              built to scale.
+            </h2>
+            <p className="wc-home-solutions-intro">
+              Productized delivery for commerce, custom software, mobile, AI, growth, and dedicated
+              squads — clear outcomes, not endless scope.
+            </p>
+          </div>
+        </header>
+
+        <ul className="wc-home-solutions-list">
+          {homeSolutions.map((item, i) => (
+            <li key={item.id}>
+              <Link href={`/solutions#${item.id}`} className="wc-home-solutions-row group">
+                <span className="wc-home-solutions-index">{String(i + 1).padStart(2, "0")}</span>
+                <div className="wc-home-solutions-copy">
+                  <h3>{item.name}</h3>
+                  <p>{item.tagline}</p>
+                </div>
+                <div className="wc-home-solutions-media">
+                  <img src={item.image} alt="" draggable={false} />
+                </div>
+                <span className="wc-home-solutions-go" aria-hidden>
+                  →
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className="wc-home-solutions-foot">
+          <Link href="/solutions" className="wc-home-link">
+            Explore all solutions
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>
@@ -178,6 +232,48 @@ export function HomeClients() {
   );
 }
 
+export function HomeAbout() {
+  return (
+    <section id="about" className="wc-home-about">
+      <div className="wc-home-about-bg" aria-hidden />
+      <div className="wc-container relative z-10">
+        <div className="wc-home-about-grid">
+          <div className="wc-home-about-visual" aria-hidden>
+            <div className="wc-home-about-mosaic">
+              <img src="/about/about-img1.jpg" alt="" className="is-a" />
+              <img src="/about/about-img2.jpg" alt="" className="is-b" />
+              <img src="/about/about-img3.jpg" alt="" className="is-c" />
+            </div>
+          </div>
+
+          <div className="wc-home-about-copy">
+            <p className="wc-home-about-kicker">Who we are</p>
+            <h2 className="wc-home-about-title">
+              A digital partner built for
+              <br />
+              lasting progress.
+            </h2>
+            <p className="wc-home-about-lede">
+              From product engineering to growth and brand systems, we work as an extension of your
+              team — focused on clarity, speed, and work you can stand behind.
+            </p>
+            <div className="wc-home-about-actions">
+              <Link href="/about" className="wc-home-link">
+                About Woodenclouds
+                <span aria-hidden>→</span>
+              </Link>
+              <Link href="/career" className="wc-home-link is-muted">
+                Careers
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function HomeFuture() {
   return (
     <section className="wc-future" id="future">
@@ -215,6 +311,36 @@ export function HomeFuture() {
             <p>Long horizon</p>
           </div>
         </aside>
+      </div>
+    </section>
+  );
+}
+
+export function HomePartner() {
+  return (
+    <section id="partner" className="wc-home-partner">
+      <div className="wc-home-partner-media" aria-hidden>
+        <img src="/hero/hero-collab.jpg" alt="" />
+      </div>
+      <div className="wc-home-partner-overlay" aria-hidden />
+
+      <div className="wc-home-partner-ui">
+        <div className="wc-container">
+          <p className="wc-home-partner-kicker">Partner with us</p>
+          <h2 className="wc-home-partner-title">
+            Grow together.
+            <br />
+            Build the next chapter.
+          </h2>
+          <p className="wc-home-partner-lede">
+            Outsourcing, affiliate, and business partnerships — collaboration that compounds across
+            technology, marketing, and shared markets.
+          </p>
+          <Link href="/partner-with-us" className="wc-future-cta">
+            Explore partnerships
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
       </div>
     </section>
   );
