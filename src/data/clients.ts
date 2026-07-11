@@ -18,13 +18,8 @@ export const brands = [
     href: "#",
   },
   {
-    name: "WC Creatives",
-    logo: "/clients/wc-creatives.png",
-    href: "#",
-  },
-  {
     name: "Woodenclouds Academy",
-    logo: "https://woodencloudsacademy.com/wp-content/uploads/2024/04/logo.png",
+    logo: "/clients/wca-logo-white.png",
     href: "https://woodencloudsacademy.com/",
   },
   {
