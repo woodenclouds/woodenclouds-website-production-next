@@ -1,9 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { site } from "@/data/content";
 
 const GlobeCanvas = dynamic(
   () => import("@/components/home/GlobeCanvas").then((m) => m.GlobeCanvas),
@@ -47,7 +46,6 @@ function clamp(n: number, min = 0, max = 1) {
 }
 
 export function FutureView() {
-  const [done, setDone] = useState(false);
   const scrollProgress = useRef(0);
   const finaleRef = useRef<HTMLElement>(null);
   const [finaleProgress, setFinaleProgress] = useState(0);
@@ -99,11 +97,6 @@ export function FutureView() {
     };
   }, []);
 
-  function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    setDone(true);
-  }
-
   // Fade in as the sticky finale stage is scrolled
   const finaleOpacity = clamp(finaleProgress / 0.45);
   const finaleScale = 0.92 + finaleOpacity * 0.08;
@@ -132,10 +125,10 @@ export function FutureView() {
                 across every category, connected and ready to work from anywhere on earth.
               </p>
               <div className="wc-fw-hero-actions">
-                <a href="#join" className="wc-btn wc-btn-light">
+                <Link href="/career" className="wc-btn wc-btn-light">
                   Join the network
                   <span aria-hidden>→</span>
-                </a>
+                </Link>
                 <a href="#meaning" className="wc-btn wc-btn-light">
                   What we mean
                 </a>
@@ -261,98 +254,6 @@ export function FutureView() {
               <br />
               <span>Connect</span>
             </p>
-          </div>
-        </section>
-
-        <section id="join" className="wc-fw-section wc-fw-section--join">
-          <div className="wc-fw-stage">
-            <p className="wc-fw-kicker">Join the network</p>
-            <h2 className="wc-fw-section-title">
-              Be part of building
-              <br />
-              <span className="wc-gradient-text">the world&apos;s #1.</span>
-            </h2>
-            <p className="wc-fw-section-lede">
-              Skilled talent ready to work from anywhere — or companies ready for managed
-              remote teams. Tell us who you are.
-            </p>
-            <a href={`mailto:${site.careersEmail}`} className="wc-fw-join-mail">
-              {site.careersEmail}
-            </a>
-            <p className="wc-fw-join-alt">
-              Or explore open roles on our <Link href="/career">careers page</Link>.
-            </p>
-
-            <div className="wc-fw-join-panel">
-              {done ? (
-                <p className="wc-contact-success">
-                  Thanks for reaching out — we&apos;ll be in touch soon.
-                </p>
-              ) : (
-                <form onSubmit={onSubmit} className="wc-contact-form">
-                  <div>
-                    <label className="wc-contact-label" htmlFor="fw-name">
-                      Full name
-                    </label>
-                    <input
-                      className="wc-contact-input"
-                      id="fw-name"
-                      name="name"
-                      required
-                      autoComplete="name"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div className="wc-contact-form-row">
-                    <div>
-                      <label className="wc-contact-label" htmlFor="fw-phone">
-                        Phone
-                      </label>
-                      <input
-                        className="wc-contact-input"
-                        id="fw-phone"
-                        name="phone"
-                        type="tel"
-                        required
-                        autoComplete="tel"
-                        placeholder="Phone"
-                      />
-                    </div>
-                    <div>
-                      <label className="wc-contact-label" htmlFor="fw-email">
-                        Email
-                      </label>
-                      <input
-                        className="wc-contact-input"
-                        id="fw-email"
-                        name="email"
-                        type="email"
-                        required
-                        autoComplete="email"
-                        placeholder="Email"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="wc-contact-label" htmlFor="fw-message">
-                      Message
-                    </label>
-                    <textarea
-                      className="wc-contact-input"
-                      id="fw-message"
-                      name="message"
-                      rows={4}
-                      required
-                      placeholder="Your skill, or how your company wants to connect"
-                    />
-                  </div>
-                  <button type="submit" className="wc-btn wc-btn-light">
-                    Connect with us
-                    <span aria-hidden>→</span>
-                  </button>
-                </form>
-              )}
-            </div>
           </div>
         </section>
       </div>

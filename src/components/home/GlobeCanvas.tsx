@@ -13,6 +13,38 @@ function clamp01(n: number) {
   return Math.min(1, Math.max(0, n));
 }
 
+/** Soft circular sprite so Points render as round dots, not squares. */
+function makeRoundDotTexture() {
+  const size = 64;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+
+  // Hard-ish disc with soft edge — visible, clearly round
+  const g = ctx.createRadialGradient(
+    size / 2,
+    size / 2,
+    0,
+    size / 2,
+    size / 2,
+    size / 2,
+  );
+  g.addColorStop(0, "rgba(255,255,255,1)");
+  g.addColorStop(0.5, "rgba(255,255,255,1)");
+  g.addColorStop(0.72, "rgba(255,255,255,0.55)");
+  g.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, size, size);
+
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.colorSpace = THREE.NoColorSpace;
+  tex.premultiplyAlpha = true;
+  tex.needsUpdate = true;
+  return tex;
+}
+
 function fibonacciSphere(
   count: number,
   radius: number,
@@ -174,7 +206,7 @@ function buildConnectionArcs(
   return { positions: arr, arcCount: pairs.length, vertsPerArc };
 }
 
-function Starfield() {
+function Starfield({ dotMap }: { dotMap: THREE.Texture | null }) {
   const points = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
     const count = 900;
@@ -204,6 +236,7 @@ function Starfield() {
       <pointsMaterial
         size={0.028}
         color="#c8d4ea"
+        map={dotMap ?? undefined}
         transparent
         opacity={0.35}
         sizeAttenuation
@@ -226,6 +259,7 @@ function ConnectionNetwork({
   nodeSize = 0.05,
   startReveal = 0,
   revealDelay = 0.04,
+  dotMap,
 }: {
   scrollProgress: React.MutableRefObject<number>;
   nodePositions: Float32Array;
@@ -239,6 +273,7 @@ function ConnectionNetwork({
   nodeSize?: number;
   startReveal?: number;
   revealDelay?: number;
+  dotMap: THREE.Texture | null;
 }) {
   const lines = useRef<THREE.LineSegments>(null);
   const nodes = useRef<THREE.Points>(null);
@@ -298,6 +333,7 @@ function ConnectionNetwork({
         <pointsMaterial
           size={nodeSize}
           color="#ffffff"
+          map={dotMap ?? undefined}
           transparent
           opacity={0}
           sizeAttenuation
@@ -361,7 +397,11 @@ function GlobeWireframe({
   );
 }
 
-function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
+function PointGlobe({
+  scrollProgress,
+  showConnections = false,
+  dotMap,
+}: GlobeProps & { dotMap: THREE.Texture | null }) {
   const group = useRef<THREE.Group>(null);
   const core = useRef<THREE.Points>(null);
   const shell = useRef<THREE.Points>(null);
@@ -427,8 +467,9 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
     if (core.current) {
       const mat = core.current.material as THREE.PointsMaterial;
       if (showConnections) {
-        mat.opacity = 0.32 + p * 0.1 + Math.sin(t * 0.9) * 0.02;
-        mat.size = 0.028 + p * 0.003 + Math.sin(t * 1.4) * 0.001;
+        // Soft dotted globe only at top — connections stay off until scroll
+        mat.opacity = 0.48 + p * 0.08 + Math.sin(t * 0.9) * 0.02;
+        mat.size = 0.03 + p * 0.003 + Math.sin(t * 1.4) * 0.001;
       } else {
         mat.opacity = 0.42 + p * 0.3 + Math.sin(t * 0.9) * 0.03;
         mat.size = 0.015 + p * 0.01 + Math.sin(t * 1.4) * 0.0015;
@@ -438,10 +479,10 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
     if (shell.current) {
       const mat = shell.current.material as THREE.PointsMaterial;
       mat.opacity = showConnections
-        ? 0.18 + p * 0.1 + Math.sin(t * 0.6 + 1) * 0.02
+        ? 0.26 + p * 0.1 + Math.sin(t * 0.6 + 1) * 0.02
         : 0.24 + p * 0.22 + Math.sin(t * 0.6 + 1) * 0.04;
       mat.size = showConnections
-        ? 0.032 + p * 0.004
+        ? 0.034 + p * 0.004
         : 0.03;
       shell.current.rotation.y = -t * 0.04;
     }
@@ -475,13 +516,13 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
           <bufferAttribute attach="attributes-position" args={[corePos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={showConnections ? 0.028 : 0.016}
-          color={showConnections ? "#cdd8ec" : "#b4c6e8"}
+          size={showConnections ? 0.03 : 0.016}
+          color={showConnections ? "#d8e4f5" : "#b4c6e8"}
+          map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.34 : 0.55}
+          opacity={showConnections ? 0.5 : 0.55}
           sizeAttenuation
           depthWrite={false}
-          blending={showConnections ? THREE.AdditiveBlending : THREE.NormalBlending}
         />
       </points>
 
@@ -490,13 +531,13 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
           <bufferAttribute attach="attributes-position" args={[shellPos, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={showConnections ? 0.032 : 0.03}
-          color={showConnections ? "#9bb8de" : "#7aa8e8"}
+          size={showConnections ? 0.034 : 0.03}
+          color={showConnections ? "#a8c4e8" : "#7aa8e8"}
+          map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.2 : 0.28}
+          opacity={showConnections ? 0.28 : 0.28}
           sizeAttenuation
           depthWrite={false}
-          blending={showConnections ? THREE.AdditiveBlending : THREE.NormalBlending}
         />
       </points>
 
@@ -518,6 +559,7 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
           nodeSize={0.07}
           startReveal={0}
           revealDelay={0.05}
+          dotMap={dotMap}
         />
       )}
 
@@ -535,6 +577,7 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
           nodeSize={0.085}
           startReveal={0}
           revealDelay={0.18}
+          dotMap={dotMap}
         />
       )}
 
@@ -552,6 +595,7 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
           nodeSize={0.1}
           startReveal={0}
           revealDelay={0.32}
+          dotMap={dotMap}
         />
       )}
 
@@ -562,6 +606,7 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
         <pointsMaterial
           size={0.016}
           color="#5b9de8"
+          map={dotMap ?? undefined}
           transparent
           opacity={0.2}
           sizeAttenuation
@@ -576,6 +621,7 @@ function PointGlobe({ scrollProgress, showConnections = false }: GlobeProps) {
         <pointsMaterial
           size={0.014}
           color="#8eb4e0"
+          map={dotMap ?? undefined}
           transparent
           opacity={0.14}
           sizeAttenuation
@@ -650,6 +696,13 @@ export function GlobeCanvas({
   showConnections?: boolean;
 }) {
   const cameraZ = showConnections ? 6.1 : 7.2;
+  const dotMap = useMemo(() => makeRoundDotTexture(), []);
+
+  useEffect(() => {
+    return () => {
+      dotMap?.dispose();
+    };
+  }, [dotMap]);
 
   return (
     <div
@@ -669,10 +722,11 @@ export function GlobeCanvas({
         <ambientLight intensity={0.4} />
         <pointLight position={[5, 2, 6]} intensity={1.2} color="#7aa8e8" />
         <pointLight position={[-4, -2, 3]} intensity={0.4} color="#4a7ab8" />
-        <Starfield />
+        <Starfield dotMap={dotMap} />
         <PointGlobe
           scrollProgress={scrollProgress}
           showConnections={showConnections}
+          dotMap={dotMap}
         />
         <PointerParallax scrollProgress={scrollProgress} cameraZ={cameraZ} />
       </Canvas>
