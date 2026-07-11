@@ -222,8 +222,9 @@ export function HomeBlogs() {
   const blogs = getFeaturedBlogs(2);
 
   return (
-    <section className="wc-section bg-black text-white">
-      <div className="wc-container">
+    <section className="wc-insights wc-section text-white">
+      <div className="wc-insights-bg" aria-hidden />
+      <div className="wc-container relative z-10">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <h2 className="text-3xl font-light md:text-4xl">Insights from Woodenclouds</h2>
           <Link href="/blog" className="text-sm text-white/70 hover:text-white">

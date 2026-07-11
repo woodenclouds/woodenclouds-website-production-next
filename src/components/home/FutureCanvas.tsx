@@ -41,7 +41,7 @@ export function FutureCanvas() {
         </svg>
         <div className="wc-future-badge__core">
           <span>Future</span>
-          <strong>WC</strong>
+          <strong>Woodenclouds</strong>
         </div>
       </div>
 
