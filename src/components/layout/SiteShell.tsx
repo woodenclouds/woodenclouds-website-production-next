@@ -15,6 +15,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     document.body.classList.toggle("is-home", isHome);
   }, [isHome]);
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <QuoteProvider>
       <ProgressWrap />
