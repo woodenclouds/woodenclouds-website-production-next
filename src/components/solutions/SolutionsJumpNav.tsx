@@ -20,7 +20,7 @@ export function SolutionsJumpNav({ items }: { items: Pick<Solution, "id" | "name
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible?.target?.id) setActive(visible.target.id);
       },
-      { rootMargin: "-30% 0px -50% 0px", threshold: [0.15, 0.4, 0.7] },
+      { rootMargin: "-20% 0px -50% 0px", threshold: [0.15, 0.4, 0.7] },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -29,7 +29,7 @@ export function SolutionsJumpNav({ items }: { items: Pick<Solution, "id" | "name
 
   return (
     <nav
-      className="sticky top-0 z-30 border-b border-line-dark bg-paper/90 backdrop-blur-md"
+      className="sticky top-0 z-40 border-b border-line-dark bg-paper/95 backdrop-blur-md"
       aria-label="Solutions"
     >
       <div className="wc-container">

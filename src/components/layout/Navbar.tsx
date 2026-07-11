@@ -17,7 +17,8 @@ const links = [
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const isDarkPage = isHome || pathname === "/services";
+  const isSolutions = pathname === "/solutions";
+  const isDarkPage = isHome || pathname === "/services" || isSolutions;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -39,11 +40,13 @@ export function Navbar() {
     };
   }, [open]);
 
-  const shell = isDarkPage
-    ? scrolled
-      ? "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
-      : "absolute top-0 border-b border-white/10 bg-transparent"
-    : "relative border-b border-white/10 bg-black";
+  const shell = isSolutions
+    ? "absolute top-0 border-b border-white/10 bg-transparent"
+    : isDarkPage
+      ? scrolled
+        ? "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
+        : "absolute top-0 border-b border-white/10 bg-transparent"
+      : "relative border-b border-white/10 bg-black";
 
   return (
     <header className={`inset-x-0 z-50 w-full ${shell}`}>

@@ -10,7 +10,7 @@ import { QuoteProvider } from "./QuoteProvider";
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const isDarkPage = isHome || pathname === "/services";
+  const isDarkPage = isHome || pathname === "/services" || pathname === "/solutions";
 
   useLayoutEffect(() => {
     document.body.classList.toggle("is-home", isHome);
@@ -24,7 +24,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <QuoteProvider>
       <ProgressWrap />
-      <div className={isDarkPage ? "min-h-screen bg-black text-white" : "min-h-screen bg-paper text-ink"}>
+      <div
+        className={
+          isDarkPage
+            ? pathname === "/solutions"
+              ? "min-h-screen bg-[#0a1f38]"
+              : "min-h-screen bg-black text-white"
+            : "min-h-screen bg-paper text-ink"
+        }
+      >
         <Navbar />
         <main>{children}</main>
         <Footer />

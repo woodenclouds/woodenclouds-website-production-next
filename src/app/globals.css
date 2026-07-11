@@ -2484,3 +2484,124 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
     transition: none;
   }
 }
+
+/* Solutions hero — glassmorphism */
+.wc-solutions-hero {
+  isolation: isolate;
+}
+
+.wc-solutions-hero-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 35%, #2563a8 0%, #123a66 38%, #0a1c33 68%, #050b14 100%);
+}
+
+.wc-solutions-hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.wc-solutions-hero-orb--a {
+  width: min(55vw, 520px);
+  height: min(55vw, 520px);
+  left: -8%;
+  top: 12%;
+  background: radial-gradient(circle, rgba(91, 157, 232, 0.55) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+.wc-solutions-hero-orb--b {
+  width: min(50vw, 480px);
+  height: min(50vw, 480px);
+  right: -6%;
+  bottom: 8%;
+  background: radial-gradient(circle, rgba(41, 119, 212, 0.5) 0%, transparent 70%);
+  opacity: 0.65;
+}
+
+.wc-solutions-hero-orb--c {
+  width: min(40vw, 360px);
+  height: min(40vw, 360px);
+  left: 40%;
+  top: -8%;
+  background: radial-gradient(circle, rgba(168, 189, 234, 0.4) 0%, transparent 70%);
+  opacity: 0.55;
+}
+
+.wc-solutions-hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 75%);
+}
+
+.wc-solutions-hero-sheen {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 42%, transparent 58%, rgba(255, 255, 255, 0.04) 100%);
+  pointer-events: none;
+}
+
+.wc-solutions-glass {
+  position: relative;
+  border-radius: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(28px) saturate(1.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.35);
+}
+
+.wc-solutions-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 255, 255, 0.18), transparent 55%);
+  pointer-events: none;
+}
+
+.wc-solutions-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.wc-solutions-chip:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-solutions-chip:hover {
+    transform: none;
+  }
+}
