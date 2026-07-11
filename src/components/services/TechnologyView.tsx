@@ -51,15 +51,11 @@ export function TechnologyView() {
       <section id="capabilities" className="wc-tech-section">
         <div className="wc-tech-section-bg" aria-hidden />
         <div className="wc-container relative z-10">
-          <header className="wc-tech-section-head">
-            <div>
-              <p className="wc-tech-kicker">Technology services</p>
-              <h2 className="wc-tech-section-title">
-                Six capabilities.
-                <br />
-                One engineering standard.
-              </h2>
-            </div>
+          <header className="wc-tech-section-head wc-tech-section-head--list">
+            <p className="wc-tech-kicker">Technology services</p>
+            <h2 className="wc-tech-section-title">
+              Six capabilities. One engineering standard.
+            </h2>
             <p className="wc-tech-section-intro">
               Pick the surface you need — or combine them. Every engagement is built to ship cleanly
               and scale with you.
@@ -68,18 +64,18 @@ export function TechnologyView() {
 
           <div className="wc-tech-list">
             {technologyCapabilities.map((card, i) => (
-              <Link key={card.title} href={card.href} className="wc-tech-row group">
+              <Link key={card.title} href={card.href} className="wc-tech-row">
                 <span className="wc-tech-row-index">{String(i + 1).padStart(2, "0")}</span>
                 <div className="wc-tech-row-copy">
-                  <h3>{card.title}</h3>
-                  <p className="wc-tech-row-tagline">{card.tagline}</p>
-                  <p>{card.description}</p>
+                  <div className="wc-tech-row-heading">
+                    <h3>{card.title}</h3>
+                    <p className="wc-tech-row-tagline">{card.tagline}</p>
+                  </div>
+                  <p className="wc-tech-row-desc">{card.description}</p>
                 </div>
-                <div className="wc-tech-row-media" aria-hidden>
-                  <img src={card.image} alt="" draggable={false} />
-                </div>
-                <span className="wc-tech-row-go" aria-hidden>
-                  →
+                <span className="wc-tech-row-go">
+                  Explore
+                  <span aria-hidden>→</span>
                 </span>
               </Link>
             ))}
