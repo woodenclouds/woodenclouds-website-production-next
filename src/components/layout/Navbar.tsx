@@ -20,7 +20,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -37,19 +37,18 @@ export function Navbar() {
     };
   }, [open]);
 
-  const shell =
-    isHome
-      ? scrolled
-        ? "fixed top-0 bg-black/90 backdrop-blur-md border-b border-white/10"
-        : "absolute top-0 bg-transparent border-b border-white/10"
-      : "relative bg-ink border-b border-white/10";
+  const shell = isHome
+    ? scrolled
+      ? "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
+      : "absolute top-0 border-b border-white/10 bg-transparent"
+    : "relative border-b border-white/10 bg-black";
 
   return (
     <header className={`inset-x-0 z-50 w-full ${shell}`}>
-      <div className="wc-container flex min-h-20 items-center justify-between gap-8">
-        <Link href="/" className="relative z-50 w-44 shrink-0 md:w-56">
+      <div className="wc-container flex min-h-[4.75rem] items-center justify-between gap-6 md:min-h-20">
+        <Link href="/" className="relative z-50 w-40 shrink-0 sm:w-48 md:w-56">
           <img
-            src="/assets/user/imgs/logo-light.png"
+            src="/brand/logo-light.png"
             alt="Woodenclouds"
             className="h-auto w-full"
           />
@@ -78,11 +77,11 @@ export function Navbar() {
           className={[
             "lg:flex lg:flex-1 lg:items-center lg:justify-end",
             open
-              ? "fixed inset-0 z-40 flex flex-col items-center justify-center gap-2 bg-ink/95 backdrop-blur-md"
+              ? "fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/95 backdrop-blur-md"
               : "hidden",
           ].join(" ")}
         >
-          <ul className="flex flex-col items-center gap-2 lg:flex-row lg:items-center lg:gap-1">
+          <ul className="flex flex-col items-center gap-1 lg:flex-row lg:items-center lg:gap-1 xl:gap-2">
             {links.map((link) => {
               const active =
                 pathname === link.href ||
@@ -92,10 +91,9 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     className={[
-                      "block whitespace-nowrap px-3 py-2 text-sm tracking-wide text-white/85 hover:text-white",
-                      "lg:text-[13px] xl:text-sm",
+                      "block whitespace-nowrap px-2.5 py-2 text-[13px] tracking-[0.02em] text-white/80 hover:text-white xl:px-3 xl:text-sm",
                       active ? "text-white" : "",
-                      open ? "text-xl py-3" : "",
+                      open ? "py-3 text-xl text-white" : "",
                     ].join(" ")}
                   >
                     {link.label}

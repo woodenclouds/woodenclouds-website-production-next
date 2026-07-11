@@ -12,7 +12,7 @@ import "swiper/css";
 
 export function HomeServices() {
   return (
-    <section id="services" className="wc-section bg-ink text-white">
+    <section id="services" className="wc-section bg-black text-white">
       <div className="wc-container">
         <h2 className="mb-10 text-3xl font-light md:text-4xl">
           Our <span className="wc-gradient-text">Services</span>
@@ -47,7 +47,7 @@ export function HomeWorks() {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="wc-section overflow-hidden bg-ink text-white">
+    <section className="wc-section overflow-hidden bg-black text-white">
       <div className="wc-container mb-8 flex items-end justify-between gap-4">
         <h3 className="text-3xl font-light md:text-4xl">Recent Projects.</h3>
         <div className="flex gap-3">
@@ -107,7 +107,7 @@ export function HomeWorks() {
 
 export function HomeClients() {
   return (
-    <section className="wc-section bg-ink-soft text-white">
+    <section className="wc-section bg-[#111] text-white">
       <div className="wc-container grid items-center gap-12 lg:grid-cols-2">
         <div>
           <p className="mb-3 text-sm uppercase tracking-wider text-white/60">Since From 2020</p>
@@ -160,7 +160,7 @@ export function HomeFuture() {
   return (
     <section
       className="wc-section relative overflow-hidden bg-cover bg-center text-white"
-      style={{ backgroundImage: "url(/assets/user/imgs/background/1.jpg)" }}
+      style={{ backgroundImage: "url(/backgrounds/1.jpg)" }}
     >
       <div className="absolute inset-0 bg-black/55" />
       <div className="wc-container relative grid gap-10 lg:grid-cols-12">
@@ -201,7 +201,7 @@ export function HomeBlogs() {
   const blogs = getFeaturedBlogs(2);
 
   return (
-    <section className="wc-section bg-ink text-white">
+    <section className="wc-section bg-black text-white">
       <div className="wc-container">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <h2 className="text-3xl font-light md:text-4xl">Insights from Woodenclouds</h2>
@@ -238,7 +238,7 @@ export function HomeBlogs() {
 
 export function HomeBrands() {
   return (
-    <section className="wc-section bg-ink text-white">
+    <section className="wc-section bg-black text-white">
       <div className="wc-container">
         <h3 className="mb-8 text-3xl font-light">Our Brands</h3>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-5">

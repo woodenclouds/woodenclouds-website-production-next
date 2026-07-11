@@ -18,7 +18,7 @@ export default function ServicesPage() {
         </div>
         <div className="mt-10 px-0 md:px-8">
           <video
-            src="/assets/user/videos/video3.mp4"
+            src="/videos/video3.mp4"
             autoPlay
             muted
             loop

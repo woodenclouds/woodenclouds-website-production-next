@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Woodenclouds designs and builds digital products, technology solutions, and dedicated teams.",
   icons: {
-    icon: "/assets/user/imgs/icon.png",
+    icon: "/brand/icon.png",
   },
 };
 

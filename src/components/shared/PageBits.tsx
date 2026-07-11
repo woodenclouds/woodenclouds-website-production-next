@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useQuote } from "@/components/layout/QuoteProvider";
 
 export function EnquireCta({
-  background = "/assets/user/imgs/background/1.jpg",
+  background = "/backgrounds/1.jpg",
   buttonLabel = "Enquire Now",
 }: {
   background?: string;

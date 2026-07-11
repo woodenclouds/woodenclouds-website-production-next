@@ -15,7 +15,7 @@ export default function BusinessSupportPage() {
           <div>
             <h2 className="mb-6 text-4xl font-light">Startup & Business Support</h2>
             <img
-              src="/assets/user/imgs/services/technology-bg.jpg"
+              src="/services/technology-bg.jpg"
               alt="Business support"
               className="rounded-xl"
             />

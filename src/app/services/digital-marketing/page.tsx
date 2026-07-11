@@ -18,7 +18,7 @@ export default function DigitalMarketingPage() {
         <div className="wc-container">
           <div className="mb-14 grid items-center gap-10 lg:grid-cols-2">
             <video
-              src="/assets/user/videos/video2.mp4"
+              src="/videos/video2.mp4"
               autoPlay
               muted
               loop

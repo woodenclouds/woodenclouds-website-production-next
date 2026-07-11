@@ -12,21 +12,21 @@ export const homeServiceCards: ServiceCard[] = [
     title: "Technology Services",
     description:
       "Discover bespoke technology solutions with Woodenclouds, specializing in website development, mobile apps, and custom software to fuel your business growth.",
-    image: "/assets/user/imgs/services/technology.jpg",
+    image: "/services/technology.jpg",
     href: "/services/technology",
   },
   {
     title: "Startup & Business Support",
     description:
       "From startup essentials to ongoing support, Woodenclouds is your dedicated partner for navigating challenges and achieving sustained success.",
-    image: "/assets/user/imgs/services/startup-business-support.jpg",
+    image: "/services/startup-business-support.jpg",
     href: "/services/business-support",
   },
   {
     title: "Branding & Digital Marketing",
     description:
       "Elevate your brand effortlessly with Woodenclouds seamless branding and digital marketing solutions. Drive visibility, engagement, and results.",
-    image: "/assets/user/imgs/services/marketing.jpg",
+    image: "/services/marketing.jpg",
     href: "/services/digital-marketing",
   },
 ];
@@ -56,42 +56,42 @@ export const technologyServices: ServiceCard[] = [
     title: "Website Development",
     description:
       "Transform your online presence with stunning brochure sites or powerful e-commerce experiences.",
-    image: "/assets/user/imgs/services/technology/website.png",
+    image: "/services/technology/website.png",
     href: "/services/technology/website-development",
   },
   {
     title: "Web Application Development",
     description:
       "Build CRM tools, project management platforms, and custom web applications that scale.",
-    image: "/assets/user/imgs/services/technology/web-application.png",
+    image: "/services/technology/web-application.png",
     href: "/services/technology/web-application-development",
   },
   {
     title: "Mobile App Development",
     description:
       "Native and cross-platform mobile apps for iOS and Android that users love.",
-    image: "/assets/user/imgs/services/technology/mobile-app.png",
+    image: "/services/technology/mobile-app.png",
     href: "/services/technology/mobile-app-development",
   },
   {
     title: "Custom Software Development",
     description:
       "ERP, CRM, and bespoke software systems designed around your operations.",
-    image: "/assets/user/imgs/services/technology/software.png",
+    image: "/services/technology/software.png",
     href: "/services/technology/custom-software-development",
   },
   {
     title: "E-commerce Development",
     description:
       "Seamless, secure commerce platforms built for conversion and growth.",
-    image: "/assets/user/imgs/services/technology/ecommerce.png",
+    image: "/services/technology/ecommerce.png",
     href: "/services/technology/ecommerce-development",
   },
   {
     title: "Extension Development",
     description:
       "Browser extensions and plugins that extend workflows and improve UX.",
-    image: "/assets/user/imgs/services/technology/extension.png",
+    image: "/services/technology/extension.png",
     href: "/services/technology/extension-development",
   },
 ];
@@ -121,13 +121,13 @@ export const techPages: TechPage[] = [
     description:
       "Looking for professional website development services in Kerala, India? We craft stunning and responsive websites — from brochure sites to complex e-commerce — designed to drive traffic and conversions.",
     logos: [
-      { src: "/assets/user/imgs/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
-      { src: "/assets/user/imgs/services/technology/website/reactjs.png", alt: "React" },
-      { src: "/assets/user/imgs/services/technology/website/nextjs.png", alt: "Next.js" },
-      { src: "/assets/user/imgs/services/technology/website/python.png", alt: "Python" },
-      { src: "/assets/user/imgs/services/technology/website/php.png", alt: "PHP" },
-      { src: "/assets/user/imgs/services/technology/website/postgresql.png", alt: "PostgreSQL" },
-      { src: "/assets/user/imgs/services/technology/website/mysql.png", alt: "MySQL" },
+      { src: "/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
+      { src: "/services/technology/website/reactjs.png", alt: "React" },
+      { src: "/services/technology/website/nextjs.png", alt: "Next.js" },
+      { src: "/services/technology/website/python.png", alt: "Python" },
+      { src: "/services/technology/website/php.png", alt: "PHP" },
+      { src: "/services/technology/website/postgresql.png", alt: "PostgreSQL" },
+      { src: "/services/technology/website/mysql.png", alt: "MySQL" },
     ],
     faqs: [
       {
@@ -153,13 +153,13 @@ export const techPages: TechPage[] = [
     description:
       "We build custom, user-friendly, and secure web applications for startups and established businesses — with transparent collaboration at every step.",
     logos: [
-      { src: "/assets/user/imgs/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
-      { src: "/assets/user/imgs/services/technology/website/reactjs.png", alt: "React" },
-      { src: "/assets/user/imgs/services/technology/website/nextjs.png", alt: "Next.js" },
-      { src: "/assets/user/imgs/services/technology/website/python.png", alt: "Python" },
-      { src: "/assets/user/imgs/services/technology/website/php.png", alt: "PHP" },
-      { src: "/assets/user/imgs/services/technology/website/postgresql.png", alt: "PostgreSQL" },
-      { src: "/assets/user/imgs/services/technology/website/mysql.png", alt: "MySQL" },
+      { src: "/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
+      { src: "/services/technology/website/reactjs.png", alt: "React" },
+      { src: "/services/technology/website/nextjs.png", alt: "Next.js" },
+      { src: "/services/technology/website/python.png", alt: "Python" },
+      { src: "/services/technology/website/php.png", alt: "PHP" },
+      { src: "/services/technology/website/postgresql.png", alt: "PostgreSQL" },
+      { src: "/services/technology/website/mysql.png", alt: "MySQL" },
     ],
     faqs: [
       {
@@ -185,10 +185,10 @@ export const techPages: TechPage[] = [
     description:
       "Bespoke mobile apps that streamline processes, deepen engagement, and bring new products to market on iOS and Android.",
     logos: [
-      { src: "/assets/user/imgs/services/technology/app/react-native.png", alt: "React Native" },
-      { src: "/assets/user/imgs/services/technology/app/flutter.png", alt: "Flutter" },
-      { src: "/assets/user/imgs/services/technology/app/android.png", alt: "Android" },
-      { src: "/assets/user/imgs/services/technology/app/ios.png", alt: "iOS" },
+      { src: "/services/technology/app/react-native.png", alt: "React Native" },
+      { src: "/services/technology/app/flutter.png", alt: "Flutter" },
+      { src: "/services/technology/app/android.png", alt: "Android" },
+      { src: "/services/technology/app/ios.png", alt: "iOS" },
     ],
     faqs: [
       {
@@ -214,14 +214,14 @@ export const techPages: TechPage[] = [
     description:
       "Bespoke software to automate operations, streamline workflows, and unlock innovation across your organization.",
     logos: [
-      { src: "/assets/user/imgs/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
-      { src: "/assets/user/imgs/services/technology/website/reactjs.png", alt: "React" },
-      { src: "/assets/user/imgs/services/technology/website/nextjs.png", alt: "Next.js" },
-      { src: "/assets/user/imgs/services/technology/website/python.png", alt: "Python" },
-      { src: "/assets/user/imgs/services/technology/website/php.png", alt: "PHP" },
-      { src: "/assets/user/imgs/services/technology/website/postgresql.png", alt: "PostgreSQL" },
-      { src: "/assets/user/imgs/services/technology/website/mysql.png", alt: "MySQL" },
-      { src: "/assets/user/imgs/services/technology/website/firebase.png", alt: "Firebase" },
+      { src: "/services/technology/website/html-css-js.png", alt: "HTML CSS JS" },
+      { src: "/services/technology/website/reactjs.png", alt: "React" },
+      { src: "/services/technology/website/nextjs.png", alt: "Next.js" },
+      { src: "/services/technology/website/python.png", alt: "Python" },
+      { src: "/services/technology/website/php.png", alt: "PHP" },
+      { src: "/services/technology/website/postgresql.png", alt: "PostgreSQL" },
+      { src: "/services/technology/website/mysql.png", alt: "MySQL" },
+      { src: "/services/technology/website/firebase.png", alt: "Firebase" },
     ],
     faqs: [
       {
@@ -251,22 +251,22 @@ export const techPages: TechPage[] = [
       {
         title: "Magento",
         description: "Enterprise-ready commerce with deep customization.",
-        image: "/assets/user/imgs/services/magento.png",
+        image: "/services/magento.png",
       },
       {
         title: "WooCommerce",
         description: "Flexible WordPress commerce for growing brands.",
-        image: "/assets/user/imgs/services/woocommerce.png",
+        image: "/services/woocommerce.png",
       },
       {
         title: "Shopify",
         description: "Fast-to-market storefronts with strong ecosystem support.",
-        image: "/assets/user/imgs/services/shopify.png",
+        image: "/services/shopify.png",
       },
       {
         title: "Medusa",
         description: "Composable commerce for modern product teams.",
-        image: "/assets/user/imgs/services/medusa.png",
+        image: "/services/medusa.png",
       },
     ],
     faqs: [
@@ -293,10 +293,10 @@ export const techPages: TechPage[] = [
     description:
       "Chrome, Firefox, and Edge extensions that streamline workflows and improve everyday digital experiences.",
     logos: [
-      { src: "/assets/user/imgs/services/technology/website/html.png", alt: "HTML" },
-      { src: "/assets/user/imgs/services/technology/website/css.png", alt: "CSS" },
-      { src: "/assets/user/imgs/services/technology/website/js.png", alt: "JavaScript" },
-      { src: "/assets/user/imgs/services/technology/website/json.png", alt: "JSON" },
+      { src: "/services/technology/website/html.png", alt: "HTML" },
+      { src: "/services/technology/website/css.png", alt: "CSS" },
+      { src: "/services/technology/website/js.png", alt: "JavaScript" },
+      { src: "/services/technology/website/json.png", alt: "JSON" },
     ],
     faqs: [
       {
@@ -326,31 +326,31 @@ export const digitalMarketingServices: ServiceCard[] = [
   {
     title: "Brand Identity Development",
     description: "Craft a distinctive brand system that feels consistent across every touchpoint.",
-    image: "/assets/user/imgs/background/1.jpg",
+    image: "/backgrounds/1.jpg",
     href: "/services/digital-marketing",
   },
   {
     title: "Digital Marketing Campaigns",
     description: "Performance campaigns that connect the right message to the right audience.",
-    image: "/assets/user/imgs/background/1.jpg",
+    image: "/backgrounds/1.jpg",
     href: "/services/digital-marketing",
   },
   {
     title: "Social Media Management",
     description: "Always-on social presence with content, community, and growth in mind.",
-    image: "/assets/user/imgs/background/1.jpg",
+    image: "/backgrounds/1.jpg",
     href: "/services/digital-marketing",
   },
   {
     title: "Content Creation",
     description: "Stories, visuals, and copy that make your brand memorable.",
-    image: "/assets/user/imgs/background/1.jpg",
+    image: "/backgrounds/1.jpg",
     href: "/services/digital-marketing",
   },
   {
     title: "SEO Optimization",
     description: "Technical and content SEO that helps the right people find you.",
-    image: "/assets/user/imgs/background/1.jpg",
+    image: "/backgrounds/1.jpg",
     href: "/services/digital-marketing",
   },
 ];

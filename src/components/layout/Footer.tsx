@@ -32,7 +32,7 @@ export function Footer() {
               <h2 className="text-3xl font-light md:text-4xl">
                 Designing your <span className="wc-gradient-text">Digital Future</span>
                 <img
-                  src="/assets/user/imgs/rocket.png"
+                  src="/brand/rocket.png"
                   alt=""
                   className="ml-3 inline-block w-16 align-middle md:w-20"
                 />
@@ -147,7 +147,7 @@ export function Footer() {
         <div className="border-t border-white/10">
           <div className="wc-container grid gap-4 py-8 text-center text-xs text-white/60 md:grid-cols-3 md:items-center">
             <Link href="/" className="mx-auto block w-36 md:mx-0">
-              <img src="/assets/user/imgs/logo-light.png" alt="Woodenclouds" />
+              <img src="/brand/logo-light.png" alt="Woodenclouds" />
             </Link>
             <p>
               <a href="#" className="underline-offset-2 hover:text-white hover:underline">

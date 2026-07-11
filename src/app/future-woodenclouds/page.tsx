@@ -18,8 +18,8 @@ export default function FutureWoodencloudsPage() {
         <div className="wc-container space-y-20">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="grid grid-cols-2 gap-4">
-              <img src="/assets/user/imgs/about/about-img1.jpg" alt="" className="rounded-xl" />
-              <img src="/assets/user/imgs/team-work.jpg" alt="" className="mt-8 rounded-xl" />
+              <img src="/about/about-img1.jpg" alt="" className="rounded-xl" />
+              <img src="/team/team-work.jpg" alt="" className="mt-8 rounded-xl" />
             </div>
             <p className="text-sm font-light leading-relaxed text-muted">
               At Future Woodenclouds, we&apos;re not just an IT service company; we&apos;re
@@ -46,8 +46,8 @@ export default function FutureWoodencloudsPage() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <img src="/assets/user/imgs/img1.jpg" alt="" className="rounded-xl" />
-              <img src="/assets/user/imgs/img2.jpg" alt="" className="rounded-xl" />
+              <img src="/about/img1.jpg" alt="" className="rounded-xl" />
+              <img src="/about/img2.jpg" alt="" className="rounded-xl" />
             </div>
           </div>
 

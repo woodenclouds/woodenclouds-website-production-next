@@ -17,7 +17,7 @@ export default function CareerPage() {
             {site.careersEmail}
           </a>
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <img src="/assets/user/imgs/team.jpg" alt="Join Woodenclouds" className="rounded-xl" />
+            <img src="/team/team.jpg" alt="Join Woodenclouds" className="rounded-xl" />
             <div>
               <h4 className="mb-4 text-2xl font-light">
                 Join the Woodenclouds Team: Where Innovation Meets Opportunity

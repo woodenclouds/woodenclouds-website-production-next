@@ -10,8 +10,8 @@ export default function AboutPage() {
       <section className="wc-section pt-0">
         <div className="wc-container grid items-center gap-10 lg:grid-cols-2">
           <div className="grid grid-cols-2 gap-4">
-            <img src="/assets/user/imgs/about/about-img1.jpg" alt="" className="rounded-xl object-cover" />
-            <img src="/assets/user/imgs/about/about-img2.jpg" alt="" className="mt-8 rounded-xl object-cover" />
+            <img src="/about/about-img1.jpg" alt="" className="rounded-xl object-cover" />
+            <img src="/about/about-img2.jpg" alt="" className="mt-8 rounded-xl object-cover" />
           </div>
           <div>
             <p className="mb-3 text-sm uppercase tracking-wider text-muted">About</p>
@@ -26,8 +26,8 @@ export default function AboutPage() {
       <section className="wc-section pt-0">
         <div className="wc-container grid gap-10 lg:grid-cols-2">
           <div className="space-y-4">
-            <img src="/assets/user/imgs/img5.jpg" alt="" className="rounded-xl" />
-            <img src="/assets/user/imgs/img1.jpg" alt="" className="rounded-xl" />
+            <img src="/about/img5.jpg" alt="" className="rounded-xl" />
+            <img src="/about/img1.jpg" alt="" className="rounded-xl" />
           </div>
           <div>
             <h3 className="mb-8 text-3xl font-light">Driving Success:</h3>

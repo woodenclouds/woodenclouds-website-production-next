@@ -13,7 +13,7 @@ export const blogs: Blog[] = [
   {
     slug: "designing-digital-products-that-scale",
     title: "Designing digital products that scale",
-    image: "/assets/user/imgs/about/about-img1.jpg",
+    image: "/about/about-img1.jpg",
     createdAt: "2025-11-12",
     updatedAt: "2025-11-18",
     tags: ["Product", "Design"],
@@ -27,7 +27,7 @@ export const blogs: Blog[] = [
   {
     slug: "ai-insight-for-real-business-growth",
     title: "AI and insight for real business growth",
-    image: "/assets/user/imgs/about/about-img2.jpg",
+    image: "/about/about-img2.jpg",
     createdAt: "2025-10-03",
     updatedAt: "2025-10-08",
     tags: ["AI", "Technology"],
@@ -40,7 +40,7 @@ export const blogs: Blog[] = [
   {
     slug: "building-dedicated-teams-that-ship",
     title: "Building dedicated teams that ship",
-    image: "/assets/user/imgs/team-work.jpg",
+    image: "/team/team-work.jpg",
     createdAt: "2025-08-21",
     updatedAt: "2025-08-22",
     tags: ["Teams", "Delivery"],
@@ -52,7 +52,7 @@ export const blogs: Blog[] = [
   {
     slug: "brand-systems-for-digital-first-companies",
     title: "Brand systems for digital-first companies",
-    image: "/assets/user/imgs/services/marketing.jpg",
+    image: "/services/marketing.jpg",
     createdAt: "2025-06-14",
     updatedAt: "2025-06-16",
     tags: ["Branding", "Marketing"],

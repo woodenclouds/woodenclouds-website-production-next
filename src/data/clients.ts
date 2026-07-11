@@ -4,22 +4,22 @@ export type Client = {
 };
 
 export const clients: Client[] = [
-  { name: "Client 1", logo: "/assets/user/imgs/wc-creatives.png" },
-  { name: "Client 2", logo: "/assets/user/imgs/wc-frames.png" },
-  { name: "Client 3", logo: "/assets/user/imgs/zendots-logo.png" },
-  { name: "Client 4", logo: "/assets/user/imgs/wca-logo-white.png" },
-  { name: "Client 5", logo: "/assets/user/imgs/logo-light.png" },
+  { name: "Client 1", logo: "/clients/wc-creatives.png" },
+  { name: "Client 2", logo: "/clients/wc-frames.png" },
+  { name: "Client 3", logo: "/clients/zendots-logo.png" },
+  { name: "Client 4", logo: "/clients/wca-logo-white.png" },
+  { name: "Client 5", logo: "/brand/logo-light.png" },
 ];
 
 export const brands = [
   {
     name: "WC Creatives",
-    logo: "/assets/user/imgs/wc-creatives.png",
+    logo: "/clients/wc-creatives.png",
     href: "#",
   },
   {
     name: "WC Creatives",
-    logo: "/assets/user/imgs/wc-creatives.png",
+    logo: "/clients/wc-creatives.png",
     href: "#",
   },
   {
@@ -29,12 +29,12 @@ export const brands = [
   },
   {
     name: "WC Frames",
-    logo: "/assets/user/imgs/wc-frames.png",
+    logo: "/clients/wc-frames.png",
     href: "#",
   },
   {
     name: "Zendots",
-    logo: "/assets/user/imgs/zendots-logo.png",
+    logo: "/clients/zendots-logo.png",
     href: "#",
   },
 ];

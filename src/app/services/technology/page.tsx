@@ -14,7 +14,7 @@ export default function TechnologyPage() {
           <div>
             <h2 className="mb-6 text-4xl font-light">Technology</h2>
             <img
-              src="/assets/user/imgs/services/technology-bg.jpg"
+              src="/services/technology-bg.jpg"
               alt="Technology"
               className="rounded-xl"
             />
