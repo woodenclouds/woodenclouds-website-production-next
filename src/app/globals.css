@@ -6840,3 +6840,451 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   }
 }
 
+
+/* Future Woodenclouds page */
+.wc-fw-page {
+  background: #05070b;
+  color: #fff;
+}
+
+.wc-fw-hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: #0a0b10;
+  color: #f4f6f8;
+}
+
+.wc-fw-hero .wc-future-stage {
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Keep atmosphere; hide decorative badge so brand copy owns the hero */
+.wc-fw-hero .wc-future-badge {
+  display: none;
+}
+
+.wc-fw-hero .wc-future-year {
+  bottom: 14%;
+  right: 6%;
+  z-index: 1;
+}
+
+.wc-fw-hero .wc-future-arcs {
+  opacity: 0.7;
+}
+
+.wc-fw-hero-ui {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding-top: 5.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.wc-fw-brand {
+  margin: 0 0 1.15rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #fff;
+  animation: wc-future-in 0.85s ease both;
+}
+
+.wc-fw-brand span {
+  color: var(--color-accent-soft);
+}
+
+.wc-fw-hero-title {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.6rem, 6.2vw, 4.6rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: #fff;
+  animation: wc-future-in 0.85s ease 0.08s both;
+}
+
+.wc-fw-hero-lede {
+  margin: 1.2rem 0 0;
+  max-width: 28rem;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(244, 246, 248, 0.68);
+  animation: wc-future-in 0.85s ease 0.14s both;
+}
+
+.wc-fw-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.85rem;
+  animation: wc-future-in 0.85s ease 0.2s both;
+}
+
+.wc-fw-hero-scroll {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 2rem;
+  z-index: 3;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.wc-fw-hero-scroll span:last-child {
+  animation: wc-hero-scroll-bounce 1.8s ease-in-out infinite;
+}
+
+@media (min-width: 900px) {
+  .wc-fw-hero-scroll {
+    display: flex;
+  }
+}
+
+.wc-fw-kicker {
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.wc-fw-kicker.is-light {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.wc-fw-mission {
+  position: relative;
+  z-index: 1;
+  background: #f1f3f5;
+  color: #0a0c10;
+  padding: 5rem 0 6rem;
+}
+
+.wc-fw-mission-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .wc-fw-mission-grid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 4.5rem;
+  }
+}
+
+.wc-fw-mission-mosaic {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.85rem;
+  min-height: 440px;
+}
+
+.wc-fw-mission-mosaic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: rgba(10, 12, 16, 0.06);
+}
+
+.wc-fw-mission-mosaic .is-a {
+  grid-row: 1 / -1;
+  min-height: 440px;
+}
+
+.wc-fw-mission-mosaic .is-b,
+.wc-fw-mission-mosaic .is-c {
+  min-height: 0;
+}
+
+.wc-fw-mission-title {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #0a0c10;
+}
+
+.wc-fw-mission-body {
+  margin: 1.15rem 0 0;
+  max-width: 34rem;
+  font-size: 0.975rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.wc-fw-vision {
+  position: relative;
+  overflow: hidden;
+  background: #0a0b10;
+  color: #fff;
+  padding: 5.5rem 0;
+}
+
+.wc-fw-vision::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 60% at 0% 50%, rgba(120, 50, 140, 0.28), transparent 65%),
+    radial-gradient(ellipse 45% 55% at 100% 40%, rgba(35, 90, 160, 0.3), transparent 60%);
+}
+
+.wc-fw-vision .wc-container {
+  position: relative;
+  z-index: 1;
+  max-width: 48rem;
+}
+
+.wc-fw-vision-title {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.wc-fw-vision-body {
+  margin: 1.5rem 0 0;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.wc-fw-phase {
+  position: relative;
+  z-index: 1;
+  background: #f1f3f5;
+  color: #0a0c10;
+  padding: 5rem 0 6rem;
+}
+
+.wc-fw-phase-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .wc-fw-phase-grid {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 4.5rem;
+  }
+}
+
+.wc-fw-phase-title {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #0a0c10;
+}
+
+.wc-fw-phase-body {
+  margin: 1.15rem 0 0;
+  max-width: 34rem;
+  font-size: 0.975rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.wc-fw-disciplines {
+  display: grid;
+  gap: 0;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 32rem;
+}
+
+.wc-fw-disciplines li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  border-top: 1px solid var(--color-line-dark);
+  padding: 1.15rem 0;
+}
+
+.wc-fw-disciplines li:last-child {
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.wc-fw-disciplines span {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-deep);
+  padding-top: 0.15rem;
+}
+
+.wc-fw-disciplines h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: #0a0c10;
+}
+
+.wc-fw-disciplines p {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.wc-fw-phase-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 0.85rem;
+  align-items: start;
+  min-height: 440px;
+}
+
+.wc-fw-phase-visual img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  background: rgba(10, 12, 16, 0.06);
+}
+
+.wc-fw-phase-visual .is-main {
+  aspect-ratio: 3 / 4;
+  height: auto;
+  min-height: 440px;
+}
+
+.wc-fw-phase-visual .is-accent {
+  aspect-ratio: 3 / 4;
+  height: auto;
+  margin-top: 3.5rem;
+}
+
+.wc-fw-join {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  color: #0a0c10;
+  padding: 5rem 0 6rem;
+}
+
+.wc-fw-join-layout {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 900px) {
+  .wc-fw-join-layout {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+}
+
+.wc-fw-join-title {
+  margin: 0;
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #0a0c10;
+}
+
+.wc-fw-join-copy {
+  margin: 1rem 0 0;
+  max-width: 28rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+.wc-fw-join-mail {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--color-accent-deep);
+  text-decoration: none;
+}
+
+.wc-fw-join-mail:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.wc-fw-join-alt {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-muted);
+}
+
+.wc-fw-join-alt a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wc-fw-join-panel {
+  padding-top: 0.25rem;
+}
+
+@media (max-width: 767px) {
+  .wc-fw-hero .wc-future-year {
+    display: none;
+  }
+
+  .wc-fw-mission-mosaic,
+  .wc-fw-phase-visual {
+    grid-template-columns: 1fr 0.85fr;
+    min-height: 280px;
+  }
+
+  .wc-fw-mission-mosaic .is-a,
+  .wc-fw-phase-visual .is-main {
+    min-height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-fw-brand,
+  .wc-fw-hero-title,
+  .wc-fw-hero-lede,
+  .wc-fw-hero-actions {
+    animation: none;
+  }
+
+  .wc-fw-hero-scroll span:last-child {
+    animation: none;
+  }
+}
+

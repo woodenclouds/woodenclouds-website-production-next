@@ -25,9 +25,6 @@ export function DigitalMarketingView() {
 
         <div className="wc-mkt-hero-ui">
           <div className="wc-container">
-            <p className="wc-mkt-brand">
-              Woodenclouds <span>Branding &amp; Marketing</span>
-            </p>
             <h1 className="wc-mkt-hero-title">
               {digitalMarketingHero.title}
               <br />
@@ -77,11 +74,11 @@ export function DigitalMarketingView() {
           <header className="wc-mkt-head">
             <div>
               <p className="wc-mkt-kicker">What we craft</p>
-              <h2 className="wc-mkt-title">Five levers for brand and growth.</h2>
+              <h2 className="wc-mkt-title">From first impression to lasting demand.</h2>
             </div>
             <p className="wc-mkt-intro">
-              Identity through acquisition — the creative and performance work that makes a brand
-              visible, credible, and hard to ignore.
+              Brand, campaigns, content, social, and SEO — working as one system so every channel
+              strengthens the next.
             </p>
           </header>
         </div>
@@ -112,7 +109,7 @@ export function DigitalMarketingView() {
           <header className="wc-mkt-head wc-mkt-head--center">
             <div>
               <p className="wc-mkt-kicker">How we do it</p>
-              <h2 className="wc-mkt-title">Our approach</h2>
+              <h2 className="wc-mkt-title">Listen. Learn. Launch.</h2>
             </div>
           </header>
 
@@ -133,7 +130,7 @@ export function DigitalMarketingView() {
           <header className="wc-mkt-head">
             <div>
               <p className="wc-mkt-kicker">What changes</p>
-              <h2 className="wc-mkt-title">Outcomes worth the spend.</h2>
+              <h2 className="wc-mkt-title">What you should feel after we start.</h2>
             </div>
           </header>
 
@@ -154,10 +151,10 @@ export function DigitalMarketingView() {
           <div className="wc-mkt-next-panel">
             <div>
               <p className="wc-mkt-kicker is-on-dark">Next step</p>
-              <h2 className="wc-mkt-next-title">Ready to elevate the brand?</h2>
+              <h2 className="wc-mkt-next-title">Ready to make the brand work harder?</h2>
               <p className="wc-mkt-next-copy">
-                Tell us where you are — new identity, campaign push, or always-on growth. We&apos;ll
-                reply with how we can help.
+                Share your goals — a new identity, a campaign sprint, or always-on growth. We&apos;ll
+                come back with a clear plan and next steps.
               </p>
               <a href={`mailto:${site.email}`} className="wc-mkt-next-mail">
                 {site.email}

@@ -1,51 +1,51 @@
 export const digitalMarketingHero = {
-  title: "Brands that get",
-  titleAccent: "seen and remembered.",
+  title: "Make your brand",
+  titleAccent: "impossible to ignore.",
   description:
-    "Identity, campaigns, content, and growth — branding and digital marketing shaped around your audience, not a template.",
+    "We build identity, campaigns, content, and growth systems that earn attention — and turn it into customers.",
   image: "/services/marketing.jpg",
 };
 
 export const digitalMarketingStory = {
-  title: "Crafting your brand's success",
-  body: "Every business is unique. We start with your goals, then build tailored branding and marketing that resonates with the right people — and drives results you can measure.",
+  title: "Marketing that matches how your business actually grows",
+  body: "We start with who you serve and what you need them to do next. Then we shape brand, message, and channels around that — so every post, page, and campaign pulls in the same direction.",
   video: "/videos/video2.mp4",
 };
 
 export const digitalMarketingServices = [
   {
     title: "Brand identity development",
-    tagline: "A system you can recognize anywhere",
+    tagline: "Look, sound, and feel like one brand",
     description:
-      "From logo and voice to messaging across touchpoints — a distinctive brand system that feels consistent and sets you apart.",
+      "Logo, voice, and messaging built into a clear system — so every touchpoint feels intentional, consistent, and unmistakably yours.",
     image: "/about/img1.jpg",
   },
   {
     title: "Digital marketing campaigns",
-    tagline: "Message, audience, conversion",
+    tagline: "Right story. Right people. Real results.",
     description:
-      "Performance campaigns across channels that connect the right story to the right people — built for engagement, leads, and growth.",
+      "Paid and organic campaigns designed around conversion — creative, targeting, and measurement working together to drive leads and growth.",
     image: "/services/marketing.jpg",
   },
   {
     title: "Social media management",
-    tagline: "Presence that compounds",
+    tagline: "A feed that builds trust daily",
     description:
-      "Always-on social with content, community, and growth in mind — elevating presence and building loyalty over time.",
+      "Content calendars, community, and growth loops that keep your brand present — so followers become customers, not just an audience.",
     image: "/hero/hero-4.jpg",
   },
   {
     title: "Content creation",
-    tagline: "Stories people actually read",
+    tagline: "Words and visuals worth stopping for",
     description:
-      "Copy, visuals, and video that make the brand memorable — reinforcing your message wherever your audience shows up.",
+      "Copy, design, and video that carry your message clearly — from website to social to campaigns — without sounding generic.",
     image: "/hero/hero-collab.jpg",
   },
   {
     title: "SEO optimization",
-    tagline: "Found by the right search",
+    tagline: "Show up when buyers are searching",
     description:
-      "Technical and content SEO so the people looking for what you offer can find you — organic visibility that compounds.",
+      "Technical fixes and content that help the right people find you — steady organic visibility that compounds month after month.",
     image: "/about/img5.jpg",
   },
 ];
@@ -53,32 +53,32 @@ export const digitalMarketingServices = [
 export const digitalMarketingApproach = [
   {
     index: "01",
-    title: "Understand your needs",
-    body: "We dig into objectives, audience, and market landscape — consultations that grasp what your brand is and where it can go.",
+    title: "Understand the goal",
+    body: "We map your audience, offer, and success metrics — so creative and channel choices serve a real business outcome.",
   },
   {
     index: "02",
-    title: "Research thoroughly",
-    body: "Trends, competitors, and behavior patterns distilled into opportunities — so strategy sits on insight, not guesswork.",
+    title: "Find the opening",
+    body: "Competitor gaps, search demand, and cultural signals become a sharp positioning and message — not a pile of research slides.",
   },
   {
     index: "03",
-    title: "Ship actionable strategies",
-    body: "Roadmaps you can run: channels, creatives, and milestones designed to move the brand forward — not decks that sit unused.",
+    title: "Launch and learn",
+    body: "We ship campaigns and content, then refine with data — what works scales, what does not gets cut fast.",
   },
 ];
 
 export const digitalMarketingOutcomes = [
   {
-    title: "Clearer brand signal",
-    body: "Identity and messaging that feel intentional — so every post, page, and campaign pulls in the same direction.",
+    title: "A brand people recognize",
+    body: "Consistent identity and messaging across every surface — so you stop reinventing how you show up each week.",
   },
   {
-    title: "Audience that engages",
-    body: "Content and campaigns tuned to who you serve — visibility that turns into conversations, not just impressions.",
+    title: "An audience that responds",
+    body: "Content and campaigns built for the people you want — more engagement, better conversations, stronger pipeline.",
   },
   {
-    title: "Growth you can track",
-    body: "SEO, social, and paid work tied to outcomes — so you know what is working and what to double down on.",
+    title: "Growth you can explain",
+    body: "Clear reporting on what moved the needle — so budget goes to channels and creatives that earn it.",
   },
 ];
