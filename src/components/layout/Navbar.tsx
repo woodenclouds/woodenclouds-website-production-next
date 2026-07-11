@@ -20,7 +20,10 @@ export function Navbar() {
   const isSolutions = pathname === "/solutions";
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
-  const isDarkPage = isHome || pathname === "/services" || isSolutions || isWorks;
+  const isDarkPage =
+    isHome || pathname === "/services" || isSolutions || isWorks || isPartner;
+  /** Light content below hero — scrolled bar should be white */
+  const lightOnScroll = isPartner || isWorks;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -42,31 +45,33 @@ export function Navbar() {
     };
   }, [open]);
 
-  const shell = isPartner
-    ? "relative border-b border-line-dark bg-white"
-    : isSolutions
-      ? "absolute top-0 border-b border-white/10 bg-transparent"
-      : isDarkPage
-        ? scrolled
-          ? "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
-          : "absolute top-0 border-b border-white/10 bg-transparent"
-        : "relative border-b border-white/10 bg-black";
+  const inverted = lightOnScroll && scrolled;
+  const shell = isSolutions
+    ? "absolute top-0 border-b border-white/10 bg-transparent"
+    : isDarkPage
+      ? scrolled
+        ? inverted
+          ? "fixed top-0 border-b border-line-dark bg-white/95 backdrop-blur-md"
+          : "fixed top-0 border-b border-white/10 bg-black/90 backdrop-blur-md"
+        : "absolute top-0 border-b border-white/10 bg-transparent"
+      : "relative border-b border-white/10 bg-black";
 
-  const linkBase = isPartner
+  const linkBase = inverted
     ? "text-ink/65 hover:text-ink"
     : "text-white/80 hover:text-white";
-  const linkActive = isPartner ? "text-ink" : "text-white";
-  const menuOpenBg = isPartner
+  const linkActive = inverted ? "text-ink" : "text-white";
+  const menuOpenBg = inverted
     ? "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white"
     : "fixed inset-0 z-40 flex flex-col items-center justify-center bg-black/95 backdrop-blur-md";
-  const burgerColor = isPartner ? "bg-ink" : "bg-white";
+  const burgerColor = inverted ? "bg-ink" : "bg-white";
+  const menuText = inverted ? "text-ink" : "text-white";
 
   return (
     <header className={`inset-x-0 z-50 w-full ${shell}`}>
       <div className="wc-container flex h-20 items-center justify-between gap-6">
         <Link href="/" className="relative z-50 flex shrink-0 items-center">
           <img
-            src={isPartner ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
+            src={inverted ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
             alt="Woodenclouds"
             width={200}
             height={12}
@@ -76,7 +81,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className={`relative z-50 inline-flex h-10 w-10 items-center justify-center lg:hidden ${isPartner ? "text-ink" : "text-white"}`}
+          className={`relative z-50 inline-flex h-10 w-10 items-center justify-center lg:hidden ${menuText}`}
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -112,9 +117,7 @@ export function Navbar() {
                       "block whitespace-nowrap px-2.5 py-2 text-[13px] tracking-[0.02em] xl:px-3 xl:text-sm",
                       linkBase,
                       active ? linkActive : "",
-                      open
-                        ? `py-3 text-xl ${isPartner ? "text-ink" : "text-white"}`
-                        : "",
+                      open ? `py-3 text-xl ${menuText}` : "",
                     ].join(" ")}
                   >
                     {link.label}
