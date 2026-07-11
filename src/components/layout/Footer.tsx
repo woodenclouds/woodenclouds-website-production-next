@@ -146,8 +146,14 @@ export function Footer() {
 
         <div className="border-t border-white/10">
           <div className="wc-container grid gap-4 py-8 text-center text-xs text-white/60 md:grid-cols-3 md:items-center">
-            <Link href="/" className="mx-auto block w-36 md:mx-0">
-              <img src="/brand/logo-light.png" alt="Woodenclouds" />
+            <Link href="/" className="mx-auto block md:mx-0">
+              <img
+                src="/brand/logo-light.png"
+                alt="Woodenclouds"
+                width={180}
+                height={10}
+                className="wc-logo mx-auto md:mx-0"
+              />
             </Link>
             <p>
               <a href="#" className="underline-offset-2 hover:text-white hover:underline">

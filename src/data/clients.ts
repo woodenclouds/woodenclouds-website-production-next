@@ -8,7 +8,7 @@ export const clients: Client[] = [
   { name: "Client 2", logo: "/clients/wc-frames.png" },
   { name: "Client 3", logo: "/clients/zendots-logo.png" },
   { name: "Client 4", logo: "/clients/wca-logo-white.png" },
-  { name: "Client 5", logo: "/brand/logo-light.png" },
+  { name: "Client 5", logo: "/clients/wc-creatives.png" },
 ];
 
 export const brands = [

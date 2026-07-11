@@ -45,12 +45,14 @@ export function Navbar() {
 
   return (
     <header className={`inset-x-0 z-50 w-full ${shell}`}>
-      <div className="wc-container flex min-h-[4.75rem] items-center justify-between gap-6 md:min-h-20">
-        <Link href="/" className="relative z-50 w-40 shrink-0 sm:w-48 md:w-56">
+      <div className="wc-container flex h-20 items-center justify-between gap-6">
+        <Link href="/" className="relative z-50 flex shrink-0 items-center">
           <img
             src="/brand/logo-light.png"
             alt="Woodenclouds"
-            className="h-auto w-full"
+            width={200}
+            height={12}
+            className="wc-logo"
           />
         </Link>
 

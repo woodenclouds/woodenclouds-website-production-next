@@ -26,7 +26,6 @@ export function HomeHero() {
 
   return (
     <header className="wc-hero">
-      {/* Images only — text lives outside Swiper so fade opacity never hides copy */}
       <div className="wc-hero-stage">
         <Swiper
           className="wc-hero-swiper"
@@ -46,7 +45,7 @@ export function HomeHero() {
           {heroSlides.map((item) => (
             <SwiperSlide key={item.image}>
               <div className="wc-hero-media">
-                <img src={item.image} alt={item.alt} />
+                <img src={item.image} alt={item.alt} draggable={false} />
               </div>
             </SwiperSlide>
           ))}
@@ -57,7 +56,6 @@ export function HomeHero() {
       <div className="wc-hero-ui">
         <div className="wc-container wc-hero-content">
           <div className="wc-hero-copy" key={slide.headline}>
-            <p className="wc-hero-brand">Woodenclouds</p>
             <h1>{slide.headline}</h1>
             <p className="wc-hero-lede">{slide.lede}</p>
             <Link href={slide.cta.href} className="wc-hero-cta">
