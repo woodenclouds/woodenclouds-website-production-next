@@ -25,28 +25,28 @@ export const digitalMarketingServices = [
     tagline: "Message, audience, conversion",
     description:
       "Performance campaigns across channels that connect the right story to the right people — built for engagement, leads, and growth.",
-    image: "/hero/hero-2.jpg",
+    image: "/services/marketing.jpg",
   },
   {
     title: "Social media management",
     tagline: "Presence that compounds",
     description:
       "Always-on social with content, community, and growth in mind — elevating presence and building loyalty over time.",
-    image: "/about/img3.jpg",
+    image: "/hero/hero-4.jpg",
   },
   {
     title: "Content creation",
     tagline: "Stories people actually read",
     description:
       "Copy, visuals, and video that make the brand memorable — reinforcing your message wherever your audience shows up.",
-    image: "/about/about-img2.jpg",
+    image: "/hero/hero-collab.jpg",
   },
   {
     title: "SEO optimization",
     tagline: "Found by the right search",
     description:
       "Technical and content SEO so the people looking for what you offer can find you — organic visibility that compounds.",
-    image: "/hero/hero-3.jpg",
+    image: "/about/img5.jpg",
   },
 ];
 
