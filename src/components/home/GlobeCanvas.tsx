@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 type GlobeProps = {
@@ -401,7 +401,8 @@ function PointGlobe({
   scrollProgress,
   showConnections = false,
   dotMap,
-}: GlobeProps & { dotMap: THREE.Texture | null }) {
+  isMobile = false,
+}: GlobeProps & { dotMap: THREE.Texture | null; isMobile?: boolean }) {
   const group = useRef<THREE.Group>(null);
   const core = useRef<THREE.Points>(null);
   const shell = useRef<THREE.Points>(null);
@@ -413,38 +414,53 @@ function PointGlobe({
   const corePos = useMemo(
     () =>
       fibonacciSphere(
-        showConnections ? 2400 : 4200,
+        showConnections ? (isMobile ? 1400 : 2400) : isMobile ? 2400 : 4200,
         showConnections ? 2.3 : 2.32,
         showConnections ? 0.01 : 0.1,
         11,
       ),
-    [showConnections],
+    [showConnections, isMobile],
   );
   const shellPos = useMemo(
     () =>
       fibonacciSphere(
-        showConnections ? 420 : 900,
+        showConnections ? (isMobile ? 220 : 420) : isMobile ? 500 : 900,
         showConnections ? 2.5 : 2.72,
         showConnections ? 0.025 : 0.18,
         29,
       ),
-    [showConnections],
+    [showConnections, isMobile],
   );
-  const ringPosA = useMemo(() => makeRing(160, 3.0, 0.55, 0.2), []);
-  const ringPosB = useMemo(() => makeRing(120, 3.28, -0.35, 0.7), []);
+  const ringPosA = useMemo(
+    () => makeRing(isMobile ? 100 : 160, 3.0, 0.55, 0.2),
+    [isMobile],
+  );
+  const ringPosB = useMemo(
+    () => makeRing(isMobile ? 80 : 120, 3.28, -0.35, 0.7),
+    [isMobile],
+  );
 
   // Sparse network on the sphere — local mesh + a few long global arcs
   const meshNodes = useMemo(
-    () => (showConnections ? fibonacciSphere(160, 2.34, 0.01, 47) : null),
-    [showConnections],
+    () =>
+      showConnections
+        ? fibonacciSphere(isMobile ? 110 : 160, 2.34, 0.01, 47)
+        : null,
+    [showConnections, isMobile],
   );
   const midNodes = useMemo(
-    () => (showConnections ? fibonacciSphere(64, 2.38, 0.012, 67) : null),
-    [showConnections],
+    () =>
+      showConnections
+        ? fibonacciSphere(isMobile ? 42 : 64, 2.38, 0.012, 67)
+        : null,
+    [showConnections, isMobile],
   );
   const longNodes = useMemo(
-    () => (showConnections ? fibonacciSphere(40, 2.42, 0.008, 91) : null),
-    [showConnections],
+    () =>
+      showConnections
+        ? fibonacciSphere(isMobile ? 28 : 40, 2.42, 0.008, 91)
+        : null,
+    [showConnections, isMobile],
   );
 
   useFrame(({ clock }) => {
@@ -454,9 +470,8 @@ function PointGlobe({
     if (group.current) {
       group.current.rotation.y = t * 0.055 + p * 1.35;
       group.current.rotation.x = 0.22 + Math.sin(t * 0.16) * 0.035 + p * 0.12;
-      const scale = showConnections
-        ? 1.08 + p * 0.14
-        : 0.74 + p * 0.3;
+      const base = showConnections ? (isMobile ? 0.92 : 1.08) : 0.74;
+      const scale = base + p * (isMobile ? 0.1 : 0.14);
       group.current.scale.setScalar(scale);
       group.current.position.y = showConnections
         ? (0.1 - p) * 0.08
@@ -656,15 +671,18 @@ function PointGlobe({
 function PointerParallax({
   scrollProgress,
   cameraZ = 7.2,
+  enabled = true,
 }: {
   scrollProgress: React.MutableRefObject<number>;
   cameraZ?: number;
+  enabled?: boolean;
 }) {
   const { camera } = useThree();
   const target = useRef({ x: 0, y: 0 });
   const current = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (!enabled) return;
     const onMove = (e: PointerEvent) => {
       const nx = (e.clientX / window.innerWidth) * 2 - 1;
       const ny = (e.clientY / window.innerHeight) * 2 - 1;
@@ -673,11 +691,16 @@ function PointerParallax({
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
-  }, []);
+  }, [enabled]);
 
   useFrame(() => {
-    current.current.x += (target.current.x - current.current.x) * 0.045;
-    current.current.y += (target.current.y - current.current.y) * 0.045;
+    if (enabled) {
+      current.current.x += (target.current.x - current.current.x) * 0.045;
+      current.current.y += (target.current.y - current.current.y) * 0.045;
+    } else {
+      current.current.x += (0 - current.current.x) * 0.06;
+      current.current.y += (0 - current.current.y) * 0.06;
+    }
     const p = clamp01(scrollProgress.current);
     camera.position.x = current.current.x;
     camera.position.y = current.current.y + (0.5 - p) * 0.12;
@@ -695,8 +718,23 @@ export function GlobeCanvas({
   scrollProgress: React.MutableRefObject<number>;
   showConnections?: boolean;
 }) {
-  const cameraZ = showConnections ? 6.1 : 7.2;
+  const [isMobile, setIsMobile] = useState(false);
+  const cameraZ = showConnections
+    ? isMobile
+      ? 7.4
+      : 6.1
+    : isMobile
+      ? 8.2
+      : 7.2;
   const dotMap = useMemo(() => makeRoundDotTexture(), []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -714,9 +752,9 @@ export function GlobeCanvas({
 
       <Canvas
         className="relative z-[1] !bg-transparent"
-        camera={{ position: [0, 0, cameraZ], fov: 40 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true, premultipliedAlpha: false }}
+        camera={{ position: [0, 0, cameraZ], fov: isMobile ? 42 : 40 }}
+        dpr={isMobile ? [1, 1.25] : [1, 1.5]}
+        gl={{ antialias: !isMobile, alpha: true, premultipliedAlpha: false }}
         style={{ background: "transparent" }}
       >
         <ambientLight intensity={0.4} />
@@ -727,8 +765,13 @@ export function GlobeCanvas({
           scrollProgress={scrollProgress}
           showConnections={showConnections}
           dotMap={dotMap}
+          isMobile={isMobile}
         />
-        <PointerParallax scrollProgress={scrollProgress} cameraZ={cameraZ} />
+        <PointerParallax
+          scrollProgress={scrollProgress}
+          cameraZ={cameraZ}
+          enabled={!isMobile}
+        />
       </Canvas>
 
       <div className="wc-globe-vignette" />

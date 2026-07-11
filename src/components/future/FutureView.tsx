@@ -114,11 +114,12 @@ export function FutureView() {
               <p className="wc-fw-brand">
                 Future <span>Woodenclouds</span>
               </p>
-              <p className="wc-fw-eyebrow">Woodenclouds Connect</p>
               <h1 className="wc-fw-hero-title">
                 Internet. A laptop.
                 <br />
-                <span className="wc-fw-hero-accent">Work from anywhere.</span>
+                <span className="wc-fw-hero-accent wc-fw-hero-accent--nowrap">
+                  Work&nbsp;from&nbsp;anywhere.
+                </span>
               </h1>
               <p className="wc-fw-hero-lede">
                 Building the world&apos;s #1 company-managed remote network — skilled people
