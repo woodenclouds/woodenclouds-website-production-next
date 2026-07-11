@@ -18,27 +18,41 @@ const FutureCanvas = dynamic(
 
 export function HomeServices() {
   return (
-    <section id="services" className="wc-section bg-black text-white">
-      <div className="wc-container">
-        <h2 className="mb-10 text-3xl font-light md:text-4xl">
-          Our <span className="wc-gradient-text">Services</span>
-        </h2>
-        <div className="grid gap-8 md:grid-cols-3">
-          {homeServiceCards.map((card) => (
-            <Link key={card.title} href={card.href} className="group block">
-              <div className="overflow-hidden rounded-xl">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
-                />
+    <section id="services" className="wc-services">
+      <div className="wc-services-bg" aria-hidden />
+
+      <div className="wc-container relative z-10">
+        <header className="wc-services-head">
+          <p className="wc-services-kicker">What we do</p>
+          <div className="wc-services-head-row">
+            <h2 className="wc-services-title">
+              Services built to
+              <br />
+              ship and scale.
+            </h2>
+            <p className="wc-services-intro">
+              Technology, growth support, and brand systems — shaped around outcomes, not feature
+              lists.
+            </p>
+          </div>
+        </header>
+
+        <div className="wc-services-list">
+          {homeServiceCards.map((card, i) => (
+            <Link key={card.title} href={card.href} className="wc-services-row group">
+              <span className="wc-services-index">{String(i + 1).padStart(2, "0")}</span>
+
+              <div className="wc-services-copy">
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
               </div>
-              <h5 className="wc-gradient-text mt-5 border-b border-white/15 pb-3 text-xl font-light">
-                {card.title}
-              </h5>
-              <p className="mt-3 text-sm font-light leading-relaxed text-white/70">{card.description}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm text-white/80 group-hover:text-white">
-                Read More <span aria-hidden>→</span>
+
+              <div className="wc-services-media">
+                <img src={card.image} alt="" draggable={false} />
+              </div>
+
+              <span className="wc-services-go" aria-hidden>
+                →
               </span>
             </Link>
           ))}
@@ -164,66 +178,41 @@ export function HomeClients() {
 
 export function HomeFuture() {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#02040a] py-20 text-white md:py-28">
+    <section className="wc-future" id="future">
       <FutureCanvas />
 
-      <div className="wc-container relative z-10 grid min-h-[70vh] items-center gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <div className="relative aspect-square max-w-md border border-white p-8 shadow-[0_0_60px_rgba(91,157,232,0.08)] md:p-10">
-            <p className="text-xs uppercase tracking-[0.22em]">Woodenclouds</p>
-            <p className="mt-6 text-sm font-light leading-snug text-white/80">
-              Designing your
-              <br />
-              digital future
-            </p>
-            <div className="absolute bottom-8 left-8 right-8 flex items-end">
-              <span className="relative text-[clamp(5rem,14vw,8.5rem)] font-light leading-none tracking-tight">
-                W
-                <span className="relative inline-block">
-                  C
-                  <span
-                    aria-hidden
-                    className="absolute -right-3 top-1/2 h-[0.72em] w-[0.72em] -translate-y-1/2 rounded-full bg-white/20 backdrop-blur-[1px]"
-                  />
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-6 lg:col-start-6">
-          <h3 className="text-3xl font-light uppercase tracking-wide md:text-5xl">
-            Future <span className="wc-gradient-text">Woodenclouds</span>
-          </h3>
-          <p className="mt-6 max-w-xl text-sm font-light leading-relaxed text-white/80 md:text-base">
-            Future Woodenclouds: We&apos;re not just a tech company. We bring together smart people
-            from all fields to use technology to make big changes. Our goal is to build a team of
-            talented developers, designers, marketers, and creative thinkers. Together, we&apos;ll
-            make the digital world even better.
+      <div className="wc-container wc-future-layout">
+        <div className="wc-future-copy-block">
+          <p className="wc-future-kicker">Future Woodenclouds</p>
+          <h2 className="wc-future-title">
+            A studio built
+            <br />
+            for what&apos;s next.
+          </h2>
+          <p className="wc-future-lede">
+            We gather developers, designers, and creative minds to invent products that feel
+            inevitable — and push the digital world further.
           </p>
-
-          <Link href="/future-woodenclouds" className="wc-explore-orbit mt-14 inline-flex">
-            <span className="wc-explore-orbit__ring" aria-hidden>
-              <svg viewBox="0 0 200 200" className="h-full w-full">
-                <defs>
-                  <path
-                    id="wcExploreCircle"
-                    d="M100,100 m-68,0 a68,68 0 1,1 136,0 a68,68 0 1,1 -136,0"
-                  />
-                </defs>
-                <text className="fill-white text-[11px] uppercase tracking-[0.35em]">
-                  <textPath href="#wcExploreCircle" startOffset="0%">
-                    Explore More — Explore More —
-                  </textPath>
-                </text>
-              </svg>
-            </span>
-            <span className="wc-explore-orbit__arrow" aria-hidden>
-              →
-            </span>
-            <span className="sr-only">Explore More</span>
+          <Link href="/future-woodenclouds" className="wc-future-cta">
+            Enter Future Woodenclouds
+            <span aria-hidden>→</span>
           </Link>
         </div>
+
+        <aside className="wc-future-aside">
+          <div className="wc-future-stat">
+            <span>01</span>
+            <p>Talent network</p>
+          </div>
+          <div className="wc-future-stat">
+            <span>02</span>
+            <p>Product craft</p>
+          </div>
+          <div className="wc-future-stat">
+            <span>03</span>
+            <p>Long horizon</p>
+          </div>
+        </aside>
       </div>
     </section>
   );

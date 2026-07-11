@@ -48,16 +48,18 @@ function PointGlobe({ scrollProgress }: GlobeProps) {
     const p = scrollProgress.current;
 
     if (group.current) {
-      group.current.rotation.y = t * 0.12 + p * 1.8;
-      group.current.rotation.x = 0.25 + Math.sin(t * 0.2) * 0.08 + p * 0.35;
-      const scale = 0.85 + p * 0.35;
+      group.current.rotation.y = t * 0.08 + p * 2.6;
+      group.current.rotation.x = 0.2 + Math.sin(t * 0.2) * 0.06 + p * 0.55;
+      const scale = 0.72 + p * 0.55;
       group.current.scale.setScalar(scale);
-      group.current.position.y = (1 - p) * 0.15;
+      group.current.position.y = (0.5 - p) * 0.4;
+      group.current.position.z = p * 0.8;
     }
 
     if (points.current) {
       const mat = points.current.material as THREE.PointsMaterial;
-      mat.opacity = 0.35 + p * 0.45;
+      mat.opacity = 0.25 + p * 0.6;
+      mat.size = 0.014 + p * 0.012;
     }
   });
 

@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const GlobeCanvas = dynamic(
   () => import("./GlobeCanvas").then((m) => m.GlobeCanvas),
@@ -10,66 +10,42 @@ const GlobeCanvas = dynamic(
 
 const LINE_1 = "Designing Your";
 const LINE_2 = "Digital Future";
+const FULL = `${LINE_1}\n${LINE_2}`;
 
-function useTypewriter(active: boolean, text: string, speed = 42, startDelay = 0) {
-  const [out, setOut] = useState("");
-  const [done, setDone] = useState(false);
-
-  useEffect(() => {
-    if (!active) {
-      setOut("");
-      setDone(false);
-      return;
-    }
-
-    let i = 0;
-    let intervalId: ReturnType<typeof setInterval> | undefined;
-    const timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        i += 1;
-        setOut(text.slice(0, i));
-        if (i >= text.length) {
-          clearInterval(intervalId);
-          setDone(true);
-        }
-      }, speed);
-    }, startDelay);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [active, text, speed, startDelay]);
-
-  return { out, done };
+function clamp(n: number, min = 0, max = 1) {
+  return Math.min(max, Math.max(min, n));
 }
 
 export function HomeDigitalFuture() {
   const sectionRef = useRef<HTMLElement>(null);
   const scrollProgress = useRef(0);
-  const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const onScroll = () => {
+    let ticking = false;
+
+    const update = () => {
       const rect = section.getBoundingClientRect();
       const view = window.innerHeight;
-      const raw = 1 - Math.min(Math.max((rect.top + rect.height * 0.35) / view, 0), 1);
-      scrollProgress.current = raw;
-      setProgress(raw);
-
-      const inView = rect.top < view * 0.8 && rect.bottom > view * 0.15;
-      setVisible((prev) => {
-        if (inView && !prev) setCycle((c) => c + 1);
-        return inView;
-      });
+      // Progress while the sticky stage is pinned:
+      // 0 = section top hits viewport top, 1 = section almost finished
+      const scrollable = Math.max(section.offsetHeight - view, 1);
+      const scrolled = clamp(-rect.top / scrollable);
+      scrollProgress.current = scrolled;
+      setProgress(scrolled);
+      ticking = false;
     };
 
-    onScroll();
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -78,68 +54,83 @@ export function HomeDigitalFuture() {
     };
   }, []);
 
-  const line1 = useTypewriter(visible, LINE_1, 38, 180);
-  const line2 = useTypewriter(visible && line1.done, LINE_2, 44, 220);
-  const showCursor1 = visible && !line1.done;
-  const showCursor2 = visible && line1.done && !line2.done;
-  const complete = line1.done && line2.done;
+  // Map scroll to typed characters (writing effect driven by scroll)
+  const typed = useMemo(() => {
+    const writeEnd = 0.62; // finish typing by 62% of section scroll
+    const t = clamp(progress / writeEnd);
+    const count = Math.floor(t * FULL.length);
+    return FULL.slice(0, count);
+  }, [progress]);
+
+  const [typed1, typed2 = ""] = typed.split("\n");
+  const charsDone = typed.length;
+  const line1Done = charsDone >= LINE_1.length;
+  const allDone = charsDone >= FULL.length;
+  const showCaret1 = progress > 0.02 && !line1Done;
+  const showCaret2 = line1Done && !allDone;
+  const subOpacity = clamp((progress - 0.58) / 0.2);
+  const stageOpacity = clamp(0.2 + progress * 1.2);
 
   return (
     <section
       ref={sectionRef}
       id="digital-future"
-      className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-black text-white"
+      className="relative bg-black text-white"
+      style={{ height: "220vh" }}
     >
-      <GlobeCanvas scrollProgress={scrollProgress} />
+      <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden">
+        <GlobeCanvas scrollProgress={scrollProgress} />
 
-      <div className="wc-container relative z-10 py-28 text-center">
         <div
-          key={cycle}
-          className="wc-future-copy mx-auto max-w-5xl"
-          style={{
-            opacity: visible ? 0.45 + progress * 0.55 : 0,
-            transform: `translateY(${visible ? (1 - progress) * 28 : 40}px) scale(${0.97 + progress * 0.03})`,
-          }}
+          className="wc-container relative z-10 py-28 text-center"
+          style={{ opacity: stageOpacity }}
         >
-          <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/45 md:text-xs">
-            Woodenclouds
-          </p>
-
-          <h2 className="text-[clamp(2.4rem,7vw,5.4rem)] font-medium leading-[1.08] tracking-[-0.03em]">
-            <span className="wc-type-line block min-h-[1.15em] text-white">
-              {line1.out}
-              {showCursor1 && <span className="wc-type-caret" aria-hidden />}
-            </span>
-            <span
-              className={`wc-type-line mt-1 block min-h-[1.15em] ${complete ? "wc-type-glow" : ""}`}
+          <div className="wc-future-copy mx-auto max-w-5xl">
+            <p
+              className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/45 md:text-xs"
+              style={{ opacity: clamp(progress * 3) }}
             >
-              <span className="wc-gradient-text">{line2.out}</span>
-              {showCursor2 && <span className="wc-type-caret wc-type-caret--accent" aria-hidden />}
-            </span>
-          </h2>
+              Woodenclouds
+            </p>
 
-          <p
-            className="mx-auto mt-8 max-w-lg text-sm font-light leading-relaxed text-white/55 transition-all duration-700 md:text-base"
-            style={{
-              opacity: complete ? 1 : 0,
-              transform: complete ? "translateY(0)" : "translateY(12px)",
-            }}
-          >
-            Technology, design, and intelligence — shaped into products that feel inevitable.
-          </p>
+            <h2 className="text-[clamp(2.4rem,7vw,5.4rem)] font-medium leading-[1.08] tracking-[-0.03em]">
+              <span className="wc-type-line block min-h-[1.15em] text-white">
+                {typed1}
+                {showCaret1 && <span className="wc-type-caret" aria-hidden />}
+              </span>
+              <span
+                className={`wc-type-line mt-1 block min-h-[1.15em] ${allDone ? "wc-type-glow" : ""}`}
+              >
+                <span className="wc-gradient-text">{typed2}</span>
+                {showCaret2 && (
+                  <span className="wc-type-caret wc-type-caret--accent" aria-hidden />
+                )}
+              </span>
+            </h2>
+
+            <p
+              className="mx-auto mt-8 max-w-lg text-sm font-light leading-relaxed text-white/55 md:text-base"
+              style={{
+                opacity: subOpacity,
+                transform: `translateY(${(1 - subOpacity) * 16}px)`,
+              }}
+            >
+              Technology, design, and intelligence — shaped into products that feel inevitable.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div
-        className="pointer-events-none absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
-        aria-hidden
-      >
-        <span
-          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1.5"
-          style={{ opacity: 0.35 + (1 - progress) * 0.4 }}
+        <div
+          className="pointer-events-none absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
+          aria-hidden
         >
-          <span className="wc-scroll-dot h-1.5 w-px bg-white/70" />
-        </span>
+          <span
+            className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1.5"
+            style={{ opacity: clamp(1 - progress * 1.4) * 0.7 }}
+          >
+            <span className="wc-scroll-dot h-1.5 w-px bg-white/70" />
+          </span>
+        </div>
       </div>
     </section>
   );
