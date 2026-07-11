@@ -78,7 +78,7 @@ export function AboutView() {
             </div>
             <div className="wc-about-story-copy">
               <p className="wc-about-kicker">Who we are</p>
-              <h2 className="wc-about-story-title">A digital studio built for lasting progress</h2>
+              <h2 className="wc-about-story-title">A digital partner built for lasting progress</h2>
               <p className="wc-about-story-body">
                 We are a leading IT and digital partner. Our goal is to cover the full arc of a
                 business — development, survival, progress, reputation, and the relationships that
@@ -178,7 +178,7 @@ export function AboutView() {
         <div className="wc-container">
           <div className="wc-about-lens-grid">
             <div className="wc-about-lens-copy">
-              <p className="wc-about-kicker">Inside the studio</p>
+              <p className="wc-about-kicker">Inside Woodenclouds</p>
               <h2 className="wc-about-lens-title">People, craft, and the work behind the work</h2>
               <p className="wc-about-lens-body">
                 Meet the team shaping products and brands every day — or join us if you want to

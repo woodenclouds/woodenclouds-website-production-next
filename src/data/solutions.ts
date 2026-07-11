@@ -98,7 +98,7 @@ export const solutions: Solution[] = [
   },
   {
     id: "growth",
-    name: "Growth Studio",
+    name: "Growth Systems",
     tagline: "Brand and demand, working as one",
     description:
       "Branding, content, SEO, and performance marketing orchestrated as a single growth system — so every campaign compounds instead of competing with the last.",

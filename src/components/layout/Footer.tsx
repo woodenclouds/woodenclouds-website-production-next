@@ -37,7 +37,7 @@ export function Footer() {
                 />
               </Link>
               <p className="wc-footer-brand-copy">
-                A digital product studio shaping technology, brand, and growth — from Kochi to the
+                A digital product company shaping technology, brand, and growth — from Kochi to the
                 world.
               </p>
               <div className="wc-footer-social">

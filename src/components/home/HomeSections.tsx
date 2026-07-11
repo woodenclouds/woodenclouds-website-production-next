@@ -187,7 +187,7 @@ export function HomeFuture() {
         <div className="wc-future-copy-block">
           <p className="wc-future-kicker">Future Woodenclouds</p>
           <h2 className="wc-future-title">
-            A studio built
+            A team built
             <br />
             for what&apos;s next.
           </h2>

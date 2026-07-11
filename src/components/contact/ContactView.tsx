@@ -78,7 +78,7 @@ export function ContactView() {
           <header className="wc-partner-programs-head">
             <div>
               <p className="wc-partner-kicker">Reach us</p>
-              <h2 className="wc-partner-programs-title">Direct lines into the studio</h2>
+              <h2 className="wc-partner-programs-title">Direct lines to Woodenclouds</h2>
             </div>
             <p className="wc-partner-programs-intro">
               Prefer a call, email, or careers note? Pick the channel that fits — we reply from
@@ -94,7 +94,7 @@ export function ContactView() {
               </li>
             ))}
             <li>
-              <span>Studio</span>
+              <span>Office</span>
               <p>{site.address}</p>
             </li>
           </ul>
