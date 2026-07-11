@@ -49,22 +49,38 @@ function clamp(n: number, min = 0, max = 1) {
 export function FutureView() {
   const [done, setDone] = useState(false);
   const scrollProgress = useRef(0);
+  const finaleRef = useRef<HTMLElement>(null);
+  const [finaleProgress, setFinaleProgress] = useState(0);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
       scrollProgress.current = 1;
+      setFinaleProgress(1);
       return;
     }
 
     let ticking = false;
 
     const update = () => {
-      const scrollable = Math.max(
-        document.documentElement.scrollHeight - window.innerHeight,
+      const view = window.innerHeight;
+      const pageScrollable = Math.max(
+        document.documentElement.scrollHeight - view,
         1,
       );
-      scrollProgress.current = clamp(window.scrollY / scrollable);
+      // Pure top → bottom progress drives globe connections
+      const pageProgress = clamp(window.scrollY / pageScrollable);
+      scrollProgress.current = pageProgress;
+
+      const finale = finaleRef.current;
+      if (finale) {
+        const rect = finale.getBoundingClientRect();
+        const runway = Math.max(finale.offsetHeight - view, 1);
+        setFinaleProgress(clamp(-rect.top / runway));
+      } else {
+        setFinaleProgress(0);
+      }
+
       ticking = false;
     };
 
@@ -87,6 +103,10 @@ export function FutureView() {
     e.preventDefault();
     setDone(true);
   }
+
+  // Fade in as the sticky finale stage is scrolled
+  const finaleOpacity = clamp(finaleProgress / 0.45);
+  const finaleScale = 0.92 + finaleOpacity * 0.08;
 
   return (
     <div className="wc-fw-page">
@@ -221,6 +241,26 @@ export function FutureView() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section
+          ref={finaleRef}
+          className="wc-fw-finale"
+          aria-label="Woodenclouds Connect"
+        >
+          <div className="wc-fw-finale-stage">
+            <p
+              className="wc-fw-finale-title"
+              style={{
+                opacity: finaleOpacity,
+                transform: `translateY(${(1 - finaleOpacity) * 24}px) scale(${finaleScale})`,
+              }}
+            >
+              Woodenclouds
+              <br />
+              <span>Connect</span>
+            </p>
           </div>
         </section>
 

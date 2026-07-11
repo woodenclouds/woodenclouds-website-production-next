@@ -1633,11 +1633,20 @@
 .wc-globe--network .wc-globe-vignette {
   background:
     radial-gradient(
-      ellipse 72% 64% at 50% 48%,
+      ellipse 82% 74% at 50% 48%,
       transparent 0%,
-      rgba(0, 0, 0, 0.18) 58%,
-      rgba(0, 0, 0, 0.62) 100%
+      transparent 48%,
+      rgba(0, 0, 0, 0.18) 72%,
+      rgba(0, 0, 0, 0.68) 100%
     );
+}
+
+.wc-globe--network .wc-globe-nebula {
+  opacity: 0.75;
+}
+
+.wc-globe--network .wc-globe-nebula--secondary {
+  opacity: 0.55;
 }
 
 .wc-globe-nebula {
@@ -7236,6 +7245,12 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   background: #000;
 }
 
+.wc-fw-globe-bg .wc-globe,
+.wc-fw-globe-bg canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .wc-fw-content {
   position: relative;
   z-index: 1;
@@ -7391,6 +7406,58 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 .wc-fw-section--join {
   padding-bottom: 8rem;
   background: transparent;
+}
+
+/* Final scroll beat — mark centered on the connected globe */
+.wc-fw-finale {
+  position: relative;
+  z-index: 2;
+  height: 180vh;
+  pointer-events: none;
+}
+
+.wc-fw-finale-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  padding: 1.5rem;
+  isolation: isolate;
+}
+
+.wc-fw-finale-title {
+  margin: 0;
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-align: center;
+  color: #fff;
+  text-shadow:
+    0 0 48px rgba(91, 157, 232, 0.45),
+    0 0 80px rgba(61, 111, 168, 0.28),
+    0 2px 28px rgba(0, 0, 0, 0.5);
+  will-change: opacity, transform;
+}
+
+.wc-fw-finale-title span {
+  color: #c5d8f2;
+  text-shadow:
+    0 0 42px rgba(91, 157, 232, 0.55),
+    0 2px 28px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-fw-finale {
+    height: 100svh;
+  }
+
+  .wc-fw-finale-title {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .wc-fw-kicker {
