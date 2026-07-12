@@ -40,7 +40,7 @@ export function BusinessSupportView() {
                 See how we help
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-dark" onClick={openQuote}>
+              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
                 Talk to us
               </button>
             </div>

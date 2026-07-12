@@ -19,6 +19,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");
   const isDigitalMarketing = pathname === "/services/digital-marketing";
+  const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
   const isDarkPage =
     isHome ||
@@ -31,6 +32,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isContact ||
     isBlogDetail ||
     isDigitalMarketing ||
+    isBusinessSupport ||
     isFuture;
 
   useLayoutEffect(() => {
@@ -57,6 +59,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   isContact ||
                   isBlogDetail ||
                   isDigitalMarketing ||
+                  isBusinessSupport ||
                   isFuture
                 ? "min-h-screen bg-[#05070b] text-white"
                 : "min-h-screen bg-black text-white"

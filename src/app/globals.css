@@ -5572,10 +5572,10 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.65rem 0.85rem;
-  margin: 0 0 1rem;
-  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  margin: 0 0 1.15rem;
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
   font-weight: 300;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--biz-ink);
   animation: wc-hero-in 0.65s ease both;
 }
@@ -5640,14 +5640,15 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   }
 }
 
-/* Hero */
+/* Hero — cinematic full-bleed */
 .wc-biz-hero {
   position: relative;
   min-height: 100svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: #dce6f2;
+  background: #05070b;
+  color: #f4f6f8;
 }
 
 .wc-biz-hero-media {
@@ -5661,9 +5662,9 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  transform: scale(1.1);
-  filter: saturate(0.95) contrast(1.04);
+  object-position: center 32%;
+  transform: scale(1.12);
+  filter: saturate(1.08) contrast(1.06) brightness(0.92);
   animation: wc-svc-kenburns 18s ease-out forwards;
 }
 
@@ -5673,9 +5674,9 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(105deg, rgba(243, 246, 250, 0.96) 0%, rgba(243, 246, 250, 0.72) 36%, rgba(243, 246, 250, 0.12) 64%),
-    linear-gradient(180deg, rgba(243, 246, 250, 0.2) 0%, transparent 28%, rgba(243, 246, 250, 0.88) 100%),
-    radial-gradient(ellipse 50% 55% at 92% 22%, rgba(41, 119, 212, 0.22), transparent 68%);
+    linear-gradient(105deg, rgba(5, 7, 11, 0.88) 0%, rgba(5, 7, 11, 0.55) 38%, rgba(5, 7, 11, 0.12) 68%),
+    linear-gradient(180deg, rgba(5, 7, 11, 0.42) 0%, transparent 32%, rgba(5, 7, 11, 0.82) 100%),
+    radial-gradient(ellipse 48% 55% at 88% 28%, rgba(41, 119, 212, 0.32), transparent 68%);
 }
 
 .wc-biz-hero-grain {
@@ -5683,7 +5684,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.38;
   mix-blend-mode: soft-light;
   background-image: url("/patterns/noise.png");
   background-size: 280px;
@@ -5693,27 +5694,36 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 8rem 0 4.5rem;
+  padding: 8rem 0 4.75rem;
+}
+
+.wc-biz-hero .wc-biz-brand {
+  color: #f4f6f8;
+}
+
+.wc-biz-hero .wc-biz-brand-tag {
+  border-left-color: rgba(244, 246, 248, 0.28);
+  color: rgba(244, 246, 248, 0.55);
 }
 
 .wc-biz-hero-title {
   margin: 0;
-  max-width: 12ch;
-  font-size: clamp(2.85rem, 7.2vw, 5.1rem);
+  max-width: 11ch;
+  font-size: clamp(2.9rem, 7.4vw, 5.25rem);
   font-weight: 300;
   letter-spacing: -0.045em;
   line-height: 0.98;
-  color: var(--biz-ink);
+  color: #f4f6f8;
   animation: wc-hero-in 0.75s ease 0.06s both;
 }
 
 .wc-biz-hero-lede {
-  margin: 1.35rem 0 0;
+  margin: 1.4rem 0 0;
   max-width: 30rem;
-  font-size: clamp(1.02rem, 1.6vw, 1.15rem);
+  font-size: clamp(1.05rem, 1.7vw, 1.18rem);
   font-weight: 300;
   line-height: 1.6;
-  color: rgba(10, 12, 16, 0.62);
+  color: rgba(244, 246, 248, 0.72);
   animation: wc-hero-in 0.75s ease 0.14s both;
 }
 
@@ -5722,8 +5732,18 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.85rem;
-  margin-top: 2rem;
+  margin-top: 2.1rem;
   animation: wc-hero-in 0.75s ease 0.22s both;
+}
+
+.wc-biz-hero-actions .wc-btn-solid {
+  background: #f4f6f8;
+  color: #05070b;
+}
+
+.wc-biz-hero-actions .wc-btn-solid:hover {
+  background: #fff;
+  color: #05070b;
 }
 
 .wc-biz-hero-scroll {
@@ -5735,7 +5755,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   flex-direction: column;
   align-items: center;
   gap: 0.55rem;
-  color: rgba(10, 12, 16, 0.38);
+  color: rgba(244, 246, 248, 0.45);
   font-size: 0.65rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;

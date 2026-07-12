@@ -1,8 +1,8 @@
 export const businessSupportHero = {
-  title: "Startup support",
-  titleAccent: "that keeps pace.",
+  title: "The partner layer",
+  titleAccent: "founders actually need.",
   description:
-    "Strategy, research, planning, and operations — the partner layer founders need when the product alone is not enough.",
+    "Strategy, research, planning, and operations — so the business stays clear when the product alone is not enough.",
   image: "/services/startup-business-support.jpg",
 };
 
