@@ -179,16 +179,13 @@ export function AboutView() {
               <p className="wc-about-kicker">Inside Woodenclouds</p>
               <h2 className="wc-about-lens-title">People, craft, and the work behind the work</h2>
               <p className="wc-about-lens-body">
-                Meet the team shaping products and brands every day — or join us if you want to
-                build the next chapter with Woodenclouds.
+                Join us if you want to build the next chapter with Woodenclouds — craft, clarity,
+                and work that lasts.
               </p>
               <div className="wc-about-lens-actions">
-                <Link href="/behind-woodenclouds" className="wc-btn wc-btn-dark">
-                  Meet the team
-                  <span aria-hidden>→</span>
-                </Link>
                 <Link href="/career" className="wc-btn wc-btn-dark">
                   Careers
+                  <span aria-hidden>→</span>
                 </Link>
               </div>
             </div>

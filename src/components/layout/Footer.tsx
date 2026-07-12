@@ -86,9 +86,6 @@ export function Footer() {
                   <Link href="/partner-with-us">Partner with us</Link>
                 </li>
                 <li>
-                  <Link href="/behind-woodenclouds">Behind Woodenclouds</Link>
-                </li>
-                <li>
                   <Link href="/future-woodenclouds">Future Woodenclouds</Link>
                 </li>
               </ul>

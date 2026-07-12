@@ -160,13 +160,6 @@ export function CareerView() {
               <p className="mt-3 max-w-sm text-sm font-light leading-relaxed text-muted">
                 Prefer email? Send your resume with the role in the subject line.
               </p>
-              <Link
-                href="/behind-woodenclouds"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-light text-ink/70 hover:text-ink"
-              >
-                Meet the team
-                <span aria-hidden>→</span>
-              </Link>
             </div>
 
             <div className="rounded-none border border-black/10 bg-white p-6 md:p-8">
