@@ -1,12 +1,12 @@
 "use client";
 
+import Link from "next/link";
+
 import { dedicatedAdvantages, dedicatedSquads } from "@/data/dedicatedTeam";
 import { site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function DedicatedTeamView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="wc-team-page bg-[#05070b] text-white">
@@ -33,9 +33,9 @@ export function DedicatedTeamView() {
                 Explore teams
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Hire a team
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -77,10 +77,10 @@ export function DedicatedTeamView() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-                  <button type="button" className="wc-btn wc-btn-dark mt-8" onClick={openQuote}>
+                  <Link href="/contact" className="wc-btn wc-btn-dark mt-8">
                     Talk about this team
                     <span aria-hidden>→</span>
-                  </button>
+                  </Link>
                 </div>
               </li>
             ))}
@@ -124,10 +124,10 @@ export function DedicatedTeamView() {
               </a>
             </div>
             <div className="wc-partner-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Hire a team
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-dark">
                 Mail us
               </a>

@@ -3,13 +3,11 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { works, workCategories } from "@/data/works";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 const featured = works.find((w) => w.featured) ?? works[0];
 
 export function WorksView() {
-  const { openQuote } = useQuote();
   const [filter, setFilter] = useState<(typeof workCategories)[number]>("All");
 
   const filtered = useMemo(
@@ -40,9 +38,9 @@ export function WorksView() {
                 Explore projects
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Start a project
-              </button>
+              </Link>
             </div>
           </div>
         </div>

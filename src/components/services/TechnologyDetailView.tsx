@@ -5,11 +5,9 @@ import { useState } from "react";
 import type { TechDetail } from "@/data/technology";
 import { technologyCapabilities, technologyProcess } from "@/data/technology";
 import { site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function TechnologyDetailView({ page }: { page: TechDetail }) {
-  const { openQuote } = useQuote();
   const [openFaq, setOpenFaq] = useState(0);
 
   const related = technologyCapabilities.filter(
@@ -39,10 +37,10 @@ export function TechnologyDetailView({ page }: { page: TechDetail }) {
             <p className="wc-tech-detail-tagline">{page.tagline}</p>
             <p className="wc-tech-detail-lede">{page.description}</p>
             <div className="wc-tech-detail-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a project
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href="#outcomes" className="wc-btn wc-btn-light">
                 See outcomes
               </a>
@@ -242,10 +240,10 @@ export function TechnologyDetailView({ page }: { page: TechDetail }) {
               </a>
             </div>
             <div className="wc-tech-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a project
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-dark">
                 Mail us
               </a>

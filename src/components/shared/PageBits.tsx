@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useQuote } from "@/components/layout/QuoteProvider";
 
 export function EnquireCta({
   background = "/backgrounds/1.jpg",
@@ -10,8 +9,6 @@ export function EnquireCta({
   background?: string;
   buttonLabel?: string;
 }) {
-  const { openQuote } = useQuote();
-
   return (
     <section
       className="relative overflow-hidden bg-cover bg-center py-20 text-white md:py-28"
@@ -24,9 +21,9 @@ export function EnquireCta({
           <br />
           Let’s get to work.
         </h3>
-        <button type="button" className="wc-btn wc-btn-light mt-8" onClick={openQuote}>
+        <Link href="/contact" className="wc-btn wc-btn-light mt-8">
           {buttonLabel}
-        </button>
+        </Link>
       </div>
     </section>
   );

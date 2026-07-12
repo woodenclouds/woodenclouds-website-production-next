@@ -150,25 +150,6 @@ export const partnerReasons = [
   },
 ];
 
-export const quoteSubjects = [
-  "Web Development",
-  "Mobile App Development",
-  "Ecommerce Development",
-  "Custom Software Development",
-  "Digital Marketing",
-  "Social Media Management",
-  "SEO",
-  "Video Production",
-  "Other",
-];
-
-export const quoteBudgets = [
-  "Below 1 Lakh",
-  "Between 1 Lakh - 5 Lakh",
-  "Between 5 Lakh - 10 Lakh",
-  "Above 10 Lakh",
-];
-
 export const site = {
   name: "Woodenclouds",
   email: "hello@woodenclouds.com",

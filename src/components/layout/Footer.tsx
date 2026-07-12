@@ -2,25 +2,9 @@
 
 import Link from "next/link";
 import { site } from "@/data/content";
-import { useQuote } from "./QuoteProvider";
 
 export function Footer() {
-  const { openQuote } = useQuote();
-
   return (
-    <>
-      <button
-        type="button"
-        onClick={openQuote}
-        className="wc-quote-fab wc-quote-fab--dark"
-        aria-label="Get a Quote"
-      >
-        <span className="inline-flex items-center gap-2 text-[15px]">
-          <span aria-hidden>✉</span>
-          <span className="text-sm">Get a Quote</span>
-        </span>
-      </button>
-
       <footer className="wc-footer">
         <div className="wc-footer-bg" aria-hidden />
 
@@ -135,6 +119,5 @@ export function Footer() {
           </div>
         </div>
       </footer>
-    </>
   );
 }

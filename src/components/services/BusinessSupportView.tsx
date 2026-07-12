@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   businessSupportBrief,
   businessSupportHero,
@@ -8,11 +10,9 @@ import {
   howWeHelpAll,
 } from "@/data/businessSupport";
 import { site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function BusinessSupportView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="wc-biz-page">
@@ -34,9 +34,9 @@ export function BusinessSupportView() {
                 See how we help
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Talk to us
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -152,10 +152,10 @@ export function BusinessSupportView() {
               </a>
             </div>
             <div className="wc-biz-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a conversation
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-light">
                 Mail us
               </a>

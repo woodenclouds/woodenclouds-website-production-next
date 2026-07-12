@@ -1,11 +1,11 @@
 "use client";
 
+import Link from "next/link";
+
 import { partnerPrograms, partnerReasons, site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function PartnerView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="bg-[#05070b] text-white">
@@ -31,9 +31,9 @@ export function PartnerView() {
                 Explore programs
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Start a conversation
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -75,10 +75,10 @@ export function PartnerView() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-                  <button type="button" className="wc-btn wc-btn-dark mt-8" onClick={openQuote}>
+                  <Link href="/contact" className="wc-btn wc-btn-dark mt-8">
                     Talk about this program
                     <span aria-hidden>→</span>
-                  </button>
+                  </Link>
                 </div>
               </li>
             ))}
@@ -122,10 +122,10 @@ export function PartnerView() {
               </a>
             </div>
             <div className="wc-partner-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a conversation
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-dark">
                 Mail us
               </a>

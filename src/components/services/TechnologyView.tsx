@@ -8,11 +8,9 @@ import {
   technologyStandards,
 } from "@/data/technology";
 import { site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function TechnologyView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="wc-tech-page">
@@ -36,9 +34,9 @@ export function TechnologyView() {
                 Explore capabilities
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Start a project
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -148,10 +146,10 @@ export function TechnologyView() {
               </a>
             </div>
             <div className="wc-tech-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a project
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-dark">
                 Mail us
               </a>

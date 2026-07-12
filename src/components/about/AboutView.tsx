@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { brands } from "@/data/clients";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 const values = [
@@ -27,7 +26,6 @@ const milestones = [
 ];
 
 export function AboutView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="bg-[#05070b] text-white">
@@ -53,9 +51,9 @@ export function AboutView() {
                 Our story
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Work with us
-              </button>
+              </Link>
             </div>
           </div>
         </div>

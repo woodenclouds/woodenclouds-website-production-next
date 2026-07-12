@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   digitalMarketingApproach,
   digitalMarketingHero,
@@ -8,11 +10,9 @@ import {
   digitalMarketingStory,
 } from "@/data/digitalMarketing";
 import { site } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function DigitalMarketingView() {
-  const { openQuote } = useQuote();
 
   return (
     <div className="wc-mkt-page">
@@ -36,9 +36,9 @@ export function DigitalMarketingView() {
                 See services
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Start a campaign
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -161,10 +161,10 @@ export function DigitalMarketingView() {
               </a>
             </div>
             <div className="wc-mkt-next-actions">
-              <button type="button" className="wc-btn wc-btn-solid" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-solid">
                 Start a conversation
                 <span aria-hidden>→</span>
-              </button>
+              </Link>
               <a href={`mailto:${site.email}`} className="wc-btn wc-btn-light">
                 Mail us
               </a>

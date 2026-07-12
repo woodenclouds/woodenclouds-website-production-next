@@ -5,7 +5,6 @@ import { useLayoutEffect } from "react";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { ProgressWrap } from "./ProgressWrap";
-import { QuoteProvider } from "./QuoteProvider";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -46,7 +45,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   return (
-    <QuoteProvider>
+    <>
       <ProgressWrap />
       <div
         className={
@@ -72,6 +71,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <main>{children}</main>
         <Footer />
       </div>
-    </QuoteProvider>
+    </>
   );
 }

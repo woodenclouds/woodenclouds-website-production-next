@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { homeServiceCards, servicesFaqs } from "@/data/content";
-import { useQuote } from "@/components/layout/QuoteProvider";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 const approach = [
@@ -36,7 +35,6 @@ const serviceRows = [
 ];
 
 export function ServicesView() {
-  const { openQuote } = useQuote();
   const [openFaq, setOpenFaq] = useState(0);
 
   return (
@@ -63,9 +61,9 @@ export function ServicesView() {
                 Explore services
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
+              <Link href="/contact" className="wc-btn wc-btn-light">
                 Enquire now
-              </button>
+              </Link>
             </div>
           </div>
         </div>
