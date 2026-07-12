@@ -1,9 +1,15 @@
 export const businessSupportHero = {
-  title: "Support that grows",
-  titleAccent: "with your business.",
+  title: "Startup support",
+  titleAccent: "that keeps pace.",
   description:
-    "Consulting, research, strategy, and operations — partnership for startups and teams who need clarity beyond the product.",
+    "Strategy, research, planning, and operations — the partner layer founders need when the product alone is not enough.",
   image: "/services/startup-business-support.jpg",
+};
+
+export const businessSupportBrief = {
+  title: "Built for teams shipping under pressure",
+  body: "We sit beside founders and operators — clarifying priorities, sharpening the offer, and putting practical systems around growth so momentum does not stall when things get messy.",
+  image: "/about/img2.jpg",
 };
 
 export const businessSupportOfferings = [
@@ -47,20 +53,19 @@ export const businessSupportOfferings = [
 
 export const howWeHelpAll = [
   {
-    title: "Early-stage startups",
-    body: "Validate the idea, shape the offer, and set foundations — brand, product direction, and go-to-market — before runway goes to the wrong bets.",
+    stage: "01",
+    title: "Idea & validation",
+    body: "Shape the offer, test assumptions, and set brand, product, and go-to-market foundations before runway goes to the wrong bets.",
   },
   {
-    title: "Growing businesses",
-    body: "Tighten operations, clarify priorities, and build systems that let a small team deliver like a larger one without losing focus.",
+    stage: "02",
+    title: "Traction & growth",
+    body: "Tighten operations, clarify priorities, and build systems that let a small team deliver like a larger one — without losing focus.",
   },
   {
-    title: "Established teams",
+    stage: "03",
+    title: "Scale & systems",
     body: "Refresh strategy, modernize workflows, and plug in specialist depth where you need it — without rebuilding everything in-house.",
-  },
-  {
-    title: "Founders & operators",
-    body: "A practical sounding board across product, marketing, and operations — so you are not figuring every layer alone.",
   },
 ];
 
@@ -68,31 +73,21 @@ export const businessSupportProcess = [
   {
     index: "01",
     title: "Listen & map",
-    body: "We start with your goals, constraints, and current reality — so support fits the business you have.",
+    body: "Goals, constraints, and current reality — so support fits the business you have today.",
   },
   {
     index: "02",
-    title: "Research & clarify",
-    body: "Market, audience, and internal signals distilled into priorities you can act on this quarter.",
+    title: "Clarify priorities",
+    body: "Market and internal signals distilled into what matters this quarter — not a pile of unused slides.",
   },
   {
     index: "03",
-    title: "Plan the path",
-    body: "Strategy, milestones, and ownership in a plan your team can run — not a deck that sits unused.",
+    title: "Plan & own",
+    body: "Strategy, milestones, and ownership in a plan your team can run and measure.",
   },
   {
     index: "04",
-    title: "Support the work",
-    body: "We stay close through execution: reviews, adjustments, and operational help as the plan meets reality.",
-  },
-  {
-    index: "05",
-    title: "Measure & refine",
-    body: "Progress checked against outcomes. What works scales; what does not gets cut or reworked quickly.",
-  },
-  {
-    index: "06",
-    title: "Stay the course",
-    body: "Ongoing partnership keeps momentum after the first win — so growth does not stall at the next challenge.",
+    title: "Support & refine",
+    body: "We stay close through execution — reviews, adjustments, and momentum after the first win.",
   },
 ];
