@@ -14,8 +14,9 @@ export type TechDetail = {
 
 export const technologyHero = {
   brand: "Woodenclouds",
-  title: "Technology that ships.",
-  titleAccent: "Products that scale.",
+  eyebrow: "Technology",
+  title: "Build products",
+  titleAccent: "people rely on.",
   description:
     "Websites, apps, platforms, and commerce — engineered for clarity, performance, and the next release.",
   image: "/services/technology.jpg",

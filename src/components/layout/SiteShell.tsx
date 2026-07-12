@@ -33,6 +33,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isBlogDetail ||
     isDigitalMarketing ||
     isBusinessSupport ||
+    isTechnology ||
     isFuture;
 
   useLayoutEffect(() => {
@@ -60,12 +61,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   isBlogDetail ||
                   isDigitalMarketing ||
                   isBusinessSupport ||
+                  isTechnology ||
                   isFuture
                 ? "min-h-screen bg-[#05070b] text-white"
                 : "min-h-screen bg-black text-white"
-            : isTechnology
-              ? "min-h-screen bg-white text-ink"
-              : "min-h-screen bg-paper text-ink"
+            : "min-h-screen bg-paper text-ink"
         }
       >
         <Navbar />

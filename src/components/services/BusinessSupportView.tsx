@@ -24,16 +24,10 @@ export function BusinessSupportView() {
         <div className="wc-biz-hero-grain" aria-hidden />
 
         <div className="wc-biz-hero-ui">
-          <div className="wc-container">
-            <p className="wc-biz-brand">
-              <span className="wc-biz-brand-name">Woodenclouds</span>
-              <span className="wc-biz-brand-tag">Startup Support</span>
-            </p>
-            <h1 className="wc-biz-hero-title">
-              {businessSupportHero.title}
-              <br />
-              <span className="wc-gradient-text">{businessSupportHero.titleAccent}</span>
-            </h1>
+          <div className="wc-container wc-biz-hero-inner">
+            <p className="wc-biz-hero-eyebrow">{businessSupportHero.eyebrow}</p>
+            <h1 className="wc-biz-hero-brand">Woodenclouds</h1>
+            <p className="wc-biz-hero-title">{businessSupportHero.title}</p>
             <p className="wc-biz-hero-lede">{businessSupportHero.description}</p>
             <div className="wc-biz-hero-actions">
               <a href="#offerings" className="wc-btn wc-btn-solid">

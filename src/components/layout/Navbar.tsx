@@ -24,6 +24,8 @@ export function Navbar() {
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isContact = pathname === "/contact";
   const isBlogDetail = pathname.startsWith("/blog/");
+  const isTechnology =
+    pathname === "/services/technology" || pathname.startsWith("/services/technology/");
   const isDigitalMarketing = pathname === "/services/digital-marketing";
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
@@ -39,6 +41,7 @@ export function Navbar() {
     isBlogDetail ||
     isDigitalMarketing ||
     isBusinessSupport ||
+    isTechnology ||
     isFuture;
   /** Light content below hero — scrolled bar should be white */
   const lightOnScroll =
@@ -49,7 +52,8 @@ export function Navbar() {
     isContact ||
     isBlogDetail ||
     isDigitalMarketing ||
-    isBusinessSupport;
+    isBusinessSupport ||
+    isTechnology;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 

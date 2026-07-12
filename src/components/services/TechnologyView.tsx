@@ -21,9 +21,14 @@ export function TechnologyView() {
           <img src={technologyHero.image} alt="" />
         </div>
         <div className="wc-tech-hero-wash" aria-hidden />
+        <div className="wc-tech-hero-grain" aria-hidden />
 
         <div className="wc-tech-hero-ui">
           <div className="wc-container">
+            <p className="wc-tech-brand">
+              <span className="wc-tech-brand-name">{technologyHero.brand}</span>
+              <span className="wc-tech-brand-tag">{technologyHero.eyebrow}</span>
+            </p>
             <h1 className="wc-tech-hero-title">
               {technologyHero.title}
               <br />
@@ -35,7 +40,7 @@ export function TechnologyView() {
                 Explore capabilities
                 <span aria-hidden>→</span>
               </a>
-              <button type="button" className="wc-btn wc-btn-dark" onClick={openQuote}>
+              <button type="button" className="wc-btn wc-btn-light" onClick={openQuote}>
                 Start a project
               </button>
             </div>

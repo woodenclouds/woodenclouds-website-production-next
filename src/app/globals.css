@@ -5075,19 +5075,37 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   }
 }
 
-/* Technology services — light theme */
+/* Technology services — cinematic engineering */
 .wc-tech-page {
-  background: #ffffff;
+  background: #f4f6f8;
   color: var(--color-ink);
 }
 
 .wc-tech-brand {
-  margin: 0 0 0.85rem;
-  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem 0.85rem;
+  margin: 0 0 1.1rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
   font-weight: 300;
-  letter-spacing: -0.02em;
-  color: var(--color-ink);
+  letter-spacing: -0.03em;
+  color: #f4f6f8;
   animation: wc-hero-in 0.65s ease both;
+}
+
+.wc-tech-brand-name {
+  display: inline-block;
+}
+
+.wc-tech-brand-tag {
+  display: inline-block;
+  padding-left: 0.85rem;
+  border-left: 1px solid rgba(244, 246, 248, 0.28);
+  font-size: 0.68em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 246, 248, 0.55);
 }
 
 .wc-tech-kicker {
@@ -5100,11 +5118,12 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 
 .wc-tech-hero {
   position: relative;
-  min-height: 88svh;
+  min-height: 100svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: #f4f8fc;
+  background: #05070b;
+  color: #f4f6f8;
 }
 
 .wc-tech-hero-media {
@@ -5118,10 +5137,10 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  transform: scale(1.06);
-  filter: saturate(0.92) contrast(1.04);
-  animation: wc-svc-kenburns 14s ease-out forwards;
+  object-position: center 30%;
+  transform: scale(1.1);
+  filter: saturate(1.08) contrast(1.08) brightness(0.88);
+  animation: wc-svc-kenburns 16s ease-out forwards;
 }
 
 .wc-tech-hero-wash {
@@ -5130,36 +5149,47 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.82) 42%, rgba(255, 255, 255, 0.35) 72%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.94) 100%),
-    radial-gradient(ellipse 50% 55% at 85% 35%, rgba(91, 157, 232, 0.16), transparent 70%);
+    linear-gradient(105deg, rgba(5, 7, 11, 0.9) 0%, rgba(5, 7, 11, 0.58) 40%, rgba(5, 7, 11, 0.14) 70%),
+    linear-gradient(180deg, rgba(5, 7, 11, 0.4) 0%, transparent 34%, rgba(5, 7, 11, 0.86) 100%),
+    radial-gradient(ellipse 48% 55% at 88% 28%, rgba(41, 119, 212, 0.34), transparent 68%);
+}
+
+.wc-tech-hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.36;
+  mix-blend-mode: soft-light;
+  background-image: url("/patterns/noise.png");
+  background-size: 280px;
 }
 
 .wc-tech-hero-ui {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 7rem 0 3.5rem;
+  padding: 8rem 0 4.5rem;
 }
 
 .wc-tech-hero-title {
   margin: 0;
-  max-width: 14ch;
-  font-size: clamp(2.5rem, 6vw, 4.4rem);
+  max-width: 12ch;
+  font-size: clamp(2.85rem, 7vw, 5.1rem);
   font-weight: 300;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  color: var(--color-ink);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  color: #f4f6f8;
   animation: wc-hero-in 0.75s ease 0.06s both;
 }
 
 .wc-tech-hero-lede {
-  margin: 1.15rem 0 0;
-  max-width: 28rem;
-  font-size: 1.05rem;
+  margin: 1.35rem 0 0;
+  max-width: 30rem;
+  font-size: clamp(1.02rem, 1.6vw, 1.15rem);
   font-weight: 300;
-  line-height: 1.55;
-  color: rgba(10, 12, 16, 0.62);
+  line-height: 1.6;
+  color: rgba(244, 246, 248, 0.72);
   animation: wc-hero-in 0.75s ease 0.14s both;
 }
 
@@ -5168,8 +5198,18 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.85rem;
-  margin-top: 1.75rem;
+  margin-top: 2rem;
   animation: wc-hero-in 0.75s ease 0.22s both;
+}
+
+.wc-tech-hero-actions .wc-btn-solid {
+  background: #f4f6f8;
+  color: #05070b;
+}
+
+.wc-tech-hero-actions .wc-btn-solid:hover {
+  background: #fff;
+  color: #05070b;
 }
 
 .wc-tech-hero-scroll {
@@ -5181,7 +5221,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   flex-direction: column;
   align-items: center;
   gap: 0.55rem;
-  color: rgba(10, 12, 16, 0.4);
+  color: rgba(244, 246, 248, 0.45);
   font-size: 0.65rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -5640,7 +5680,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   }
 }
 
-/* Hero — cinematic full-bleed */
+/* Hero — bottom-anchored partnership composition */
 .wc-biz-hero {
   position: relative;
   min-height: 100svh;
@@ -5662,9 +5702,9 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 32%;
-  transform: scale(1.12);
-  filter: saturate(1.08) contrast(1.06) brightness(0.92);
+  object-position: center 28%;
+  transform: scale(1.1);
+  filter: saturate(1.1) contrast(1.05);
   animation: wc-svc-kenburns 18s ease-out forwards;
 }
 
@@ -5674,9 +5714,8 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(105deg, rgba(5, 7, 11, 0.88) 0%, rgba(5, 7, 11, 0.55) 38%, rgba(5, 7, 11, 0.12) 68%),
-    linear-gradient(180deg, rgba(5, 7, 11, 0.42) 0%, transparent 32%, rgba(5, 7, 11, 0.82) 100%),
-    radial-gradient(ellipse 48% 55% at 88% 28%, rgba(41, 119, 212, 0.32), transparent 68%);
+    linear-gradient(180deg, rgba(5, 7, 11, 0.15) 0%, rgba(5, 7, 11, 0.2) 35%, rgba(5, 7, 11, 0.72) 68%, rgba(5, 7, 11, 0.94) 100%),
+    radial-gradient(ellipse 70% 45% at 50% 100%, rgba(41, 119, 212, 0.28), transparent 70%);
 }
 
 .wc-biz-hero-grain {
@@ -5684,7 +5723,7 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.38;
+  opacity: 0.32;
   mix-blend-mode: soft-light;
   background-image: url("/patterns/noise.png");
   background-size: 280px;
@@ -5694,45 +5733,63 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 8rem 0 4.75rem;
+  padding: 7.5rem 0 4.25rem;
 }
 
-.wc-biz-hero .wc-biz-brand {
-  color: #f4f6f8;
+.wc-biz-hero-inner {
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-.wc-biz-hero .wc-biz-brand-tag {
-  border-left-color: rgba(244, 246, 248, 0.28);
+.wc-biz-hero-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   color: rgba(244, 246, 248, 0.55);
+  animation: wc-hero-in 0.65s ease both;
+}
+
+.wc-biz-hero-brand {
+  margin: 0;
+  font-size: clamp(3.2rem, 9vw, 6.4rem);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+  color: #fff;
+  animation: wc-hero-in 0.75s ease 0.05s both;
 }
 
 .wc-biz-hero-title {
-  margin: 0;
-  max-width: 11ch;
-  font-size: clamp(2.9rem, 7.4vw, 5.25rem);
+  margin: 1.15rem auto 0;
+  max-width: 18ch;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
   font-weight: 300;
-  letter-spacing: -0.045em;
-  line-height: 0.98;
-  color: #f4f6f8;
-  animation: wc-hero-in 0.75s ease 0.06s both;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: rgba(244, 246, 248, 0.92);
+  animation: wc-hero-in 0.75s ease 0.1s both;
 }
 
 .wc-biz-hero-lede {
-  margin: 1.4rem 0 0;
-  max-width: 30rem;
-  font-size: clamp(1.05rem, 1.7vw, 1.18rem);
+  margin: 1.1rem auto 0;
+  max-width: 32rem;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
   font-weight: 300;
-  line-height: 1.6;
-  color: rgba(244, 246, 248, 0.72);
-  animation: wc-hero-in 0.75s ease 0.14s both;
+  line-height: 1.65;
+  color: rgba(244, 246, 248, 0.68);
+  animation: wc-hero-in 0.75s ease 0.16s both;
 }
 
 .wc-biz-hero-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.85rem;
-  margin-top: 2.1rem;
+  margin-top: 2rem;
   animation: wc-hero-in 0.75s ease 0.22s both;
 }
 
@@ -6248,7 +6305,8 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 @media (prefers-reduced-motion: reduce) {
   .wc-biz-hero-media img,
   .wc-biz-stages-media img,
-  .wc-biz-brand,
+  .wc-biz-hero-eyebrow,
+  .wc-biz-hero-brand,
   .wc-biz-hero-title,
   .wc-biz-hero-lede,
   .wc-biz-hero-actions,
@@ -7319,6 +7377,10 @@ body:not(.is-home):not(.is-dark-page) .wc-progress {
 @media (prefers-reduced-motion: reduce) {
   .wc-tech-hero-media img,
   .wc-tech-detail-hero-media img,
+  .wc-tech-brand,
+  .wc-tech-hero-title,
+  .wc-tech-hero-lede,
+  .wc-tech-hero-actions,
   .wc-tech-hero-scroll span:last-child {
     animation: none;
   }
