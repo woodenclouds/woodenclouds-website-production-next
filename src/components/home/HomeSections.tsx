@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { getFeaturedWorks } from "@/data/works";
 import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
-import { clients, brands } from "@/data/clients";
+import { clients } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import { solutions } from "@/data/solutions";
 import "swiper/css";
@@ -379,29 +379,6 @@ export function HomeBlogs() {
                 <span className="mt-4 text-sm text-white/60">View Details</span>
               </div>
             </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function HomeBrands() {
-  return (
-    <section className="wc-section bg-black text-white">
-      <div className="wc-container">
-        <h3 className="mb-8 text-3xl font-light">Our Brands</h3>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-5">
-          {brands.map((brand, i) => (
-            <a
-              key={`${brand.name}-${i}`}
-              href={brand.href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex aspect-[5/3] items-center justify-center rounded-xl bg-white/5 p-6"
-            >
-              <img src={brand.logo} alt={brand.name} className="max-h-10 object-contain opacity-80" />
-            </a>
           ))}
         </div>
       </div>
