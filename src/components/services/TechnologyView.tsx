@@ -25,10 +25,6 @@ export function TechnologyView() {
 
         <div className="wc-tech-hero-ui">
           <div className="wc-container">
-            <p className="wc-tech-brand">
-              <span className="wc-tech-brand-name">{technologyHero.brand}</span>
-              <span className="wc-tech-brand-tag">{technologyHero.eyebrow}</span>
-            </p>
             <h1 className="wc-tech-hero-title">
               {technologyHero.title}
               <br />
