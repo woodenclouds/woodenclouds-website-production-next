@@ -50,6 +50,9 @@ export function Footer() {
                   <Link href="/solutions">Solutions</Link>
                 </li>
                 <li>
+                  <Link href="/industries">Industries</Link>
+                </li>
+                <li>
                   <Link href="/career">Career</Link>
                 </li>
                 <li>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const links = [
   { href: "/services", label: "Services" },
   { href: "/solutions", label: "Solutions" },
+  { href: "/industries", label: "Industries" },
   { href: "/partner-with-us", label: "Partner with us" },
   { href: "/services/dedicated-team", label: "Hire dedicated team" },
   { href: "/works", label: "Works" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isSolutions = pathname === "/solutions";
+  const isIndustries = pathname === "/industries";
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
@@ -33,6 +35,7 @@ export function Navbar() {
     isHome ||
     pathname === "/services" ||
     isSolutions ||
+    isIndustries ||
     isWorks ||
     isPartner ||
     isAbout ||
@@ -81,7 +84,7 @@ export function Navbar() {
     ? scrolled
       ? "fixed top-0 border-b border-white/10 bg-transparent backdrop-blur-md"
       : "absolute top-0 border-b border-transparent bg-transparent"
-    : isSolutions
+    : isSolutions || isIndustries
       ? "absolute top-0 border-b border-white/10 bg-transparent"
       : isDarkPage
         ? scrolled

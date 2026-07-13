@@ -20,10 +20,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isDigitalMarketing = pathname === "/services/digital-marketing";
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
+  const isSolutions = pathname === "/solutions";
+  const isIndustries = pathname === "/industries";
   const isDarkPage =
     isHome ||
     pathname === "/services" ||
-    pathname === "/solutions" ||
+    isSolutions ||
+    isIndustries ||
     isWorks ||
     isPartner ||
     isAbout ||
@@ -50,20 +53,22 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <div
         className={
           isDarkPage
-            ? pathname === "/solutions"
+            ? isSolutions
               ? "min-h-screen bg-[#0a1f38]"
-              : isWorks ||
-                  isPartner ||
-                  isAbout ||
-                  isDedicatedTeam ||
-                  isContact ||
-                  isBlogDetail ||
-                  isDigitalMarketing ||
-                  isBusinessSupport ||
-                  isTechnology ||
-                  isFuture
-                ? "min-h-screen bg-[#05070b] text-white"
-                : "min-h-screen bg-black text-white"
+              : isIndustries
+                ? "min-h-screen bg-[#070e16]"
+                : isWorks ||
+                    isPartner ||
+                    isAbout ||
+                    isDedicatedTeam ||
+                    isContact ||
+                    isBlogDetail ||
+                    isDigitalMarketing ||
+                    isBusinessSupport ||
+                    isTechnology ||
+                    isFuture
+                  ? "min-h-screen bg-[#05070b] text-white"
+                  : "min-h-screen bg-black text-white"
             : "min-h-screen bg-paper text-ink"
         }
       >
