@@ -16,39 +16,55 @@ export function WorksView() {
   );
 
   return (
-    <div className="bg-[#05070b] text-white">
-      <header className="wc-works-hero">
-        <div className="wc-works-hero-media" aria-hidden>
-          <img src={featured.image1} alt="" />
-        </div>
-        <div className="wc-works-hero-overlay" aria-hidden />
+    <div className="bg-paper text-ink">
+      <header className="wc-works-stage">
+        <div className="wc-works-stage-grain" aria-hidden />
+        <div className="wc-works-stage-orb wc-works-stage-orb--a" aria-hidden />
+        <div className="wc-works-stage-orb wc-works-stage-orb--b" aria-hidden />
+        <div className="wc-works-stage-orb wc-works-stage-orb--c" aria-hidden />
 
-        <div className="wc-works-hero-ui">
-          <div className="wc-container">
-            <h1 className="wc-works-hero-title">
-              Selected work.
-              <br />
-              Real outcomes.
-            </h1>
-            <p className="wc-works-hero-lede">
-              Products, brands, and experiences shaped with clarity — from first sketch to launch.
-            </p>
-            <div className="wc-works-hero-actions">
-              <a href="#index" className="wc-btn wc-btn-light">
-                Explore projects
-                <span aria-hidden>→</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-light">
-                Start a project
-              </Link>
+        <div className="wc-container wc-works-stage-frame">
+          <div className="wc-works-stage-split">
+            <div className="wc-works-stage-main">
+              <h1 className="wc-works-stage-title">
+                Selected work.
+                <br />
+                Real outcomes.
+              </h1>
+              <p className="wc-works-stage-lede">
+                Products, brands, and experiences shaped with clarity — from first sketch to launch.
+              </p>
+              <div className="wc-works-stage-actions">
+                <a href="#index" className="wc-btn wc-btn-solid">
+                  Explore projects
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Start a project
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
             </div>
+
+            <Link
+              href={`/works/${featured.slug}`}
+              className="wc-works-stage-visual group"
+              aria-label={`${featured.title} — view case`}
+            >
+              <div className="wc-works-stage-visual-media">
+                <img src={featured.image1} alt="" />
+              </div>
+              <div className="wc-works-stage-visual-shade" aria-hidden />
+              <div className="wc-works-stage-visual-meta">
+                <span>
+                  {featured.category} · {featured.client}
+                </span>
+                <strong>{featured.title}</strong>
+                {featured.result ? <em>{featured.result}</em> : null}
+              </div>
+            </Link>
           </div>
         </div>
-
-        <a href="#index" className="wc-works-hero-scroll" aria-label="Scroll to projects">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
       </header>
 
       <section id="index" className="wc-works-index">
@@ -98,6 +114,7 @@ export function WorksView() {
                         </span>
                         <h3 className="wc-works-card-title">{work.title}</h3>
                         <p className="wc-works-card-desc">{work.title1}</p>
+                        {work.result ? <p className="wc-works-card-result">{work.result}</p> : null}
                         <span className="wc-works-card-link">
                           View case
                           <span aria-hidden>→</span>
@@ -112,7 +129,7 @@ export function WorksView() {
         </div>
       </section>
 
-      <EnquireCta buttonLabel="Start a conversation" />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
     </div>
   );
 }
