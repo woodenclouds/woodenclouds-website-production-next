@@ -17,6 +17,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
+  const isBlogIndex = pathname === "/blog";
   const isLightShell =
     isHome ||
     isServicesHub ||
@@ -25,7 +26,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isAbout ||
     isDedicatedTeam ||
     isPartner ||
-    isContact;
+    isContact ||
+    isBlogIndex;
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");

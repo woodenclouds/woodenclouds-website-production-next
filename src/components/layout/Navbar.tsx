@@ -27,6 +27,7 @@ export function Navbar() {
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
+  const isBlogIndex = pathname === "/blog";
   const isLightShell =
     isHome ||
     isServicesHub ||
@@ -35,7 +36,8 @@ export function Navbar() {
     isAbout ||
     isDedicatedTeam ||
     isPartner ||
-    isContact;
+    isContact ||
+    isBlogIndex;
   const isSolutions = pathname === "/solutions";
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
@@ -110,7 +112,8 @@ export function Navbar() {
       isAbout ||
       isDedicatedTeam ||
       isPartner ||
-      isContact
+      isContact ||
+      isBlogIndex
     )
       return "relative";
     if (isLightShell || isFuture || isSolutions || isDarkPage) {
