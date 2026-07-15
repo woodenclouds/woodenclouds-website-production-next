@@ -14,11 +14,18 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isWorksIndex = pathname === "/works";
   const isWorksDetail = pathname.startsWith("/works/");
   const isAbout = pathname === "/about";
-  const isLightShell =
-    isHome || isServicesHub || isIndustries || isWorksIndex || isAbout;
-  const isPartner = pathname === "/partner-with-us";
   const isDedicatedTeam = pathname === "/services/dedicated-team";
+  const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
+  const isLightShell =
+    isHome ||
+    isServicesHub ||
+    isIndustries ||
+    isWorksIndex ||
+    isAbout ||
+    isDedicatedTeam ||
+    isPartner ||
+    isContact;
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");
@@ -29,9 +36,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isDarkPage =
     isSolutions ||
     isWorksDetail ||
-    isPartner ||
-    isDedicatedTeam ||
-    isContact ||
     isBlogDetail ||
     isDigitalMarketing ||
     isBusinessSupport ||
@@ -58,9 +62,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               ? isSolutions
                 ? "min-h-screen bg-[#0a1f38]"
                 : isWorksDetail ||
-                    isPartner ||
-                    isDedicatedTeam ||
-                    isContact ||
                     isBlogDetail ||
                     isDigitalMarketing ||
                     isBusinessSupport ||

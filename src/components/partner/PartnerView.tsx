@@ -1,47 +1,65 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { partnerPrograms, partnerReasons, site } from "@/data/content";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export function PartnerView() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
 
   return (
-    <div className="bg-[#05070b] text-white">
-      <header className="wc-partner-hero">
-        <div className="wc-partner-hero-media" aria-hidden>
-          <img src="/hero/hero-collab.jpg" alt="" />
-        </div>
-        <div className="wc-partner-hero-overlay" aria-hidden />
+    <div className="wc-partner-page bg-paper text-ink">
+      <header className={`wc-partner-stage${ready ? " is-ready" : ""}`}>
+        <div className="wc-partner-stage-grain" aria-hidden />
+        <div className="wc-partner-stage-mesh" aria-hidden />
+        <div className="wc-partner-stage-orb wc-partner-stage-orb--a" aria-hidden />
+        <div className="wc-partner-stage-orb wc-partner-stage-orb--b" aria-hidden />
+        <div className="wc-partner-stage-orb wc-partner-stage-orb--c" aria-hidden />
 
-        <div className="wc-partner-hero-ui">
-          <div className="wc-container">
-            <h1 className="wc-partner-hero-title">
-              Grow together.
-              <br />
-              <span className="wc-gradient-text">Partner with us.</span>
-            </h1>
-            <p className="wc-partner-hero-lede">
-              Collaboration that drives growth — across delivery, referrals, and strategic
-              alliances in technology, marketing, and business.
-            </p>
-            <div className="wc-partner-hero-actions">
-              <a href="#programs" className="wc-btn wc-btn-light">
-                Explore programs
-                <span aria-hidden>→</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-light">
-                Start a conversation
-              </Link>
+        <div className="wc-container wc-partner-stage-frame">
+          <div className="wc-partner-stage-split">
+            <div className="wc-partner-stage-main">
+              <h1 className="wc-partner-stage-title">
+                Grow together.
+                <br />
+                Win together.
+              </h1>
+              <p className="wc-partner-stage-lede">
+                Partnership paths for delivery capacity, referrals, and strategic alliances — across
+                technology, marketing, and business.
+              </p>
+              <div className="wc-partner-stage-actions">
+                <a href="#programs" className="wc-btn wc-btn-solid">
+                  Explore programs
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Start a conversation
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="wc-partner-stage-visual" aria-hidden>
+              <div className="wc-partner-stage-visual-media">
+                <img src="/hero/hero-collab.jpg" alt="" />
+              </div>
+              <div className="wc-partner-stage-visual-shade" />
+              <div className="wc-partner-stage-visual-meta">
+                <span>Partner programs</span>
+                <strong>Three ways to collaborate</strong>
+                <em>Outsourcing · Affiliate · Business</em>
+              </div>
             </div>
           </div>
         </div>
-
-        <a href="#programs" className="wc-partner-hero-scroll" aria-label="Scroll to programs">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
       </header>
 
       <section id="programs" className="wc-partner-programs">
@@ -89,10 +107,9 @@ export function PartnerView() {
       <section className="wc-partner-reasons">
         <div className="wc-container">
           <div className="wc-partner-reasons-head">
-            <p className="wc-partner-kicker is-light">Why partners stay</p>
+            <p className="wc-partner-kicker">Why partners stay</p>
             <h2 className="wc-partner-reasons-title">
-              Built for collaboration that{" "}
-              <span className="wc-gradient-text">actually compounds</span>
+              Built for collaboration that compounds
             </h2>
           </div>
           <ol className="wc-partner-reasons-grid">
@@ -134,7 +151,7 @@ export function PartnerView() {
         </div>
       </section>
 
-      <EnquireCta buttonLabel="Partner with Woodenclouds" />
+      <EnquireCta variant="light" buttonLabel="Start a partnership" />
     </div>
   );
 }
