@@ -19,6 +19,8 @@ const cta = { href: "/contact", label: "Contact" };
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isServicesHub = pathname === "/services";
+  const isLightShell = isHome || isServicesHub;
   const isSolutions = pathname === "/solutions";
   const isIndustries = pathname === "/industries";
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
@@ -33,7 +35,6 @@ export function Navbar() {
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
   const isDarkPage =
-    pathname === "/services" ||
     isSolutions ||
     isIndustries ||
     isWorks ||
@@ -78,10 +79,10 @@ export function Navbar() {
   }, [open]);
 
   const inverted = lightOnScroll && scrolled;
-  const lightNav = isHome || !isDarkPage || inverted;
+  const lightNav = isLightShell || !isDarkPage || inverted;
   const shell = [
     "wc-nav-bar",
-    isHome
+    isLightShell
       ? scrolled
         ? "is-solid is-light"
         : "is-clear is-light"
@@ -101,8 +102,8 @@ export function Navbar() {
   ].join(" ");
 
   const headerPos = (() => {
-    if (isHome || isFuture || isSolutions || isIndustries || isDarkPage) {
-      return scrolled && (isHome || isFuture || (isDarkPage && !isSolutions && !isIndustries))
+    if (isLightShell || isFuture || isSolutions || isIndustries || isDarkPage) {
+      return scrolled && (isLightShell || isFuture || (isDarkPage && !isSolutions && !isIndustries))
         ? "fixed top-0"
         : "absolute top-0";
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { homeServiceCards, servicesFaqs } from "@/data/content";
 import { EnquireCta } from "@/components/shared/PageBits";
 
@@ -34,47 +34,110 @@ const serviceRows = [
   },
 ];
 
+const practices = [
+  { label: "Technology", href: "/services/technology" },
+  { label: "Business support", href: "/services/business-support" },
+  { label: "Brand & growth", href: "/services/digital-marketing" },
+  { label: "Dedicated team", href: "/services/dedicated-team" },
+];
+
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
+  const [ready, setReady] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onScroll = () => {
+      const rect = hero.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.7, 1)));
+      hero.style.setProperty("--svc-scroll", p.toFixed(4));
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className="bg-[#05070b] text-white">
-      <header className="wc-svc-hero">
+    <div className="bg-paper text-ink">
+      <header
+        ref={heroRef}
+        className={`wc-svc-hero wc-svc-hero--light${ready ? " is-ready" : ""}`}
+      >
         <div className="wc-svc-hero-media" aria-hidden>
-          <video src="/videos/video3.mp4" autoPlay muted loop playsInline />
+          <img src="/services/technology.jpg" alt="" draggable={false} />
+          <span className="wc-svc-hero-media-shade" />
         </div>
-        <div className="wc-svc-hero-overlay" aria-hidden />
+
+        <div className="wc-svc-hero-wash" aria-hidden />
+        <div className="wc-svc-hero-grain" aria-hidden />
 
         <div className="wc-svc-hero-ui">
-          <div className="wc-container">
-            <h1 className="wc-svc-hero-title">
-              Built to ship.
-              <br />
-              Ready to scale.
-            </h1>
-            <p className="wc-svc-hero-lede">
-              Technology, growth support, and brand systems — shaped around outcomes, not feature
-              lists.
-            </p>
-            <div className="wc-svc-hero-actions">
-              <a href="#services" className="wc-btn wc-btn-light">
-                Explore services
-                <span aria-hidden>→</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-light">
-                Enquire now
-              </Link>
+          <div className="wc-container wc-svc-hero-layout">
+            <div className="wc-svc-hero-copy">
+              <p className="wc-svc-hero-kicker">Services</p>
+              <h1 className="wc-svc-hero-title">
+                Built to ship.
+                <br />
+                Ready to scale.
+              </h1>
+              <p className="wc-svc-hero-lede">
+                Technology, growth support, and brand systems — shaped around outcomes, not feature
+                lists.
+              </p>
+              <div className="wc-svc-hero-actions">
+                <a href="#services" className="wc-btn wc-btn-solid">
+                  Explore services
+                  <span aria-hidden>→</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Enquire now
+                </Link>
+              </div>
             </div>
+
+            <aside className="wc-svc-hero-aside" aria-label="Service practices">
+              <p className="wc-svc-hero-aside-label">Practices</p>
+              <ol className="wc-svc-hero-practices">
+                {practices.map((item, i) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>
+                      <span>{String(i + 1).padStart(2, "0")}</span>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </aside>
           </div>
         </div>
 
-        <a href="#services" className="wc-svc-hero-scroll" aria-label="Scroll to services">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
+        <button
+          type="button"
+          className="wc-svc-hero-scroll"
+          aria-label="Scroll to services"
+          onClick={() => {
+            document.getElementById("services")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
+        >
+          <span className="wc-svc-hero-scroll-line" aria-hidden />
+          Scroll
+        </button>
       </header>
 
-      <section id="services" className="wc-services">
+      <section id="services" className="wc-services wc-services--light">
         <div className="wc-services-bg" aria-hidden />
 
         <div className="wc-container relative z-10">
@@ -116,7 +179,7 @@ export function ServicesView() {
         </div>
       </section>
 
-      <section className="wc-svc-approach">
+      <section className="wc-svc-approach wc-svc-approach--light">
         <div className="wc-svc-approach-bg" aria-hidden />
         <div className="wc-container relative z-10">
           <header className="wc-svc-approach-head">
@@ -136,7 +199,7 @@ export function ServicesView() {
         </div>
       </section>
 
-      <section className="wc-svc-faq">
+      <section className="wc-svc-faq wc-svc-faq--light">
         <div className="wc-container max-w-4xl">
           <h2 className="wc-svc-faq-title">FAQs</h2>
           <div className="wc-svc-faq-list">
@@ -160,7 +223,7 @@ export function ServicesView() {
         </div>
       </section>
 
-      <EnquireCta />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
     </div>
   );
 }

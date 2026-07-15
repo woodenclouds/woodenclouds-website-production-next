@@ -2,6 +2,7 @@ import { HomeHero } from "@/components/home/HomeHero";
 import {
   HomeWhatWeDo,
   HomeFeaturedWork,
+  HomeClients,
   HomeIndustries,
   HomeWhy,
   HomeTestimonials,
@@ -16,6 +17,7 @@ export default function HomePage() {
       <HomeHero />
       <HomeWhatWeDo />
       <HomeFeaturedWork />
+      <HomeClients />
       <HomeIndustries />
       <HomeProcess />
       <HomeWhy />

@@ -5,10 +5,11 @@ import { usePathname } from "next/navigation";
 import { site } from "@/data/content";
 
 export function Footer() {
-  const isHome = usePathname() === "/";
+  const pathname = usePathname();
+  const isLightShell = pathname === "/" || pathname === "/services";
 
   return (
-      <footer className={isHome ? "wc-footer wc-footer--light" : "wc-footer"}>
+      <footer className={isLightShell ? "wc-footer wc-footer--light" : "wc-footer"}>
         <div className="wc-footer-bg" aria-hidden />
 
         <div className="wc-container relative z-10 py-16 md:py-20">
@@ -16,7 +17,7 @@ export function Footer() {
             <div className="wc-footer-brand">
               <Link href="/" className="inline-block">
                 <img
-                  src={isHome ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
+                  src={isLightShell ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
                   alt="Woodenclouds"
                   width={180}
                   height={10}

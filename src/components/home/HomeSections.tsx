@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { getFeaturedWorks } from "@/data/works";
 import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
+import { clients } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import { getHomeIndustries, industries } from "@/data/industries";
 import { homeWhy, homeTestimonials } from "@/data/home";
@@ -89,10 +90,6 @@ export function HomeFeaturedWork() {
                 <h3>{lead.title}</h3>
                 <p>{lead.description1}</p>
                 {lead.result ? <span className="wc-home-case-result">{lead.result}</span> : null}
-                <span className="wc-home-case-go">
-                  View case study
-                  <span aria-hidden>→</span>
-                </span>
               </span>
             </Link>
           </HomeReveal>
@@ -114,10 +111,6 @@ export function HomeFeaturedWork() {
                   <h3>{work.title}</h3>
                   <p>{work.title1}</p>
                   {work.result ? <span className="wc-home-case-result">{work.result}</span> : null}
-                  <span className="wc-home-case-go">
-                    View case study
-                    <span aria-hidden>→</span>
-                  </span>
                 </span>
               </Link>
             </HomeReveal>
@@ -130,6 +123,51 @@ export function HomeFeaturedWork() {
             <span aria-hidden>→</span>
           </Link>
         </HomeReveal>
+      </div>
+    </section>
+  );
+}
+
+export function HomeClients() {
+  return (
+    <section id="clients" className="wc-clients wc-section text-ink">
+      <div className="wc-clients-bg" aria-hidden />
+
+      <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-2">
+        <HomeReveal>
+          <p className="wc-home-kicker">Previous clients</p>
+          <h2 className="wc-home-title">
+            Teams we&apos;ve
+            <br />
+            built with.
+          </h2>
+          <p className="wc-home-lede mt-5">
+            Brands and product teams that trusted Woodenclouds to design, ship, and grow — across
+            markets and stages.
+          </p>
+          <div className="mt-8">
+            <Link href="/clients" className="wc-home-link">
+              View all clients
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </HomeReveal>
+
+        <ul className="wc-clients-grid">
+          {clients.map((client, i) => (
+            <HomeReveal key={client.name} as="li" delay={i * 60}>
+              <div className="wc-clients-tile">
+                <img src={client.logo} alt={client.name} draggable={false} />
+              </div>
+            </HomeReveal>
+          ))}
+          <HomeReveal as="li" delay={clients.length * 60}>
+            <Link href="/clients" className="wc-clients-more">
+              View more
+              <span aria-hidden>→</span>
+            </Link>
+          </HomeReveal>
+        </ul>
       </div>
     </section>
   );
@@ -158,16 +196,7 @@ export function HomeIndustries() {
 
         <ul className="wc-home-industries-mosaic">
           {items.map((item, i) => (
-            <HomeReveal
-              key={item.id}
-              as="li"
-              delay={Math.min(i, 8) * 50}
-              className={
-                item.id === "agriculture" || item.id === "construction" || i === 0
-                  ? "is-wide"
-                  : undefined
-              }
-            >
+            <HomeReveal key={item.id} as="li" delay={Math.min(i, 8) * 50}>
               <Link href={`/industries#${item.id}`} className="wc-home-industry-card">
                 <span className="wc-home-industry-card-media" aria-hidden>
                   <img src={item.image} alt="" draggable={false} />
