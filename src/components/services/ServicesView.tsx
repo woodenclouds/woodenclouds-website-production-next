@@ -11,6 +11,10 @@ import {
 import { getFeaturedWorks } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
 import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
+import {
+  practiceArts,
+  ServicesHeroArt,
+} from "@/components/services/ServiceIllustrations";
 
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
@@ -81,43 +85,46 @@ export function ServicesView() {
     <div className="bg-paper text-ink">
       <header ref={heroRef} className={`wc-svc-stage${ready ? " is-ready" : ""}`}>
         <div className="wc-svc-stage-grain" aria-hidden />
+        <div className="wc-svc-stage-mesh" aria-hidden />
         <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
         <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
         <div className="wc-svc-stage-orb wc-svc-stage-orb--c" aria-hidden />
 
         <div className="wc-container wc-svc-stage-frame">
-          <span className="wc-svc-stage-corner wc-svc-stage-corner--tl" aria-hidden />
-          <span className="wc-svc-stage-corner wc-svc-stage-corner--tr" aria-hidden />
-          <span className="wc-svc-stage-corner wc-svc-stage-corner--bl" aria-hidden />
-          <span className="wc-svc-stage-corner wc-svc-stage-corner--br" aria-hidden />
+          <div className="wc-svc-stage-split">
+            <div className="wc-svc-stage-main">
+              <p className="wc-svc-stage-brand">
+                Woodenclouds <span>Services</span>
+              </p>
+              <h1 className="wc-svc-stage-title">
+                {servicesHero.titleLine1}
+                <br />
+                {servicesHero.titleLine2}
+              </h1>
+              <p className="wc-svc-stage-ticks" aria-live="polite">
+                <span className="wc-svc-stage-ticks-label">We deliver</span>
+                <span className="wc-svc-stage-ticks-sep" aria-hidden>
+                  —
+                </span>
+                <span key={servicePractices[tick]?.name} className="wc-svc-stage-tick">
+                  {servicePractices[tick]?.name}
+                </span>
+              </p>
+              <p className="wc-svc-stage-lede">{servicesHero.description}</p>
+              <div className="wc-svc-stage-actions">
+                <a href={`#${servicePractices[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
+                  Explore services
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Enquire now
+                </Link>
+              </div>
+            </div>
 
-          <div className="wc-svc-stage-main">
-            <p className="wc-svc-stage-brand">
-              Woodenclouds <span>Services</span>
-            </p>
-            <h1 className="wc-svc-stage-title">
-              {servicesHero.titleLine1}
-              <br />
-              {servicesHero.titleLine2}
-            </h1>
-            <p className="wc-svc-stage-ticks" aria-live="polite">
-              <span className="wc-svc-stage-ticks-label">We deliver</span>
-              <span className="wc-svc-stage-ticks-sep" aria-hidden>
-                —
-              </span>
-              <span key={servicePractices[tick]?.name} className="wc-svc-stage-tick">
-                {servicePractices[tick]?.name}
-              </span>
-            </p>
-            <p className="wc-svc-stage-lede">{servicesHero.description}</p>
-            <div className="wc-svc-stage-actions">
-              <a href={`#${servicePractices[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
-                Explore services
-                <span aria-hidden>↓</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-dark">
-                Enquire now
-              </Link>
+            <div className="wc-svc-stage-visual" aria-hidden>
+              <div className="wc-svc-stage-visual-glow" />
+              <ServicesHeroArt className="wc-svc-stage-art" />
             </div>
           </div>
 
@@ -142,6 +149,7 @@ export function ServicesView() {
       <div className="bg-paper text-ink">
         {servicePractices.map((practice, index) => {
           const reverse = index % 2 === 1;
+          const Art = practiceArts[practice.id as keyof typeof practiceArts];
           return (
             <section
               key={practice.id}
@@ -156,12 +164,10 @@ export function ServicesView() {
                   ].join(" ")}
                 >
                   <div className="lg:col-span-6">
-                    <div className="wc-svc-media overflow-hidden bg-ink/5">
-                      <img
-                        src={practice.image}
-                        alt={practice.imageAlt}
-                        className="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-[1.03]"
-                      />
+                    <div className="wc-svc-vector">
+                      <div className="wc-svc-vector-frame" aria-hidden>
+                        {Art ? <Art className="wc-svc-vector-art" /> : null}
+                      </div>
                     </div>
                   </div>
 

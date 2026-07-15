@@ -3891,7 +3891,7 @@ body:not(.is-dark-page) .wc-progress {
   animation: wc-hero-in 0.35s ease both;
 }
 
-/* Services hub — isolated light stage (avoids dark .wc-svc-hero collisions) */
+/* Services hub — vector-led modern stage */
 .wc-svc-stage {
   --hx: 0;
   --hy: 0;
@@ -3901,8 +3901,9 @@ body:not(.is-dark-page) .wc-progress {
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.9) 0%, transparent 55%),
-    linear-gradient(180deg, #fbfaf7 0%, var(--color-paper) 48%, #f3f0eb 100%);
+    radial-gradient(90% 70% at 88% 18%, rgba(91, 157, 232, 0.16) 0%, transparent 55%),
+    radial-gradient(70% 55% at 8% 88%, rgba(41, 119, 212, 0.08) 0%, transparent 50%),
+    linear-gradient(165deg, #fcfbf9 0%, var(--color-paper) 42%, #eef3fa 100%);
   color: var(--color-ink);
 }
 
@@ -3911,44 +3912,58 @@ body:not(.is-dark-page) .wc-progress {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.04;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   transform: translate3d(calc(var(--hx) * -8px), calc(var(--hy) * -8px), 0);
+}
+
+.wc-svc-stage-mesh {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(41, 119, 212, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41, 119, 212, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 75% 65% at 70% 40%, #000 15%, transparent 78%);
+  transform: translate3d(calc(var(--hx) * 12px), calc(var(--hy) * 10px), 0);
 }
 
 .wc-svc-stage-orb {
   pointer-events: none;
   position: absolute;
   border-radius: 50%;
-  filter: blur(48px);
-  opacity: 0.55;
+  filter: blur(52px);
+  opacity: 0.6;
   z-index: 0;
 }
 
 .wc-svc-stage-orb--a {
-  top: 12%;
-  left: 8%;
-  width: min(28rem, 55vw);
-  height: min(28rem, 55vw);
+  top: 8%;
+  left: 4%;
+  width: min(26rem, 52vw);
+  height: min(26rem, 52vw);
   background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, transparent 70%);
   transform: translate3d(calc(var(--hx) * 24px), calc(var(--hy) * 18px), 0);
 }
 
 .wc-svc-stage-orb--b {
-  right: 4%;
-  bottom: 18%;
-  width: min(22rem, 48vw);
-  height: min(22rem, 48vw);
-  background: radial-gradient(circle, rgba(10, 10, 10, 0.05) 0%, transparent 68%);
+  right: -2%;
+  bottom: 12%;
+  width: min(24rem, 50vw);
+  height: min(24rem, 50vw);
+  background: radial-gradient(circle, rgba(91, 157, 232, 0.28) 0%, transparent 68%);
   transform: translate3d(calc(var(--hx) * -30px), calc(var(--hy) * -20px), 0);
 }
 
 .wc-svc-stage-orb--c {
-  left: 42%;
-  top: 40%;
-  width: min(16rem, 36vw);
-  height: min(16rem, 36vw);
-  background: radial-gradient(circle, rgba(243, 240, 235, 0.9) 0%, transparent 70%);
+  left: 38%;
+  top: 48%;
+  width: min(14rem, 32vw);
+  height: min(14rem, 32vw);
+  background: radial-gradient(circle, rgba(168, 189, 234, 0.45) 0%, transparent 70%);
   transform: translate3d(calc(var(--hx) * 16px), calc(var(--hy) * -22px), 0);
 }
 
@@ -3958,78 +3973,83 @@ body:not(.is-dark-page) .wc-progress {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 2rem;
   box-sizing: border-box;
   min-height: calc(100svh - 4.75rem);
-  padding-top: 2.75rem;
-  padding-bottom: 2.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.25rem;
   opacity: calc(1 - var(--svc-scroll) * 0.35);
 }
 
-.wc-svc-stage-corner {
-  position: absolute;
-  width: 1.35rem;
-  height: 1.35rem;
-  border-color: rgba(10, 10, 10, 0.28);
-  border-style: solid;
-  border-width: 0;
-  pointer-events: none;
+.wc-svc-stage-split {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  flex: 1;
 }
 
-.wc-svc-stage-corner--tl {
-  top: 2rem;
-  left: 1.25rem;
-  border-top-width: 1px;
-  border-left-width: 1px;
-}
-
-.wc-svc-stage-corner--tr {
-  top: 2rem;
-  right: 1.25rem;
-  border-top-width: 1px;
-  border-right-width: 1px;
-}
-
-.wc-svc-stage-corner--bl {
-  bottom: 1.5rem;
-  left: 1.25rem;
-  border-bottom-width: 1px;
-  border-left-width: 1px;
-}
-
-.wc-svc-stage-corner--br {
-  bottom: 1.5rem;
-  right: 1.25rem;
-  border-bottom-width: 1px;
-  border-right-width: 1px;
+@media (min-width: 980px) {
+  .wc-svc-stage-split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 2.5rem 3rem;
+  }
 }
 
 .wc-svc-stage-main,
+.wc-svc-stage-visual,
 .wc-svc-stage-foot {
   position: relative;
   opacity: 0;
   transform: translate3d(0, 18px, 0);
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .wc-svc-stage.is-ready .wc-svc-stage-main,
+.wc-svc-stage.is-ready .wc-svc-stage-visual,
 .wc-svc-stage.is-ready .wc-svc-stage-foot {
   opacity: 1;
   transform: none;
 }
 
-.wc-svc-stage.is-ready .wc-svc-stage-foot {
-  transition-delay: 0.12s;
+.wc-svc-stage.is-ready .wc-svc-stage-visual {
+  transition-delay: 0.1s;
 }
 
-.wc-svc-stage-kicker {
-  margin: 0 0 0.85rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.42);
+.wc-svc-stage.is-ready .wc-svc-stage-foot {
+  transition-delay: 0.18s;
+}
+
+.wc-svc-stage-visual {
+  display: grid;
+  place-items: center;
+  min-height: min(52vw, 22rem);
+}
+
+@media (min-width: 980px) {
+  .wc-svc-stage-visual {
+    min-height: min(42vw, 28rem);
+  }
+}
+
+.wc-svc-stage-visual-glow {
+  position: absolute;
+  width: 78%;
+  height: 72%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 157, 232, 0.22) 0%, transparent 68%);
+  filter: blur(28px);
+  transform: translate3d(calc(var(--hx) * 18px), calc(var(--hy) * 14px), 0);
+}
+
+.wc-svc-stage-art {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 34rem);
+  height: auto;
+  transform: translate3d(calc(var(--hx) * -14px), calc(var(--hy) * -10px), 0);
+  filter: drop-shadow(0 28px 48px rgba(41, 119, 212, 0.12));
 }
 
 .wc-svc-stage-brand {
@@ -4051,7 +4071,7 @@ body:not(.is-dark-page) .wc-progress {
   margin: 0;
   max-width: 12ch;
   color: var(--color-ink);
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-size: clamp(2.75rem, 6.5vw, 4.75rem);
   font-weight: 300;
   letter-spacing: -0.05em;
   line-height: 1.02;
@@ -4077,8 +4097,8 @@ body:not(.is-dark-page) .wc-progress {
 }
 
 .wc-svc-stage-tick {
-  color: var(--color-ink);
-  border-bottom: 1px solid rgba(10, 10, 10, 0.3);
+  color: var(--color-accent-deep);
+  border-bottom: 1px solid rgba(41, 119, 212, 0.35);
   padding-bottom: 0.08rem;
   animation: wc-svc-tick 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -4138,6 +4158,31 @@ body:not(.is-dark-page) .wc-progress {
   background: var(--color-paper);
 }
 
+.wc-svc-vector {
+  position: relative;
+}
+
+.wc-svc-vector-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background:
+    radial-gradient(70% 60% at 70% 30%, rgba(91, 157, 232, 0.14), transparent 70%),
+    linear-gradient(145deg, #f4f7fb 0%, #ebe6df 100%);
+  box-shadow: inset 0 0 0 1px rgba(10, 10, 10, 0.06);
+}
+
+.wc-svc-vector-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wc-svc-vector:hover .wc-svc-vector-art {
+  transform: scale(1.03);
+}
+
 .wc-svc-stage-rail {
   list-style: none;
   margin: 0;
@@ -4169,55 +4214,109 @@ body:not(.is-dark-page) .wc-progress {
   color: var(--color-ink);
 }
 
-.wc-svc-stage-cue {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(10, 10, 10, 0.42);
-  cursor: pointer;
+/* Vector illustration motion */
+.wc-svc-art-float {
+  animation: wc-svc-float 6.5s ease-in-out infinite;
+  transform-origin: center;
 }
 
-.wc-svc-stage-cue-line {
-  display: block;
-  width: 1px;
-  height: 2.1rem;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.45), transparent);
-  transform-origin: top center;
-  animation: wc-svc-scroll-line 1.8s ease-in-out infinite;
+.wc-svc-art-float--delay {
+  animation-delay: -2.4s;
 }
 
-.wc-svc-stage-cue:hover {
-  color: var(--color-ink);
+.wc-svc-art-drift {
+  animation: wc-svc-drift 9s ease-in-out infinite alternate;
 }
 
-@keyframes wc-svc-scroll-line {
+.wc-svc-art-drift--slow {
+  animation-duration: 13s;
+  animation-delay: -3s;
+}
+
+.wc-svc-art-rise {
+  animation: wc-svc-rise 7s ease-in-out infinite;
+}
+
+.wc-svc-art-pulse {
+  animation: wc-svc-pulse 2.8s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+.wc-svc-art-pulse--delay {
+  animation-delay: -1.2s;
+}
+
+.wc-svc-art-draw {
+  stroke-dashoffset: 0;
+  animation: wc-svc-draw 8s linear infinite;
+}
+
+@keyframes wc-svc-float {
   0%,
   100% {
-    transform: scaleY(0.55);
-    opacity: 0.4;
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: scaleY(1);
-    opacity: 1;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes wc-svc-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(10px, -14px, 0) scale(1.04);
+  }
+}
+
+@keyframes wc-svc-rise {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0);
+  }
+}
+
+@keyframes wc-svc-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes wc-svc-draw {
+  to {
+    stroke-dashoffset: -80;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wc-svc-stage-cue-line,
-  .wc-svc-stage-tick {
+  .wc-svc-stage-tick,
+  .wc-svc-art-float,
+  .wc-svc-art-float--delay,
+  .wc-svc-art-drift,
+  .wc-svc-art-drift--slow,
+  .wc-svc-art-rise,
+  .wc-svc-art-pulse,
+  .wc-svc-art-pulse--delay,
+  .wc-svc-art-draw {
     animation: none;
   }
 
   .wc-svc-stage-main,
+  .wc-svc-stage-visual,
   .wc-svc-stage-foot {
     opacity: 1;
+    transform: none;
+  }
+
+  .wc-svc-vector:hover .wc-svc-vector-art {
     transform: none;
   }
 }
