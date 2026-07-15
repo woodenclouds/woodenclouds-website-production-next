@@ -13,9 +13,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isIndustries = pathname === "/industries";
   const isWorksIndex = pathname === "/works";
   const isWorksDetail = pathname.startsWith("/works/");
-  const isLightShell = isHome || isServicesHub || isIndustries || isWorksIndex;
-  const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
+  const isLightShell =
+    isHome || isServicesHub || isIndustries || isWorksIndex || isAbout;
+  const isPartner = pathname === "/partner-with-us";
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isContact = pathname === "/contact";
   const isBlogDetail = pathname.startsWith("/blog/");
@@ -29,7 +30,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isSolutions ||
     isWorksDetail ||
     isPartner ||
-    isAbout ||
     isDedicatedTeam ||
     isContact ||
     isBlogDetail ||
@@ -59,7 +59,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 ? "min-h-screen bg-[#0a1f38]"
                 : isWorksDetail ||
                     isPartner ||
-                    isAbout ||
                     isDedicatedTeam ||
                     isContact ||
                     isBlogDetail ||

@@ -26,42 +26,45 @@ const milestones = [
 ];
 
 export function AboutView() {
-
   return (
-    <div className="bg-[#05070b] text-white">
-      <header className="wc-about-hero">
-        <div className="wc-about-hero-media" aria-hidden>
-          <img src="/team/team-work.jpg" alt="" />
-        </div>
-        <div className="wc-about-hero-overlay" aria-hidden />
+    <div className="bg-paper text-ink">
+      <header className="wc-about-stage">
+        <div className="wc-about-stage-grain" aria-hidden />
+        <div className="wc-about-stage-orb wc-about-stage-orb--a" aria-hidden />
+        <div className="wc-about-stage-orb wc-about-stage-orb--b" aria-hidden />
+        <div className="wc-about-stage-orb wc-about-stage-orb--c" aria-hidden />
 
-        <div className="wc-about-hero-ui">
-          <div className="wc-container">
-            <h1 className="wc-about-hero-title">
-              Your growth.
-              <br />
-              <span className="wc-gradient-text">Our expertise.</span>
-            </h1>
-            <p className="wc-about-hero-lede">
-              Woodenclouds is a digital partner for products, brands, and teams that need clarity,
-              craft, and outcomes that compound.
-            </p>
-            <div className="wc-about-hero-actions">
-              <a href="#story" className="wc-btn wc-btn-light">
-                Our story
-                <span aria-hidden>→</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-light">
-                Work with us
-              </Link>
+        <div className="wc-container wc-about-stage-frame">
+          <div className="wc-about-stage-split">
+            <div className="wc-about-stage-main">
+              <h1 className="wc-about-stage-title">
+                Your growth.
+                <br />
+                Our expertise.
+              </h1>
+              <p className="wc-about-stage-lede">
+                Woodenclouds is a digital partner for products, brands, and teams that need clarity,
+                craft, and outcomes that compound.
+              </p>
+              <div className="wc-about-stage-actions">
+                <a href="#story" className="wc-btn wc-btn-solid">
+                  Our story
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Work with us
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="wc-about-stage-visual" aria-hidden>
+              <div className="wc-about-stage-visual-media">
+                <img src="/team/team-work.jpg" alt="" />
+              </div>
             </div>
           </div>
         </div>
-
-        <a href="#story" className="wc-about-hero-scroll" aria-label="Scroll to story">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
       </header>
 
       <section id="story" className="wc-about-story">
@@ -103,11 +106,8 @@ export function AboutView() {
         <div className="wc-container">
           <header className="wc-about-values-head">
             <div>
-              <p className="wc-about-kicker is-light">What drives us</p>
-              <h2 className="wc-about-values-title">
-                Principles that shape{" "}
-                <span className="wc-gradient-text">every engagement</span>
-              </h2>
+              <p className="wc-about-kicker">What drives us</p>
+              <h2 className="wc-about-values-title">Principles that shape every engagement</h2>
             </div>
           </header>
 
@@ -127,10 +127,8 @@ export function AboutView() {
         <div className="wc-container">
           <header className="wc-about-brands-head">
             <div>
-              <p className="wc-about-kicker is-light">Our brands</p>
-              <h2 className="wc-about-brands-title">
-                The Woodenclouds <span className="wc-gradient-text">family</span>
-              </h2>
+              <p className="wc-about-kicker">Our brands</p>
+              <h2 className="wc-about-brands-title">The Woodenclouds family</h2>
             </div>
             <p className="wc-about-brands-intro">
               Sister brands across creatives, education, production, and technology — built to serve
@@ -197,7 +195,7 @@ export function AboutView() {
         </div>
       </section>
 
-      <EnquireCta buttonLabel="Start a conversation" />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
     </div>
   );
 }

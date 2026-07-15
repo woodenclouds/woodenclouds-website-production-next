@@ -10,7 +10,8 @@ export function Footer() {
     pathname === "/" ||
     pathname === "/services" ||
     pathname === "/industries" ||
-    pathname === "/works";
+    pathname === "/works" ||
+    pathname === "/about";
 
   return (
     <footer className={isLightShell ? "wc-footer wc-footer--light" : "wc-footer"}>

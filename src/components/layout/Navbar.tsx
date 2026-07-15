@@ -23,10 +23,11 @@ export function Navbar() {
   const isIndustries = pathname === "/industries";
   const isWorksIndex = pathname === "/works";
   const isWorksDetail = pathname.startsWith("/works/");
-  const isLightShell = isHome || isServicesHub || isIndustries || isWorksIndex;
+  const isAbout = pathname === "/about";
+  const isLightShell =
+    isHome || isServicesHub || isIndustries || isWorksIndex || isAbout;
   const isSolutions = pathname === "/solutions";
   const isPartner = pathname === "/partner-with-us";
-  const isAbout = pathname === "/about";
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isContact = pathname === "/contact";
   const isBlogDetail = pathname.startsWith("/blog/");
@@ -39,7 +40,6 @@ export function Navbar() {
     isSolutions ||
     isWorksDetail ||
     isPartner ||
-    isAbout ||
     isDedicatedTeam ||
     isContact ||
     isBlogDetail ||
@@ -50,7 +50,6 @@ export function Navbar() {
   const lightOnScroll =
     isPartner ||
     isWorksDetail ||
-    isAbout ||
     isDedicatedTeam ||
     isContact ||
     isBlogDetail ||
@@ -103,7 +102,7 @@ export function Navbar() {
 
   const headerPos = (() => {
     // Light hub pages: stay in document flow and scroll away with the page.
-    if (isServicesHub || isIndustries || isWorksIndex) return "relative";
+    if (isServicesHub || isIndustries || isWorksIndex || isAbout) return "relative";
     if (isLightShell || isFuture || isSolutions || isDarkPage) {
       return scrolled && (isLightShell || isFuture || (isDarkPage && !isSolutions))
         ? "fixed top-0"
