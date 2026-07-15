@@ -6,7 +6,8 @@ import { site } from "@/data/content";
 
 export function Footer() {
   const pathname = usePathname();
-  const isLightShell = pathname === "/" || pathname === "/services";
+  const isLightShell =
+    pathname === "/" || pathname === "/services" || pathname === "/industries";
 
   return (
       <footer className={isLightShell ? "wc-footer wc-footer--light" : "wc-footer"}>

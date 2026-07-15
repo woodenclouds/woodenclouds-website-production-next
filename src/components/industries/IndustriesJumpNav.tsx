@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type JumpItem = { id: string; name: string };
 
 export function IndustriesJumpNav({ items }: { items: JumpItem[] }) {
   const [active, setActive] = useState(items[0]?.id ?? "");
+  const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     const sections = items
@@ -28,19 +29,37 @@ export function IndustriesJumpNav({ items }: { items: JumpItem[] }) {
     return () => observer.disconnect();
   }, [items]);
 
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list || !active) return;
+
+    const activeLink = list.querySelector<HTMLElement>(
+      `[data-industry-id="${CSS.escape(active)}"]`,
+    );
+    activeLink?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [active]);
+
   return (
     <nav
-      className="sticky top-0 z-40 border-b border-line-dark bg-paper/95 backdrop-blur-md"
+      className="wc-ind-jump sticky top-0 z-40 border-b border-black/8 bg-paper/95 backdrop-blur-md"
       aria-label="Industries"
     >
       <div className="wc-container">
-        <ul className="flex gap-1 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <ul
+          ref={listRef}
+          className="flex gap-1 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {items.map((item) => {
             const isActive = active === item.id;
             return (
               <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
+                  data-industry-id={item.id}
                   className={[
                     "block whitespace-nowrap px-3 py-2 text-sm font-light tracking-wide transition",
                     isActive ? "text-ink" : "text-muted hover:text-ink",

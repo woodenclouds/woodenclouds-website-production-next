@@ -44,11 +44,21 @@ const practices = [
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
   const [ready, setReady] = useState(false);
+  const [tick, setTick] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+  const smooth = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
 
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);
     return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => setTick((t) => (t + 1) % practices.length), 2600);
+    return () => window.clearInterval(id);
   }, []);
 
   useEffect(() => {
@@ -58,86 +68,117 @@ export function ServicesView() {
 
     const onScroll = () => {
       const rect = hero.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.7, 1)));
+      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
       hero.style.setProperty("--svc-scroll", p.toFixed(4));
     };
 
+    const onMove = (e: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      pointer.current = {
+        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+      };
+    };
+
+    const loop = () => {
+      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
+      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
+      hero.style.setProperty("--hx", smooth.current.x.toFixed(4));
+      hero.style.setProperty("--hy", smooth.current.y.toFixed(4));
+      raf.current = requestAnimationFrame(loop);
+    };
+
     onScroll();
+    hero.addEventListener("pointermove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    raf.current = requestAnimationFrame(loop);
+
+    return () => {
+      hero.removeEventListener("pointermove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf.current);
+    };
   }, []);
 
   return (
     <div className="bg-paper text-ink">
       <header
         ref={heroRef}
-        className={`wc-svc-hero wc-svc-hero--light${ready ? " is-ready" : ""}`}
+        className={`wc-svc-stage${ready ? " is-ready" : ""}`}
       >
-        <div className="wc-svc-hero-media" aria-hidden>
-          <img src="/services/technology.jpg" alt="" draggable={false} />
-          <span className="wc-svc-hero-media-shade" />
-        </div>
+        <div className="wc-svc-stage-grain" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--c" aria-hidden />
 
-        <div className="wc-svc-hero-wash" aria-hidden />
-        <div className="wc-svc-hero-grain" aria-hidden />
+        <div className="wc-container wc-svc-stage-frame">
+          <span className="wc-svc-stage-corner wc-svc-stage-corner--tl" aria-hidden />
+          <span className="wc-svc-stage-corner wc-svc-stage-corner--tr" aria-hidden />
+          <span className="wc-svc-stage-corner wc-svc-stage-corner--bl" aria-hidden />
+          <span className="wc-svc-stage-corner wc-svc-stage-corner--br" aria-hidden />
 
-        <div className="wc-svc-hero-ui">
-          <div className="wc-container wc-svc-hero-layout">
-            <div className="wc-svc-hero-copy">
-              <p className="wc-svc-hero-kicker">Services</p>
-              <h1 className="wc-svc-hero-title">
-                Built to ship.
-                <br />
-                Ready to scale.
-              </h1>
-              <p className="wc-svc-hero-lede">
-                Technology, growth support, and brand systems — shaped around outcomes, not feature
-                lists.
-              </p>
-              <div className="wc-svc-hero-actions">
-                <a href="#services" className="wc-btn wc-btn-solid">
-                  Explore services
-                  <span aria-hidden>→</span>
-                </a>
-                <Link href="/contact" className="wc-btn wc-btn-dark">
-                  Enquire now
-                </Link>
-              </div>
+          <div className="wc-svc-stage-main">
+            <p className="wc-svc-stage-kicker">Services</p>
+            <h1 className="wc-svc-stage-title">
+              Built to ship.
+              <br />
+              Ready to scale.
+            </h1>
+            <p className="wc-svc-stage-ticks" aria-live="polite">
+              <span className="wc-svc-stage-ticks-label">We deliver</span>
+              <span className="wc-svc-stage-ticks-sep" aria-hidden>
+                —
+              </span>
+              <span key={practices[tick]?.label} className="wc-svc-stage-tick">
+                {practices[tick]?.label}
+              </span>
+            </p>
+            <p className="wc-svc-stage-lede">
+              Technology, growth support, and brand systems — shaped around outcomes, not feature
+              lists.
+            </p>
+            <div className="wc-svc-stage-actions">
+              <a href="#services" className="wc-btn wc-btn-solid">
+                Explore services
+                <span aria-hidden>↓</span>
+              </a>
+              <Link href="/contact" className="wc-btn wc-btn-dark">
+                Enquire now
+              </Link>
             </div>
+          </div>
 
-            <aside className="wc-svc-hero-aside" aria-label="Service practices">
-              <p className="wc-svc-hero-aside-label">Practices</p>
-              <ol className="wc-svc-hero-practices">
-                {practices.map((item, i) => (
-                  <li key={item.href}>
-                    <Link href={item.href}>
-                      <span>{String(i + 1).padStart(2, "0")}</span>
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-            </aside>
+          <div className="wc-svc-stage-foot">
+            <ol className="wc-svc-stage-rail" aria-label="Service practices">
+              {practices.map((item, i) => (
+                <li key={item.href}>
+                  <Link href={item.href}>
+                    <span>{String(i + 1).padStart(2, "0")}</span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+
+            <button
+              type="button"
+              className="wc-svc-stage-cue"
+              aria-label="Scroll to services"
+              onClick={() => {
+                document.getElementById("services")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+            >
+              <span className="wc-svc-stage-cue-line" aria-hidden />
+              Scroll
+            </button>
           </div>
         </div>
-
-        <button
-          type="button"
-          className="wc-svc-hero-scroll"
-          aria-label="Scroll to services"
-          onClick={() => {
-            document.getElementById("services")?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }}
-        >
-          <span className="wc-svc-hero-scroll-line" aria-hidden />
-          Scroll
-        </button>
       </header>
 
-      <section id="services" className="wc-services wc-services--light">
+      <section id="services" className="wc-services wc-services--light wc-services--text">
         <div className="wc-services-bg" aria-hidden />
 
         <div className="wc-container relative z-10">
@@ -164,10 +205,6 @@ export function ServicesView() {
                 <div className="wc-services-copy">
                   <h3>{card.title}</h3>
                   <p>{card.description}</p>
-                </div>
-
-                <div className="wc-services-media">
-                  <img src={card.image} alt="" draggable={false} />
                 </div>
 
                 <span className="wc-services-go" aria-hidden>

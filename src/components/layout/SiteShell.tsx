@@ -10,7 +10,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isServicesHub = pathname === "/services";
-  const isLightShell = isHome || isServicesHub;
+  const isIndustries = pathname === "/industries";
+  const isLightShell = isHome || isServicesHub || isIndustries;
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
@@ -23,10 +24,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
   const isSolutions = pathname === "/solutions";
-  const isIndustries = pathname === "/industries";
   const isDarkPage =
     isSolutions ||
-    isIndustries ||
     isWorks ||
     isPartner ||
     isAbout ||
@@ -57,20 +56,18 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             : isDarkPage
               ? isSolutions
                 ? "min-h-screen bg-[#0a1f38]"
-                : isIndustries
-                  ? "min-h-screen bg-[#070e16]"
-                  : isWorks ||
-                      isPartner ||
-                      isAbout ||
-                      isDedicatedTeam ||
-                      isContact ||
-                      isBlogDetail ||
-                      isDigitalMarketing ||
-                      isBusinessSupport ||
-                      isTechnology ||
-                      isFuture
-                    ? "min-h-screen bg-[#05070b] text-white"
-                    : "min-h-screen bg-black text-white"
+                : isWorks ||
+                    isPartner ||
+                    isAbout ||
+                    isDedicatedTeam ||
+                    isContact ||
+                    isBlogDetail ||
+                    isDigitalMarketing ||
+                    isBusinessSupport ||
+                    isTechnology ||
+                    isFuture
+                  ? "min-h-screen bg-[#05070b] text-white"
+                  : "min-h-screen bg-black text-white"
               : "min-h-screen bg-paper text-ink"
         }
       >

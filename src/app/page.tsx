@@ -9,6 +9,7 @@ import {
   HomeInsights,
 } from "@/components/home/HomeSections";
 import { HomeProcess } from "@/components/home/HomeProcess";
+import { HomeVisitNotice } from "@/components/home/HomeVisitNotice";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export default function HomePage() {
@@ -24,6 +25,7 @@ export default function HomePage() {
       <HomeTestimonials />
       <HomeInsights />
       <EnquireCta variant="light" buttonLabel="Start a conversation" />
+      <HomeVisitNotice />
     </>
   );
 }

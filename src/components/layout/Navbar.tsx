@@ -20,9 +20,9 @@ export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isServicesHub = pathname === "/services";
-  const isLightShell = isHome || isServicesHub;
-  const isSolutions = pathname === "/solutions";
   const isIndustries = pathname === "/industries";
+  const isLightShell = isHome || isServicesHub || isIndustries;
+  const isSolutions = pathname === "/solutions";
   const isWorks = pathname === "/works" || pathname.startsWith("/works/");
   const isPartner = pathname === "/partner-with-us";
   const isAbout = pathname === "/about";
@@ -36,7 +36,6 @@ export function Navbar() {
   const isFuture = pathname === "/future-woodenclouds";
   const isDarkPage =
     isSolutions ||
-    isIndustries ||
     isWorks ||
     isPartner ||
     isAbout ||
@@ -102,8 +101,10 @@ export function Navbar() {
   ].join(" ");
 
   const headerPos = (() => {
-    if (isLightShell || isFuture || isSolutions || isIndustries || isDarkPage) {
-      return scrolled && (isLightShell || isFuture || (isDarkPage && !isSolutions && !isIndustries))
+    // Light hub pages: stay in document flow and scroll away with the page.
+    if (isServicesHub || isIndustries) return "relative";
+    if (isLightShell || isFuture || isSolutions || isDarkPage) {
+      return scrolled && (isLightShell || isFuture || (isDarkPage && !isSolutions))
         ? "fixed top-0"
         : "absolute top-0";
     }
