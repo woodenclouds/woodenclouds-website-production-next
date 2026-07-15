@@ -2,140 +2,124 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-import { heroSlides } from "@/data/hero";
-import "swiper/css";
-import "swiper/css/effect-fade";
-
-function pad(n: number) {
-  return n < 10 ? `0${n}` : String(n);
-}
+import { heroContent } from "@/data/hero";
 
 export function HomeHero() {
-  const swiperRef = useRef<SwiperType | null>(null);
-  const [index, setIndex] = useState(0);
-  const [progressKey, setProgressKey] = useState(0);
-  const slide = heroSlides[index] ?? heroSlides[0];
-  const next = heroSlides[(index + 1) % heroSlides.length] ?? heroSlides[0];
-  const total = heroSlides.length;
+  const stageRef = useRef<HTMLElement>(null);
+  const [ready, setReady] = useState(false);
+  const [tick, setTick] = useState(0);
+  const pointer = useRef({ x: 0, y: 0 });
+  const smooth = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
 
   useEffect(() => {
-    setProgressKey((k) => k + 1);
-  }, [index]);
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(
+      () => setTick((t) => (t + 1) % heroContent.ticks.length),
+      2400,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onMove = (e: PointerEvent) => {
+      const rect = stage.getBoundingClientRect();
+      pointer.current = {
+        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+      };
+    };
+
+    const loop = () => {
+      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
+      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
+      const { x, y } = smooth.current;
+      stage.style.setProperty("--hx", x.toFixed(4));
+      stage.style.setProperty("--hy", y.toFixed(4));
+      raf.current = requestAnimationFrame(loop);
+    };
+
+    stage.addEventListener("pointermove", onMove, { passive: true });
+    raf.current = requestAnimationFrame(loop);
+    return () => {
+      stage.removeEventListener("pointermove", onMove);
+      cancelAnimationFrame(raf.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onScroll = () => {
+      const rect = stage.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
+      stage.style.setProperty("--hscroll", p.toFixed(4));
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="wc-hero">
-      <div className="wc-hero-stage">
-        <Swiper
-          className="wc-hero-swiper"
-          modules={[Autoplay, EffectFade]}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          loop
-          speed={1100}
-          autoplay={{ delay: 5500, disableOnInteraction: false }}
-          allowTouchMove
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-            setIndex(swiper.realIndex);
-          }}
-          onSlideChange={(swiper) => setIndex(swiper.realIndex)}
-        >
-          {heroSlides.map((item) => (
-            <SwiperSlide key={item.image}>
-              <div className="wc-hero-media">
-                <img src={item.image} alt={item.alt} draggable={false} />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className="wc-hero-overlay" aria-hidden />
-      </div>
+    <header ref={stageRef} className={`wc-hero${ready ? " is-ready" : ""}`}>
+      <div className="wc-hero-grain" aria-hidden />
+      <div className="wc-hero-orb wc-hero-orb--a" aria-hidden />
+      <div className="wc-hero-orb wc-hero-orb--b" aria-hidden />
+      <div className="wc-hero-orb wc-hero-orb--c" aria-hidden />
 
-      <div className="wc-hero-ui">
-        <div className="wc-container wc-hero-content">
-          <div className="wc-hero-copy" key={slide.headline}>
-            <h1>{slide.headline}</h1>
-            <p className="wc-hero-lede">{slide.lede}</p>
-            <Link href={slide.cta.href} className="wc-hero-cta">
-              {slide.cta.label}
-              <span aria-hidden>→</span>
-            </Link>
-          </div>
+      <div className="wc-container wc-hero-frame">
+        <span className="wc-hero-corner wc-hero-corner--tl" aria-hidden />
+        <span className="wc-hero-corner wc-hero-corner--tr" aria-hidden />
+        <span className="wc-hero-corner wc-hero-corner--bl" aria-hidden />
+        <span className="wc-hero-corner wc-hero-corner--br" aria-hidden />
 
-          <button
-            type="button"
-            className="wc-hero-next"
-            aria-label={`Next slide: ${next.teaser}`}
-            onClick={() => swiperRef.current?.slideNext()}
-          >
-            <span className="wc-hero-next-thumb">
-              <img src={next.image} alt="" draggable={false} />
+        <div className="wc-hero-top">
+          <h1 className="wc-hero-statement">{heroContent.statement}</h1>
+          <p className="wc-hero-ticks" aria-live="polite">
+            <span className="wc-hero-ticks-label">We shape</span>
+            <span key={heroContent.ticks[tick]} className="wc-hero-tick">
+              {heroContent.ticks[tick]}
             </span>
-            <span className="wc-hero-next-body">
-              <span className="wc-hero-next-label">Next</span>
-              <span className="wc-hero-next-title">{next.teaser}</span>
-              <span className="wc-hero-next-segments" aria-hidden>
-                {heroSlides.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`wc-hero-next-seg${i === index ? " is-active" : ""}`}
-                  >
-                    {i === index ? (
-                      <span
-                        key={progressKey}
-                        className="wc-hero-next-seg-fill is-running"
-                      />
-                    ) : null}
-                  </span>
-                ))}
-              </span>
-            </span>
-          </button>
+          </p>
         </div>
 
-        <div className="wc-hero-chrome">
-          <div className="wc-container">
-            <div className="wc-hero-chrome-row">
-              <button
-                type="button"
-                className="wc-hero-nav"
-                aria-label="Previous slide"
-                onClick={() => swiperRef.current?.slidePrev()}
-              >
-                ←
-              </button>
-              <span className="wc-hero-index">
-                {pad(index + 1)} / {pad(total)}
-              </span>
-              <button
-                type="button"
-                className="wc-hero-nav"
-                aria-label="Next slide"
-                onClick={() => swiperRef.current?.slideNext()}
-              >
-                →
-              </button>
-              <button
-                type="button"
-                className="wc-hero-scroll"
-                aria-label="Scroll to next section"
-                onClick={() => {
-                  document.getElementById("digital-future")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}
-              >
-                <span className="wc-hero-scroll-chevs" aria-hidden>
-                  <span />
-                  <span />
-                </span>
-              </button>
-            </div>
-          </div>
+        <div className="wc-hero-mid">
+          <Link href={heroContent.cta.href} className="wc-hero-cta">
+            <span>{heroContent.cta.label}</span>
+            <span className="wc-hero-cta-arrow" aria-hidden>
+              ↓
+            </span>
+          </Link>
+        </div>
+
+        <div className="wc-hero-bottom">
+          <p className="wc-hero-headline">{heroContent.headline}</p>
+          <button
+            type="button"
+            className="wc-hero-scroll-cue"
+            aria-label="Scroll to explore"
+            onClick={() => {
+              document.getElementById("digital-future")?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+          >
+            <span className="wc-hero-scroll-line" aria-hidden />
+            Scroll
+          </button>
         </div>
       </div>
     </header>

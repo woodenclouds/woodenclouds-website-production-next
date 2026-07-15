@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { site } from "@/data/content";
 
 export function Footer() {
+  const isHome = usePathname() === "/";
+
   return (
-      <footer className="wc-footer">
+      <footer className={isHome ? "wc-footer wc-footer--light" : "wc-footer"}>
         <div className="wc-footer-bg" aria-hidden />
 
         <div className="wc-container relative z-10 py-16 md:py-20">
@@ -13,7 +16,7 @@ export function Footer() {
             <div className="wc-footer-brand">
               <Link href="/" className="inline-block">
                 <img
-                  src="/brand/logo-light.png"
+                  src={isHome ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
                   alt="Woodenclouds"
                   width={180}
                   height={10}

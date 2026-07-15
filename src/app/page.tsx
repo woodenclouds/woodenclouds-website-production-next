@@ -7,7 +7,6 @@ import {
   HomeClients,
   HomeAbout,
   HomeFuture,
-  HomePartner,
   HomeBlogs,
 } from "@/components/home/HomeSections";
 import { EnquireCta } from "@/components/shared/PageBits";
@@ -23,9 +22,8 @@ export default function HomePage() {
       <HomeClients />
       <HomeAbout />
       <HomeFuture />
-      <HomePartner />
       <HomeBlogs />
-      <EnquireCta buttonLabel="Start a conversation" />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
     </>
   );
 }

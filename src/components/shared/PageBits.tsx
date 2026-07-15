@@ -5,10 +5,29 @@ import Link from "next/link";
 export function EnquireCta({
   background = "/backgrounds/1.jpg",
   buttonLabel = "Enquire Now",
+  variant = "photo",
 }: {
   background?: string;
   buttonLabel?: string;
+  variant?: "photo" | "light";
 }) {
+  if (variant === "light") {
+    return (
+      <section className="relative overflow-hidden bg-paper py-20 text-ink md:py-28">
+        <div className="wc-container relative text-center">
+          <h3 className="text-3xl font-light md:text-4xl">
+            Have a project in mind?
+            <br />
+            Let’s get to work.
+          </h3>
+          <Link href="/contact" className="wc-btn wc-btn-solid mt-8">
+            {buttonLabel}
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       className="relative overflow-hidden bg-cover bg-center py-20 text-white md:py-28"

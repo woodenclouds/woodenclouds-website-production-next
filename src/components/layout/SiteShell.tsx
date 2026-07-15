@@ -23,7 +23,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isSolutions = pathname === "/solutions";
   const isIndustries = pathname === "/industries";
   const isDarkPage =
-    isHome ||
     pathname === "/services" ||
     isSolutions ||
     isIndustries ||
@@ -52,24 +51,26 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <ProgressWrap />
       <div
         className={
-          isDarkPage
-            ? isSolutions
-              ? "min-h-screen bg-[#0a1f38]"
-              : isIndustries
-                ? "min-h-screen bg-[#070e16]"
-                : isWorks ||
-                    isPartner ||
-                    isAbout ||
-                    isDedicatedTeam ||
-                    isContact ||
-                    isBlogDetail ||
-                    isDigitalMarketing ||
-                    isBusinessSupport ||
-                    isTechnology ||
-                    isFuture
-                  ? "min-h-screen bg-[#05070b] text-white"
-                  : "min-h-screen bg-black text-white"
-            : "min-h-screen bg-paper text-ink"
+          isHome
+            ? "min-h-screen bg-paper text-ink"
+            : isDarkPage
+              ? isSolutions
+                ? "min-h-screen bg-[#0a1f38]"
+                : isIndustries
+                  ? "min-h-screen bg-[#070e16]"
+                  : isWorks ||
+                      isPartner ||
+                      isAbout ||
+                      isDedicatedTeam ||
+                      isContact ||
+                      isBlogDetail ||
+                      isDigitalMarketing ||
+                      isBusinessSupport ||
+                      isTechnology ||
+                      isFuture
+                    ? "min-h-screen bg-[#05070b] text-white"
+                    : "min-h-screen bg-black text-white"
+              : "min-h-screen bg-paper text-ink"
         }
       >
         <Navbar />
