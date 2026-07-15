@@ -4,7 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 type JumpItem = { id: string; name: string };
 
-export function IndustriesJumpNav({ items }: { items: JumpItem[] }) {
+export function IndustriesJumpNav({
+  items,
+  label = "Industries",
+}: {
+  items: JumpItem[];
+  label?: string;
+}) {
   const [active, setActive] = useState(items[0]?.id ?? "");
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -46,7 +52,7 @@ export function IndustriesJumpNav({ items }: { items: JumpItem[] }) {
   return (
     <nav
       className="wc-ind-jump sticky top-0 z-40 border-b border-black/8 bg-paper/95 backdrop-blur-md"
-      aria-label="Industries"
+      aria-label={label}
     >
       <div className="wc-container">
         <ul

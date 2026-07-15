@@ -2,44 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { homeServiceCards, servicesFaqs } from "@/data/content";
+import { servicesFaqs } from "@/data/content";
+import {
+  servicePractices,
+  servicesApproach,
+  servicesHero,
+} from "@/data/services";
+import { getFeaturedWorks } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
-
-const approach = [
-  {
-    index: "01",
-    title: "Value-driven research",
-    body: "We study your market, competitors, and constraints so every decision earns its place — and every build creates real business value.",
-  },
-  {
-    index: "02",
-    title: "Specialized planning",
-    body: "Before a line of code or a campaign goes live, we map a strategy that stays aligned with your vision, timeline, and budget.",
-  },
-  {
-    index: "03",
-    title: "Precise delivery",
-    body: "We implement with focus — shipping high-quality work on schedule, then staying close through launch and beyond.",
-  },
-];
-
-const serviceRows = [
-  ...homeServiceCards,
-  {
-    title: "Hire Dedicated Team",
-    description:
-      "Embed skilled developers and specialists into your workflow — flexible capacity without the hiring overhead.",
-    image: "/team/team-01.jpg",
-    href: "/services/dedicated-team",
-  },
-];
-
-const practices = [
-  { label: "Technology", href: "/services/technology" },
-  { label: "Business support", href: "/services/business-support" },
-  { label: "Brand & growth", href: "/services/digital-marketing" },
-  { label: "Dedicated team", href: "/services/dedicated-team" },
-];
+import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
 
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
@@ -50,6 +21,9 @@ export function ServicesView() {
   const smooth = useRef({ x: 0, y: 0 });
   const raf = useRef(0);
 
+  const jumpItems = servicePractices.map(({ id, name }) => ({ id, name }));
+  const featured = getFeaturedWorks(2);
+
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);
     return () => window.clearTimeout(id);
@@ -57,7 +31,10 @@ export function ServicesView() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(() => setTick((t) => (t + 1) % practices.length), 2600);
+    const id = window.setInterval(
+      () => setTick((t) => (t + 1) % servicePractices.length),
+      2600,
+    );
     return () => window.clearInterval(id);
   }, []);
 
@@ -102,10 +79,7 @@ export function ServicesView() {
 
   return (
     <div className="bg-paper text-ink">
-      <header
-        ref={heroRef}
-        className={`wc-svc-stage${ready ? " is-ready" : ""}`}
-      >
+      <header ref={heroRef} className={`wc-svc-stage${ready ? " is-ready" : ""}`}>
         <div className="wc-svc-stage-grain" aria-hidden />
         <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
         <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
@@ -118,27 +92,26 @@ export function ServicesView() {
           <span className="wc-svc-stage-corner wc-svc-stage-corner--br" aria-hidden />
 
           <div className="wc-svc-stage-main">
-            <p className="wc-svc-stage-kicker">Services</p>
+            <p className="wc-svc-stage-brand">
+              Woodenclouds <span>Services</span>
+            </p>
             <h1 className="wc-svc-stage-title">
-              Built to ship.
+              {servicesHero.titleLine1}
               <br />
-              Ready to scale.
+              {servicesHero.titleLine2}
             </h1>
             <p className="wc-svc-stage-ticks" aria-live="polite">
               <span className="wc-svc-stage-ticks-label">We deliver</span>
               <span className="wc-svc-stage-ticks-sep" aria-hidden>
                 —
               </span>
-              <span key={practices[tick]?.label} className="wc-svc-stage-tick">
-                {practices[tick]?.label}
+              <span key={servicePractices[tick]?.name} className="wc-svc-stage-tick">
+                {servicePractices[tick]?.name}
               </span>
             </p>
-            <p className="wc-svc-stage-lede">
-              Technology, growth support, and brand systems — shaped around outcomes, not feature
-              lists.
-            </p>
+            <p className="wc-svc-stage-lede">{servicesHero.description}</p>
             <div className="wc-svc-stage-actions">
-              <a href="#services" className="wc-btn wc-btn-solid">
+              <a href={`#${servicePractices[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
                 Explore services
                 <span aria-hidden>↓</span>
               </a>
@@ -150,87 +123,140 @@ export function ServicesView() {
 
           <div className="wc-svc-stage-foot">
             <ol className="wc-svc-stage-rail" aria-label="Service practices">
-              {practices.map((item, i) => (
-                <li key={item.href}>
-                  <Link href={item.href}>
+              {servicePractices.map((item, i) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`}>
                     <span>{String(i + 1).padStart(2, "0")}</span>
-                    {item.label}
-                  </Link>
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ol>
-
-            <button
-              type="button"
-              className="wc-svc-stage-cue"
-              aria-label="Scroll to services"
-              onClick={() => {
-                document.getElementById("services")?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }}
-            >
-              <span className="wc-svc-stage-cue-line" aria-hidden />
-              Scroll
-            </button>
+            <p className="wc-svc-stage-count">{servicePractices.length} practices</p>
           </div>
         </div>
       </header>
 
-      <section id="services" className="wc-services wc-services--light wc-services--text">
-        <div className="wc-services-bg" aria-hidden />
+      <IndustriesJumpNav items={jumpItems} label="Services" />
 
-        <div className="wc-container relative z-10">
-          <header className="wc-services-head">
-            <p className="wc-services-kicker">What we do</p>
-            <div className="wc-services-head-row">
-              <h2 className="wc-services-title">
-                Four practices.
-                <br />
-                One digital partner.
-              </h2>
-              <p className="wc-services-intro">
-                Pick a path — or combine them. Every engagement is built to move your product and
-                brand forward together.
-              </p>
-            </div>
-          </header>
+      <div className="bg-paper text-ink">
+        {servicePractices.map((practice, index) => {
+          const reverse = index % 2 === 1;
+          return (
+            <section
+              key={practice.id}
+              id={practice.id}
+              className="wc-svc-block scroll-mt-28 border-b border-black/8 last:border-b-0"
+            >
+              <div className="wc-container py-16 md:py-24">
+                <div
+                  className={[
+                    "grid items-center gap-10 lg:grid-cols-12 lg:gap-14",
+                    reverse ? "lg:[&>*:first-child]:order-2" : "",
+                  ].join(" ")}
+                >
+                  <div className="lg:col-span-6">
+                    <div className="wc-svc-media overflow-hidden bg-ink/5">
+                      <img
+                        src={practice.image}
+                        alt={practice.imageAlt}
+                        className="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-[1.03]"
+                      />
+                    </div>
+                  </div>
 
-          <div className="wc-services-list">
-            {serviceRows.map((card, i) => (
-              <Link key={card.title} href={card.href} className="wc-services-row group">
-                <span className="wc-services-index">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="lg:col-span-6">
+                    <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+                      ({String(index + 1).padStart(2, "0")}) {practice.name}
+                    </p>
+                    <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
+                      {practice.title}
+                    </h2>
+                    <p className="mt-3 text-lg font-light text-ink/80">{practice.tagline}</p>
+                    <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
+                      {practice.description}
+                    </p>
 
-                <div className="wc-services-copy">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
+                    <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2">
+                      {practice.focus.map((item) => (
+                        <li
+                          key={item}
+                          className="border-t border-black/10 py-3 text-sm font-light text-ink/80"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link href={practice.href} className="wc-btn wc-btn-dark mt-8">
+                      {practice.cta}
+                      <span aria-hidden>→</span>
+                    </Link>
+                  </div>
                 </div>
-
-                <span className="wc-services-go" aria-hidden>
-                  →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
       <section className="wc-svc-approach wc-svc-approach--light">
         <div className="wc-svc-approach-bg" aria-hidden />
-        <div className="wc-container relative z-10">
-          <header className="wc-svc-approach-head">
+        <div className="wc-container relative z-10 wc-section">
+          <header className="max-w-2xl">
             <p className="wc-svc-approach-kicker">How we work</p>
-            <h2 className="wc-svc-approach-title">A clear path from idea to impact.</h2>
+            <h2 className="wc-svc-approach-title">
+              A clear path from idea to impact.
+            </h2>
           </header>
 
-          <div className="wc-svc-approach-list">
-            {approach.map((step) => (
-              <article key={step.index} className="wc-svc-approach-item">
-                <strong>{step.index}</strong>
+          <ol className="wc-svc-approach-grid">
+            {servicesApproach.map((step, i) => (
+              <li key={step.title}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
                 <h3>{step.title}</h3>
                 <p>{step.body}</p>
-              </article>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="wc-section bg-paper text-ink">
+        <div className="wc-container">
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+                Across engagements
+              </p>
+              <h2 className="text-3xl font-light text-ink md:text-4xl">Selected work</h2>
+            </div>
+            <Link href="/works" className="wc-home-link">
+              View all works
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {featured.map((work) => (
+              <Link key={work.slug} href={`/works/${work.slug}`} className="group block">
+                <div className="wc-svc-media overflow-hidden">
+                  <img
+                    src={work.thumbnail}
+                    alt={work.title}
+                    className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <p className="mt-5 text-xs font-light uppercase tracking-[0.16em] text-muted">
+                  {work.client} · {work.category}
+                </p>
+                <h3 className="mt-2 text-2xl font-light tracking-tight text-ink group-hover:opacity-70">
+                  {work.title}
+                </h3>
+                <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-muted">
+                  {work.description1}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
@@ -238,6 +264,9 @@ export function ServicesView() {
 
       <section className="wc-svc-faq wc-svc-faq--light">
         <div className="wc-container max-w-4xl">
+          <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+            Common questions
+          </p>
           <h2 className="wc-svc-faq-title">FAQs</h2>
           <div className="wc-svc-faq-list">
             {servicesFaqs.map((faq, index) => {
