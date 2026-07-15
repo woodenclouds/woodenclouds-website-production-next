@@ -2,31 +2,37 @@ export const homeProcess = [
   {
     index: "01",
     title: "Discover",
+    mission: "Mission Brief",
     body: "We map goals, constraints, and success metrics so the work starts from clarity — not assumptions.",
   },
   {
     index: "02",
     title: "Define",
+    mission: "Blueprint",
     body: "Scope, architecture, and experience principles get locked early so every sprint moves with intent.",
   },
   {
     index: "03",
     title: "Design",
+    mission: "Product Assembly",
     body: "Interfaces and systems shaped around real users — clear, calm, and ready to build.",
   },
   {
     index: "04",
     title: "Build",
+    mission: "Systems Check",
     body: "Engineering that ships in measurable increments, with quality and performance held as defaults.",
   },
   {
     index: "05",
     title: "Launch",
+    mission: "Lift Off",
     body: "Release with confidence — environments, handoff, and measurement set up for the next chapter.",
   },
   {
     index: "06",
     title: "Evolve",
+    mission: "Orbit & Growth",
     body: "Ongoing support and iteration so the product keeps pace as the business grows.",
   },
 ];

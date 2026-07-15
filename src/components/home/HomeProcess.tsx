@@ -1,13 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { homeProcess } from "@/data/home";
-
-const ProcessCanvas = dynamic(
-  () => import("./ProcessCanvas").then((m) => m.ProcessCanvas),
-  { ssr: false },
-);
+import { ProcessMission } from "./ProcessMission";
 
 function clamp(n: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, n));
@@ -35,6 +30,7 @@ function StaticProcess() {
             <li key={step.index} className="wc-home-process-item">
               <span className="wc-home-process-index">{step.index}</span>
               <div>
+                <p className="wc-home-process-mission">{step.mission}</p>
                 <h3>{step.title}</h3>
                 <p>{step.body}</p>
               </div>
@@ -48,7 +44,6 @@ function StaticProcess() {
 
 export function HomeProcess() {
   const sectionRef = useRef<HTMLElement>(null);
-  const scrollProgress = useRef(0);
   const [progress, setProgress] = useState(0);
   const [reduced, setReduced] = useState(false);
   const steps = homeProcess;
@@ -73,9 +68,7 @@ export function HomeProcess() {
       const rect = section.getBoundingClientRect();
       const view = window.innerHeight;
       const scrollable = Math.max(section.offsetHeight - view, 1);
-      const scrolled = clamp(-rect.top / scrollable);
-      scrollProgress.current = scrolled;
-      setProgress(scrolled);
+      setProgress(clamp(-rect.top / scrollable));
       ticking = false;
     };
 
@@ -94,15 +87,25 @@ export function HomeProcess() {
     };
   }, [reduced]);
 
+  const scrollToStep = (index: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const scrollable = Math.max(section.offsetHeight - window.innerHeight, 1);
+    const top =
+      section.getBoundingClientRect().top +
+      window.scrollY +
+      (index / Math.max(stepCount - 1, 1)) * scrollable;
+    window.scrollTo({ top, behavior: reduced ? "auto" : "smooth" });
+  };
+
   if (reduced) return <StaticProcess />;
 
   const stepFloat = progress * (stepCount - 1);
   const active = Math.min(stepCount - 1, Math.max(0, Math.round(stepFloat)));
   const activeStep = steps[active]!;
-  // Sharp crossfade around each integer step — no stacked ghost titles
   const phase = 1 - Math.min(1, Math.abs(stepFloat - active) * 2.2);
   const copyOpacity = ease(phase);
-  const copyShift = (1 - copyOpacity) * 28 * Math.sign(stepFloat - active || 1);
+  const copyShift = (1 - copyOpacity) * 24 * Math.sign(stepFloat - active || 1);
 
   return (
     <section
@@ -117,9 +120,9 @@ export function HomeProcess() {
           <header className="wc-process-head">
             <p className="wc-home-kicker">Our process</p>
             <h2 className="wc-home-title">
-              A clear path
+              From concept
               <br />
-              from brief to launch.
+              to launch.
             </h2>
           </header>
 
@@ -133,29 +136,36 @@ export function HomeProcess() {
                 }}
               >
                 <span className="wc-process-step-index">{activeStep.index}</span>
+                <p className="wc-process-step-mission">{activeStep.mission}</p>
                 <h3>{activeStep.title}</h3>
                 <p>{activeStep.body}</p>
               </article>
             </div>
 
-            <div className="wc-process-visual" aria-hidden>
-              <ProcessCanvas scrollProgress={scrollProgress} stepCount={stepCount} />
-              <div className="wc-process-visual-veil" />
-              <div className="wc-process-visual-grid" />
+            <div className="wc-process-visual">
+              <ProcessMission
+                progress={progress}
+                activeStep={active}
+                stepCount={stepCount}
+              />
             </div>
           </div>
 
           <ol className="wc-process-rail" aria-label="Process steps">
             {steps.map((step, i) => {
               const on = i === active;
-              const passed = i < active || (i === active && progress > 0.02);
+              const passed = i <= active;
               return (
-                <li
-                  key={step.index}
-                  className={[on ? "is-on" : "", passed ? "is-passed" : ""].filter(Boolean).join(" ")}
-                >
-                  <span className="wc-process-rail-dot" />
-                  <span className="wc-process-rail-label">{step.title}</span>
+                <li key={step.index} className={[on ? "is-on" : "", passed ? "is-passed" : ""].filter(Boolean).join(" ")}>
+                  <button
+                    type="button"
+                    className="wc-process-rail-btn"
+                    onClick={() => scrollToStep(i)}
+                    aria-current={on ? "step" : undefined}
+                  >
+                    <span className="wc-process-rail-dot" />
+                    <span className="wc-process-rail-label">{step.title}</span>
+                  </button>
                 </li>
               );
             })}
