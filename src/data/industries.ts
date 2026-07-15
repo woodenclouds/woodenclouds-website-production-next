@@ -6,6 +6,9 @@ export type Industry = {
   image: string;
   imageAlt: string;
   focus: string[];
+  projects: number;
+  /** Shown in the homepage mosaic (keep this list focused). */
+  featuredOnHome?: boolean;
   cta: { label: string; href: string };
 };
 
@@ -15,20 +18,20 @@ export type IndustryStandard = {
 };
 
 export const industriesHero = {
-  kicker: "Where we work",
-  title: "Industries we know how to move",
+  kicker: "Industries we serve",
+  title: "Boosting growth across industries",
   description:
-    "Sector-aware product, platform, and growth work — shaped around the realities of each market, not a one-size playbook.",
+    "Sector-aware product, platform, and growth systems — shaped around how each market actually moves, not a one-size playbook.",
 };
 
 export const industries: Industry[] = [
   {
     id: "healthcare",
-    name: "Healthcare",
+    name: "Healthcare & Life Sciences",
     tagline: "Care systems patients and teams can trust",
     description:
-      "Patient portals, clinic operations, telehealth, and compliance-minded platforms that keep care coordinated without slowing clinicians down.",
-    image: "/about/img5.jpg",
+      "We partner with hospitals, clinics, labs, and healthcare startups on portals, telehealth, and ops platforms that simplify care without slowing clinicians down.",
+    image: "/industries/healthcare.jpg",
     imageAlt: "Healthcare digital systems",
     focus: [
       "Patient & provider portals",
@@ -38,6 +41,8 @@ export const industries: Industry[] = [
       "Integrations & reporting",
       "Accessible UX",
     ],
+    projects: 14,
+    featuredOnHome: true,
     cta: { label: "Talk healthcare", href: "/contact" },
   },
   {
@@ -45,8 +50,8 @@ export const industries: Industry[] = [
     name: "Financial Services",
     tagline: "Clarity, control, and confidence at scale",
     description:
-      "From fintech products to internal banking tools — interfaces and systems that feel precise, audit-ready, and calm under pressure.",
-    image: "/services/technology/software.png",
+      "Fintech products and internal banking tools — interfaces and systems that feel precise, audit-ready, and calm under pressure.",
+    image: "/industries/finance.jpg",
     imageAlt: "Financial technology platform",
     focus: [
       "Fintech products",
@@ -56,6 +61,8 @@ export const industries: Industry[] = [
       "API integrations",
       "Security-first builds",
     ],
+    projects: 10,
+    featuredOnHome: true,
     cta: { label: "Talk finance", href: "/contact" },
   },
   {
@@ -63,8 +70,8 @@ export const industries: Industry[] = [
     name: "Retail & Ecommerce",
     tagline: "Storefronts and systems built to convert",
     description:
-      "Headless commerce, omnichannel journeys, and ops tooling that turn browsing into orders — and inventory into insight.",
-    image: "/services/technology/ecommerce.png",
+      "From online stores and loyalty apps to omnichannel ops — commerce experiences that turn browsing into orders and inventory into insight.",
+    image: "/industries/retail.jpg",
     imageAlt: "Retail ecommerce experience",
     focus: [
       "Storefronts & catalogs",
@@ -74,18 +81,60 @@ export const industries: Industry[] = [
       "Performance UX",
       "Growth campaigns",
     ],
+    projects: 30,
+    featuredOnHome: true,
     cta: {
       label: "Explore commerce",
       href: "/services/technology/ecommerce-development",
     },
   },
   {
+    id: "agriculture",
+    name: "Agriculture & AgriTech",
+    tagline: "Field-to-market systems that scale",
+    description:
+      "Farms, cooperatives, and agri brands — portals, supply visibility, marketplace platforms, and ops tools that connect produce, logistics, and buyers.",
+    image: "/industries/agriculture.jpg",
+    imageAlt: "Agriculture and AgriTech digital systems",
+    focus: [
+      "Farm & crop portals",
+      "Supply chain visibility",
+      "Marketplace platforms",
+      "Dealer / partner apps",
+      "IoT data dashboards",
+      "Traceability workflows",
+    ],
+    projects: 6,
+    featuredOnHome: true,
+    cta: { label: "Talk AgriTech", href: "/contact" },
+  },
+  {
+    id: "construction",
+    name: "Construction & Infrastructure",
+    tagline: "Projects tracked. Sites aligned.",
+    description:
+      "Builders, contractors, and infrastructure teams — project portals, progress tracking, bidding tools, and field apps that keep delivery on schedule.",
+    image: "/industries/construction.jpg",
+    imageAlt: "Construction and infrastructure digital tools",
+    focus: [
+      "Project portals",
+      "Progress & site reports",
+      "Bidding & tender tools",
+      "Field force apps",
+      "Document control",
+      "Client dashboards",
+    ],
+    projects: 5,
+    featuredOnHome: true,
+    cta: { label: "Talk construction", href: "/contact" },
+  },
+  {
     id: "education",
-    name: "Education",
+    name: "Education & E-Learning",
     tagline: "Learning products people actually return to",
     description:
-      "LMS experiences, campus tools, and content platforms designed for clarity — so learners, educators, and admins stay in sync.",
-    image: "/about/about-img2.jpg",
+      "Schools, institutes, and edu-tech platforms — LMS experiences, portals, and content systems that keep learners, educators, and admins in sync.",
+    image: "/industries/education.jpg",
     imageAlt: "Education technology platform",
     focus: [
       "Learning platforms",
@@ -95,16 +144,18 @@ export const industries: Industry[] = [
       "Admin workflows",
       "Mobile-first access",
     ],
+    projects: 11,
+    featuredOnHome: true,
     cta: { label: "Talk education", href: "/contact" },
   },
   {
     id: "hospitality",
-    name: "Hospitality & Travel",
+    name: "Travel & Hospitality",
     tagline: "Journeys that feel effortless end to end",
     description:
-      "Booking flows, guest apps, and service operations that reduce friction — from discovery to stay to return visit.",
-    image: "/about/img1.jpg",
-    imageAlt: "Hospitality digital experience",
+      "Travel agencies, hotels, and destination brands — booking flows, guest apps, and service ops that reduce friction from discovery to return visit.",
+    image: "/industries/hospitality.jpg",
+    imageAlt: "Travel and hospitality digital experience",
     focus: [
       "Booking & reservations",
       "Guest apps",
@@ -113,6 +164,8 @@ export const industries: Industry[] = [
       "Multi-property tools",
       "Brand & content",
     ],
+    projects: 5,
+    featuredOnHome: true,
     cta: { label: "Talk hospitality", href: "/contact" },
   },
   {
@@ -120,8 +173,8 @@ export const industries: Industry[] = [
     name: "Real Estate",
     tagline: "Property journeys with less friction",
     description:
-      "Listings, CRM, broker tools, and client portals that keep deals moving — with the polish buyers expect and teams rely on.",
-    image: "/about/about-img3.jpg",
+      "Builders, developers, and consultants — project showcase sites, virtual tours, CRM, and enquiry systems that keep deals moving.",
+    image: "/industries/real-estate.jpg",
     imageAlt: "Real estate digital platform",
     focus: [
       "Listing platforms",
@@ -131,6 +184,8 @@ export const industries: Industry[] = [
       "Document workflows",
       "Marketing sites",
     ],
+    projects: 4,
+    featuredOnHome: true,
     cta: { label: "Talk real estate", href: "/contact" },
   },
   {
@@ -138,9 +193,9 @@ export const industries: Industry[] = [
     name: "Manufacturing & Logistics",
     tagline: "Operations software that keeps pace",
     description:
-      "Internal platforms, tracking, and workflow tools that connect plants, warehouses, and teams — less spreadsheet chaos, more visibility.",
-    image: "/services/technology/web-application.png",
-    imageAlt: "Manufacturing operations software",
+      "Plants, freight, and supply networks — dashboards, tracking, and workflow tools that connect teams with real-time visibility.",
+    image: "/industries/manufacturing.jpg",
+    imageAlt: "Manufacturing and logistics operations software",
     focus: [
       "Ops dashboards",
       "Inventory & tracking",
@@ -149,18 +204,58 @@ export const industries: Industry[] = [
       "Field / warehouse apps",
       "Reporting layers",
     ],
+    projects: 7,
+    featuredOnHome: true,
     cta: {
       label: "Explore platforms",
       href: "/services/technology/web-application-development",
     },
   },
   {
+    id: "energy",
+    name: "Energy & Utilities",
+    tagline: "Infrastructure digital, quietly reliable",
+    description:
+      "Energy providers and utility operators — monitoring dashboards, customer portals, and field workflows built for uptime and trust.",
+    image: "/industries/energy.jpg",
+    imageAlt: "Energy and utilities digital platform",
+    focus: [
+      "Ops monitoring",
+      "Customer portals",
+      "Field service tools",
+      "Usage analytics",
+      "Asset tracking",
+      "Compliance reporting",
+    ],
+    projects: 4,
+    cta: { label: "Talk energy", href: "/contact" },
+  },
+  {
+    id: "food",
+    name: "Food & Beverage",
+    tagline: "Menus, markets, and ops that stay fresh",
+    description:
+      "Restaurants, F&B brands, and food tech — ordering journeys, kitchen/ops tools, and brand platforms that keep demand and delivery in sync.",
+    image: "/industries/food.jpg",
+    imageAlt: "Food and beverage digital experience",
+    focus: [
+      "Ordering & menus",
+      "Loyalty programs",
+      "Kitchen / ops tools",
+      "Franchise portals",
+      "Delivery integrations",
+      "Brand campaigns",
+    ],
+    projects: 8,
+    cta: { label: "Talk food & beverage", href: "/contact" },
+  },
+  {
     id: "media",
     name: "Media & Entertainment",
     tagline: "Content experiences that hold attention",
     description:
-      "Publishing platforms, streaming companions, and brand systems that help audiences find, watch, and come back.",
-    image: "/services/marketing.jpg",
+      "Media houses, OTT, and creators — publishing platforms, streaming companions, and brand systems audiences return to.",
+    image: "/industries/media.jpg",
     imageAlt: "Media and entertainment digital product",
     focus: [
       "Content platforms",
@@ -170,16 +265,17 @@ export const industries: Industry[] = [
       "CMS architecture",
       "Analytics loops",
     ],
+    projects: 5,
     cta: { label: "Talk media", href: "/contact" },
   },
   {
     id: "saas",
-    name: "Startups & SaaS",
+    name: "Technology & SaaS",
     tagline: "Products that ship, then keep shipping",
     description:
-      "MVPs, product redesigns, and dedicated squads for founders building software companies — speed without throwing away the foundation.",
-    image: "/services/startup-business-support.jpg",
-    imageAlt: "Startup and SaaS product team",
+      "SaaS products, IT services, and B2B platforms — conversion-driven sites, portals, and product squads built for the next release.",
+    image: "/industries/saas.jpg",
+    imageAlt: "Technology and SaaS product team",
     focus: [
       "MVP & product builds",
       "Design systems",
@@ -188,9 +284,72 @@ export const industries: Industry[] = [
       "Infrastructure basics",
       "Founder partnership",
     ],
+    projects: 13,
     cta: { label: "Hire a squad", href: "/services/dedicated-team" },
   },
+  {
+    id: "automobile",
+    name: "Automobile",
+    tagline: "Digital as fast as the customer",
+    description:
+      "Brands, dealers, and service networks — vehicle showcases, booking journeys, and after-sales tools that move at market speed.",
+    image: "/industries/automobile.jpg",
+    imageAlt: "Automobile digital experience",
+    focus: [
+      "Vehicle showcase sites",
+      "Dealer portals",
+      "Service booking",
+      "Lead management",
+      "Customer apps",
+      "Campaign systems",
+    ],
+    projects: 4,
+    cta: { label: "Talk automobile", href: "/contact" },
+  },
+  {
+    id: "hr-staffing",
+    name: "HR & Staffing",
+    tagline: "Tools that hire and retain faster",
+    description:
+      "HR agencies and internal teams — career portals, ATS dashboards, candidate databases, and onboarding workflows that cut manual work.",
+    image: "/industries/hr-staffing.jpg",
+    imageAlt: "HR and staffing digital tools",
+    focus: [
+      "Career portals",
+      "Application tracking",
+      "Candidate databases",
+      "Onboarding flows",
+      "Internal HR tools",
+      "Reporting dashboards",
+    ],
+    projects: 6,
+    cta: { label: "Talk HR systems", href: "/contact" },
+  },
+  {
+    id: "sports-fitness",
+    name: "Sports & Fitness",
+    tagline: "Experiences that keep people active",
+    description:
+      "Gyms, academies, and fitness brands — booking systems, training apps, and membership journeys that keep users engaged.",
+    image: "/industries/sports-fitness.jpg",
+    imageAlt: "Sports and fitness digital product",
+    focus: [
+      "Class booking",
+      "Membership apps",
+      "Trainer tools",
+      "Progress tracking",
+      "Community features",
+      "Brand platforms",
+    ],
+    projects: 3,
+    cta: { label: "Talk fitness", href: "/contact" },
+  },
 ];
+
+export function getHomeIndustries() {
+  const featured = industries.filter((i) => i.featuredOnHome);
+  return featured.length ? featured : industries.slice(0, 9);
+}
 
 export const industriesApproach: IndustryStandard[] = [
   {

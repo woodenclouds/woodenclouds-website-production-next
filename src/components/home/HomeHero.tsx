@@ -111,7 +111,7 @@ export function HomeHero() {
             className="wc-hero-scroll-cue"
             aria-label="Scroll to explore"
             onClick={() => {
-              document.getElementById("digital-future")?.scrollIntoView({
+              document.getElementById("what-we-do")?.scrollIntoView({
                 behavior: "smooth",
                 block: "start",
               });

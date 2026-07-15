@@ -12,8 +12,8 @@ import { getFeaturedWorks } from "@/data/works";
 export const metadata: Metadata = {
   title: "Industries",
   description:
-    "Woodenclouds builds digital products and growth systems for healthcare, finance, retail, education, hospitality, and more.",
-};
+    "Woodenclouds builds digital products and growth systems for healthcare, finance, retail, agriculture, construction, energy, education, hospitality, and more.",
+}
 
 export default function IndustriesPage() {
   const featured = getFeaturedWorks(2);
@@ -36,9 +36,7 @@ export default function IndustriesPage() {
             {industriesHero.kicker}
           </p>
           <h1 className="mx-auto max-w-4xl text-4xl font-light leading-[1.12] md:text-6xl">
-            Industries we know
-            <br />
-            <span className="wc-gradient-text">how to move</span>
+            {industriesHero.title}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-white/70 md:text-lg">
             {industriesHero.description}
@@ -159,7 +157,7 @@ export default function IndustriesPage() {
 
                   <div className="lg:col-span-6">
                     <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
-                      {String(index + 1).padStart(2, "0")}
+                      ({String(industry.projects).padStart(2, "0")}) projects
                     </p>
                     <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
                       {industry.name}

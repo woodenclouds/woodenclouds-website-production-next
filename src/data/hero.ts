@@ -9,6 +9,6 @@ export const heroContent: HeroContent = {
   statement:
     "Digital products that close the gap between how a brand sees itself and how the world experiences it.",
   headline: "Products that feel inevitable.",
-  cta: { label: "Explore", href: "#digital-future" },
+  cta: { label: "Explore", href: "#what-we-do" },
   ticks: ["Technology", "Design", "Intelligence", "Growth"],
 };
