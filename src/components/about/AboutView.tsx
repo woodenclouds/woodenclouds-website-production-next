@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { brands } from "@/data/clients";
 import { EnquireCta } from "@/components/shared/PageBits";
 
@@ -26,10 +27,18 @@ const milestones = [
 ];
 
 export function AboutView() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
-    <div className="bg-paper text-ink">
-      <header className="wc-about-stage">
+    <div className="wc-about-page bg-paper text-ink">
+      <header className={`wc-about-stage${ready ? " is-ready" : ""}`}>
         <div className="wc-about-stage-grain" aria-hidden />
+        <div className="wc-about-stage-mesh" aria-hidden />
         <div className="wc-about-stage-orb wc-about-stage-orb--a" aria-hidden />
         <div className="wc-about-stage-orb wc-about-stage-orb--b" aria-hidden />
         <div className="wc-about-stage-orb wc-about-stage-orb--c" aria-hidden />
@@ -43,8 +52,8 @@ export function AboutView() {
                 Our expertise.
               </h1>
               <p className="wc-about-stage-lede">
-                Woodenclouds is a digital partner for products, brands, and teams that need clarity,
-                craft, and outcomes that compound.
+                A digital partner for products, brands, and teams that need clarity, craft, and
+                outcomes that compound.
               </p>
               <div className="wc-about-stage-actions">
                 <a href="#story" className="wc-btn wc-btn-solid">
@@ -58,10 +67,18 @@ export function AboutView() {
               </div>
             </div>
 
-            <div className="wc-about-stage-visual" aria-hidden>
-              <div className="wc-about-stage-visual-media">
-                <img src="/team/team-work.jpg" alt="" />
-              </div>
+            <div className="wc-about-stage-figure" aria-hidden>
+              <div className="wc-about-stage-figure-glow" />
+              <div className="wc-about-stage-figure-ring wc-about-stage-figure-ring--a" />
+              <div className="wc-about-stage-figure-ring wc-about-stage-figure-ring--b" />
+              <ul className="wc-about-stage-figure-dots">
+                {Array.from({ length: 8 }, (_, i) => (
+                  <li key={i} style={{ ["--i" as string]: i }} />
+                ))}
+              </ul>
+              <p className="wc-about-stage-figure-label">Since</p>
+              <p className="wc-about-stage-figure-year">2020</p>
+              <p className="wc-about-stage-figure-note">Building with clarity</p>
             </div>
           </div>
         </div>
