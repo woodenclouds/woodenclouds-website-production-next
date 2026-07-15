@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EnquireCta } from "@/components/shared/PageBits";
+import { IndustriesHeroFigure } from "@/components/industries/IndustriesHeroFigure";
 import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
 import {
+  getIndustriesProjectTotal,
   industries,
   industriesApproach,
   industriesHero,
@@ -18,7 +20,8 @@ export const metadata: Metadata = {
 export default function IndustriesPage() {
   const featured = getFeaturedWorks(2);
   const jumpItems = industries.map(({ id, name }) => ({ id, name }));
-  const spotlight = industries.slice(0, 4);
+  const firstIndustry = industries[0]?.id ?? "healthcare";
+  const projectTotal = getIndustriesProjectTotal();
 
   return (
     <div className="bg-paper text-ink">
@@ -29,42 +32,27 @@ export default function IndustriesPage() {
         <div className="wc-ind-stage-orb wc-ind-stage-orb--c" aria-hidden />
 
         <div className="wc-container wc-ind-stage-frame">
-          <span className="wc-ind-stage-corner wc-ind-stage-corner--tl" aria-hidden />
-          <span className="wc-ind-stage-corner wc-ind-stage-corner--tr" aria-hidden />
-          <span className="wc-ind-stage-corner wc-ind-stage-corner--bl" aria-hidden />
-          <span className="wc-ind-stage-corner wc-ind-stage-corner--br" aria-hidden />
-
-          <div className="wc-ind-stage-main">
-            <p className="wc-ind-stage-kicker">{industriesHero.kicker}</p>
-            <h1 className="wc-ind-stage-title">
-              Boosting growth
-              <br />
-              across industries.
-            </h1>
-            <p className="wc-ind-stage-lede">{industriesHero.description}</p>
-            <div className="wc-ind-stage-actions">
-              <a href={`#${spotlight[0]?.id ?? "healthcare"}`} className="wc-btn wc-btn-solid">
-                Explore industries
-                <span aria-hidden>↓</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-dark">
-                Talk to us
-              </Link>
+          <div className="wc-ind-stage-split">
+            <div className="wc-ind-stage-main">
+              <h1 className="wc-ind-stage-title">
+                {industriesHero.titleLine1}
+                <br />
+                {industriesHero.titleLine2}
+              </h1>
+              <p className="wc-ind-stage-lede">{industriesHero.description}</p>
+              <div className="wc-ind-stage-actions">
+                <Link href="/contact" className="wc-btn wc-btn-outline-accent">
+                  {industriesHero.primaryCta}
+                  <span aria-hidden>→</span>
+                </Link>
+                <a href={`#${firstIndustry}`} className="wc-btn wc-btn-dark">
+                  {industriesHero.secondaryCta}
+                  <span aria-hidden>↓</span>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div className="wc-ind-stage-foot">
-            <ol className="wc-ind-stage-rail" aria-label="Featured industries">
-              {spotlight.map((item, i) => (
-                <li key={item.id}>
-                  <a href={`#${item.id}`}>
-                    <span>{String(i + 1).padStart(2, "0")}</span>
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ol>
-            <p className="wc-ind-stage-count">{industries.length} sectors</p>
+            <IndustriesHeroFigure count={projectTotal} label="projects" />
           </div>
         </div>
       </header>

@@ -19,7 +19,6 @@ import {
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
   const [ready, setReady] = useState(false);
-  const [tick, setTick] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const smooth = useRef({ x: 0, y: 0 });
@@ -31,15 +30,6 @@ export function ServicesView() {
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);
     return () => window.clearTimeout(id);
-  }, []);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(
-      () => setTick((t) => (t + 1) % servicePractices.length),
-      2600,
-    );
-    return () => window.clearInterval(id);
   }, []);
 
   useEffect(() => {
@@ -93,23 +83,12 @@ export function ServicesView() {
         <div className="wc-container wc-svc-stage-frame">
           <div className="wc-svc-stage-split">
             <div className="wc-svc-stage-main">
-              <p className="wc-svc-stage-brand">
-                Woodenclouds <span>Services</span>
-              </p>
+              <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
               <h1 className="wc-svc-stage-title">
                 {servicesHero.titleLine1}
                 <br />
                 {servicesHero.titleLine2}
               </h1>
-              <p className="wc-svc-stage-ticks" aria-live="polite">
-                <span className="wc-svc-stage-ticks-label">We deliver</span>
-                <span className="wc-svc-stage-ticks-sep" aria-hidden>
-                  —
-                </span>
-                <span key={servicePractices[tick]?.name} className="wc-svc-stage-tick">
-                  {servicePractices[tick]?.name}
-                </span>
-              </p>
               <p className="wc-svc-stage-lede">{servicesHero.description}</p>
               <div className="wc-svc-stage-actions">
                 <a href={`#${servicePractices[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
@@ -126,20 +105,6 @@ export function ServicesView() {
               <div className="wc-svc-stage-visual-glow" />
               <ServicesHeroArt className="wc-svc-stage-art" />
             </div>
-          </div>
-
-          <div className="wc-svc-stage-foot">
-            <ol className="wc-svc-stage-rail" aria-label="Service practices">
-              {servicePractices.map((item, i) => (
-                <li key={item.id}>
-                  <a href={`#${item.id}`}>
-                    <span>{String(i + 1).padStart(2, "0")}</span>
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ol>
-            <p className="wc-svc-stage-count">{servicePractices.length} practices</p>
           </div>
         </div>
       </header>

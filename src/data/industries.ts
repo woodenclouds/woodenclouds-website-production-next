@@ -19,9 +19,12 @@ export type IndustryStandard = {
 
 export const industriesHero = {
   kicker: "Industries we serve",
-  title: "Boosting growth across industries",
+  titleLine1: "Know the market.",
+  titleLine2: "Ship what fits.",
   description:
-    "Sector-aware product, platform, and growth systems — shaped around how each market actually moves, not a one-size playbook.",
+    "Products and growth systems built around how each industry buys, operates, and scales — not a recycled template.",
+  primaryCta: "Talk to us",
+  secondaryCta: "Browse industries",
 };
 
 export const industries: Industry[] = [
@@ -349,6 +352,11 @@ export const industries: Industry[] = [
 export function getHomeIndustries() {
   const featured = industries.filter((i) => i.featuredOnHome);
   return featured.length ? featured : industries.slice(0, 9);
+}
+
+/** Sum of per-industry project counts — used as the hero total. */
+export function getIndustriesProjectTotal(list: Industry[] = industries): number {
+  return list.reduce((sum, item) => sum + item.projects, 0);
 }
 
 export const industriesApproach: IndustryStandard[] = [
