@@ -85,9 +85,7 @@ export function Navbar() {
   const shell = [
     "wc-nav-bar",
     isLightShell
-      ? scrolled
-        ? "is-solid is-light"
-        : "is-clear is-light"
+      ? "is-clear is-light"
       : isFuture
         ? scrolled
           ? "is-blur is-dark"
@@ -104,23 +102,9 @@ export function Navbar() {
   ].join(" ");
 
   const headerPos = (() => {
-    // Light hub pages: stay in document flow and scroll away with the page.
-    if (
-      isServicesHub ||
-      isIndustries ||
-      isWorksIndex ||
-      isAbout ||
-      isDedicatedTeam ||
-      isPartner ||
-      isContact ||
-      isBlogIndex
-    )
-      return "relative";
-    if (isLightShell || isFuture || isSolutions || isDarkPage) {
-      return scrolled && (isLightShell || isFuture || (isDarkPage && !isSolutions))
-        ? "fixed top-0"
-        : "absolute top-0";
-    }
+    // Never stick on scroll — light pages flow with the document; overlay pages sit absolute over the hero.
+    if (isLightShell) return "relative";
+    if (isFuture || isSolutions || isDarkPage) return "absolute top-0";
     return "relative";
   })();
 

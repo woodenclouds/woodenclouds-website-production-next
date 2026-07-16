@@ -307,7 +307,7 @@ export function ProcessMission({ progress, activeStep, stepCount }: ProcessMissi
         </g>
 
         {/* Code / cloud chip — Build → Launch */}
-        <g style={{ opacity: Math.max(build, launch) * (1 - evolveOn * 0.35) }}>
+        <g className="mc-code-chip" style={{ opacity: Math.max(build, launch) * (1 - evolveOn * 0.35) }}>
           <rect x="56" y="360" width="120" height="64" rx="4" stroke="currentColor" strokeWidth="1" fill="rgba(249,247,244,0.82)" />
           <text x="70" y="384" className="mc-code" fill="currentColor">
             {"const ship = true"}
@@ -343,6 +343,7 @@ export function ProcessMission({ progress, activeStep, stepCount }: ProcessMissi
               />
               <circle cx={node.x} cy={node.y} r="3" fill="#3b5bdb" />
               <rect
+                className="mc-node-chip"
                 x={node.x - 34}
                 y={node.y - 22}
                 width="68"

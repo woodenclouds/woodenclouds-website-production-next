@@ -2776,18 +2776,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 5.5rem;
-  padding-bottom: 4.5rem;
+  padding-top: 4.25rem;
+  padding-bottom: 3.25rem;
   min-height: 100%;
+  box-sizing: border-box;
 }
 
 .wc-process-head {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.wc-process-head .wc-home-title {
+  font-size: clamp(1.75rem, 7vw, 3.25rem);
 }
 
 .wc-process-stage {
   display: grid;
-  gap: 1.5rem;
+  gap: 0.85rem;
   align-items: center;
   flex: 1;
   min-height: 0;
@@ -2797,7 +2803,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 12rem;
+  min-height: 0;
   z-index: 2;
 }
 
@@ -2809,16 +2815,16 @@
 
 .wc-process-step-index {
   display: block;
-  margin-bottom: 0.55rem;
-  font-size: 0.72rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.68rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(10, 10, 10, 0.4);
 }
 
 .wc-process-step-mission {
-  margin: 0 0 0.55rem;
-  font-size: 0.78rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #3b5bdb;
@@ -2834,27 +2840,29 @@
 
 .wc-process-step h3 {
   margin: 0;
-  font-size: clamp(2.35rem, 5.5vw, 3.6rem);
+  font-size: clamp(1.85rem, 8vw, 3.6rem);
   font-weight: 300;
   letter-spacing: -0.045em;
   line-height: 1.02;
 }
 
 .wc-process-step > p:last-child {
-  margin: 1rem 0 0;
+  margin: 0.65rem 0 0;
   max-width: 26rem;
-  font-size: 1.02rem;
+  font-size: clamp(0.88rem, 3.4vw, 1.02rem);
   font-weight: 300;
-  line-height: 1.65;
+  line-height: 1.55;
   color: rgba(10, 10, 10, 0.58);
 }
 
 .wc-process-visual {
   position: relative;
   width: 100%;
-  height: min(52vh, 460px);
-  margin-top: 0.25rem;
+  height: min(38vh, 280px);
+  margin-top: 0;
   overflow: hidden;
+  flex-shrink: 1;
+  min-height: 9.5rem;
 }
 
 /* Mission Control SVG */
@@ -2872,30 +2880,35 @@
 .wc-mission-chrome {
   position: absolute;
   z-index: 2;
-  top: 0.85rem;
-  left: 0.95rem;
-  right: 0.95rem;
+  top: 0.55rem;
+  left: 0.65rem;
+  right: 0.65rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  gap: 0.4rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(10, 10, 10, 0.42);
+}
+
+.wc-mission-chrome-phase {
+  margin-left: auto;
+  max-width: 42%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(10, 10, 10, 0.55);
 }
 
 .wc-mission-chrome-dot {
   width: 6px;
   height: 6px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #3b5bdb;
   box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.15);
   animation: wc-mission-pulse 2.4s ease-in-out infinite;
-}
-
-.wc-mission-chrome-phase {
-  margin-left: auto;
-  color: rgba(10, 10, 10, 0.55);
 }
 
 .wc-mission-svg {
@@ -3065,17 +3078,27 @@
 
 .wc-process-rail {
   list-style: none;
-  margin: 1.75rem 0 0;
+  margin: 0.85rem 0 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem 1.15rem;
+  flex-wrap: nowrap;
+  gap: 0.35rem 0.75rem;
   z-index: 2;
+  flex-shrink: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  mask-image: linear-gradient(90deg, #000 88%, transparent);
+}
+
+.wc-process-rail::-webkit-scrollbar {
+  display: none;
 }
 
 .wc-process-rail li {
   color: rgba(10, 10, 10, 0.28);
   transition: color 0.35s ease;
+  flex: 0 0 auto;
 }
 
 .wc-process-rail li.is-passed {
@@ -3089,13 +3112,13 @@
 .wc-process-rail-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0;
+  gap: 0.35rem;
+  padding: 0.2rem 0;
   border: 0;
   background: transparent;
   font: inherit;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: inherit;
   cursor: pointer;
@@ -3108,6 +3131,7 @@
 .wc-process-rail-dot {
   width: 6px;
   height: 6px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: currentColor;
   opacity: 0.55;
@@ -3125,6 +3149,52 @@
   white-space: nowrap;
 }
 
+/* Narrow phones: simplify mission diagram + rail */
+@media (max-width: 520px) {
+  .wc-mission-svg .mc-label,
+  .wc-mission-svg .mc-code,
+  .wc-mission-svg .mc-node-chip,
+  .wc-mission-svg .mc-code-chip {
+    display: none;
+  }
+
+  .wc-mission-chrome-phase {
+    max-width: 48%;
+  }
+
+  .wc-process-rail-label {
+    font-size: 0.58rem;
+  }
+
+  .wc-process-step > p:last-child {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 380px) {
+  .wc-process-rail-label {
+    display: none;
+  }
+
+  .wc-process-rail {
+    gap: 0.85rem;
+    justify-content: space-between;
+    mask-image: none;
+    overflow-x: visible;
+  }
+
+  .wc-process-rail-btn {
+    padding: 0.35rem;
+  }
+
+  .wc-mission-chrome > span:nth-child(2) {
+    display: none;
+  }
+}
+
 .wc-process-progress {
   position: absolute;
   left: 0;
@@ -3135,6 +3205,41 @@
   transform-origin: left center;
   transform: scaleX(0);
   opacity: 0.22;
+}
+
+@media (min-width: 600px) {
+  .wc-process-inner {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+  }
+
+  .wc-process-head {
+    margin-bottom: 1.35rem;
+  }
+
+  .wc-process-visual {
+    height: min(46vh, 380px);
+  }
+
+  .wc-process-rail {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    mask-image: none;
+    gap: 0.65rem 1.15rem;
+  }
+
+  .wc-process-rail-btn {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .wc-mission-chrome {
+    top: 0.85rem;
+    left: 0.95rem;
+    right: 0.95rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
 }
 
 @media (min-width: 900px) {
@@ -3150,6 +3255,16 @@
 
   .wc-process-copy {
     min-height: 18rem;
+  }
+
+  .wc-process-step h3 {
+    font-size: clamp(2.35rem, 5.5vw, 3.6rem);
+  }
+
+  .wc-process-step > p:last-child {
+    margin: 1rem 0 0;
+    font-size: 1.02rem;
+    line-height: 1.65;
   }
 
   .wc-process-visual {
