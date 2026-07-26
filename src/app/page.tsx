@@ -16,11 +16,11 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <HomeProcess />
       <HomeWhatWeDo />
       <HomeFeaturedWork />
       <HomeClients />
       <HomeIndustries />
-      <HomeProcess />
       <HomeWhy />
       <HomeTestimonials />
       <HomeInsights />
