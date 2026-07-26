@@ -11,21 +11,21 @@ export const homeServiceCards: ServiceCard[] = [
   {
     title: "Technology Services",
     description:
-      "Discover bespoke technology solutions with Woodenclouds, specializing in website development, mobile apps, and custom software to fuel your business growth.",
+      "Websites, apps, and custom software built to ship clean and scale with the business.",
     image: "/services/technology.jpg",
     href: "/services/technology",
   },
   {
     title: "Startup & Business Support",
     description:
-      "From startup essentials to ongoing support, Woodenclouds is your dedicated partner for navigating challenges and achieving sustained success.",
+      "Research, planning, and operational support so early decisions stay clear and durable.",
     image: "/services/startup-business-support.jpg",
     href: "/services/business-support",
   },
   {
     title: "Branding & Digital Marketing",
     description:
-      "Elevate your brand effortlessly with Woodenclouds seamless branding and digital marketing solutions. Drive visibility, engagement, and results.",
+      "Brand systems and campaigns that make the product easier to find, trust, and choose.",
     image: "/services/marketing.jpg",
     href: "/services/digital-marketing",
   },

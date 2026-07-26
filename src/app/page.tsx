@@ -20,9 +20,9 @@ export default function HomePage() {
       <HomeWhatWeDo />
       <HomeFeaturedWork />
       <HomeClients />
+      <HomeTestimonials />
       <HomeIndustries />
       <HomeWhy />
-      <HomeTestimonials />
       <HomeInsights />
       <EnquireCta variant="light" buttonLabel="Start a conversation" />
       <HomeVisitNotice />

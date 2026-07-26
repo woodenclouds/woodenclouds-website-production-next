@@ -23,8 +23,7 @@ export function HomeWhatWeDo() {
               ship and scale.
             </h2>
             <p className="wc-services-intro">
-              Technology, growth support, and brand systems — shaped around outcomes, not feature
-              lists.
+              Three ways we partner — product engineering, business support, and brand growth.
             </p>
           </div>
         </HomeReveal>
@@ -69,8 +68,7 @@ export function HomeFeaturedWork() {
               the needle.
             </h2>
             <p className="wc-home-lede">
-              Selected engagements across product, commerce, and brand — each shaped around a clear
-              outcome.
+              Selected product, commerce, and brand engagements — each tied to a measurable result.
             </p>
           </div>
         </HomeReveal>
@@ -142,8 +140,7 @@ export function HomeClients() {
             built with.
           </h2>
           <p className="wc-home-lede mt-5">
-            Brands and product teams that trusted Woodenclouds to design, ship, and grow — across
-            markets and stages.
+            Product and brand teams we&apos;ve shipped with across markets and stages.
           </p>
           <div className="mt-8">
             <Link href="/clients" className="wc-home-link">
@@ -188,8 +185,8 @@ export function HomeIndustries() {
               your market moves.
             </h2>
             <p className="wc-home-lede">
-              From healthcare and finance to agriculture, construction, and commerce — sector-aware
-              products and platforms shaped around real constraints, not generic playbooks.
+              Healthcare, finance, agriculture, construction, commerce, and more — sector-aware work,
+              not generic playbooks.
             </p>
           </div>
         </HomeReveal>
@@ -242,13 +239,12 @@ export function HomeWhy() {
           <p className="wc-home-kicker">Why Woodenclouds</p>
           <div className="wc-home-why-head-row">
             <h2 className="wc-home-title">
-              A digital partner
+              A partner built
               <br />
-              built for lasting progress.
+              for lasting progress.
             </h2>
             <p className="wc-home-lede">
-              From product engineering to growth and brand systems, we work as an extension of your
-              team — focused on clarity, speed, and work you can stand behind.
+              One accountable team, clear decisions, and systems that hold as you grow.
             </p>
           </div>
         </HomeReveal>
@@ -305,7 +301,7 @@ export function HomeInsights() {
         <HomeReveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="wc-home-kicker">Insights</p>
-            <h2 className="wc-home-title">Articles from Woodenclouds</h2>
+            <h2 className="wc-home-title">Notes from the studio</h2>
           </div>
           <Link href="/blog" className="text-sm text-ink/60 hover:text-ink">
             View all →
