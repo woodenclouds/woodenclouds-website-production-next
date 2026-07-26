@@ -235,10 +235,10 @@ function Starfield({ dotMap }: { dotMap: THREE.Texture | null }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.028}
-        color="#c8d4ea"
+        color="#9a9a9a"
         map={dotMap ?? undefined}
         transparent
-        opacity={0.35}
+        opacity={0.28}
         sizeAttenuation
         depthWrite={false}
       />
@@ -253,7 +253,7 @@ function ConnectionNetwork({
   maxNeighbors,
   segmentsPerArc = 8,
   lift = 0.08,
-  color = "#6aa8e8",
+  color = "#5a5a5a",
   baseOpacity = 0.22,
   peakOpacity = 0.62,
   nodeSize = 0.05,
@@ -332,13 +332,12 @@ function ConnectionNetwork({
         </bufferGeometry>
         <pointsMaterial
           size={nodeSize}
-          color="#ffffff"
+          color="#2a2a2a"
           map={dotMap ?? undefined}
           transparent
           opacity={0}
           sizeAttenuation
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
         />
       </points>
 
@@ -354,7 +353,6 @@ function ConnectionNetwork({
           transparent
           opacity={0}
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
         />
       </lineSegments>
     </group>
@@ -387,11 +385,10 @@ function GlobeWireframe({
         <bufferAttribute attach="attributes-position" args={[grid, 3]} />
       </bufferGeometry>
       <lineBasicMaterial
-        color="#7eb4ef"
+        color="#6a6a6a"
         transparent
         opacity={0}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
       />
     </lineSegments>
   );
@@ -532,10 +529,10 @@ function PointGlobe({
         </bufferGeometry>
         <pointsMaterial
           size={showConnections ? 0.034 : 0.016}
-          color={showConnections ? "#e4ecf8" : "#b4c6e8"}
+          color={showConnections ? "#2a2a2a" : "#4a4a4a"}
           map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.6 : 0.55}
+          opacity={showConnections ? 0.55 : 0.5}
           sizeAttenuation
           depthWrite={false}
         />
@@ -547,10 +544,10 @@ function PointGlobe({
         </bufferGeometry>
         <pointsMaterial
           size={showConnections ? 0.038 : 0.03}
-          color={showConnections ? "#b8d0ee" : "#7aa8e8"}
+          color={showConnections ? "#3a3a3a" : "#6a6a6a"}
           map={dotMap ?? undefined}
           transparent
-          opacity={showConnections ? 0.36 : 0.28}
+          opacity={showConnections ? 0.32 : 0.26}
           sizeAttenuation
           depthWrite={false}
         />
@@ -568,9 +565,9 @@ function PointGlobe({
           maxNeighbors={5}
           segmentsPerArc={8}
           lift={0.07}
-          color="#8ebef0"
+          color="#555555"
           baseOpacity={0.02}
-          peakOpacity={0.48}
+          peakOpacity={0.4}
           nodeSize={0.07}
           startReveal={0}
           revealDelay={0.05}
@@ -586,9 +583,9 @@ function PointGlobe({
           maxNeighbors={3}
           segmentsPerArc={10}
           lift={0.11}
-          color="#6aa8e8"
+          color="#4a4a4a"
           baseOpacity={0.01}
-          peakOpacity={0.4}
+          peakOpacity={0.34}
           nodeSize={0.085}
           startReveal={0}
           revealDelay={0.18}
@@ -604,9 +601,9 @@ function PointGlobe({
           maxNeighbors={2}
           segmentsPerArc={12}
           lift={0.15}
-          color="#5b9de8"
+          color="#3a3a3a"
           baseOpacity={0.01}
-          peakOpacity={0.34}
+          peakOpacity={0.28}
           nodeSize={0.1}
           startReveal={0}
           revealDelay={0.32}
@@ -620,10 +617,10 @@ function PointGlobe({
         </bufferGeometry>
         <pointsMaterial
           size={0.016}
-          color="#5b9de8"
+          color="#5a5a5a"
           map={dotMap ?? undefined}
           transparent
-          opacity={0.2}
+          opacity={0.22}
           sizeAttenuation
           depthWrite={false}
         />
@@ -635,10 +632,10 @@ function PointGlobe({
         </bufferGeometry>
         <pointsMaterial
           size={0.014}
-          color="#8eb4e0"
+          color="#7a7a7a"
           map={dotMap ?? undefined}
           transparent
-          opacity={0.14}
+          opacity={0.16}
           sizeAttenuation
           depthWrite={false}
         />
@@ -647,9 +644,9 @@ function PointGlobe({
       <mesh ref={glow}>
         <sphereGeometry args={[showConnections ? 2.0 : 1.55, 48, 48]} />
         <meshBasicMaterial
-          color="#3d6fa8"
+          color="#1a1a1a"
           transparent
-          opacity={showConnections ? 0.04 : 0.06}
+          opacity={showConnections ? 0.03 : 0.04}
           depthWrite={false}
         />
       </mesh>
@@ -657,9 +654,9 @@ function PointGlobe({
       <mesh>
         <sphereGeometry args={[showConnections ? 2.45 : 2.5, 48, 48]} />
         <meshBasicMaterial
-          color="#5b9de8"
+          color="#2a2a2a"
           transparent
-          opacity={showConnections ? 0.02 : 0.035}
+          opacity={showConnections ? 0.015 : 0.025}
           side={THREE.BackSide}
           depthWrite={false}
         />
@@ -757,9 +754,9 @@ export function GlobeCanvas({
         gl={{ antialias: !isMobile, alpha: true, premultipliedAlpha: false }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[5, 2, 6]} intensity={1.2} color="#7aa8e8" />
-        <pointLight position={[-4, -2, 3]} intensity={0.4} color="#4a7ab8" />
+        <ambientLight intensity={0.55} />
+        <pointLight position={[5, 2, 6]} intensity={0.7} color="#a0a0a0" />
+        <pointLight position={[-4, -2, 3]} intensity={0.35} color="#808080" />
         <Starfield dotMap={dotMap} />
         <PointGlobe
           scrollProgress={scrollProgress}

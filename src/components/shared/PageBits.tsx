@@ -5,10 +5,30 @@ import Link from "next/link";
 export function EnquireCta({
   background = "/backgrounds/1.jpg",
   buttonLabel = "Enquire Now",
+  variant = "photo",
 }: {
   background?: string;
   buttonLabel?: string;
+  variant?: "photo" | "light";
 }) {
+  if (variant === "light") {
+    return (
+      <section className="relative overflow-hidden bg-paper py-20 text-ink md:py-28">
+        <div className="wc-container relative text-center">
+          <h3 className="mx-auto max-w-3xl text-3xl font-light tracking-tight md:text-4xl">
+            Ready to build what’s next?
+          </h3>
+          <p className="mx-auto mt-4 max-w-md text-base font-light text-muted">
+            Tell us where you are — we’ll help shape the product, brand, and growth path from there.
+          </p>
+          <Link href="/contact" className="wc-btn wc-btn-solid mt-8">
+            {buttonLabel}
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       className="relative overflow-hidden bg-cover bg-center py-20 text-white md:py-28"
@@ -16,11 +36,12 @@ export function EnquireCta({
     >
       <div className="absolute inset-0 bg-black/60" />
       <div className="wc-container relative text-center">
-        <h3 className="text-3xl font-light md:text-4xl">
-          Have a project in mind?
-          <br />
-          Let’s get to work.
+        <h3 className="mx-auto max-w-3xl text-3xl font-light tracking-tight md:text-4xl">
+          Ready to build what’s next?
         </h3>
+        <p className="mx-auto mt-4 max-w-md text-base font-light text-white/65">
+          Tell us where you are — we’ll help shape the product, brand, and growth path from there.
+        </p>
         <Link href="/contact" className="wc-btn wc-btn-light mt-8">
           {buttonLabel}
         </Link>

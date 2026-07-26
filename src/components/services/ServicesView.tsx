@@ -1,143 +1,243 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { homeServiceCards, servicesFaqs } from "@/data/content";
+import { useEffect, useRef, useState } from "react";
+import { servicesFaqs } from "@/data/content";
+import {
+  servicePractices,
+  servicesApproach,
+  servicesHero,
+} from "@/data/services";
+import { getFeaturedWorks } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
-
-const approach = [
-  {
-    index: "01",
-    title: "Value-driven research",
-    body: "We study your market, competitors, and constraints so every decision earns its place — and every build creates real business value.",
-  },
-  {
-    index: "02",
-    title: "Specialized planning",
-    body: "Before a line of code or a campaign goes live, we map a strategy that stays aligned with your vision, timeline, and budget.",
-  },
-  {
-    index: "03",
-    title: "Precise delivery",
-    body: "We implement with focus — shipping high-quality work on schedule, then staying close through launch and beyond.",
-  },
-];
-
-const serviceRows = [
-  ...homeServiceCards,
-  {
-    title: "Hire Dedicated Team",
-    description:
-      "Embed skilled developers and specialists into your workflow — flexible capacity without the hiring overhead.",
-    image: "/team/team-01.jpg",
-    href: "/services/dedicated-team",
-  },
-];
+import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
+import {
+  practiceArts,
+  ServicesHeroArt,
+} from "@/components/services/ServiceIllustrations";
 
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
+  const [ready, setReady] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+  const smooth = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
+
+  const jumpItems = servicePractices.map(({ id, name }) => ({ id, name }));
+  const featured = getFeaturedWorks(2);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onScroll = () => {
+      const rect = hero.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
+      hero.style.setProperty("--svc-scroll", p.toFixed(4));
+    };
+
+    const onMove = (e: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      pointer.current = {
+        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+      };
+    };
+
+    const loop = () => {
+      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
+      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
+      hero.style.setProperty("--hx", smooth.current.x.toFixed(4));
+      hero.style.setProperty("--hy", smooth.current.y.toFixed(4));
+      raf.current = requestAnimationFrame(loop);
+    };
+
+    onScroll();
+    hero.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    raf.current = requestAnimationFrame(loop);
+
+    return () => {
+      hero.removeEventListener("pointermove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf.current);
+    };
+  }, []);
 
   return (
-    <div className="bg-[#05070b] text-white">
-      <header className="wc-svc-hero">
-        <div className="wc-svc-hero-media" aria-hidden>
-          <video src="/videos/video3.mp4" autoPlay muted loop playsInline />
-        </div>
-        <div className="wc-svc-hero-overlay" aria-hidden />
+    <div className="bg-paper text-ink">
+      <header ref={heroRef} className={`wc-svc-stage${ready ? " is-ready" : ""}`}>
+        <div className="wc-svc-stage-grain" aria-hidden />
+        <div className="wc-svc-stage-mesh" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--c" aria-hidden />
 
-        <div className="wc-svc-hero-ui">
-          <div className="wc-container">
-            <h1 className="wc-svc-hero-title">
-              Built to ship.
-              <br />
-              Ready to scale.
-            </h1>
-            <p className="wc-svc-hero-lede">
-              Technology, growth support, and brand systems — shaped around outcomes, not feature
-              lists.
-            </p>
-            <div className="wc-svc-hero-actions">
-              <a href="#services" className="wc-btn wc-btn-light">
-                Explore services
-                <span aria-hidden>→</span>
-              </a>
-              <Link href="/contact" className="wc-btn wc-btn-light">
-                Enquire now
-              </Link>
+        <div className="wc-container wc-svc-stage-frame">
+          <div className="wc-svc-stage-split">
+            <div className="wc-svc-stage-main">
+              <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
+              <h1 className="wc-svc-stage-title">
+                {servicesHero.titleLine1}
+                <br />
+                {servicesHero.titleLine2}
+              </h1>
+              <p className="wc-svc-stage-lede">{servicesHero.description}</p>
+              <div className="wc-svc-stage-actions">
+                <a href={`#${servicePractices[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
+                  Explore services
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Enquire now
+                </Link>
+              </div>
+            </div>
+
+            <div className="wc-svc-stage-visual" aria-hidden>
+              <div className="wc-svc-stage-visual-glow" />
+              <ServicesHeroArt className="wc-svc-stage-art" />
             </div>
           </div>
         </div>
-
-        <a href="#services" className="wc-svc-hero-scroll" aria-label="Scroll to services">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
       </header>
 
-      <section id="services" className="wc-services">
-        <div className="wc-services-bg" aria-hidden />
+      <IndustriesJumpNav items={jumpItems} label="Services" />
 
-        <div className="wc-container relative z-10">
-          <header className="wc-services-head">
-            <p className="wc-services-kicker">What we do</p>
-            <div className="wc-services-head-row">
-              <h2 className="wc-services-title">
-                Four practices.
-                <br />
-                One digital partner.
-              </h2>
-              <p className="wc-services-intro">
-                Pick a path — or combine them. Every engagement is built to move your product and
-                brand forward together.
-              </p>
-            </div>
+      <div className="bg-paper text-ink">
+        {servicePractices.map((practice, index) => {
+          const reverse = index % 2 === 1;
+          const Art = practiceArts[practice.id as keyof typeof practiceArts];
+          return (
+            <section
+              key={practice.id}
+              id={practice.id}
+              className="wc-svc-block scroll-mt-28 border-b border-black/8 last:border-b-0"
+            >
+              <div className="wc-container py-16 md:py-24">
+                <div
+                  className={[
+                    "grid items-center gap-10 lg:grid-cols-12 lg:gap-14",
+                    reverse ? "lg:[&>*:first-child]:order-2" : "",
+                  ].join(" ")}
+                >
+                  <div className="lg:col-span-6">
+                    <div className="wc-svc-vector">
+                      <div className="wc-svc-vector-frame" aria-hidden>
+                        {Art ? <Art className="wc-svc-vector-art" /> : null}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-6">
+                    <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+                      ({String(index + 1).padStart(2, "0")}) {practice.name}
+                    </p>
+                    <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
+                      {practice.title}
+                    </h2>
+                    <p className="mt-3 text-lg font-light text-ink/80">{practice.tagline}</p>
+                    <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
+                      {practice.description}
+                    </p>
+
+                    <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2">
+                      {practice.focus.map((item) => (
+                        <li
+                          key={item}
+                          className="border-t border-black/10 py-3 text-sm font-light text-ink/80"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link href={practice.href} className="wc-btn wc-btn-dark mt-8">
+                      {practice.cta}
+                      <span aria-hidden>→</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      <section className="wc-svc-approach wc-svc-approach--light">
+        <div className="wc-svc-approach-bg" aria-hidden />
+        <div className="wc-container relative z-10 wc-section">
+          <header className="max-w-2xl">
+            <p className="wc-svc-approach-kicker">How we work</p>
+            <h2 className="wc-svc-approach-title">
+              A clear path from idea to impact.
+            </h2>
           </header>
 
-          <div className="wc-services-list">
-            {serviceRows.map((card, i) => (
-              <Link key={card.title} href={card.href} className="wc-services-row group">
-                <span className="wc-services-index">{String(i + 1).padStart(2, "0")}</span>
+          <ol className="wc-svc-approach-grid">
+            {servicesApproach.map((step, i) => (
+              <li key={step.title}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-                <div className="wc-services-copy">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
+      <section className="wc-section bg-paper text-ink">
+        <div className="wc-container">
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+                Across engagements
+              </p>
+              <h2 className="text-3xl font-light text-ink md:text-4xl">Selected work</h2>
+            </div>
+            <Link href="/works" className="wc-home-link">
+              View all works
+              <span aria-hidden>→</span>
+            </Link>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {featured.map((work) => (
+              <Link key={work.slug} href={`/works/${work.slug}`} className="group block">
+                <div className="wc-svc-media overflow-hidden">
+                  <img
+                    src={work.thumbnail}
+                    alt={work.title}
+                    className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                  />
                 </div>
-
-                <div className="wc-services-media">
-                  <img src={card.image} alt="" draggable={false} />
-                </div>
-
-                <span className="wc-services-go" aria-hidden>
-                  →
-                </span>
+                <p className="mt-5 text-xs font-light uppercase tracking-[0.16em] text-muted">
+                  {work.client} · {work.category}
+                </p>
+                <h3 className="mt-2 text-2xl font-light tracking-tight text-ink group-hover:opacity-70">
+                  {work.title}
+                </h3>
+                <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-muted">
+                  {work.description1}
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="wc-svc-approach">
-        <div className="wc-svc-approach-bg" aria-hidden />
-        <div className="wc-container relative z-10">
-          <header className="wc-svc-approach-head">
-            <p className="wc-svc-approach-kicker">How we work</p>
-            <h2 className="wc-svc-approach-title">A clear path from idea to impact.</h2>
-          </header>
-
-          <div className="wc-svc-approach-list">
-            {approach.map((step) => (
-              <article key={step.index} className="wc-svc-approach-item">
-                <strong>{step.index}</strong>
-                <h3>{step.title}</h3>
-                <p>{step.body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="wc-svc-faq">
+      <section className="wc-svc-faq wc-svc-faq--light">
         <div className="wc-container max-w-4xl">
+          <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+            Common questions
+          </p>
           <h2 className="wc-svc-faq-title">FAQs</h2>
           <div className="wc-svc-faq-list">
             {servicesFaqs.map((faq, index) => {
@@ -160,7 +260,7 @@ export function ServicesView() {
         </div>
       </section>
 
-      <EnquireCta />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
     </div>
   );
 }

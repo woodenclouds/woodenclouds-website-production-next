@@ -9,11 +9,25 @@ import { ProgressWrap } from "./ProgressWrap";
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const isWorks = pathname === "/works" || pathname.startsWith("/works/");
-  const isPartner = pathname === "/partner-with-us";
+  const isServicesHub = pathname === "/services";
+  const isIndustries = pathname === "/industries";
+  const isWorksIndex = pathname === "/works";
+  const isWorksDetail = pathname.startsWith("/works/");
   const isAbout = pathname === "/about";
   const isDedicatedTeam = pathname === "/services/dedicated-team";
+  const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
+  const isBlogIndex = pathname === "/blog";
+  const isLightShell =
+    isHome ||
+    isServicesHub ||
+    isIndustries ||
+    isWorksIndex ||
+    isAbout ||
+    isDedicatedTeam ||
+    isPartner ||
+    isContact ||
+    isBlogIndex;
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");
@@ -21,17 +35,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
   const isSolutions = pathname === "/solutions";
-  const isIndustries = pathname === "/industries";
   const isDarkPage =
-    isHome ||
-    pathname === "/services" ||
     isSolutions ||
-    isIndustries ||
-    isWorks ||
-    isPartner ||
-    isAbout ||
-    isDedicatedTeam ||
-    isContact ||
+    isWorksDetail ||
     isBlogDetail ||
     isDigitalMarketing ||
     isBusinessSupport ||
@@ -39,9 +45,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isFuture;
 
   useLayoutEffect(() => {
-    document.body.classList.toggle("is-home", isHome);
+    document.body.classList.toggle("is-home", isLightShell);
     document.body.classList.toggle("is-dark-page", isDarkPage);
-  }, [isHome, isDarkPage]);
+  }, [isLightShell, isDarkPage]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -52,16 +58,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <ProgressWrap />
       <div
         className={
-          isDarkPage
-            ? isSolutions
-              ? "min-h-screen bg-[#0a1f38]"
-              : isIndustries
-                ? "min-h-screen bg-[#070e16]"
-                : isWorks ||
-                    isPartner ||
-                    isAbout ||
-                    isDedicatedTeam ||
-                    isContact ||
+          isLightShell
+            ? "min-h-screen bg-paper text-ink"
+            : isDarkPage
+              ? isSolutions
+                ? "min-h-screen bg-[#0a1f38]"
+                : isWorksDetail ||
                     isBlogDetail ||
                     isDigitalMarketing ||
                     isBusinessSupport ||
@@ -69,7 +71,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     isFuture
                   ? "min-h-screen bg-[#05070b] text-white"
                   : "min-h-screen bg-black text-white"
-            : "min-h-screen bg-paper text-ink"
+              : "min-h-screen bg-paper text-ink"
         }
       >
         <Navbar />

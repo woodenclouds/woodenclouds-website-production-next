@@ -1,31 +1,31 @@
 import { HomeHero } from "@/components/home/HomeHero";
-import { HomeDigitalFuture } from "@/components/home/HomeDigitalFuture";
 import {
-  HomeServices,
-  HomeSolutions,
-  HomeWorks,
+  HomeWhatWeDo,
+  HomeFeaturedWork,
   HomeClients,
-  HomeAbout,
-  HomeFuture,
-  HomePartner,
-  HomeBlogs,
+  HomeIndustries,
+  HomeWhy,
+  HomeTestimonials,
+  HomeInsights,
 } from "@/components/home/HomeSections";
+import { HomeProcess } from "@/components/home/HomeProcess";
+import { HomeVisitNotice } from "@/components/home/HomeVisitNotice";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <HomeDigitalFuture />
-      <HomeServices />
-      <HomeSolutions />
-      <HomeWorks />
+      <HomeWhatWeDo />
+      <HomeFeaturedWork />
       <HomeClients />
-      <HomeAbout />
-      <HomeFuture />
-      <HomePartner />
-      <HomeBlogs />
-      <EnquireCta buttonLabel="Start a conversation" />
+      <HomeIndustries />
+      <HomeProcess />
+      <HomeWhy />
+      <HomeTestimonials />
+      <HomeInsights />
+      <EnquireCta variant="light" buttonLabel="Start a conversation" />
+      <HomeVisitNotice />
     </>
   );
 }

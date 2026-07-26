@@ -4,11 +4,10 @@ export type Client = {
 };
 
 export const clients: Client[] = [
-  { name: "Client 1", logo: "/clients/wc-creatives.png" },
-  { name: "Client 2", logo: "/clients/wc-frames.png" },
-  { name: "Client 3", logo: "/clients/zendots-logo.png" },
-  { name: "Client 4", logo: "/clients/wca-logo-white.png" },
-  { name: "Client 5", logo: "/clients/wc-creatives.png" },
+  { name: "WC Creatives", logo: "/clients/wc-creatives.png" },
+  { name: "WC Frames", logo: "/clients/wc-frames.png" },
+  { name: "Zendots", logo: "/clients/zendots-logo.png" },
+  { name: "Woodenclouds Academy", logo: "/clients/wca-logo-white.png" },
 ];
 
 export const brands = [

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { site } from "@/data/content";
 
 const channels = [
@@ -29,6 +29,12 @@ const social = [
 
 export function ContactView() {
   const [done, setDone] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
+  }, []);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -36,51 +42,61 @@ export function ContactView() {
   }
 
   return (
-    <div className="wc-contact-page bg-[#05070b] text-white">
-      <header className="wc-partner-hero">
-        <div className="wc-partner-hero-media" aria-hidden>
-          <img src="/hero/hero-lead.jpg" alt="" />
-        </div>
-        <div className="wc-partner-hero-overlay" aria-hidden />
+    <div className="wc-contact-page bg-paper text-ink">
+      <header className={`wc-contact-stage${ready ? " is-ready" : ""}`}>
+        <div className="wc-contact-stage-grain" aria-hidden />
+        <div className="wc-contact-stage-mesh" aria-hidden />
+        <div className="wc-contact-stage-orb wc-contact-stage-orb--a" aria-hidden />
+        <div className="wc-contact-stage-orb wc-contact-stage-orb--b" aria-hidden />
+        <div className="wc-contact-stage-orb wc-contact-stage-orb--c" aria-hidden />
 
-        <div className="wc-partner-hero-ui">
-          <div className="wc-container">
-            <p className="wc-team-hero-brand">Woodenclouds</p>
-            <h1 className="wc-partner-hero-title">
-              Let&apos;s talk.
-              <br />
-              <span className="wc-gradient-text">Get in touch.</span>
-            </h1>
-            <p className="wc-partner-hero-lede">
-              Whether you want to start a project or just say hello — we&apos;d love to hear from
-              you.
-            </p>
-            <div className="wc-partner-hero-actions">
-              <a href="#message" className="wc-btn wc-btn-light">
-                Send a message
-                <span aria-hidden>→</span>
-              </a>
-              <a href={site.phoneHref} className="wc-btn wc-btn-light">
-                Call us
-              </a>
+        <div className="wc-container wc-contact-stage-frame">
+          <div className="wc-contact-stage-split">
+            <div className="wc-contact-stage-main">
+              <h1 className="wc-contact-stage-title">
+                Let&apos;s talk.
+                <br />
+                Start here.
+              </h1>
+              <p className="wc-contact-stage-lede">
+                Tell us about a project, partnership, or role — we&apos;ll reply with the right next
+                step from Kochi.
+              </p>
+              <div className="wc-contact-stage-actions">
+                <a href="#message" className="wc-btn wc-btn-solid">
+                  Send a message
+                  <span aria-hidden>↓</span>
+                </a>
+                <a href={site.phoneHref} className="wc-btn wc-btn-dark">
+                  Call us
+                  <span aria-hidden>→</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="wc-contact-stage-visual" aria-hidden>
+              <div className="wc-contact-stage-visual-media">
+                <img src="/hero/hero-lead.jpg" alt="" />
+              </div>
+              <div className="wc-contact-stage-visual-shade" />
+              <div className="wc-contact-stage-visual-meta">
+                <span>Based in Kochi</span>
+                <strong>We reply with clarity</strong>
+                <em>{site.email}</em>
+              </div>
             </div>
           </div>
         </div>
-
-        <a href="#reach" className="wc-partner-hero-scroll" aria-label="Scroll to contact">
-          <span>Scroll</span>
-          <span aria-hidden>↓</span>
-        </a>
       </header>
 
-      <section id="reach" className="wc-partner-programs">
+      <section id="reach" className="wc-contact-reach">
         <div className="wc-container">
-          <header className="wc-partner-programs-head">
+          <header className="wc-contact-reach-head">
             <div>
-              <p className="wc-partner-kicker">Reach us</p>
-              <h2 className="wc-partner-programs-title">Direct lines to Woodenclouds</h2>
+              <p className="wc-contact-kicker">Reach us</p>
+              <h2 className="wc-contact-reach-title">Direct lines to the team</h2>
             </div>
-            <p className="wc-partner-programs-intro">
+            <p className="wc-contact-reach-intro">
               Prefer a call, email, or careers note? Pick the channel that fits — we reply from
               Kochi.
             </p>
@@ -113,11 +129,8 @@ export function ContactView() {
         <div className="wc-container">
           <div className="wc-contact-form-layout">
             <div>
-              <p className="wc-partner-kicker">Write to us</p>
-              <h2 className="wc-contact-form-title">
-                Tell us what you&apos;re{" "}
-                <span className="wc-gradient-text">building</span>
-              </h2>
+              <p className="wc-contact-kicker">Write to us</p>
+              <h2 className="wc-contact-form-title">Tell us what you&apos;re building</h2>
               <p className="wc-contact-form-copy">
                 Share a bit about your project or question. We&apos;ll get back with the right next
                 step.
@@ -190,8 +203,8 @@ export function ContactView() {
                       placeholder="What can we help with?"
                     />
                   </div>
-                  <button type="submit" className="wc-btn wc-btn-dark">
-                    Let&apos;s talk
+                  <button type="submit" className="wc-btn wc-btn-solid">
+                    Send message
                     <span aria-hidden>→</span>
                   </button>
                 </form>

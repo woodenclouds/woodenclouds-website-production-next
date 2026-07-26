@@ -1,15 +1,14 @@
 export type HeroContent = {
-  image: string;
-  alt: string;
+  statement: string;
   headline: string;
-  lede: string;
   cta: { label: string; href: string };
+  ticks: string[];
 };
 
-export const hero: HeroContent = {
-  image: "/hero/hero-1.jpg",
-  alt: "Woodenclouds experiences",
-  headline: "Experiences powered by intelligence.",
-  lede: "We design and build digital products that feel inevitable.",
-  cta: { label: "Watch the Future", href: "/future-woodenclouds" },
+export const heroContent: HeroContent = {
+  statement:
+    "Digital products that close the gap between how a brand sees itself and how the world experiences it.",
+  headline: "Products that feel inevitable.",
+  cta: { label: "Explore", href: "#what-we-do" },
+  ticks: ["Technology", "Design", "Intelligence", "Growth"],
 };
