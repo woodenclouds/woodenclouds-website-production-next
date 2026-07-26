@@ -11,8 +11,13 @@ import {
 import { HomeProcess } from "@/components/home/HomeProcess";
 import { HomeVisitNotice } from "@/components/home/HomeVisitNotice";
 import { EnquireCta } from "@/components/shared/PageBits";
+import { getFeaturedBlogs } from "@/data/blog";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const featuredPosts = await getFeaturedBlogs(2);
+
   return (
     <>
       <HomeHero />
@@ -23,7 +28,7 @@ export default function HomePage() {
       <HomeTestimonials />
       <HomeIndustries />
       <HomeWhy />
-      <HomeInsights />
+      <HomeInsights posts={featuredPosts} />
       <EnquireCta variant="light" buttonLabel="Start a conversation" />
       <HomeVisitNotice />
     </>

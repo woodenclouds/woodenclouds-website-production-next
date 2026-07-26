@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { blogs, formatBlogDate } from "@/data/blogs";
+import { formatBlogDate, type BlogPost } from "@/data/blog";
 import { EnquireCta } from "@/components/shared/PageBits";
 
-const featured = blogs[0];
+type Props = {
+  posts: BlogPost[];
+};
 
-export function BlogView() {
+export function BlogView({ posts }: Props) {
   const [ready, setReady] = useState(false);
+  const featured = posts[0] ?? null;
 
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);
@@ -54,15 +57,19 @@ export function BlogView() {
                 aria-label={`${featured.title} — read essay`}
               >
                 <div className="wc-blog-stage-visual-media">
-                  <img src={featured.image} alt="" />
+                  <img src={featured.cover} alt="" />
                 </div>
                 <div className="wc-blog-stage-visual-shade" aria-hidden />
                 <div className="wc-blog-stage-visual-meta">
                   <span>
-                    Featured · {formatBlogDate(featured.createdAt)} · {featured.readMinutes} min
+                    Featured · {formatBlogDate(featured.date)} · {featured.readTime}
                   </span>
                   <strong>{featured.title}</strong>
-                  <em>{featured.tags.join(" · ")}</em>
+                  <em>
+                    {(featured.tags.length ? featured.tags : [featured.category])
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </em>
                 </div>
               </Link>
             ) : null}
@@ -78,28 +85,34 @@ export function BlogView() {
               <h2 className="wc-blog-index-title">All essays</h2>
             </div>
             <p className="wc-blog-index-count">
-              {blogs.length} {blogs.length === 1 ? "essay" : "essays"}
+              {posts.length} {posts.length === 1 ? "essay" : "essays"}
             </p>
           </header>
 
-          {blogs.length === 0 ? (
+          {posts.length === 0 ? (
             <p className="wc-blog-empty">No essays yet.</p>
           ) : (
             <ul className="wc-blog-list">
-              {blogs.map((blog, i) => (
+              {posts.map((blog, i) => (
                 <li key={blog.slug}>
                   <Link href={`/blog/${blog.slug}`} className="wc-blog-row">
                     <span className="wc-blog-row-index">{String(i + 1).padStart(2, "0")}</span>
                     <div className="wc-blog-row-media" aria-hidden>
-                      <img src={blog.image} alt="" />
+                      <img src={blog.cover} alt="" />
                     </div>
                     <div className="wc-blog-row-body">
                       <p className="wc-blog-meta">
-                        <time dateTime={blog.createdAt}>{formatBlogDate(blog.createdAt)}</time>
+                        <time dateTime={blog.date}>{formatBlogDate(blog.date)}</time>
                         <span aria-hidden>·</span>
-                        <span>{blog.readMinutes} min</span>
-                        <span aria-hidden>·</span>
-                        <span>{blog.tags.join(" · ")}</span>
+                        <span>{blog.readTime}</span>
+                        {(blog.tags.length ? blog.tags : [blog.category])
+                          .filter(Boolean)
+                          .map((tag) => (
+                            <span key={tag}>
+                              <span aria-hidden>·</span>
+                              <span>{tag}</span>
+                            </span>
+                          ))}
                       </p>
                       <h3 className="wc-blog-row-title">{blog.title}</h3>
                       <p className="wc-blog-row-excerpt">{blog.excerpt}</p>

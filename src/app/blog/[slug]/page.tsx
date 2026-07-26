@@ -1,127 +1,106 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { blogs, formatBlogDate, getBlogBySlug } from "@/data/blogs";
 import { EnquireCta } from "@/components/shared/PageBits";
+import {
+  fetchAllPosts,
+  fetchPostBySlug,
+  formatBlogDate,
+} from "@/data/blog";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export async function generateStaticParams() {
-  return blogs.map((b) => ({ slug: b.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const blog = getBlogBySlug(slug);
+  const blog = await fetchPostBySlug(slug);
+  if (!blog) return { title: "Blog" };
   return {
-    title: blog?.title ?? "Blog",
-    description: blog?.excerpt,
+    title: blog.title,
+    description: blog.excerpt,
+    openGraph: {
+      title: blog.title,
+      description: blog.excerpt,
+      images: blog.cover ? [{ url: blog.cover }] : undefined,
+      type: "article",
+    },
   };
 }
 
 export default async function BlogDetailsPage({ params }: Props) {
   const { slug } = await params;
-  const blog = getBlogBySlug(slug);
+  const blog = await fetchPostBySlug(slug);
   if (!blog) notFound();
 
-  const gallery = [blog.image2, blog.image3, blog.image4].filter(Boolean) as string[];
-  const index = blogs.findIndex((b) => b.slug === slug);
-  const prev = index > 0 ? blogs[index - 1] : null;
-  const next = index < blogs.length - 1 ? blogs[index + 1] : null;
+  const posts = await fetchAllPosts();
+  const index = posts.findIndex((p) => p.slug === slug);
+  const prev = index > 0 ? posts[index - 1] : null;
+  const next = index >= 0 && index < posts.length - 1 ? posts[index + 1] : null;
+  const related = posts.filter((p) => p.slug !== blog.slug).slice(0, 3);
+  const topics = (blog.tags.length ? blog.tags : [blog.category]).filter(Boolean);
 
   return (
-    <>
-      <header className="wc-work-detail-hero">
-        <div className="wc-work-detail-hero-media" aria-hidden>
-          <img src={blog.image} alt="" />
+    <article className="wc-blog-article bg-paper text-ink">
+      <header className="wc-blog-article-hero">
+        <div className="wc-blog-article-hero-media" aria-hidden>
+          <img src={blog.cover} alt="" />
         </div>
-        <div className="wc-work-detail-hero-overlay" aria-hidden />
-        <div className="wc-work-detail-hero-ui">
+        <div className="wc-blog-article-hero-shade" aria-hidden />
+        <div className="wc-blog-article-hero-ui">
           <div className="wc-container">
-            <Link href="/blog" className="wc-work-detail-back">
-              ← All posts
+            <Link href="/blog" className="wc-blog-article-back">
+              ← All essays
             </Link>
-            <h1 className="wc-work-detail-title">{blog.title}</h1>
-            <p className="wc-work-detail-lede">{blog.excerpt}</p>
+            <p className="wc-blog-article-kicker">
+              {topics.join(" · ")}
+              {blog.date ? ` · ${formatBlogDate(blog.date)}` : ""}
+              {blog.readTime ? ` · ${blog.readTime}` : ""}
+            </p>
+            <h1 className="wc-blog-article-title">{blog.title}</h1>
+            {blog.excerpt ? (
+              <p className="wc-blog-article-lede">{blog.excerpt}</p>
+            ) : null}
           </div>
         </div>
       </header>
 
-      <section className="wc-work-detail-meta">
+      <section className="wc-blog-article-body">
         <div className="wc-container">
-          <dl className="wc-work-detail-meta-grid">
-            <div>
-              <dt>Published</dt>
-              <dd>{formatBlogDate(blog.createdAt)}</dd>
-            </div>
-            <div>
-              <dt>Updated</dt>
-              <dd>{formatBlogDate(blog.updatedAt)}</dd>
-            </div>
-            <div>
-              <dt>Read time</dt>
-              <dd>{blog.readMinutes} min</dd>
-            </div>
-            <div>
-              <dt>Topics</dt>
-              <dd>{blog.tags.join(" · ")}</dd>
-            </div>
-          </dl>
+          <div
+            className="wc-blog-prose"
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          />
         </div>
       </section>
 
-      <section className="wc-work-detail-body">
-        <div className="wc-container">
-          <p className="wc-work-detail-copy">{blog.description1}</p>
-
-          {gallery.length > 0 && (
-            <div className={`wc-work-detail-gallery cols-${Math.min(gallery.length, 3)}`}>
-              {gallery.map((src) => (
-                <img key={src} src={src} alt="" />
+      {related.length > 0 ? (
+        <section className="wc-blog-article-related">
+          <div className="wc-container">
+            <p className="wc-blog-kicker">Keep reading</p>
+            <h2 className="wc-blog-index-title">More from the studio</h2>
+            <ul className="wc-blog-article-related-list">
+              {related.map((item) => (
+                <li key={item.slug}>
+                  <Link href={`/blog/${item.slug}`} className="wc-blog-article-related-card">
+                    <span className="wc-blog-article-related-meta">
+                      {formatBlogDate(item.date)} · {item.readTime}
+                    </span>
+                    <strong>{item.title}</strong>
+                    <span>{item.excerpt}</span>
+                  </Link>
+                </li>
               ))}
-            </div>
-          )}
-
-          {blog.pullQuote && <blockquote className="wc-blog-pull">{blog.pullQuote}</blockquote>}
-
-          {blog.principles && blog.principles.length > 0 && (
-            <div className="wc-blog-principles">
-              {blog.principles.map((item, i) => (
-                <article key={item.title} className="wc-blog-principle">
-                  <span className="wc-blog-principle-index">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </article>
-              ))}
-            </div>
-          )}
-
-          <p className="wc-work-detail-copy is-center">{blog.description2}</p>
-
-          {blog.image5 && (
-            <figure className="wc-work-detail-figure">
-              <img src={blog.image5} alt="" />
-            </figure>
-          )}
-
-          <div className="wc-work-detail-split">
-            {blog.image6 && (
-              <figure>
-                <img src={blog.image6} alt="" />
-              </figure>
-            )}
-            <p className="wc-work-detail-copy">{blog.description3}</p>
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <nav className="wc-work-detail-nav" aria-label="Adjacent posts">
+      <nav className="wc-blog-article-nav" aria-label="Adjacent posts">
         <div className="wc-container">
-          <div className="wc-work-detail-nav-row">
+          <div className="wc-blog-article-nav-row">
             {prev ? (
-              <Link href={`/blog/${prev.slug}`} className="wc-work-detail-nav-link">
+              <Link href={`/blog/${prev.slug}`} className="wc-blog-article-nav-link">
                 <span>Previous</span>
                 <strong>{prev.title}</strong>
               </Link>
@@ -129,7 +108,7 @@ export default async function BlogDetailsPage({ params }: Props) {
               <span />
             )}
             {next ? (
-              <Link href={`/blog/${next.slug}`} className="wc-work-detail-nav-link is-next">
+              <Link href={`/blog/${next.slug}`} className="wc-blog-article-nav-link is-next">
                 <span>Next</span>
                 <strong>{next.title}</strong>
               </Link>
@@ -141,6 +120,6 @@ export default async function BlogDetailsPage({ params }: Props) {
       </nav>
 
       <EnquireCta buttonLabel="Start a conversation" />
-    </>
+    </article>
   );
 }

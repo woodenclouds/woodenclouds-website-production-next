@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { getFeaturedWorks } from "@/data/works";
-import { getFeaturedBlogs, formatBlogDate } from "@/data/blogs";
+import { formatBlogDate, type BlogPost } from "@/data/blog";
 import { clients } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import { getHomeIndustries, industries } from "@/data/industries";
@@ -291,8 +291,8 @@ export function HomeTestimonials() {
   );
 }
 
-export function HomeInsights() {
-  const blogs = getFeaturedBlogs(2);
+export function HomeInsights({ posts = [] }: { posts?: BlogPost[] }) {
+  const blogs = posts.slice(0, 2);
 
   return (
     <section id="insights" className="wc-insights wc-section text-ink">
@@ -314,14 +314,14 @@ export function HomeInsights() {
               <Link href={`/blog/${blog.slug}`} className="group grid gap-5 sm:grid-cols-2">
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src={blog.image}
+                    src={blog.cover}
                     alt={blog.title}
                     className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="flex flex-col justify-center">
                   <span className="text-xs uppercase tracking-wider text-ink/45">
-                    {formatBlogDate(blog.createdAt)}
+                    {formatBlogDate(blog.date)}
                   </span>
                   <h3 className="mt-3 text-xl font-light leading-snug group-hover:text-ink/80">
                     {blog.title}
