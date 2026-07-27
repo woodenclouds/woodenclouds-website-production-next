@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import { ServicesView } from "@/components/services/ServicesView";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { servicesFaqs } from "@/data/content";
+import { faqJsonLd, pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Services",
   description:
     "Woodenclouds services — technology, startup & business support, branding & digital marketing, and dedicated teams built to ship.",
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
-  return <ServicesView />;
+  return (
+    <>
+      <JsonLd data={faqJsonLd(servicesFaqs)} />
+      <ServicesView />
+    </>
+  );
 }

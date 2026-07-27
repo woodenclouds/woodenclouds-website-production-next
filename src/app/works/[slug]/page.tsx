@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getWorkBySlug, works } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -13,10 +15,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const work = getWorkBySlug(slug);
-  return {
+  return pageMeta({
     title: work?.title ?? "Work",
-    description: work?.description1,
-  };
+    description: work?.description1 ?? "Selected Woodenclouds work.",
+    path: `/works/${slug}`,
+    image: work?.thumbnail || work?.image1,
+  });
 }
 
 export default async function WorkDetailsPage({ params }: Props) {
@@ -31,9 +35,16 @@ export default async function WorkDetailsPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Works", path: "/works" },
+          { name: work.title, path: `/works/${work.slug}` },
+        ])}
+      />
       <header className="wc-work-detail-hero">
         <div className="wc-work-detail-hero-media" aria-hidden>
-          <img src={work.image1} alt="" />
+          <img src={work.image1} alt={work.title} />
         </div>
         <div className="wc-work-detail-hero-overlay" aria-hidden />
         <div className="wc-work-detail-hero-ui">

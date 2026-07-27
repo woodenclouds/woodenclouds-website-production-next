@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EnquireCta } from "@/components/shared/PageBits";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
   fetchAllPosts,
   fetchPostBySlug,
   formatBlogDate,
 } from "@/data/blog";
+import { articleJsonLd, breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,17 +17,20 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const blog = await fetchPostBySlug(slug);
-  if (!blog) return { title: "Blog" };
-  return {
+  if (!blog) {
+    return pageMeta({
+      title: "Blog",
+      description: "Insights from Woodenclouds.",
+      path: `/blog/${slug}`,
+    });
+  }
+  return pageMeta({
     title: blog.title,
-    description: blog.excerpt,
-    openGraph: {
-      title: blog.title,
-      description: blog.excerpt,
-      images: blog.cover ? [{ url: blog.cover }] : undefined,
-      type: "article",
-    },
-  };
+    description: blog.excerpt || blog.title,
+    path: `/blog/${slug}`,
+    image: blog.cover,
+    type: "article",
+  });
 }
 
 export default async function BlogDetailsPage({ params }: Props) {
@@ -42,9 +47,25 @@ export default async function BlogDetailsPage({ params }: Props) {
 
   return (
     <article className="wc-blog-article bg-paper text-ink">
+      <JsonLd
+        data={[
+          articleJsonLd({
+            title: blog.title,
+            description: blog.excerpt || blog.title,
+            path: `/blog/${blog.slug}`,
+            image: blog.cover,
+            datePublished: blog.date || undefined,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+            { name: blog.title, path: `/blog/${blog.slug}` },
+          ]),
+        ]}
+      />
       <header className="wc-blog-article-hero">
         <div className="wc-blog-article-hero-media" aria-hidden>
-          <img src={blog.cover} alt="" />
+          <img src={blog.cover} alt={blog.coverAlt || blog.title} />
         </div>
         <div className="wc-blog-article-hero-shade" aria-hidden />
         <div className="wc-blog-article-hero-ui">

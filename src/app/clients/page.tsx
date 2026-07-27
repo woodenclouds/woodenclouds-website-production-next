@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import { clients } from "@/data/clients";
 import { PageHeader, EnquireCta } from "@/components/shared/PageBits";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Clients" };
+export const metadata: Metadata = pageMeta({
+  title: "Clients",
+  description:
+    "Companies that trust Woodenclouds for digital products, technology delivery, branding, and growth.",
+  path: "/clients",
+});
 
 export default function ClientsPage() {
   return (

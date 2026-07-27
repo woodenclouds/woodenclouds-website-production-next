@@ -9,11 +9,14 @@ import {
 } from "@/data/solutions";
 import { getFeaturedWorks } from "@/data/works";
 
-export const metadata: Metadata = {
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta({
   title: "Solutions",
   description:
     "Productized Woodenclouds solutions for commerce, custom platforms, mobile, AI, growth, and dedicated squads — engineered to scale.",
-};
+  path: "/solutions",
+});
 
 export default function SolutionsPage() {
   const featured = getFeaturedWorks(2);

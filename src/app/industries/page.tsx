@@ -11,11 +11,14 @@ import {
 } from "@/data/industries";
 import { getFeaturedWorks } from "@/data/works";
 
-export const metadata: Metadata = {
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta({
   title: "Industries",
   description:
     "Woodenclouds builds digital products and growth systems for healthcare, finance, retail, agriculture, construction, energy, education, hospitality, and more.",
-};
+  path: "/industries",
+});
 
 export default function IndustriesPage() {
   const featured = getFeaturedWorks(2);
