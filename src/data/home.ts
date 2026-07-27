@@ -55,27 +55,3 @@ export const homeWhy = [
     body: "We work as an extension of your team — focused on clarity, honesty, and work you can stand behind.",
   },
 ];
-
-export const homeTestimonials = [
-  {
-    quote:
-      "Woodenclouds gave us a product that finally matched how we talk about the brand — clear, fast, and easy for the team to own.",
-    name: "Ananya R.",
-    role: "Head of Product",
-    company: "Growth-stage SaaS",
-  },
-  {
-    quote:
-      "From discovery to launch, every decision felt intentional. We shipped on schedule without sacrificing quality.",
-    name: "Michael K.",
-    role: "Founder",
-    company: "Retail ecommerce",
-  },
-  {
-    quote:
-      "They don’t just build screens — they build the system underneath. That difference shows in how calm ops feel now.",
-    name: "Priya S.",
-    role: "Operations Lead",
-    company: "Healthcare platform",
-  },
-];

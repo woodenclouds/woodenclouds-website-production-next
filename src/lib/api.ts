@@ -85,6 +85,16 @@ export type ApiBlogPost = {
   is_active?: boolean;
 };
 
+export type ApiTestimonial = {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  sort_order?: number;
+  is_active?: boolean;
+};
+
 export async function fetchBlogPostsList() {
   return apiFetch<ApiBlogPost[]>("/api/v1/woodenclouds/blog/", {
     cache: "no-store",
@@ -96,4 +106,10 @@ export async function fetchBlogPostDetail(slug: string) {
     `/api/v1/woodenclouds/blog/${encodeURIComponent(slug)}/`,
     { cache: "no-store" },
   );
+}
+
+export async function fetchTestimonialsList() {
+  return apiFetch<ApiTestimonial[]>("/api/v1/woodenclouds/testimonials/", {
+    cache: "no-store",
+  });
 }

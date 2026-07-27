@@ -6,7 +6,8 @@ import { formatBlogDate, type BlogPost } from "@/data/blog";
 import { clients } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
 import { getHomeIndustries, industries } from "@/data/industries";
-import { homeWhy, homeTestimonials } from "@/data/home";
+import { homeWhy } from "@/data/home";
+import { type HomeTestimonial } from "@/data/testimonials";
 import { HomeReveal } from "./HomeReveal";
 
 export function HomeWhatWeDo() {
@@ -262,7 +263,13 @@ export function HomeWhy() {
   );
 }
 
-export function HomeTestimonials() {
+export function HomeTestimonials({
+  items = [],
+}: {
+  items?: HomeTestimonial[];
+}) {
+  if (!items.length) return null;
+
   return (
     <section id="testimonials" className="wc-home-block wc-home-testimonials">
       <div className="wc-container">
@@ -272,8 +279,8 @@ export function HomeTestimonials() {
         </HomeReveal>
 
         <ul className="wc-home-testimonials-grid">
-          {homeTestimonials.map((item, i) => (
-            <HomeReveal key={item.name} as="li" delay={i * 80} className="wc-home-quote">
+          {items.map((item, i) => (
+            <HomeReveal key={item.id || item.name} as="li" delay={i * 80} className="wc-home-quote">
               <blockquote>
                 <p>“{item.quote}”</p>
                 <footer>
