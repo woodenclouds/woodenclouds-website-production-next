@@ -426,6 +426,8 @@ export function HomeTestimonials({
 export function HomeInsights({ posts = [] }: { posts?: BlogPost[] }) {
   const blogs = posts.slice(0, 2);
 
+  if (!blogs.length) return null;
+
   return (
     <section id="insights" className="wc-insights wc-section text-ink">
       <div className="wc-insights-bg" aria-hidden />
