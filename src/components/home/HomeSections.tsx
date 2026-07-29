@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { getFeaturedWorks } from "@/data/works";
 import { formatBlogDate, type BlogPost } from "@/data/blog";
@@ -259,36 +260,164 @@ export function HomeWhy() {
   );
 }
 
+const TESTIMONIAL_AUTOPLAY_MS = 6000;
+
+function slideMetrics(track: HTMLElement) {
+  const first = track.firstElementChild as HTMLElement | null;
+  if (!first) return null;
+  const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+  const unit = first.getBoundingClientRect().width + gap;
+  if (unit <= 0) return null;
+  return { unit, origin: first.offsetLeft };
+}
+
 export function HomeTestimonials({
   items = [],
 }: {
   items?: HomeTestimonial[];
 }) {
+  const trackRef = useRef<HTMLUListElement | null>(null);
+  // 0 until the track has been measured, so controls never flash before layout is known.
+  const [perView, setPerView] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const stops = perView > 0 ? Math.max(1, items.length - perView + 1) : 1;
+  const active = Math.min(index, stops - 1);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const measure = () => {
+      const metrics = slideMetrics(track);
+      if (!metrics) return;
+      setPerView(Math.max(1, Math.round(track.clientWidth / metrics.unit)));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, [items.length]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const metrics = slideMetrics(track);
+        if (!metrics) return;
+        setIndex(Math.max(0, Math.round(track.scrollLeft / metrics.unit)));
+      });
+    };
+
+    track.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      track.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const goTo = useCallback((next: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const metrics = slideMetrics(track);
+    const target = track.children[next] as HTMLElement | undefined;
+    if (!metrics || !target) return;
+    track.scrollTo({ left: target.offsetLeft - metrics.origin, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    if (paused || stops <= 1) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setInterval(() => {
+      goTo(active + 1 >= stops ? 0 : active + 1);
+    }, TESTIMONIAL_AUTOPLAY_MS);
+    return () => window.clearInterval(timer);
+  }, [active, goTo, paused, stops]);
+
   if (!items.length) return null;
 
   return (
     <section id="testimonials" className="wc-home-block wc-home-testimonials">
       <div className="wc-container">
-        <HomeReveal as="header" className="mb-10 md:mb-14">
-          <p className="wc-home-kicker">Testimonials</p>
-          <h2 className="wc-home-title">What partners say.</h2>
+        <HomeReveal as="header" className="wc-home-testimonials-head">
+          <div>
+            <p className="wc-home-kicker">Testimonials</p>
+            <h2 className="wc-home-title">What partners say.</h2>
+          </div>
+          {stops > 1 ? (
+            <div className="wc-home-testimonials-nav">
+              <button
+                type="button"
+                className="wc-hero-nav"
+                onClick={() => goTo(Math.max(0, active - 1))}
+                disabled={active === 0}
+                aria-label="Previous testimonials"
+              >
+                <span aria-hidden>←</span>
+              </button>
+              <button
+                type="button"
+                className="wc-hero-nav"
+                onClick={() => goTo(Math.min(stops - 1, active + 1))}
+                disabled={active >= stops - 1}
+                aria-label="Next testimonials"
+              >
+                <span aria-hidden>→</span>
+              </button>
+            </div>
+          ) : null}
         </HomeReveal>
 
-        <ul className="wc-home-testimonials-grid">
-          {items.map((item, i) => (
-            <HomeReveal key={item.id || item.name} as="li" delay={i * 80} className="wc-home-quote">
-              <blockquote>
-                <p>“{item.quote}”</p>
-                <footer>
-                  <strong>{item.name}</strong>
-                  <span>
-                    {item.role} · {item.company}
-                  </span>
-                </footer>
-              </blockquote>
-            </HomeReveal>
-          ))}
-        </ul>
+        <HomeReveal>
+          <div
+            className="wc-home-testimonials-slider"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onFocusCapture={() => setPaused(true)}
+            onBlurCapture={() => setPaused(false)}
+          >
+            <ul
+              ref={trackRef}
+              className="wc-home-testimonials-track"
+              aria-roledescription="carousel"
+              aria-label="Partner testimonials"
+            >
+              {items.map((item) => (
+                <li key={item.id || item.name} className="wc-home-quote">
+                  <blockquote>
+                    <p>“{item.quote}”</p>
+                    <footer>
+                      <strong>{item.name}</strong>
+                      <span>{[item.role, item.company].filter(Boolean).join(" · ")}</span>
+                    </footer>
+                  </blockquote>
+                </li>
+              ))}
+            </ul>
+
+            {stops > 1 ? (
+              <div className="wc-home-testimonials-dots" aria-label="Testimonial slides">
+                {Array.from({ length: stops }).map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className="wc-home-testimonials-dot"
+                    aria-current={i === active}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                    onClick={() => goTo(i)}
+                  />
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </HomeReveal>
       </div>
     </section>
   );

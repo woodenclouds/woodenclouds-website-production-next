@@ -894,6 +894,13 @@
   background: rgba(10, 10, 10, 0.05);
 }
 
+.wc-hero-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: rgba(10, 10, 10, 0.18);
+  background: transparent;
+}
+
 /* Insights — ambient bg only */
 .wc-insights {
   position: relative;
@@ -3326,13 +3333,83 @@
   color: var(--color-ink);
 }
 
-.wc-home-testimonials-grid {
+.wc-home-testimonials-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.wc-home-testimonials-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.wc-home-testimonials-slider {
+  --wc-quote-gap: 1.25rem;
+  --wc-quote-per-view: 1;
+}
+
+.wc-home-testimonials-track {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 1.25rem;
-  grid-template-columns: 1fr;
+  display: flex;
+  gap: var(--wc-quote-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.wc-home-testimonials-track::-webkit-scrollbar {
+  display: none;
+}
+
+.wc-home-testimonials-track > li {
+  flex: 0 0
+    calc(
+      (100% - (var(--wc-quote-per-view) - 1) * var(--wc-quote-gap)) /
+        var(--wc-quote-per-view)
+    );
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.wc-home-testimonials-dots {
+  margin-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.wc-home-testimonials-dot {
+  width: 1.6rem;
+  height: 2px;
+  padding: 0;
+  border: 0;
+  background: rgba(10, 10, 10, 0.18);
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.wc-home-testimonials-dot:hover {
+  background: rgba(10, 10, 10, 0.4);
+}
+
+.wc-home-testimonials-dot[aria-current="true"] {
+  background: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wc-home-testimonials-track {
+    scroll-behavior: auto;
+  }
 }
 
 .wc-home-quote {
@@ -3388,9 +3465,13 @@
     gap: 1.15rem;
   }
 
-  .wc-home-testimonials-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
+  .wc-home-testimonials-head {
+    margin-bottom: 3.5rem;
+  }
+
+  .wc-home-testimonials-slider {
+    --wc-quote-gap: 1.5rem;
+    --wc-quote-per-view: 2;
   }
 
   .wc-home-quote {
@@ -3410,6 +3491,10 @@
   .wc-home-industries-mosaic {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.1rem;
+  }
+
+  .wc-home-testimonials-slider {
+    --wc-quote-per-view: 3;
   }
 }
 
