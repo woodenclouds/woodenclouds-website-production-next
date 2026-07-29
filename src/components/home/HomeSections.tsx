@@ -134,10 +134,10 @@ export function HomeClients() {
 
       <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-2">
         <HomeReveal>
-          <p className="wc-home-kicker">Previous clients</p>
+          <p className="wc-home-kicker">Clients</p>
           <h2 className="wc-home-title">Our Clients</h2>
           <p className="wc-home-lede mt-5">
-            Product and brand teams we&apos;ve shipped with across markets and stages.
+            The brands and businesses we design, build, and grow alongside.
           </p>
           <div className="mt-8">
             <Link href="/clients" className="wc-home-link">
