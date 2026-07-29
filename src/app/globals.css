@@ -12391,3 +12391,246 @@ body:not(.is-dark-page) .wc-progress {
     max-width: 100%;
   }
 }
+
+/* Clients — light paper stage */
+.wc-clientspage-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0 3.5rem;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.wc-clientspage-hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 6% 25%, rgba(10, 10, 10, 0.035), transparent 62%),
+    radial-gradient(ellipse 50% 55% at 94% 75%, rgba(255, 255, 255, 0.6), transparent 60%),
+    var(--color-paper);
+}
+
+.wc-clientspage-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  background-image:
+    linear-gradient(rgba(10, 10, 10, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 10, 10, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 65% 70% at 78% 45%, #000 15%, transparent 78%);
+}
+
+.wc-clientspage-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.wc-clientspage-kicker {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.45);
+}
+
+.wc-clientspage-title {
+  margin: 0;
+  max-width: 42rem;
+  font-size: clamp(2.35rem, 5.4vw, 3.9rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.wc-clientspage-lede {
+  margin: 1.5rem 0 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(10, 10, 10, 0.62);
+}
+
+.wc-clientspage-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wc-clientspage-tags li {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(10, 10, 10, 0.14);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.6);
+}
+
+.wc-clientspage-wall {
+  background: #f3f0eb;
+  color: var(--color-ink);
+  padding: 4rem 0 4.5rem;
+  border-top: 1px solid rgba(10, 10, 10, 0.06);
+}
+
+.wc-clientspage-wall-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.wc-clientspage-wall-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.wc-clientspage-wall-note {
+  margin: 0;
+  max-width: 24rem;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.wc-clientspage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(10, 10, 10, 0.1);
+  border: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+@media (min-width: 900px) {
+  .wc-clientspage-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.wc-clientspage-cell {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  min-height: 12rem;
+  padding: 2.25rem 1.25rem;
+  background: rgba(255, 255, 255, 0.72);
+  transition: background 0.3s ease;
+}
+
+.wc-clientspage-cell:hover {
+  background: #fff;
+}
+
+.wc-clientspage-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+}
+
+.wc-clientspage-logo img {
+  display: block;
+  max-height: 3rem;
+  max-width: 11rem;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.78;
+  /* Logos ship as light-on-dark artwork — flatten to ink so they read on paper */
+  filter: brightness(0) invert(0.1);
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s ease;
+}
+
+.wc-clientspage-cell:hover .wc-clientspage-logo img {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.wc-clientspage-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-align: center;
+}
+
+.wc-clientspage-name {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.72);
+}
+
+.wc-clientspage-sector {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--color-muted);
+}
+
+.wc-clientspage-band {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  padding: 4rem 0 4.5rem;
+  border-top: 1px solid rgba(10, 10, 10, 0.06);
+}
+
+.wc-clientspage-band-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .wc-clientspage-band-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem;
+  }
+}
+
+.wc-clientspage-step {
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(10, 10, 10, 0.14);
+}
+
+.wc-clientspage-step-index {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: rgba(10, 10, 10, 0.35);
+}
+
+.wc-clientspage-step h3 {
+  margin: 0.85rem 0 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.wc-clientspage-step p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
