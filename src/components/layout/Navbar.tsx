@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { isWorksCaseStudyPath } from "@/data/works";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -22,7 +23,8 @@ export function Navbar() {
   const isServicesHub = pathname === "/services";
   const isIndustries = pathname === "/industries";
   const isWorksIndex = pathname === "/works";
-  const isWorksDetail = pathname.startsWith("/works/");
+  const isWorksCaseStudy = isWorksCaseStudyPath(pathname);
+  const isWorksDetail = pathname.startsWith("/works/") && !isWorksCaseStudy;
   const isAbout = pathname === "/about";
   const isDedicatedTeam = pathname === "/services/dedicated-team";
   const isPartner = pathname === "/partner-with-us";
@@ -63,11 +65,15 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const next = window.scrollY > 48;
+      setScrolled(next);
+      if (isWorksCaseStudy && next) setOpen(false);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isWorksCaseStudy]);
 
   useEffect(() => {
     setOpen(false);
@@ -80,42 +86,57 @@ export function Navbar() {
     };
   }, [open]);
 
+  const showSiteNavOnCase = isWorksCaseStudy && (!scrolled || open);
   const inverted = lightOnScroll && scrolled;
-  const lightNav = isLightShell || !isDarkPage || inverted;
+  const lightNav = isWorksCaseStudy
+    ? false
+    : isLightShell || !isDarkPage || inverted;
   const shell = [
     "wc-nav-bar",
-    isLightShell
-      ? "is-clear is-light"
-      : isFuture
-        ? scrolled
-          ? "is-blur is-dark"
-          : "is-clear is-dark"
-        : isSolutions || isIndustries
-          ? "is-clear is-dark"
-          : isDarkPage
-            ? scrolled
-              ? inverted
-                ? "is-solid is-light"
-                : "is-blur is-dark"
-              : "is-clear is-dark"
-            : "is-solid is-light",
+    isWorksCaseStudy
+      ? "is-clear is-dark"
+      : isLightShell
+        ? "is-clear is-light"
+        : isFuture
+          ? scrolled
+            ? "is-blur is-dark"
+            : "is-clear is-dark"
+          : isSolutions || isIndustries
+            ? "is-clear is-dark"
+            : isDarkPage
+              ? scrolled
+                ? inverted
+                  ? "is-solid is-light"
+                  : "is-blur is-dark"
+                : "is-clear is-dark"
+              : "is-solid is-light",
   ].join(" ");
 
   const headerPos = (() => {
-    // Never stick on scroll — light pages flow with the document; overlay pages sit absolute over the hero.
+    if (isWorksCaseStudy) return "fixed top-0";
     if (isLightShell) return "relative";
     if (isFuture || isSolutions || isDarkPage) return "absolute top-0";
     return "relative";
   })();
 
-  const drawerDark = isFuture || !lightNav;
+  const drawerDark = isWorksCaseStudy ? true : isFuture || !lightNav;
   const logoLight = drawerDark;
 
   const isActive = (href: string) =>
     pathname === href || (href !== "/services" && pathname.startsWith(`${href}/`));
 
   return (
-    <header className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${scrolled ? " is-scrolled" : ""}`}>
+    <header
+      className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${scrolled ? " is-scrolled" : ""}${
+        isWorksCaseStudy
+          ? showSiteNavOnCase
+            ? " opacity-100"
+            : " pointer-events-none opacity-0"
+          : ""
+      }`}
+      style={isWorksCaseStudy ? { transition: "opacity 0.45s ease" } : undefined}
+      aria-hidden={isWorksCaseStudy && !showSiteNavOnCase}
+    >
       <div className={shell}>
         <div className="wc-container wc-nav-inner">
           <Link href="/" className="wc-nav-logo">

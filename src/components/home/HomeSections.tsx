@@ -79,7 +79,21 @@ export function HomeFeaturedWork() {
           <HomeReveal>
             <Link href={`/works/${lead.slug}`} className="wc-home-case wc-home-case--lead group">
               <span className="wc-home-case-media">
-                <img src={lead.thumbnail} alt={lead.title} draggable={false} />
+                {lead.cover ? (
+                  <>
+                    <img
+                      className="wc-home-case-cover"
+                      src={lead.cover}
+                      alt=""
+                      draggable={false}
+                    />
+                    <span className="wc-home-case-product">
+                      <img src={lead.thumbnail} alt={lead.title} draggable={false} />
+                    </span>
+                  </>
+                ) : (
+                  <img src={lead.thumbnail} alt={lead.title} draggable={false} />
+                )}
               </span>
               <span className="wc-home-case-copy">
                 <span className="wc-home-case-meta">
@@ -88,8 +102,13 @@ export function HomeFeaturedWork() {
                   <span>{lead.client}</span>
                 </span>
                 <h3>{lead.title}</h3>
+                <p className="wc-home-case-lede">{lead.title1}</p>
                 <p>{lead.description1}</p>
                 {lead.result ? <span className="wc-home-case-result">{lead.result}</span> : null}
+                <span className="wc-home-case-go">
+                  View case study
+                  <span aria-hidden>→</span>
+                </span>
               </span>
             </Link>
           </HomeReveal>

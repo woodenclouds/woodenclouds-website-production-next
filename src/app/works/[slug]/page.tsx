@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, pageMeta } from "@/lib/seo";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return works.map((w) => ({ slug: w.slug }));
+  return works.filter((w) => w.layout !== "case-study").map((w) => ({ slug: w.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

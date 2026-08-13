@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/data/content";
+import { isWorksCaseStudyPath } from "@/data/works";
 
 export function Footer() {
   const pathname = usePathname();
@@ -15,7 +16,8 @@ export function Footer() {
     pathname === "/services/dedicated-team" ||
     pathname === "/partner-with-us" ||
     pathname === "/contact" ||
-    pathname === "/blog";
+    pathname === "/blog" ||
+    isWorksCaseStudyPath(pathname);
 
   return (
     <footer className={isLightShell ? "wc-footer wc-footer--light" : "wc-footer"}>
