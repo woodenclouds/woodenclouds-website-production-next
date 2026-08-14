@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { hispan } from "./assets";
 import { smoothScrollTo, smoothScrollToId } from "./smoothScroll";
@@ -54,38 +55,68 @@ export function CaseStudyNav({ activeSection }: { activeSection: string }) {
       aria-hidden={!showHispanNav}
     >
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 md:px-12">
-        <div className="pointer-events-none flex items-center gap-2 opacity-0">
+        <div className="pointer-events-none flex items-center gap-3 opacity-0">
+          <img src="/brand/logo-dark.png" alt="" className="h-[13px] w-auto md:h-[15px]" />
+          <span className="text-sm">×</span>
           <img src={hispan.logo} alt="" className="h-8 w-auto md:h-10" />
         </div>
 
-        <button
-          type="button"
-          className={`absolute top-1/2 z-50 flex -translate-y-1/2 cursor-pointer items-center gap-2 transition-all duration-700 ease-in-out ${
+        <div
+          className={`absolute top-1/2 z-50 flex -translate-y-1/2 items-center transition-all duration-700 ease-in-out ${
             isDarkSection
               ? "left-1/2 -translate-x-1/2 scale-125"
               : "left-6 translate-x-0 scale-100 md:left-12"
           }`}
-          onClick={() => smoothScrollTo(0)}
-          aria-label="HISPAN — back to top"
         >
-          <img
-            src={hispan.logo}
-            alt="HISPAN"
-            className={`h-8 w-auto transition-all duration-700 md:h-10 ${
-              isDarkTheme ? "drop-shadow-[0_0_4px_rgba(255,255,255,0.25)]" : ""
+          <Link
+            href="/"
+            className={`flex items-center overflow-hidden transition-all duration-700 ease-in-out ${
+              isDarkSection
+                ? "pointer-events-none mr-0 max-w-0 gap-0 opacity-0"
+                : "mr-3 max-w-[220px] gap-3 opacity-100"
             }`}
-          />
-          <span className="flex items-center text-2xl leading-none font-bold tracking-tighter whitespace-nowrap">
+            aria-label="Woodenclouds home"
+          >
+            <img
+              src={isDarkTheme ? "/brand/logo-light.png" : "/brand/logo-dark.png"}
+              alt="Woodenclouds"
+              className="h-[13px] w-auto shrink-0 md:h-[15px]"
+            />
             <span
-              className={`overflow-hidden text-emerald-400 transition-all duration-700 ease-in-out ${
-                isDarkSection ? "ml-2 max-w-[320px] opacity-100" : "ml-0 max-w-0 opacity-0"
+              className={`shrink-0 text-[15px] leading-none ${
+                isDarkTheme ? "text-white/35" : "text-slate-300"
               }`}
+              aria-hidden
             >
-              - Behind <span className="italic">the</span>{" "}
-              <span className="text-white">Build</span>
+              ×
             </span>
-          </span>
-        </button>
+          </Link>
+
+          <button
+            type="button"
+            className="flex cursor-pointer items-center gap-2"
+            onClick={() => smoothScrollTo(0)}
+            aria-label="HISPAN — back to top"
+          >
+            <img
+              src={hispan.logo}
+              alt="HISPAN"
+              className={`h-8 w-auto transition-all duration-700 md:h-10 ${
+                isDarkTheme ? "drop-shadow-[0_0_4px_rgba(255,255,255,0.25)]" : ""
+              }`}
+            />
+            <span className="flex items-center text-2xl leading-none font-bold tracking-tighter whitespace-nowrap">
+              <span
+                className={`overflow-hidden text-emerald-400 transition-all duration-700 ease-in-out ${
+                  isDarkSection ? "ml-2 max-w-[320px] opacity-100" : "ml-0 max-w-0 opacity-0"
+                }`}
+              >
+                - Behind <span className="italic">the</span>{" "}
+                <span className="text-white">Build</span>
+              </span>
+            </span>
+          </button>
+        </div>
 
         <nav
           className={`hidden items-center gap-6 transition-all duration-700 ease-in-out lg:flex ${
