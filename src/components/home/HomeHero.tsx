@@ -88,7 +88,7 @@ export function HomeHero() {
         <div className="wc-hero-top">
           <h1 className="wc-hero-statement">{heroContent.statement}</h1>
           <p className="wc-hero-ticks" aria-live="polite">
-            <span className="wc-hero-ticks-label">We shape</span>
+            <span className="wc-hero-ticks-label">{heroContent.prefix}</span>
             <span key={heroContent.ticks[tick]} className="wc-hero-tick">
               {heroContent.ticks[tick]}
             </span>

@@ -5,6 +5,7 @@ import { useLayoutEffect } from "react";
 import { isWorksCaseStudyPath } from "@/data/works";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { GetProposal } from "./GetProposal";
 import { ProgressWrap } from "./ProgressWrap";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -81,6 +82,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <GetProposal />
       </div>
     </>
   );

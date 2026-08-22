@@ -1,14 +1,16 @@
 export type HeroContent = {
   statement: string;
   headline: string;
+  prefix: string;
   cta: { label: string; href: string };
   ticks: string[];
 };
 
 export const heroContent: HeroContent = {
   statement:
-    "Digital products that close the gap between how a brand sees itself and how the world experiences it.",
-  headline: "Products that feel inevitable.",
-  cta: { label: "Explore", href: "#process" },
-  ticks: ["Technology", "Design", "Intelligence", "Growth"],
+    "We design and build websites, apps, and digital systems your customers can use — and your business can grow on.",
+  headline: "From first sketch to a product in the market.",
+  prefix: "We build",
+  cta: { label: "See how we work", href: "#process" },
+  ticks: ["Websites", "Apps", "Brands", "Teams"],
 };
