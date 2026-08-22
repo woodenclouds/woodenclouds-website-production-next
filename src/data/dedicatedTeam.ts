@@ -24,7 +24,7 @@ export const dedicatedSquads = [
     description:
       "End-to-end product support across ideation, design, development, and launch — a cross-functional squad that owns the path from brief to shipped.",
     highlights: ["Discovery & design", "Build & iterate", "Launch support", "Roadmap partnership"],
-    image: "/team/team-work.jpg",
+    image: "/team/team-03.jpg",
   },
   {
     id: "support",
