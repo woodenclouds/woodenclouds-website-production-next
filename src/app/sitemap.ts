@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { fetchAllPosts } from "@/data/blog";
+import { industries } from "@/data/industries";
 import { techPages } from "@/data/technology";
 import { works } from "@/data/works";
 import { SITE_URL } from "@/lib/seo";
@@ -61,6 +62,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.75,
   }));
 
+  const industryEntries: MetadataRoute.Sitemap = industries.map((industry) => ({
+    url: `${SITE_URL}/industries/${industry.id}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   const workEntries: MetadataRoute.Sitemap = works.map((work) => ({
     url: `${SITE_URL}/works/${work.slug}`,
     lastModified: now,
@@ -75,5 +83,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  return [...staticEntries, ...techEntries, ...workEntries, ...blogEntries];
+  return [...staticEntries, ...techEntries, ...industryEntries, ...workEntries, ...blogEntries];
 }

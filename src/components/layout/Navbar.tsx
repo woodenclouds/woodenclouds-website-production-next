@@ -21,7 +21,7 @@ export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isServicesHub = pathname === "/services";
-  const isIndustries = pathname === "/industries";
+  const isIndustries = pathname === "/industries" || pathname.startsWith("/industries/");
   const isWorksIndex = pathname === "/works";
   const isWorksCaseStudy = isWorksCaseStudyPath(pathname);
   const isWorksDetail = pathname.startsWith("/works/") && !isWorksCaseStudy;

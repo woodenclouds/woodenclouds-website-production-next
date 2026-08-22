@@ -11,6 +11,7 @@ export function Footer() {
     pathname === "/" ||
     pathname === "/services" ||
     pathname === "/industries" ||
+    pathname.startsWith("/industries/") ||
     pathname === "/works" ||
     pathname === "/about" ||
     pathname === "/services/dedicated-team" ||

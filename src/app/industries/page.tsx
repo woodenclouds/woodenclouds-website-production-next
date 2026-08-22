@@ -79,13 +79,15 @@ export default function IndustriesPage() {
                   ].join(" ")}
                 >
                   <div className="lg:col-span-6">
-                    <div className="wc-ind-media overflow-hidden bg-ink/5">
-                      <img
-                        src={industry.image}
-                        alt={industry.imageAlt}
-                        className="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-[1.03]"
-                      />
-                    </div>
+                    <Link href={`/industries/${industry.id}`} className="group block">
+                      <div className="wc-ind-media overflow-hidden bg-ink/5">
+                        <img
+                          src={industry.image}
+                          alt={industry.imageAlt}
+                          className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                    </Link>
                   </div>
 
                   <div className="lg:col-span-6">
@@ -93,7 +95,9 @@ export default function IndustriesPage() {
                       ({String(industry.projects).padStart(2, "0")}) projects
                     </p>
                     <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
-                      {industry.name}
+                      <Link href={`/industries/${industry.id}`} className="hover:opacity-70">
+                        {industry.name}
+                      </Link>
                     </h2>
                     <p className="mt-3 text-lg font-light text-ink/80">{industry.tagline}</p>
                     <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
@@ -111,10 +115,15 @@ export default function IndustriesPage() {
                       ))}
                     </ul>
 
-                    <Link href={industry.cta.href} className="wc-btn wc-btn-dark mt-8">
-                      {industry.cta.label}
-                      <span aria-hidden>→</span>
-                    </Link>
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      <Link href={`/industries/${industry.id}`} className="wc-btn wc-btn-dark">
+                        Explore more
+                        <span aria-hidden>→</span>
+                      </Link>
+                      <Link href={industry.cta.href} className="wc-btn wc-btn-outline-accent">
+                        {industry.cta.label}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -349,6 +349,17 @@ export const industries: Industry[] = [
   },
 ];
 
+export function getIndustryById(id: string) {
+  return industries.find((item) => item.id === id);
+}
+
+export function getRelatedIndustries(id: string, limit = 3) {
+  const index = industries.findIndex((item) => item.id === id);
+  if (index < 0) return industries.slice(0, limit);
+  const rest = [...industries.slice(index + 1), ...industries.slice(0, index)];
+  return rest.slice(0, limit);
+}
+
 export function getHomeIndustries() {
   const featured = industries.filter((i) => i.featuredOnHome);
   return featured.length ? featured : industries.slice(0, 9);

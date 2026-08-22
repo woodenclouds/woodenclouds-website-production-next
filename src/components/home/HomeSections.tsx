@@ -211,7 +211,7 @@ export function HomeIndustries() {
         <ul className="wc-home-industries-mosaic">
           {items.map((item, i) => (
             <HomeReveal key={item.id} as="li" delay={Math.min(i, 8) * 50}>
-              <Link href={`/industries#${item.id}`} className="wc-home-industry-card">
+              <Link href={`/industries/${item.id}`} className="wc-home-industry-card">
                 <span className="wc-home-industry-card-media" aria-hidden>
                   <img src={item.image} alt="" draggable={false} />
                 </span>
