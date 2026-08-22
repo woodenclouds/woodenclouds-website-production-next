@@ -36,7 +36,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isDigitalMarketing = pathname === "/services/digital-marketing";
   const isBusinessSupport = pathname === "/services/business-support";
   const isFuture = pathname === "/future-woodenclouds";
-  const isSolutions = pathname === "/solutions";
+  const isSolutions = pathname === "/solutions" || pathname.startsWith("/solutions/");
   const isDarkPage =
     isSolutions ||
     isWorksDetail ||

@@ -14,7 +14,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Solutions",
   description:
-    "Productized Woodenclouds solutions for commerce, custom platforms, mobile, AI, growth, and dedicated squads — engineered to scale.",
+    "Productized Woodenclouds solutions — WAI voice agents, commerce, custom platforms, mobile, AI, growth, and dedicated squads.",
   path: "/solutions",
 });
 
@@ -131,6 +131,10 @@ export default function SolutionsPage() {
         @media (prefers-reduced-motion: reduce) {
           .solutions-hero-glow { animation: none; }
         }
+        .wai-list-media {
+          background:
+            radial-gradient(ellipse 90% 65% at 50% 35%, #1e5fa8 0%, #123a6b 38%, #0a1f38 72%, #060d18 100%);
+        }
       `}</style>
 
       <SolutionsJumpNav items={jumpItems} />
@@ -153,11 +157,19 @@ export default function SolutionsPage() {
                   ].join(" ")}
                 >
                   <div className="lg:col-span-6">
-                    <div className="overflow-hidden rounded-2xl bg-ink/5">
+                    <div
+                      className={[
+                        "overflow-hidden rounded-2xl bg-ink/5",
+                        solution.id === "wai" ? "wai-list-media" : "",
+                      ].join(" ")}
+                    >
                       <img
                         src={solution.image}
                         alt={solution.imageAlt}
-                        className="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-[1.03]"
+                        className={[
+                          "aspect-[4/3] w-full transition duration-700 hover:scale-[1.03]",
+                          solution.id === "wai" ? "object-contain object-center p-6" : "object-cover",
+                        ].join(" ")}
                       />
                     </div>
                   </div>

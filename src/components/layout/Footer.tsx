@@ -84,6 +84,9 @@ export function Footer() {
                 <Link href="/solutions">Solutions</Link>
               </li>
               <li>
+                <Link href="/solutions/wai">WAI Voice Agents</Link>
+              </li>
+              <li>
                 <Link href="/industries">Industries</Link>
               </li>
               <li>

@@ -30,6 +30,7 @@ const staticRoutes: {
     priority: 0.8,
   },
   { path: "/solutions", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/solutions/wai", changeFrequency: "monthly", priority: 0.85 },
   { path: "/industries", changeFrequency: "monthly", priority: 0.75 },
   { path: "/works", changeFrequency: "weekly", priority: 0.85 },
   { path: "/clients", changeFrequency: "monthly", priority: 0.6 },

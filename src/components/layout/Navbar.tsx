@@ -40,7 +40,7 @@ export function Navbar() {
     isPartner ||
     isContact ||
     isBlogIndex;
-  const isSolutions = pathname === "/solutions";
+  const isSolutions = pathname === "/solutions" || pathname.startsWith("/solutions/");
   const isBlogDetail = pathname.startsWith("/blog/");
   const isTechnology =
     pathname === "/services/technology" || pathname.startsWith("/services/technology/");

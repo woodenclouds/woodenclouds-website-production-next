@@ -20,10 +20,28 @@ export const solutionsHero = {
   title: "Solutions engineered to grow with you",
   description:
     "Productized platforms and delivery models that turn complex digital needs into clear, measurable outcomes.",
-  cta: { label: "Explore solutions", href: "#commerce" },
+  cta: { label: "Explore solutions", href: "#wai" },
 };
 
 export const solutions: Solution[] = [
+  {
+    id: "wai",
+    name: "WAI",
+    tagline: "AI voice agents that take the call",
+    description:
+      "Woodenclouds AI for sales, support, reception, and appointments — natural voice in English and Malayalam, on Indian infrastructure, billed only for what you use.",
+    image: "/solutions/wai-agent-hq.png",
+    imageAlt: "Woodenclouds AI WAI voice agent",
+    features: [
+      "Inbound & outbound calls",
+      "Live transcripts",
+      "English & Malayalam",
+      "Human handoff",
+      "Analytics dashboard",
+      "Pay as you go",
+    ],
+    cta: { label: "Explore WAI", href: "/solutions/wai" },
+  },
   {
     id: "commerce",
     name: "Commerce Cloud",
@@ -133,6 +151,10 @@ export const solutions: Solution[] = [
     cta: { label: "Hire a team", href: "/services/dedicated-team" },
   },
 ];
+
+export function getSolutionById(id: string) {
+  return solutions.find((item) => item.id === id);
+}
 
 export const solutionsStandards: Standard[] = [
   {
