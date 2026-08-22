@@ -9,8 +9,6 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/solutions", label: "Solutions" },
   { href: "/industries", label: "Industries" },
-  { href: "/partner-with-us", label: "Partner" },
-  { href: "/services/dedicated-team", label: "Hire team" },
   { href: "/works", label: "Works" },
   { href: "/about", label: "About" },
 ];
@@ -26,8 +24,6 @@ export function Navbar() {
   const isWorksCaseStudy = isWorksCaseStudyPath(pathname);
   const isWorksDetail = pathname.startsWith("/works/") && !isWorksCaseStudy;
   const isAbout = pathname === "/about";
-  const isDedicatedTeam = pathname === "/services/dedicated-team";
-  const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
   const isBlogIndex = pathname === "/blog";
   const isLightShell =
@@ -36,8 +32,6 @@ export function Navbar() {
     isIndustries ||
     isWorksIndex ||
     isAbout ||
-    isDedicatedTeam ||
-    isPartner ||
     isContact ||
     isBlogIndex;
   const isSolutions = pathname === "/solutions" || pathname.startsWith("/solutions/");

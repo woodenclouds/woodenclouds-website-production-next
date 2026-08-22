@@ -105,51 +105,6 @@ export const processSteps = [
   "Support & Maintenance",
 ];
 
-export const partnerPrograms = [
-  {
-    id: "outsourcing",
-    title: "Outsourcing Partnership",
-    tagline: "Delivery capacity you can trust",
-    description:
-      "Hand off projects and get dedicated expertise across software and digital marketing. Focus on your core work while we deliver on time with quality you can stand behind.",
-    highlights: ["Dedicated squads", "On-time delivery", "Tech & marketing"],
-    image: "/team/team-work.jpg",
-  },
-  {
-    id: "affiliate",
-    title: "Affiliate Partnership",
-    tagline: "Earn from every successful referral",
-    description:
-      "Refer clients and earn rewards for every successful conversion. A simple way for individuals and businesses to monetize their network.",
-    highlights: ["Simple referrals", "Reward on conversion", "Partner support"],
-    image: "/hero/hero-collab.jpg",
-  },
-  {
-    id: "business",
-    title: "Business Partnerships",
-    tagline: "Alliances that open new markets",
-    description:
-      "Explore joint ventures, co-marketing, and strategic alliances that expand reach for both sides. Unlock new markets and stay ahead together.",
-    highlights: ["Co-marketing", "Joint ventures", "Shared growth"],
-    image: "/about/about-img3.jpg",
-  },
-];
-
-export const partnerReasons = [
-  {
-    title: "Shared standards",
-    body: "We treat partner work with the same craft, communication, and accountability as our direct clients.",
-  },
-  {
-    title: "Clear economics",
-    body: "Transparent scopes, timelines, and referral terms — so collaboration stays simple as it scales.",
-  },
-  {
-    title: "Long-term fit",
-    body: "From one project to ongoing alliances, we build partnerships meant to compound over time.",
-  },
-];
-
 export const site = {
   name: "Woodenclouds",
   email: "hello@woodenclouds.com",

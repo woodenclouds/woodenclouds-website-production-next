@@ -148,7 +148,7 @@ export const solutions: Solution[] = [
       "Transparent delivery",
       "Cost-effective",
     ],
-    cta: { label: "Hire a team", href: "/services/dedicated-team" },
+    cta: { label: "Hire a team", href: "/contact" },
   },
 ];
 

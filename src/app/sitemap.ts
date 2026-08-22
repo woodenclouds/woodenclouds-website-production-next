@@ -24,11 +24,6 @@ const staticRoutes: {
     changeFrequency: "monthly",
     priority: 0.8,
   },
-  {
-    path: "/services/dedicated-team",
-    changeFrequency: "monthly",
-    priority: 0.8,
-  },
   { path: "/solutions", changeFrequency: "monthly", priority: 0.8 },
   { path: "/solutions/wai", changeFrequency: "monthly", priority: 0.85 },
   { path: "/industries", changeFrequency: "monthly", priority: 0.75 },
@@ -37,7 +32,6 @@ const staticRoutes: {
   { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
   { path: "/career", changeFrequency: "weekly", priority: 0.7 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.85 },
-  { path: "/partner-with-us", changeFrequency: "monthly", priority: 0.7 },
   {
     path: "/future-woodenclouds",
     changeFrequency: "monthly",

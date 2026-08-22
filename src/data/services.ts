@@ -15,7 +15,7 @@ export const servicesHero = {
   kicker: "Services",
   title: "Building strong capabilities to empower your brand",
   description:
-    "Six practices. One standard. Branding, experience, technology, growth, business support, and dedicated teams — planned together so the work compounds.",
+    "Five practices. One standard. Branding, experience, technology, growth, and business support — planned together so the work compounds.",
 };
 
 export type ServiceOffer = {
@@ -119,23 +119,6 @@ export const serviceCatalog: ServiceCatalogGroup[] = [
       { title: "Ongoing Partnership", note: "A partner for the messy months when the product meets reality." },
     ],
   },
-  {
-    id: "dedicated-team",
-    name: "Dedicated Team",
-    href: "/services/dedicated-team",
-    cta: "Explore dedicated teams",
-    tagline: "Capacity without hiring overhead",
-    description:
-      "Embed skilled marketing, engineering, and product specialists into your workflow — flexible squads accountable to outcomes, not tickets.",
-    items: [
-      { title: "Marketing Squads", note: "Campaign, content, and growth people who join your weekly rhythm." },
-      { title: "Tech Squads", note: "Engineers who ship with your backlog, not a separate vendor queue." },
-      { title: "Product Support", note: "Discovery, specs, and delivery help so the team stays pointed." },
-      { title: "Technical Support", note: "A desk for incidents, releases, and the unglamorous work after launch." },
-      { title: "Shared Rituals", note: "Standups, demos, and reviews you can see — not a black box." },
-      { title: "Flexible Scaling", note: "Add or reduce seats as the roadmap changes, without a hiring freeze." },
-    ],
-  },
 ];
 
 export const servicePractices: ServicePractice[] = [
@@ -198,26 +181,6 @@ export const servicePractices: ServicePractice[] = [
     ],
     href: "/services/digital-marketing",
     cta: "Explore brand & growth",
-  },
-  {
-    id: "dedicated-team",
-    name: "Dedicated team",
-    title: "Hire Dedicated Team",
-    tagline: "Capacity without hiring overhead",
-    description:
-      "Embed skilled marketing, engineering, and product specialists into your workflow — flexible squads accountable to outcomes, not tickets.",
-    image: "/team/team-01.jpg",
-    imageAlt: "Dedicated team collaboration",
-    focus: [
-      "Marketing squads",
-      "Tech squads",
-      "Product support",
-      "Technical support",
-      "Shared rituals",
-      "Flexible scaling",
-    ],
-    href: "/services/dedicated-team",
-    cta: "Explore dedicated teams",
   },
 ];
 

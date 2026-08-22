@@ -14,8 +14,6 @@ export function Footer() {
     pathname.startsWith("/industries/") ||
     pathname === "/works" ||
     pathname === "/about" ||
-    pathname === "/services/dedicated-team" ||
-    pathname === "/partner-with-us" ||
     pathname === "/contact" ||
     pathname === "/blog" ||
     isWorksCaseStudyPath(pathname);
@@ -110,9 +108,6 @@ export function Footer() {
               <li>
                 <Link href="/services/digital-marketing">Branding & Digital Marketing</Link>
               </li>
-              <li>
-                <Link href="/services/dedicated-team">Hire Dedicated Team</Link>
-              </li>
             </ul>
           </div>
 
@@ -121,9 +116,6 @@ export function Footer() {
             <ul className="wc-footer-links">
               <li>
                 <Link href="/blog">Blog</Link>
-              </li>
-              <li>
-                <Link href="/partner-with-us">Partner with us</Link>
               </li>
               <li>
                 <Link href="/future-woodenclouds">Future Woodenclouds</Link>

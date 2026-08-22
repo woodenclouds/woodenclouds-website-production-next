@@ -288,7 +288,7 @@ export const industries: Industry[] = [
       "Founder partnership",
     ],
     projects: 13,
-    cta: { label: "Hire a squad", href: "/services/dedicated-team" },
+    cta: { label: "Hire a squad", href: "/contact" },
   },
   {
     id: "automobile",

@@ -276,62 +276,8 @@ export function BrandGrowthArt({ className }: IllustProps) {
   );
 }
 
-export function DedicatedTeamArt({ className }: IllustProps) {
-  return (
-    <svg className={className} viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <defs>
-        <linearGradient id="teamGrad" x1="60" y1="40" x2="420" y2="320" gradientUnits="userSpaceOnUse">
-          <stop stopColor={C.paperDeep} />
-          <stop offset="1" stopColor={C.blueSoft} stopOpacity="0.35" />
-        </linearGradient>
-      </defs>
-      <rect width="480" height="360" fill="url(#teamGrad)" />
-
-      {/* connection ring */}
-      <circle className="wc-svc-art-drift" cx="240" cy="168" r="110" fill="none" stroke={C.ink} strokeOpacity="0.08" strokeWidth="1.5" strokeDasharray="6 10" />
-      <circle cx="240" cy="168" r="72" fill={C.blueWash} />
-
-      {/* avatars */}
-      <g className="wc-svc-art-float">
-        <circle cx="240" cy="168" r="36" fill={C.ink} />
-        <circle cx="240" cy="158" r="12" fill={C.blueSoft} />
-        <path d="M218 190c6-14 38-14 44 0" fill={C.blue} />
-      </g>
-      <g className="wc-svc-art-float wc-svc-art-float--delay">
-        <circle cx="140" cy="120" r="28" fill={C.white} stroke={C.ink} strokeOpacity="0.12" strokeWidth="1.5" />
-        <circle cx="140" cy="112" r="9" fill={C.blueDeep} />
-        <path d="M124 138c4-10 28-10 32 0" fill={C.blueWash} />
-      </g>
-      <g className="wc-svc-art-float">
-        <circle cx="340" cy="120" r="28" fill={C.white} stroke={C.ink} strokeOpacity="0.12" strokeWidth="1.5" />
-        <circle cx="340" cy="112" r="9" fill={C.blue} />
-        <path d="M324 138c4-10 28-10 32 0" fill={C.blueWash} />
-      </g>
-      <g className="wc-svc-art-float wc-svc-art-float--delay">
-        <circle cx="160" cy="230" r="26" fill={C.ink} />
-        <circle cx="160" cy="222" r="8" fill={C.blueSoft} />
-        <path d="M146 246c3-9 25-9 28 0" fill={C.blue} fillOpacity="0.7" />
-      </g>
-      <g className="wc-svc-art-float">
-        <circle cx="320" cy="230" r="26" fill={C.blueDeep} />
-        <circle cx="320" cy="222" r="8" fill="white" fillOpacity="0.85" />
-        <path d="M306 246c3-9 25-9 28 0" fill="white" fillOpacity="0.35" />
-      </g>
-
-      {/* role pills */}
-      <rect x="78" y="286" width="100" height="34" rx="17" fill={C.white} stroke={C.ink} strokeOpacity="0.1" />
-      <rect x="96" y="300" width="52" height="6" rx="3" fill={C.ink} fillOpacity="0.2" />
-      <rect x="190" y="286" width="100" height="34" rx="17" fill={C.ink} />
-      <rect x="208" y="300" width="52" height="6" rx="3" fill={C.blue} />
-      <rect x="302" y="286" width="100" height="34" rx="17" fill={C.white} stroke={C.ink} strokeOpacity="0.1" />
-      <rect x="320" y="300" width="52" height="6" rx="3" fill={C.blueDeep} fillOpacity="0.65" />
-    </svg>
-  );
-}
-
 export const practiceArts = {
   technology: TechnologyArt,
   "business-support": BusinessSupportArt,
   "digital-marketing": BrandGrowthArt,
-  "dedicated-team": DedicatedTeamArt,
 } as const;

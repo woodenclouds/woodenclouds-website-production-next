@@ -17,8 +17,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const isWorksCaseStudy = isWorksCaseStudyPath(pathname);
   const isWorksDetail = pathname.startsWith("/works/") && !isWorksCaseStudy;
   const isAbout = pathname === "/about";
-  const isDedicatedTeam = pathname === "/services/dedicated-team";
-  const isPartner = pathname === "/partner-with-us";
   const isContact = pathname === "/contact";
   const isBlogIndex = pathname === "/blog";
   const isLightShell =
@@ -27,8 +25,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     isIndustries ||
     isWorksIndex ||
     isAbout ||
-    isDedicatedTeam ||
-    isPartner ||
     isContact ||
     isBlogIndex;
   const isBlogDetail = pathname.startsWith("/blog/");

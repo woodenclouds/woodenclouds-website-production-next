@@ -7,7 +7,7 @@ import { faqJsonLd, pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   title: "Services",
   description:
-    "Woodenclouds services — branding, experience design, technology, digital marketing, startup & business support, and dedicated teams.",
+    "Woodenclouds services — branding, experience design, technology, digital marketing, and startup & business support.",
   path: "/services",
 });
 
