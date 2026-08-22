@@ -46,6 +46,29 @@ export const works: Work[] = [
     layout: "case-study",
   },
   {
+    slug: "koko-spices",
+    title: "Koko Spices",
+    category: "Web Application",
+    client: "Koko Spices",
+    location: "India",
+    technology: "React, React Native, REST API",
+    thumbnail: "/works/koko-spices/koko-tablet.png",
+    image1: "/works/koko-spices/koko-tablet.png",
+    image2: "/works/koko-spices/koko-dashboard-frame.png",
+    image3: "/works/koko-spices/koko-solar.png",
+    image4: "/works/koko-spices/koko-logo-frame.png",
+    image5: "/works/koko-spices/koko-frame-section.png",
+    title1: "Estate operations in one connected system",
+    description1:
+      "A plantation management platform for Koko Spices — workforce, inventory, and finance in real time, without fragmented manual processes.",
+    description2:
+      "Field teams work from role-based mobile apps. Owners and managers see the whole estate from a single dashboard, with inventory and labour logged at the point of action.",
+    description3:
+      "The result is operational visibility: fewer delayed reports, less inventory confusion, and decisions tied to what is actually happening on the ground.",
+    result: "Real-time visibility across the estate",
+    featured: true,
+  },
+  {
     slug: "fintech-dashboard",
     title: "Fintech Analytics Dashboard",
     category: "Web Application",

@@ -64,9 +64,6 @@ export default function ClientsPage() {
             {clients.map((client, i) => (
               <HomeReveal as="li" key={client.name} delay={i * 70}>
                 <div className="wc-clientspage-cell">
-                  <span className="wc-clientspage-logo">
-                    <img src={client.logo} alt={client.name} draggable={false} />
-                  </span>
                   <span className="wc-clientspage-meta">
                     <span className="wc-clientspage-name">{client.name}</span>
                     {client.sector && (

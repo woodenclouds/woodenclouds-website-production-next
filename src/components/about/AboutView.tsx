@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { brands } from "@/data/clients";
 import { EnquireCta } from "@/components/shared/PageBits";
 
 const values = [
@@ -137,53 +136,6 @@ export function AboutView() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section id="brands" className="wc-about-brands">
-        <div className="wc-container">
-          <header className="wc-about-brands-head">
-            <div>
-              <p className="wc-about-kicker">Our brands</p>
-              <h2 className="wc-about-brands-title">The Woodenclouds family</h2>
-            </div>
-            <p className="wc-about-brands-intro">
-              Sister brands across creatives, education, production, and technology — built to serve
-              different needs under one standard of craft.
-            </p>
-          </header>
-
-          <ul className="wc-about-brands-grid">
-            {brands.map((brand) => {
-              const hasLink = Boolean(brand.href && brand.href !== "#");
-              const external = hasLink && brand.href.startsWith("http");
-              const inner = (
-                <>
-                  <span className="wc-about-brand-logo">
-                    <img src={brand.logo} alt="" />
-                  </span>
-                  <span className="wc-about-brand-name">{brand.name}</span>
-                </>
-              );
-
-              return (
-                <li key={brand.name}>
-                  {hasLink ? (
-                    <a
-                      href={brand.href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noreferrer" : undefined}
-                      className="wc-about-brand"
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <div className="wc-about-brand">{inner}</div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
         </div>
       </section>
 

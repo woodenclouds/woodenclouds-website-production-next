@@ -171,7 +171,7 @@ export function HomeClients() {
           {clients.map((client, i) => (
             <HomeReveal key={client.name} as="li" delay={i * 60}>
               <div className="wc-clients-tile">
-                <img src={client.logo} alt={client.name} draggable={false} />
+                <span>{client.name}</span>
               </div>
             </HomeReveal>
           ))}
