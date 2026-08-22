@@ -72,6 +72,7 @@ export function ProcessMission({ progress, activeStep, stepCount }: ProcessMissi
       <svg
         className="wc-mission-svg"
         viewBox="0 0 480 520"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
