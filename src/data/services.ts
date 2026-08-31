@@ -14,6 +14,8 @@ export type ServicePractice = {
 export const servicesHero = {
   kicker: "Services",
   title: "Building strong capabilities to empower your brand",
+  titleLine1: "Building strong",
+  titleLine2: "capabilities",
   description:
     "Five practices. One standard. Branding, experience, technology, growth, and business support — planned together so the work compounds.",
 };

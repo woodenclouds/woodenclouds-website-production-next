@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { servicesFaqs } from "@/data/content";
 import {
   serviceCatalog,
@@ -11,46 +11,136 @@ import {
 import { getFeaturedWorks } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
 import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
+import { ServicesHeroArt } from "@/components/services/ServiceIllustrations";
 
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+  const smooth = useRef({ x: 0, y: 0 });
+  const raf = useRef(0);
   const featured = getFeaturedWorks(2);
   const jumpItems = serviceCatalog.map(({ id, name }) => ({ id, name }));
 
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onScroll = () => {
+      const rect = hero.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
+      hero.style.setProperty("--svc-scroll", p.toFixed(4));
+    };
+
+    const onMove = (e: PointerEvent) => {
+      const rect = hero.getBoundingClientRect();
+      pointer.current = {
+        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+      };
+    };
+
+    const loop = () => {
+      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
+      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
+      hero.style.setProperty("--hx", smooth.current.x.toFixed(4));
+      hero.style.setProperty("--hy", smooth.current.y.toFixed(4));
+      raf.current = requestAnimationFrame(loop);
+    };
+
+    onScroll();
+    hero.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    raf.current = requestAnimationFrame(loop);
+
+    return () => {
+      hero.removeEventListener("pointermove", onMove);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf.current);
+    };
+  }, []);
+
   return (
-    <div className="wc-svc-page">
-      <header className="wc-svc-intro">
-        <div className="wc-container">
-          <p className="wc-svc-pillar-kicker">{servicesHero.kicker}</p>
-          <h1>{servicesHero.title}</h1>
-          <p>{servicesHero.description}</p>
+    <div className="bg-paper text-ink">
+      <header ref={heroRef} className="wc-svc-stage">
+        <div className="wc-svc-stage-grain" aria-hidden />
+        <div className="wc-svc-stage-mesh" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
+        <div className="wc-svc-stage-orb wc-svc-stage-orb--c" aria-hidden />
+
+        <div className="wc-container wc-svc-stage-frame">
+          <div className="wc-svc-stage-split">
+            <div className="wc-svc-stage-main">
+              <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
+              <h1 className="wc-svc-stage-title">
+                {servicesHero.titleLine1}
+                <br />
+                {servicesHero.titleLine2}
+              </h1>
+              <p className="wc-svc-stage-lede">{servicesHero.description}</p>
+              <div className="wc-svc-stage-actions">
+                <a href={`#${jumpItems[0]?.id ?? "branding"}`} className="wc-btn wc-btn-solid">
+                  Explore services
+                  <span aria-hidden>↓</span>
+                </a>
+                <Link href="/contact" className="wc-btn wc-btn-dark">
+                  Enquire now
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="wc-svc-stage-visual" aria-hidden>
+              <div className="wc-svc-stage-visual-glow" />
+              <ServicesHeroArt className="wc-svc-stage-art" />
+            </div>
+          </div>
         </div>
       </header>
 
       <IndustriesJumpNav items={jumpItems} label="Services" />
 
       {serviceCatalog.map((group, index) => (
-        <section key={group.id} id={group.id} className="wc-svc-pillar scroll-mt-28">
-          <div className="wc-container">
-            <div className="wc-svc-pillar-grid">
-              <div className="wc-svc-pillar-copy">
-                <p className="wc-svc-pillar-kicker">
+        <section
+          key={group.id}
+          id={group.id}
+          className="scroll-mt-28 border-b border-black/8 bg-paper last:border-b-0"
+        >
+          <div className="wc-container py-16 md:py-24">
+            <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
                   ({String(index + 1).padStart(2, "0")}) {group.name}
                 </p>
-                <h2>{group.tagline}</h2>
-                <p>{group.description}</p>
-                <Link href={group.href} className="wc-btn wc-btn-dark">
+                <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
+                  {group.tagline}
+                </h2>
+                <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
+                  {group.description}
+                </p>
+                <Link href={group.href} className="wc-btn wc-btn-dark mt-8">
                   {group.cta}
                   <span aria-hidden>→</span>
                 </Link>
               </div>
-              <ol className="wc-svc-pillar-list">
+              <ol className="lg:col-span-7">
                 {group.items.map((item, itemIndex) => (
-                  <li key={item.title}>
-                    <span>{String(itemIndex + 1).padStart(2, "0")}</span>
+                  <li
+                    key={item.title}
+                    className="flex items-start gap-4 border-t border-black/10 py-4 last:border-b"
+                  >
+                    <span className="w-8 shrink-0 pt-1 text-xs font-light tracking-[0.12em] text-muted">
+                      {String(itemIndex + 1).padStart(2, "0")}
+                    </span>
                     <div>
-                      <strong>{item.title}</strong>
-                      <em>{item.note}</em>
+                      <strong className="block text-base font-normal tracking-tight text-ink">
+                        {item.title}
+                      </strong>
+                      <p className="mt-1 text-sm font-light leading-relaxed text-muted">
+                        {item.note}
+                      </p>
                     </div>
                   </li>
                 ))}

@@ -4679,21 +4679,6 @@ body:not(.is-dark-page) .wc-progress {
 .wc-svc-stage-main,
 .wc-svc-stage-visual {
   position: relative;
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition:
-    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.wc-svc-stage.is-ready .wc-svc-stage-main,
-.wc-svc-stage.is-ready .wc-svc-stage-visual {
-  opacity: 1;
-  transform: none;
-}
-
-.wc-svc-stage.is-ready .wc-svc-stage-visual {
-  transition-delay: 0.12s;
 }
 
 .wc-svc-stage-main {
@@ -4751,7 +4736,7 @@ body:not(.is-dark-page) .wc-progress {
 
 .wc-svc-stage-title {
   margin: 0;
-  max-width: 12ch;
+  max-width: 16ch;
   color: var(--color-ink);
   font-size: clamp(2.75rem, 7vw, 5rem);
   font-weight: 300;
