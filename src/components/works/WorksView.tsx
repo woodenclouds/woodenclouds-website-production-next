@@ -104,7 +104,11 @@ export function WorksView() {
                   <li key={work.slug} className={lead ? "wc-works-item is-lead" : "wc-works-item"}>
                     <Link href={`/works/${work.slug}`} className="wc-works-card group">
                       <div className="wc-works-card-media">
-                        <img src={work.thumbnail} alt={work.title} />
+                        <img 
+                          src={work.thumbnail} 
+                          alt={work.title} 
+                          style={work.slug === "hispan" ? { transform: "scale(1.5)", objectPosition: "center 40%" } : undefined}
+                        />
                       </div>
                       <div className="wc-works-card-body">
                         <span className="wc-works-card-meta">

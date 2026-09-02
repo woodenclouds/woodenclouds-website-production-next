@@ -34,7 +34,7 @@ export function Footer() {
                 src="/brand/logo-light.png"
                 alt="Woodenclouds"
                 width={180}
-                height={10}
+                height={20}
                 className="wc-logo"
               />
             </Link>

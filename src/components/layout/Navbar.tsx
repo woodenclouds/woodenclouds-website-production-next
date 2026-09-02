@@ -147,13 +147,13 @@ export function Navbar() {
       aria-hidden={isWorksCaseStudy && !showSiteNavOnCase}
     >
       <div className={shell}>
-        <div className="wc-nav-inner">
+        <div className="wc-container wc-nav-inner">
           <Link href="/" className="wc-nav-logo">
             <img
               src={logoLight ? "/brand/logo-light.png" : "/brand/logo-dark.png"}
               alt="Woodenclouds"
               width={220}
-              height={14}
+              height={24}
               className="wc-logo"
             />
           </Link>

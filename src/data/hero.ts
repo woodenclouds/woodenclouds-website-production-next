@@ -11,10 +11,8 @@ export type HeroContent = {
 
 export const heroContent: HeroContent = {
   statementLines: [
-    "Digital Products That Close The Gap",
-    "Between How A Brand Sees Itself",
-    "And How The World",
-    "Experiences It.",
+    "Building the digital foundation",
+    "for brands ready to define their industry.",
   ],
   actions: [
     { label: "View Our Works", href: "/works", variant: "solid" },

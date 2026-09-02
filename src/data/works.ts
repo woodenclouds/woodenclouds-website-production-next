@@ -32,9 +32,9 @@ export const works: Work[] = [
     client: "Lazza",
     location: "Kerala, India",
     technology: "React, Django REST, PostgreSQL, OpenAI",
-    thumbnail: "/works/hispan/custom-hero.png",
-    cover: "/works/hispan/custom-hero.png",
-    image1: "/works/hispan/custom-hero.png",
+    thumbnail: "/works/hispan/laptop_mockup.png",
+    cover: "/works/hispan/laptop_mockup.png",
+    image1: "/works/hispan/laptop_mockup.png",
     title1: "Enterprise platform to streamline factory operations",
     description1:
       "A unified multi-factory operations platform for Lazza — production, inventory, utilities, machine complaints, wastage, and reporting in one intelligent dashboard.",

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { heroContent } from "@/data/hero";
 import { HeroStrings, heroStringsCanInteract } from "./HeroStrings";
 import "./home-hero.css";
+import { AnimatedHeroText } from "./AnimatedHeroText";
 
 export function HomeHero() {
   const [ready, setReady] = useState(false);
@@ -69,6 +70,9 @@ export function HomeHero() {
               </span>
             ))}
           </h1>
+          
+          <AnimatedHeroText />
+
           <div className="wc-hero-actions">
             {heroContent.actions.map((action) => (
               <Link
