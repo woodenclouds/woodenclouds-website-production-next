@@ -86,17 +86,22 @@ export function Navbar() {
     };
   }, [open]);
 
-  const showSiteNavOnCase = isWorksCaseStudy && (!scrolled || open);
+  const isKoko = pathname === "/works/koko";
+  const showSiteNavOnCase = isWorksCaseStudy && (isKoko || !scrolled || open);
   const inverted = lightOnScroll && scrolled;
   const lightNav = isWorksCaseStudy
     ? false
     : isLightShell || !isDarkPage || inverted;
   const shell = [
     "wc-nav-bar",
-    isWorksCaseStudy
-      ? "is-clear is-dark"
-      : overlayLightHero
-        ? "is-clear is-light"
+    isKoko
+      ? scrolled
+        ? "is-blur is-dark"
+        : "is-clear is-dark"
+      : isWorksCaseStudy
+        ? "is-clear is-dark"
+        : overlayLightHero
+          ? "is-clear is-light"
         : isLightShell
           ? "is-solid is-light"
           : isFuture
