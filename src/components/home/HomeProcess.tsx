@@ -150,7 +150,6 @@ export function HomeProcess() {
                           onClick={() => scrollToStep(i)}
                           aria-current={on ? "step" : undefined}
                         >
-                          <span className="wc-process-rail-dot" />
                           <span className="wc-process-rail-label">{step.title}</span>
                         </button>
                       </li>

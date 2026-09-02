@@ -63,11 +63,7 @@ export function ProcessMission({ progress, activeStep, stepCount }: ProcessMissi
 
   return (
     <div className="wc-mission" data-step={activeStep} aria-hidden>
-      <div className="wc-mission-chrome">
-        <span className="wc-mission-chrome-dot" />
-        <span>Mission Control</span>
-        <span className="wc-mission-chrome-phase">{missionLabel}</span>
-      </div>
+
 
       <svg
         className="wc-mission-svg"
@@ -103,13 +99,12 @@ export function ProcessMission({ progress, activeStep, stepCount }: ProcessMissi
           </radialGradient>
         </defs>
 
-        {/* Grid */}
         <g className="wc-mission-grid" opacity={0.35 + discover * 0.25}>
-          {Array.from({ length: 13 }, (_, i) => (
-            <line key={`v${i}`} x1={40 + i * 33.3} y1={40} x2={40 + i * 33.3} y2={480} stroke="currentColor" strokeWidth="0.6" />
+          {Array.from({ length: 11 }, (_, i) => (
+            <line key={`v${i}`} x1={40 + i * 40} y1={40} x2={40 + i * 40} y2={480} stroke="currentColor" strokeWidth="0.6" />
           ))}
-          {Array.from({ length: 14 }, (_, i) => (
-            <line key={`h${i}`} x1={40} y1={40 + i * 33.3} x2={440} y2={40 + i * 33.3} stroke="currentColor" strokeWidth="0.6" />
+          {Array.from({ length: 12 }, (_, i) => (
+            <line key={`h${i}`} x1={40} y1={40 + i * 40} x2={440} y2={40 + i * 40} stroke="currentColor" strokeWidth="0.6" />
           ))}
           <rect x="40" y="40" width="400" height="440" stroke="currentColor" strokeWidth="1" opacity="0.35" />
         </g>
