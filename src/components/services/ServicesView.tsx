@@ -1,100 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { servicesFaqs } from "@/data/content";
 import {
-  serviceCatalog,
+  servicePractices,
   servicesApproach,
   servicesHero,
 } from "@/data/services";
 import { getFeaturedWorks } from "@/data/works";
 import { EnquireCta } from "@/components/shared/PageBits";
 import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
-import { ServicesHeroArt } from "@/components/services/ServiceIllustrations";
+import FloatingLines from "@/components/services/FloatingLines";
 
 export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
-  const heroRef = useRef<HTMLElement>(null);
-  const pointer = useRef({ x: 0, y: 0 });
-  const smooth = useRef({ x: 0, y: 0 });
-  const raf = useRef(0);
+  const [ready, setReady] = useState(false);
   const featured = getFeaturedWorks(2);
-  const jumpItems = serviceCatalog.map(({ id, name }) => ({ id, name }));
+  const jumpItems = servicePractices.map(({ id, name }) => ({ id, name }));
 
   useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const onScroll = () => {
-      const rect = hero.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
-      hero.style.setProperty("--svc-scroll", p.toFixed(4));
-    };
-
-    const onMove = (e: PointerEvent) => {
-      const rect = hero.getBoundingClientRect();
-      pointer.current = {
-        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
-        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
-      };
-    };
-
-    const loop = () => {
-      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
-      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
-      hero.style.setProperty("--hx", smooth.current.x.toFixed(4));
-      hero.style.setProperty("--hy", smooth.current.y.toFixed(4));
-      raf.current = requestAnimationFrame(loop);
-    };
-
-    onScroll();
-    hero.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
-    raf.current = requestAnimationFrame(loop);
-
-    return () => {
-      hero.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf.current);
-    };
+    const id = window.setTimeout(() => setReady(true), 40);
+    return () => window.clearTimeout(id);
   }, []);
 
   return (
     <div className="bg-paper text-ink">
-      <header ref={heroRef} className="wc-svc-stage">
-        <div className="wc-svc-stage-grain" aria-hidden />
-        <div className="wc-svc-stage-mesh" aria-hidden />
-        <div className="wc-svc-stage-orb wc-svc-stage-orb--a" aria-hidden />
-        <div className="wc-svc-stage-orb wc-svc-stage-orb--b" aria-hidden />
-        <div className="wc-svc-stage-orb wc-svc-stage-orb--c" aria-hidden />
+      <header
+        className={`wc-svc-stage h-[100svh] !bg-none bg-white${ready ? " is-ready" : ""}`}
+      >
+        <div className="absolute inset-0 z-0">
+          <FloatingLines
+            enabledWaves={["top", "bottom"]}
+            topWavePosition={{ x: 10, y: 0.65, rotate: -0.4 }}
+            lineCount={[10, 15, 20]}
+            lineDistance={2}
+            bendRadius={6}
+            bendStrength={-4.5}
+            interactive={true}
+            parallax={true}
+            animationSpeed={1.5}
+            linesGradient={["#ad92d5", "#2f4973", "#06b6d4"]}
+            lightMode
+            backgroundColor="#ffffff"
+          />
+        </div>
 
-        <div className="wc-container wc-svc-stage-frame">
-          <div className="wc-svc-stage-split">
-            <div className="wc-svc-stage-main">
-              <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
-              <h1 className="wc-svc-stage-title">
-                {servicesHero.titleLine1}
-                <br />
-                {servicesHero.titleLine2}
-              </h1>
-              <p className="wc-svc-stage-lede">{servicesHero.description}</p>
-              <div className="wc-svc-stage-actions">
-                <a href={`#${jumpItems[0]?.id ?? "branding"}`} className="wc-btn wc-btn-solid">
-                  Explore services
-                  <span aria-hidden>↓</span>
-                </a>
-                <Link href="/contact" className="wc-btn wc-btn-dark">
-                  Enquire now
-                  <span aria-hidden>→</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="wc-svc-stage-visual" aria-hidden>
-              <div className="wc-svc-stage-visual-glow" />
-              <ServicesHeroArt className="wc-svc-stage-art" />
+        <div className="wc-container relative z-10 wc-svc-stage-frame pointer-events-none !pt-0 !pb-0 !min-h-[100svh] flex items-center justify-center">
+          <div className="wc-svc-stage-main text-center flex flex-col items-center max-w-4xl">
+            <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
+            <h1 className="wc-svc-stage-title">
+              {servicesHero.titleLine1}
+              <br />
+              {servicesHero.titleLine2}
+            </h1>
+            <p className="wc-svc-stage-lede mx-auto">{servicesHero.description}</p>
+            <div className="wc-svc-stage-actions pointer-events-auto justify-center">
+              <a href={`#${jumpItems[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
+                Explore services
+                <span aria-hidden>↓</span>
+              </a>
+              <Link href="/contact" className="wc-btn wc-btn-dark">
+                Enquire now
+              </Link>
             </div>
           </div>
         </div>
@@ -102,53 +70,68 @@ export function ServicesView() {
 
       <IndustriesJumpNav items={jumpItems} label="Services" />
 
-      {serviceCatalog.map((group, index) => (
-        <section
-          key={group.id}
-          id={group.id}
-          className="scroll-mt-28 border-b border-black/8 bg-paper last:border-b-0"
-        >
-          <div className="wc-container py-16 md:py-24">
-            <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-5">
-                <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
-                  ({String(index + 1).padStart(2, "0")}) {group.name}
-                </p>
-                <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
-                  {group.tagline}
-                </h2>
-                <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
-                  {group.description}
-                </p>
-                <Link href={group.href} className="wc-btn wc-btn-dark mt-8">
-                  {group.cta}
-                  <span aria-hidden>→</span>
-                </Link>
-              </div>
-              <ol className="lg:col-span-7">
-                {group.items.map((item, itemIndex) => (
-                  <li
-                    key={item.title}
-                    className="flex items-start gap-4 border-t border-black/10 py-4 last:border-b"
-                  >
-                    <span className="w-8 shrink-0 pt-1 text-xs font-light tracking-[0.12em] text-muted">
-                      {String(itemIndex + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <strong className="block text-base font-normal tracking-tight text-ink">
-                        {item.title}
-                      </strong>
-                      <p className="mt-1 text-sm font-light leading-relaxed text-muted">
-                        {item.note}
-                      </p>
+      <div className="bg-paper text-ink">
+        {servicePractices.map((practice, index) => {
+          const reverse = index % 2 === 1;
+          return (
+            <section
+              key={practice.id}
+              id={practice.id}
+              className="wc-svc-block scroll-mt-28 border-b border-black/8 last:border-b-0"
+            >
+              <div className="wc-container py-16 md:py-24">
+                <div
+                  className={[
+                    "grid items-center gap-10 lg:grid-cols-12 lg:gap-14",
+                    reverse ? "lg:[&>*:first-child]:order-2" : "",
+                  ].join(" ")}
+                >
+                  <div className="lg:col-span-6">
+                    <div className="wc-svc-vector">
+                      <div className="wc-svc-vector-frame" aria-hidden>
+                        <img
+                          src={practice.image}
+                          alt={practice.imageAlt}
+                          className="wc-svc-vector-art object-cover"
+                        />
+                      </div>
                     </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </section>
-      ))}
+                  </div>
+
+                  <div className="lg:col-span-6">
+                    <p className="mb-3 text-sm font-light uppercase tracking-[0.18em] text-muted">
+                      ({String(index + 1).padStart(2, "0")}) {practice.name}
+                    </p>
+                    <h2 className="text-3xl font-light tracking-tight text-ink md:text-4xl">
+                      {practice.title}
+                    </h2>
+                    <p className="mt-3 text-lg font-light text-ink/80">{practice.tagline}</p>
+                    <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-muted md:text-base">
+                      {practice.description}
+                    </p>
+
+                    <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2">
+                      {practice.focus.map((item) => (
+                        <li
+                          key={item}
+                          className="border-t border-black/10 py-3 text-sm font-light text-ink/80"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link href={practice.href} className="wc-btn wc-btn-dark mt-8">
+                      {practice.cta}
+                      <span aria-hidden>→</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
 
       <section className="wc-svc-approach wc-svc-approach--light">
         <div className="wc-svc-approach-bg" aria-hidden />
@@ -199,6 +182,9 @@ export function ServicesView() {
                 <h3 className="mt-2 text-2xl font-light tracking-tight text-ink group-hover:opacity-70">
                   {work.title}
                 </h3>
+                <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-muted">
+                  {work.description1}
+                </p>
               </Link>
             ))}
           </div>

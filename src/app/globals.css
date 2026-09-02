@@ -144,7 +144,11 @@
   background: transparent;
 }
 
-.wc-nav-bar.is-clear.is-light,
+.wc-nav-bar.is-clear.is-light {
+  background: transparent;
+  border-bottom: 0;
+}
+
 .wc-nav-bar.is-solid.is-light {
   background: #ffffff;
   border-bottom: 0;
@@ -6403,8 +6407,8 @@ body:not(.is-dark-page) .wc-progress {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  min-height: calc(100svh - 4.75rem);
-  padding-top: 2.5rem;
+  min-height: 100svh;
+  padding-top: 5.75rem;
   padding-bottom: 3rem;
 }
 

@@ -19,8 +19,10 @@ export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isServicesHub = pathname === "/services";
-  const isIndustries = pathname === "/industries" || pathname.startsWith("/industries/");
+  const isIndustriesHub = pathname === "/industries";
+  const isIndustries = isIndustriesHub || pathname.startsWith("/industries/");
   const isWorksIndex = pathname === "/works";
+  const overlayLightHero = isServicesHub || isIndustriesHub || isWorksIndex;
   const isWorksCaseStudy = isWorksCaseStudyPath(pathname);
   const isWorksDetail = pathname.startsWith("/works/") && !isWorksCaseStudy;
   const isAbout = pathname === "/about";
@@ -71,7 +73,11 @@ export function Navbar() {
 
   useEffect(() => {
     setOpen(false);
-  }, [pathname]);
+    if (overlayLightHero) {
+      const id = window.setTimeout(() => window.scrollTo(0, 0), 50);
+      return () => window.clearTimeout(id);
+    }
+  }, [pathname, overlayLightHero]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -89,26 +95,29 @@ export function Navbar() {
     "wc-nav-bar",
     isWorksCaseStudy
       ? "is-clear is-dark"
-      : isLightShell
-        ? "is-solid is-light"
-        : isFuture
-          ? scrolled
-            ? "is-blur is-dark"
-            : "is-clear is-dark"
-          : isSolutions || isIndustries
-            ? "is-clear is-dark"
-            : isDarkPage
-              ? scrolled
-                ? inverted
-                  ? "is-solid is-light"
-                  : "is-blur is-dark"
-                : "is-clear is-dark"
-              : "is-solid is-light",
+      : overlayLightHero
+        ? "is-clear is-light"
+        : isLightShell
+          ? "is-solid is-light"
+          : isFuture
+            ? scrolled
+              ? "is-blur is-dark"
+              : "is-clear is-dark"
+            : isSolutions
+              ? "is-clear is-dark"
+              : isDarkPage
+                ? scrolled
+                  ? inverted
+                    ? "is-solid is-light"
+                    : "is-blur is-dark"
+                  : "is-clear is-dark"
+                : "is-solid is-light",
   ].join(" ");
 
   const headerPos = (() => {
     if (isHome) return "fixed top-0";
     if (isWorksCaseStudy) return "fixed top-0";
+    if (overlayLightHero) return "absolute top-0";
     if (isLightShell) return "relative";
     if (isFuture || isSolutions || isDarkPage) return "absolute top-0";
     return "relative";
@@ -122,7 +131,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${lightNav ? " is-light" : ""}${scrolled ? " is-scrolled" : ""}${
+      className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${lightNav && !overlayLightHero ? " is-light" : ""}${scrolled ? " is-scrolled" : ""}${
         isWorksCaseStudy
           ? showSiteNavOnCase
             ? " opacity-100"

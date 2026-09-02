@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EnquireCta } from "@/components/shared/PageBits";
-import { IndustriesHeroFigure } from "@/components/industries/IndustriesHeroFigure";
+import MoltenMetal from "@/components/shared/MoltenMetal";
 import { IndustriesJumpNav } from "@/components/industries/IndustriesJumpNav";
-import {
-  getIndustriesProjectTotal,
-  industries,
-  industriesApproach,
-  industriesHero,
-} from "@/data/industries";
+import { industries, industriesApproach, industriesHero } from "@/data/industries";
 import { getFeaturedWorks } from "@/data/works";
 
 import { pageMeta } from "@/lib/seo";
@@ -24,27 +19,52 @@ export default function IndustriesPage() {
   const featured = getFeaturedWorks(2);
   const jumpItems = industries.map(({ id, name }) => ({ id, name }));
   const firstIndustry = industries[0]?.id ?? "healthcare";
-  const projectTotal = getIndustriesProjectTotal();
 
   return (
     <div className="bg-paper text-ink">
-      <header className="wc-ind-stage">
-        <div className="wc-ind-stage-grain" aria-hidden />
-        <div className="wc-ind-stage-orb wc-ind-stage-orb--a" aria-hidden />
-        <div className="wc-ind-stage-orb wc-ind-stage-orb--b" aria-hidden />
-        <div className="wc-ind-stage-orb wc-ind-stage-orb--c" aria-hidden />
+      <header className="wc-ind-stage h-[100svh] relative overflow-hidden !bg-none bg-white">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            maskImage: "radial-gradient(ellipse at center, transparent 25%, black 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse at center, transparent 25%, black 75%)",
+          }}
+        >
+          <MoltenMetal
+            color1="#579cb9"
+            color2="#006b7d"
+            color3="#000000"
+            speed={0.15}
+            scale={3.6}
+            detail={2}
+            glow={1.25}
+            coreSize={0.09}
+            swirl={1.45}
+            fold={-0.17}
+            blackPoint={0.24}
+            brightness={1.05}
+            colorMode="molten"
+            grain={true}
+            grainIntensity={0.05}
+            mouseInteraction={true}
+            mouseStrength={0.2}
+            opacity={1}
+            lightMode
+            backgroundColor="#ffffff"
+          />
+        </div>
 
-        <div className="wc-container wc-ind-stage-frame">
-          <div className="wc-ind-stage-split">
-            <div className="wc-ind-stage-main">
-              <h1 className="wc-ind-stage-title">
+        <div className="wc-container wc-ind-stage-frame relative z-10 !pt-0 !pb-0 !min-h-[100svh] flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center text-center max-w-4xl w-full">
+            <div className="flex flex-col items-center">
+              <h1 className="wc-ind-stage-title !max-w-none text-center">
                 {industriesHero.titleLine1}
                 <br />
                 {industriesHero.titleLine2}
               </h1>
-              <p className="wc-ind-stage-lede">{industriesHero.description}</p>
-              <div className="wc-ind-stage-actions">
-                <Link href="/contact" className="wc-btn wc-btn-outline-accent">
+              <p className="wc-ind-stage-lede text-center mx-auto mt-6">{industriesHero.description}</p>
+              <div className="wc-ind-stage-actions justify-center mt-8">
+                <Link href="/contact" className="wc-btn wc-btn-solid">
                   {industriesHero.primaryCta}
                   <span aria-hidden>→</span>
                 </Link>
@@ -54,8 +74,6 @@ export default function IndustriesPage() {
                 </a>
               </div>
             </div>
-
-            <IndustriesHeroFigure count={projectTotal} label="projects" />
           </div>
         </div>
       </header>

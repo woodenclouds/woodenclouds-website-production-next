@@ -8,6 +8,7 @@ import {
   solutionsStandards,
 } from "@/data/solutions";
 import { getFeaturedWorks } from "@/data/works";
+import GradientWaves from "@/components/solutions/GradientWaves";
 
 import { pageMeta } from "@/lib/seo";
 
@@ -25,18 +26,34 @@ export default function SolutionsPage() {
   return (
     <>
       {/* Hero — centered composition on clean brand field */}
-      <header className="solutions-hero relative flex min-h-[88svh] items-center justify-center overflow-hidden text-white md:min-h-[92svh]">
-        <div className="solutions-hero-bg" aria-hidden>
-          <div className="solutions-hero-base" />
-          <div className="solutions-hero-glow solutions-hero-glow--a" />
-          <div className="solutions-hero-glow solutions-hero-glow--b" />
-          <div className="solutions-hero-grid" />
-          <div className="solutions-hero-frame solutions-hero-frame--tl" />
-          <div className="solutions-hero-frame solutions-hero-frame--br" />
+      <header className="solutions-hero relative flex min-h-[100svh] items-center justify-center overflow-hidden text-white">
+        <div className="absolute inset-0 z-0 pointer-events-auto">
+          <GradientWaves
+            horizonColor="#3b82f6"
+            waveColor="#7dd3fc"
+            crestColor="#ffffff"
+            speed={0.1}
+            amplitude={1.35}
+            waveScale={0.6}
+            waveRatio={0.9}
+            swell={35}
+            turbulence={20}
+            tilt={1.11}
+            zoom={1}
+            height={5.5}
+            fogDepth={17}
+            detail="medium"
+            brightness={1}
+            opacity={1}
+            mouseInteraction
+            parallaxStrength={0.5}
+            grain
+            grainIntensity={0.025}
+          />
         </div>
 
-        <div className="wc-container relative z-10 w-full py-28 text-center md:py-32">
-          <p className="mb-6 inline-flex rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-light uppercase tracking-[0.18em] text-white/75">
+        <div className="wc-container relative z-10 w-full py-28 text-center md:py-32 pointer-events-none">
+          <p className="mb-6 text-xs font-light uppercase tracking-[0.18em] text-white/75">
             {solutionsHero.kicker}
           </p>
           <h1 className="mx-auto max-w-4xl text-4xl font-light leading-[1.12] md:text-6xl">
@@ -47,7 +64,7 @@ export default function SolutionsPage() {
           <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-white/70 md:text-lg">
             {solutionsHero.description}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 pointer-events-auto">
             {solutions.slice(0, 3).map((item) => (
               <a
                 key={item.id}
@@ -62,75 +79,6 @@ export default function SolutionsPage() {
       </header>
 
       <style>{`
-        .solutions-hero-bg {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-        .solutions-hero-base {
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse 90% 65% at 50% 35%, #1e5fa8 0%, #123a6b 38%, #0a1f38 72%, #060d18 100%);
-        }
-        .solutions-hero-glow {
-          position: absolute;
-          border-radius: 9999px;
-          filter: blur(80px);
-          opacity: 0.45;
-          animation: solutions-hero-drift 14s ease-in-out infinite alternate;
-        }
-        .solutions-hero-glow--a {
-          width: min(52vw, 520px);
-          height: min(52vw, 520px);
-          left: -8%;
-          bottom: -12%;
-          background: radial-gradient(circle, rgba(91, 157, 232, 0.7) 0%, transparent 70%);
-        }
-        .solutions-hero-glow--b {
-          width: min(42vw, 420px);
-          height: min(42vw, 420px);
-          right: -6%;
-          top: 8%;
-          background: radial-gradient(circle, rgba(41, 119, 212, 0.55) 0%, transparent 70%);
-          animation-delay: -4s;
-        }
-        .solutions-hero-grid {
-          position: absolute;
-          inset: 0;
-          opacity: 0.18;
-          background-image:
-            linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
-          background-size: 72px 72px;
-          mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 80%);
-        }
-        .solutions-hero-frame {
-          position: absolute;
-          width: min(28vw, 280px);
-          height: min(28vw, 280px);
-          border: 1px solid rgba(168, 189, 234, 0.18);
-          opacity: 0.7;
-        }
-        .solutions-hero-frame--tl {
-          top: 12%;
-          left: 6%;
-          border-right: none;
-          border-bottom: none;
-        }
-        .solutions-hero-frame--br {
-          right: 6%;
-          bottom: 14%;
-          border-left: none;
-          border-top: none;
-        }
-        @keyframes solutions-hero-drift {
-          from { transform: translate3d(0, 0, 0) scale(1); }
-          to { transform: translate3d(24px, -18px, 0) scale(1.08); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .solutions-hero-glow { animation: none; }
-        }
         .wai-list-media {
           background:
             radial-gradient(ellipse 90% 65% at 50% 35%, #1e5fa8 0%, #123a6b 38%, #0a1f38 72%, #060d18 100%);
