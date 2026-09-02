@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koko — Estate Management Platform Case Study | Wooden Clouds</title>
+    <meta name="description" content="How Wooden Clouds designed a centralized operations platform for Koko to simplify workforce, harvesting, inventory, and finance across multiple plantations.">
+    <base href="/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-casestudy.css">
+    <style>
+        /* ─── Woodenclouds Header Navigation (Image 2 Match) ─── */
+        .wc-header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 500;
+            padding: 1.5rem 0;
+            background: transparent;
+            transition: background 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+        }
+        .wc-header-nav.scrolled {
+            background: rgba(15, 18, 16, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1rem 0;
+        }
+        .wc-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .wc-header-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .wc-header-logo-img {
+            height: 14px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .wc-header-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .wc-nav-item {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.9rem;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            position: relative;
+            padding: 0.3rem 0;
+            transition: color 0.2s ease;
+            letter-spacing: 0.01em;
+        }
+        .wc-nav-item:hover {
+            color: #ffffff;
+        }
+        .wc-nav-item.is-active {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .wc-nav-item.is-active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+        .wc-nav-btn {
+            background: #ffffff;
+            color: #111111;
+            padding: 0.55rem 1.45rem;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.88rem;
+            text-decoration: none;
+            margin-left: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .wc-nav-btn:hover {
+            background: #f3f4f6;
+            transform: scale(1.03);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+        }
+        .wc-header-burger {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 6px;
+        }
+        .wc-header-burger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Mobile Drawer */
+        .wc-mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: #0f1411;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem;
+            gap: 2rem;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .wc-mobile-drawer.open {
+            right: 0;
+        }
+        .wc-mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .wc-mobile-links a {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.15rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .wc-mobile-links a:hover,
+        .wc-mobile-links a.is-active {
+            color: #ffffff;
+        }
+        .wc-mobile-cta {
+            margin-top: 1rem;
+            background: #ffffff !important;
+            color: #111111 !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-align: center;
+            font-weight: 600 !important;
+        }
+
+        @media (max-width: 1080px) {
+            .wc-header-links {
+                display: none;
+            }
+            .wc-header-burger {
+                display: flex;
+            }
+            .wc-header-container {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>    <!-- Navigation (Woodenclouds Exact Image 2 Header) -->
+    <nav class="wc-header-nav" id="navbar">
+        <div class="wc-header-container">
+            <a href="/" class="wc-header-logo" aria-label="Woodenclouds Home">
+                <img src="/brand/logo-light.png" alt="Woodenclouds" class="wc-header-logo-img">
+            </a>
+
+            <div class="wc-header-links">
+                <a href="/services" class="wc-nav-item">Services</a>
+                <a href="/solutions" class="wc-nav-item">Solutions</a>
+                <a href="/industries" class="wc-nav-item">Industries</a>
+                <a href="/partner-with-us" class="wc-nav-item">Partner</a>
+                <a href="/services/dedicated-team" class="wc-nav-item">Hire team</a>
+                <a href="/works" class="wc-nav-item is-active">Works</a>
+                <a href="/about" class="wc-nav-item">About</a>
+                <a href="/contact" class="wc-nav-btn">Contact</a>
+            </div>
+
+            <button class="wc-header-burger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Nav -->
+    <div class="wc-mobile-drawer" id="mobileNav">
+        <div class="wc-mobile-links">
+            <a href="/services">Services</a>
+            <a href="/solutions">Solutions</a>
+            <a href="/industries">Industries</a>
+            <a href="/partner-with-us">Partner</a>
+            <a href="/services/dedicated-team">Hire team</a>
+            <a href="/works" class="is-active">Works</a>
+            <a href="/about">About</a>
+            <a href="/contact" class="wc-mobile-cta">Contact</a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="ed-hero" id="koko-hero-section" style="background: #1a1200;">
+        <div class="ed-hero-bg" id="hero-explosion-container" style="position: absolute; inset: 0; overflow: hidden; background: #1a1200;">
+            
+            <!-- ① Always-visible base image — the foundation that never disappears -->
+            <img src="koko-hero-cardamom.jpg" class="hero-base-img" alt="Koko Spice Background">
+            
+            <!-- ② Soft organic pod layers — same image, softly masked with radial gradients
+                 Each floats away from its natural position on scroll.
+                 No hard edges. No black gaps. Transparent feathered boundary. -->
+
+            <!-- Top-left floating pod (upper-left cardamom area) -->
+            <div class="hero-pod" data-tx="-260" data-ty="-200" data-r="-22" data-s="1.05"
+                 style="--px:18%;--py:24%;--pw:18%;--ph:22%;"></div>
+
+            <!-- Top-center spice cloud -->
+            <div class="hero-pod" data-tx="10" data-ty="-280" data-r="12" data-s="1.08"
+                 style="--px:48%;--py:14%;--pw:22%;--ph:16%;"></div>
+
+            <!-- Top-right pod group -->
+            <div class="hero-pod" data-tx="270" data-ty="-210" data-r="30" data-s="1.1"
+                 style="--px:80%;--py:22%;--pw:20%;--ph:18%;"></div>
+
+            <!-- Right-center floating pod -->
+            <div class="hero-pod" data-tx="310" data-ty="40" data-r="18" data-s="1.0"
+                 style="--px:90%;--py:50%;--pw:14%;--ph:24%;"></div>
+
+            <!-- Bottom-right pod -->
+            <div class="hero-pod" data-tx="230" data-ty="250" data-r="38" data-s="0.95"
+                 style="--px:78%;--py:80%;--pw:18%;--ph:16%;"></div>
+
+            <!-- Bottom-center cluster -->
+            <div class="hero-pod" data-tx="20" data-ty="270" data-r="-8" data-s="1.02"
+                 style="--px:50%;--py:90%;--pw:24%;--ph:14%;"></div>
+
+            <!-- Bottom-left pod -->
+            <div class="hero-pod" data-tx="-210" data-ty="240" data-r="-32" data-s="1.05"
+                 style="--px:20%;--py:82%;--pw:18%;--ph:14%;"></div>
+
+            <!-- Left-center pod -->
+            <div class="hero-pod" data-tx="-300" data-ty="30" data-r="-16" data-s="1.0"
+                 style="--px:8%;--py:52%;--pw:14%;--ph:22%;"></div>
+
+            <!-- Upper-center-left pod (prominent cardamom cluster) -->
+            <div class="hero-pod" data-tx="-160" data-ty="-130" data-r="-20" data-s="1.06"
+                 style="--px:33%;--py:35%;--pw:16%;--ph:22%;"></div>
+
+            <!-- Upper-center-right pod -->
+            <div class="hero-pod" data-tx="150" data-ty="-100" data-r="24" data-s="1.04"
+                 style="--px:65%;--py:30%;--pw:16%;--ph:20%;"></div>
+
+            <!-- Lower-left inner pod -->
+            <div class="hero-pod" data-tx="-130" data-ty="160" data-r="-28" data-s="1.0"
+                 style="--px:30%;--py:72%;--pw:14%;--ph:16%;"></div>
+
+            <!-- Lower-right inner pod -->
+            <div class="hero-pod" data-tx="120" data-ty="170" data-r="22" data-s="1.02"
+                 style="--px:68%;--py:68%;--pw:14%;--ph:16%;"></div>
+
+            <!-- ③ Canvas layer removed for minimal premium feel -->
+
+            <style>
+                #hero-explosion-container {
+                    background: #1a1200;
+                }
+                /* Always-visible base — never fades to black */
+                .hero-base-img {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                    display: block;
+                    z-index: 1;
+                    will-change: transform, filter;
+                }
+                /* Soft organic pod layers */
+                .hero-pod {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 2;
+                    will-change: transform;
+                    /* Soft feathered mask — no hard edges, no black shapes */
+                    -webkit-mask-image: radial-gradient(
+                        ellipse var(--pw, 18%) var(--ph, 22%) at var(--px, 50%) var(--py, 50%),
+                        black 0%,
+                        black 30%,
+                        rgba(0,0,0,0.6) 55%,
+                        transparent 75%
+                    );
+                    mask-image: radial-gradient(
+                        ellipse var(--pw, 18%) var(--ph, 22%) at var(--px, 50%) var(--py, 50%),
+                        black 0%,
+                        black 30%,
+                        rgba(0,0,0,0.6) 55%,
+                        transparent 75%
+                    );
+                    /* Each pod shows the original image at its real position */
+                    background-image: url('koko-hero-cardamom.jpg');
+                    background-size: cover;
+                    background-position: center center;
+                }
+                /* Spice canvas overlay */
+                #hero-spice-canvas {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 3;
+                    pointer-events: none;
+                }
+                .ed-hero-overlay { z-index: 4; }
+            </style>
+
+            <div class="ed-hero-overlay"></div>
+        </div>
+        <div class="container ed-hero-container" style="z-index: 5; position: relative;">
+            <div class="ed-hero-content ed-hero-content--split">
+                <div class="ed-hero-title-col">
+                    <h1 class="ed-hero-title" style="margin-bottom:0;">Modernising Estate Operations from Field to Finance</h1>
+                </div>
+                <div class="ed-hero-desc-col">
+                    <p class="ed-hero-desc" style="max-width:100%;">A centralized estate management platform built to simplify workforce operations, harvesting, inventory, finance, and business reporting across multiple plantations.</p>
+                    <div>
+                        <a href="#cta" class="btn btn-primary" style="background: white; color: black; border-radius: 30px; font-weight: 500; padding: 0.8rem 1.8rem; display: inline-block;">Talk to Our Team</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AT A GLANCE SECTION -->
+    <section class="koko-glance-section" id="koko-glance-section" style="background-color: #F8F9FA; padding: 6rem 0;">
+        <div class="container">
+            <div class="koko-glance-grid">
+                <!-- Left Column -->
+                <div class="koko-glance-left gs-ed-fade">
+                    <div class="koko-glance-logo">
+                        <img src="koko-logo-new.png" alt="Koko Logo" style="width: 80px; height: auto;">
+                    </div>
+                    <h2 class="koko-glance-title gs-text-reveal">Everything you need<br>to know about KOKO<br>at a glance.</h2>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="koko-glance-right">
+                    <div class="koko-card koko-glance-card" style="z-index: 1;">
+                        <div class="koko-card-content">
+                            <h3>Built for Modern Agriculture</h3>
+                            <p>Designed specifically for estate and plantation businesses, bringing every operation into one connected digital platform.</p>
+                        </div>
+                        <div class="koko-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                                <path d="M2 22 12 12"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="koko-card koko-glance-card" style="z-index: 2;">
+                        <div class="koko-card-content">
+                            <h3>Enterprise SaaS Platform</h3>
+                            <p>A scalable cloud platform that centralizes workforce, harvesting, inventory, finance, and reporting across multiple estates.</p>
+                        </div>
+                        <div class="koko-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="koko-card koko-glance-card" style="z-index: 3;">
+                        <div class="koko-card-content">
+                            <h3>Five Integrated Modules</h3>
+                            <p>Manage operations seamlessly with dedicated modules for Workforce, Harvesting, Inventory, Finance, and Business Intelligence.</p>
+                        </div>
+                        <div class="koko-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="koko-card koko-glance-card" style="z-index: 4;">
+                        <div class="koko-card-content">
+                            <h3>Dashboard &amp; Mobile Experience</h3>
+                            <p>Stay connected from anywhere with powerful web dashboards for management and mobile apps for field teams.</p>
+                        </div>
+                        <div class="koko-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="koko-card koko-glance-card" style="z-index: 5;">
+                        <div class="koko-card-content">
+                            <h3>Built for Every Stakeholder</h3>
+                            <p>Created for Estate Owners, Managers, Supervisors, and Store Teams, ensuring every role has the right tools and insights.</p>
+                        </div>
+                        <div class="koko-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            .koko-glance-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+                gap: clamp(2rem, 4vw, 4rem);
+                align-items: start;
+            }
+            .koko-glance-left {
+                position: sticky;
+                top: clamp(90px, 14vh, 140px);
+                margin-bottom: 2rem;
+            }
+            .koko-glance-logo {
+                margin-bottom: 2rem;
+            }
+            .koko-glance-title {
+                font-family: 'Inter', sans-serif;
+                font-size: clamp(2rem, 3.5vw, 2.75rem);
+                font-weight: 400;
+                color: #111;
+                line-height: 1.2;
+            }
+            .koko-glance-right {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                isolation: isolate;
+            }
+            .koko-card {
+                background: #FFFFFF;
+                border-radius: 12px;
+                padding: clamp(1.25rem, 2.5vw, 1.75rem);
+                display: flex;
+                justify-content: space-between;
+                align-items: stretch;
+                gap: clamp(1rem, 2vw, 2rem);
+                box-shadow: 0 4px 24px -4px rgba(0,0,0,0.1);
+                will-change: transform, opacity;
+                position: sticky;
+                top: clamp(90px, 14vh, 140px);
+                transform-origin: top center;
+                backdrop-filter: none;
+            }
+            
+            .koko-card-content {
+                flex: 1;
+            }
+            .koko-card-content h3 {
+                font-family: 'Inter', sans-serif;
+                font-size: 1.15rem;
+                font-weight: 500;
+                color: #166534;
+                margin-bottom: 0.75rem;
+                margin-top: 0;
+            }
+            .koko-card-content p {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                color: #4B5563;
+                margin: 0;
+            }
+            .koko-card-icon {
+                width: 120px;
+                background-color: #F0FDF4;
+                border-radius: 8px;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            @media (max-width: 960px) {
+                .koko-glance-grid {
+                    grid-template-columns: 1fr;
+                    gap: 2.5rem;
+                }
+                .koko-glance-left {
+                    position: static;
+                    margin-bottom: 1rem;
+                }
+                .koko-card {
+                    position: relative;
+                    top: 0;
+                }
+            }
+            @media (max-width: 540px) {
+                .koko-card {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                .koko-card-icon {
+                    width: 100%;
+                    height: 80px;
+                }
+            }
+        </style>
+    </section>
+
+    <!-- 01 — THE CHALLENGE & SOLUTION -->
+    <section class="koko-complex-section" style="padding: 6rem 0;">
+        <div class="container">
+            <div class="koko-3cards-grid">
+
+                <!-- Card 01 -->
+                <div class="koko-3card gs-koko-slide-left">
+                    <div class="koko-3card-num">01</div>
+                    <div class="koko-3card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <div class="koko-3card-body">
+                        <h3 class="koko-3card-title">Managing an estate is more complex than it looks.</h3>
+                        <p class="koko-3card-desc">Large plantations coordinate people, harvesting, inventory, wages, approvals, and financial records across multiple estates. Every operation depends on accurate information moving between teams.</p>
+                    </div>
+                </div>
+
+                <!-- Card 02 -->
+                <div class="koko-3card koko-3card--mid">
+                    <div class="koko-3card-num">02</div>
+                    <div class="koko-3card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="7" height="7" rx="1"/><rect x="15" y="3" width="7" height="7" rx="1"/>
+                            <rect x="2" y="14" width="7" height="7" rx="1"/><rect x="15" y="14" width="7" height="7" rx="1"/>
+                            <line x1="9" y1="6.5" x2="15" y2="6.5"/><line x1="9" y1="17.5" x2="15" y2="17.5"/>
+                            <line x1="11.5" y1="9" x2="11.5" y2="14"/><line x1="12.5" y1="9" x2="12.5" y2="14"/>
+                        </svg>
+                    </div>
+                    <div class="koko-3card-body">
+                        <h3 class="koko-3card-title">Too many tools create too much friction.</h3>
+                        <p class="koko-3card-desc">Spreadsheets, paperwork, and disconnected systems make it difficult to track operations in real time. This creates delays, duplicated work, errors, and limited visibility for decision-makers.</p>
+                    </div>
+                </div>
+
+                <!-- Card 03 -->
+                <div class="koko-3card koko-3card--accent gs-koko-slide-right">
+                    <div class="koko-3card-num">03</div>
+                    <div class="koko-3card-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12l2.5 2.5L16 9"/>
+                        </svg>
+                    </div>
+                    <div class="koko-3card-body">
+                        <h3 class="koko-3card-title">KOKO brings every operation together.</h3>
+                        <p class="koko-3card-desc">One centralized platform connects workforce management, harvesting, inventory, finance, and reporting. Every team works from the same source of truth — in real time, from any device.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <style>
+            /* ── 3-Card Grid ─────────────────────────────────────── */
+            .koko-3cards-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                align-items: stretch;
+            }
+
+            /* ── Card Base ───────────────────────────────────────── */
+            .koko-3card {
+                background: #0d2818;
+                background-image:
+                    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(253,224,71,0.04) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255,255,255,0.03) 0%, transparent 60%);
+                border: 1px solid rgba(255,255,255,0.07);
+                border-radius: 24px;
+                padding: 3rem 2.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                position: relative;
+                overflow: hidden;
+                /* Hover lift */
+                transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), box-shadow 0.32s ease, border-color 0.32s ease;
+                will-change: transform;
+            }
+            .koko-3card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 48px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.14);
+                border-color: rgba(253,224,71,0.15);
+            }
+
+            /* ── Mid card: slightly lighter tone for visual rhythm */
+            .koko-3card--mid {
+                background: #0f2f1c;
+                background-image:
+                    radial-gradient(ellipse 80% 60% at 90% 0%, rgba(253,224,71,0.04) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 40% at 10% 100%, rgba(255,255,255,0.03) 0%, transparent 60%);
+            }
+
+            /* ── Accent card: subtle green highlight ─────────────── */
+            .koko-3card--accent {
+                background: #112d1a;
+                background-image:
+                    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(253,224,71,0.06) 0%, transparent 55%),
+                    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255,255,255,0.03) 0%, transparent 60%);
+                border-color: rgba(253,224,71,0.12);
+            }
+            .koko-3card--accent::after {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, rgba(253,224,71,0.5), transparent);
+                border-radius: 24px 24px 0 0;
+            }
+
+            /* ── Card number ─────────────────────────────────────── */
+            .koko-3card-num {
+                font-family: 'Inter', sans-serif;
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 0.16em;
+                color: rgba(253,224,71,0.55);
+                text-transform: uppercase;
+            }
+
+            /* ── Icon ────────────────────────────────────────────── */
+            .koko-3card-icon {
+                width: 48px;
+                height: 48px;
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(253,224,71,0.8);
+                flex-shrink: 0;
+                transition: background 0.28s ease, transform 0.28s cubic-bezier(0.22,1,0.36,1);
+            }
+            .koko-3card:hover .koko-3card-icon {
+                background: rgba(253,224,71,0.08);
+                transform: translateY(-2px) scale(1.05);
+            }
+
+            /* ── Body ────────────────────────────────────────────── */
+            .koko-3card-body {
+                display: flex;
+                flex-direction: column;
+                gap: 1.1rem;
+                flex: 1;
+            }
+            .koko-3card-title {
+                font-family: 'Inter', sans-serif;
+                font-size: 1.15rem;
+                font-weight: 400;
+                line-height: 1.45;
+                color: #FFFFFF;
+                margin: 0;
+                letter-spacing: -0.01em;
+                transition: color 0.2s ease;
+            }
+            .koko-3card:hover .koko-3card-title {
+                color: rgba(253,224,71,0.95);
+            }
+            .koko-3card-desc {
+                font-family: 'Inter', sans-serif;
+                font-size: 0.92rem;
+                line-height: 1.7;
+                color: rgba(255,255,255,0.55);
+                margin: 0;
+                transition: color 0.28s ease;
+            }
+            .koko-3card:hover .koko-3card-desc {
+                color: rgba(255,255,255,0.72);
+            }
+
+            /* ── Responsive ──────────────────────────────────────── */
+            @media (max-width: 1024px) {
+                .koko-3cards-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.25rem;
+                }
+                .koko-3card { padding: 2.25rem 1.75rem; }
+                /* No transform hover on touch */
+                .koko-3card:hover { transform: none; }
+            }
+        </style>
+    </section>
+
+
+    <!-- CHALLENGES & SOLUTION -->
+    <section class="koko-cs-section" id="koko-cs-section" style="padding: 6rem 0; background: #FFFFFF;">
+        <div class="container">
+            <div class="koko-cs-header text-center" style="margin-bottom: 4rem; text-align: center;">
+                <span class="ed-section-label">THE PROBLEM & THE FIX</span>
+                <h2 class="koko-cs-main-title gs-text-reveal" style="font-family: 'Inter', sans-serif; font-size: clamp(2rem, 3.5vw, 2.5rem); font-weight: 400; color: #111; margin-top: 1rem;">Bridging the Gap in Estate Operations</h2>
+            </div>
+            
+            <div class="koko-cs-grid">
+                <!-- Challenge Card -->
+                <div class="koko-cs-card challenge-card koko-cs-anim-card">
+                    <div class="koko-cs-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3>The Challenge</h3>
+                    <p>Large plantations coordinate people, harvesting, inventory, wages, and finance across multiple estates. When these complex processes rely on disconnected spreadsheets and paperwork, operational visibility decreases while administrative friction, delays, and errors increase.</p>
+                </div>
+                
+                <!-- Solution Card -->
+                <div class="koko-cs-card solution-card koko-cs-anim-card">
+                    <div class="koko-cs-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3>The Solution</h3>
+                    <p>A centralized, custom-built digital platform that brings every operational layer—from field to finance—into one seamless ecosystem. KOKO provides real-time visibility, automated workflows, and role-based mobile tools to modernize estate management.</p>
+                </div>
+            </div>
+        </div>
+        <style>
+            .koko-cs-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: clamp(1.25rem, 2.5vw, 2rem);
+            }
+            .koko-cs-card {
+                padding: clamp(1.75rem, 3vw, 3rem);
+                border-radius: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+            .challenge-card {
+                background: #FEF2F2;
+                border: 1px solid #FEE2E2;
+            }
+            .solution-card {
+                background: #F0FDF4;
+                border: 1px solid #DCFCE7;
+            }
+            .koko-cs-card h3 {
+                font-family: 'Inter', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 500;
+                margin: 0;
+            }
+            .challenge-card h3 { color: #991B1B; }
+            .solution-card h3 { color: #166534; }
+            
+            .koko-cs-card p {
+                font-size: 1.05rem;
+                line-height: 1.6;
+                margin: 0;
+            }
+            .challenge-card p { color: #7F1D1D; }
+            .solution-card p { color: #14532D; }
+            
+            @media (max-width: 860px) {
+                .koko-cs-grid { grid-template-columns: 1fr; }
+            }
+        </style>
+    </section>
+
+    <!-- 02 — KEY CAPABILITIES -->
+    <section class="ed-cs-section ed-cs-section--alt" id="cs-capabilities">
+        <div class="container">
+            <div class="ed-cs-section-header gs-ed-fade">
+                <span class="ed-section-label">02 — KEY CAPABILITIES</span>
+                <h2 class="ed-cs-title gs-text-reveal" style="margin-top: 1rem;">One Connected Platform for Every Estate Operation</h2>
+                <p class="ed-body-text" style="margin-top: 1.5rem; max-width: 800px;">A centralized estate management platform built to simplify workforce operations, harvesting, inventory, finance, and business reporting across multiple plantations.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+    <!-- 03 — HOW THE PLATFORM WORKS -->
+    <section class="koko-timeline-section">
+        <div class="koko-timeline-bg"></div>
+        <div class="container relative">
+
+            <!-- Desktop Interactive Snake Timeline (> 900px) -->
+            <div class="koko-timeline-desktop">
+                <div class="koko-timeline-grid">
+                    <!-- Single full-height SVG overlay for the animated path -->
+                    <svg class="koko-path-svg" id="koko-path-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <path id="koko-main-path" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="3"/>
+                    </svg>
+
+                    <!-- Starting dot positioned directly on the grid container -->
+                    <div class="koko-dot" id="koko-dot-start"></div>
+
+                    <!-- Row 0: Header -->
+                    <div class="koko-grid-col-left">
+                        <div class="koko-header-block">
+                            <h2>How the Platform Works</h2>
+                            <p>Every level contributes operational data that becomes available across the organization through role-based access and real-time reporting.</p>
+                        </div>
+                    </div>
+                    <div class="koko-grid-col-center"></div>
+                    <div class="koko-grid-col-right"></div>
+
+                    <!-- Row 1: Organization -->
+                    <div class="koko-grid-col-left"></div>
+                    <div class="koko-grid-col-center">
+                        <div class="koko-dot" id="koko-dot-0" data-side="right"></div>
+                    </div>
+                    <div class="koko-grid-col-right">
+                        <div class="koko-text-block" id="koko-text-0">
+                            <h3>Organization</h3>
+                            <p>The centralized Super Admin panel that manages multiple estates, users, permissions, configurations, and organization-wide reporting from a single dashboard.</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Owner -->
+                    <div class="koko-grid-col-left">
+                        <div class="koko-text-block" id="koko-text-1">
+                            <h3>Owner</h3>
+                            <p>Gain a complete overview of estate performance with real-time insights into operations, workforce, harvesting, inventory, finance, and business reports across all plantations.</p>
+                        </div>
+                    </div>
+                    <div class="koko-grid-col-center">
+                        <div class="koko-dot" id="koko-dot-1" data-side="left"></div>
+                    </div>
+                    <div class="koko-grid-col-right"></div>
+
+                    <!-- Row 3: Manager -->
+                    <div class="koko-grid-col-left"></div>
+                    <div class="koko-grid-col-center">
+                        <div class="koko-dot" id="koko-dot-2" data-side="right"></div>
+                    </div>
+                    <div class="koko-grid-col-right">
+                        <div class="koko-text-block" id="koko-text-2">
+                            <h3>Manager</h3>
+                            <p>Manage daily estate operations, assign tasks, monitor productivity, approve workflows, and ensure every department runs efficiently.</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Supervisor -->
+                    <div class="koko-grid-col-left">
+                        <div class="koko-text-block" id="koko-text-3">
+                            <h3>Supervisor</h3>
+                            <p>Coordinate field teams, assign work, monitor attendance, record harvesting activities, and keep day-to-day operations on track.</p>
+                        </div>
+                    </div>
+                    <div class="koko-grid-col-center">
+                        <div class="koko-dot" id="koko-dot-3" data-side="left"></div>
+                    </div>
+                    <div class="koko-grid-col-right"></div>
+
+                    <!-- Spacer row for tail -->
+                    <div class="koko-grid-col-left"></div>
+                    <div class="koko-grid-col-center koko-tail-spacer"></div>
+                    <div class="koko-grid-col-right"></div>
+                </div>
+            </div>
+
+            <!-- Mobile Streamlined Flow (<= 900px) -->
+            <div class="koko-timeline-mobile">
+                <div class="koko-mobile-header">
+                    <h2>How the Platform Works</h2>
+                    <p>Every level contributes operational data that becomes available across the organization through role-based access and real-time reporting.</p>
+                </div>
+                <div class="koko-mobile-steps">
+                    <div class="koko-mobile-card">
+                        <div class="koko-mobile-badge">01</div>
+                        <div class="koko-mobile-card-content">
+                            <h3>Organization</h3>
+                            <p>The centralized Super Admin panel that manages multiple estates, users, permissions, configurations, and organization-wide reporting from a single dashboard.</p>
+                        </div>
+                    </div>
+                    <div class="koko-mobile-card">
+                        <div class="koko-mobile-badge">02</div>
+                        <div class="koko-mobile-card-content">
+                            <h3>Owner</h3>
+                            <p>Gain a complete overview of estate performance with real-time insights into operations, workforce, harvesting, inventory, finance, and business reports across all plantations.</p>
+                        </div>
+                    </div>
+                    <div class="koko-mobile-card">
+                        <div class="koko-mobile-badge">03</div>
+                        <div class="koko-mobile-card-content">
+                            <h3>Manager</h3>
+                            <p>Manage daily estate operations, assign tasks, monitor productivity, approve workflows, and ensure every department runs efficiently.</p>
+                        </div>
+                    </div>
+                    <div class="koko-mobile-card">
+                        <div class="koko-mobile-badge">04</div>
+                        <div class="koko-mobile-card-content">
+                            <h3>Supervisor</h3>
+                            <p>Coordinate field teams, assign work, monitor attendance, record harvesting activities, and keep day-to-day operations on track.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <style>
+            /* ── Section ── */
+            .koko-timeline-section {
+                position: relative;
+                padding: 10rem 0;
+                color: #fff;
+                background: #0d1a12;
+            }
+            .koko-timeline-bg {
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background-image: 
+                    radial-gradient(circle at 30% 20%, rgba(52, 114, 75, 0.25) 0%, transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(35, 87, 54, 0.25) 0%, transparent 50%);
+                filter: blur(60px);
+                z-index: 0;
+            }
+            .koko-timeline-section .container {
+                position: relative;
+                z-index: 1;
+            }
+
+            /* ── Desktop View ── */
+            .koko-timeline-desktop {
+                display: block;
+            }
+            .koko-timeline-mobile {
+                display: none;
+            }
+
+            /* ── Grid ── */
+            .koko-timeline-grid {
+                position: relative;
+                display: grid;
+                grid-template-columns: 1fr 140px 1fr;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            .koko-grid-col-left,
+            .koko-grid-col-center,
+            .koko-grid-col-right {
+                position: relative;
+                z-index: 1;
+            }
+
+            /* ── Overlay SVG (absolute over entire grid) ── */
+            .koko-path-svg {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                pointer-events: none;
+                z-index: 0;
+                overflow: visible;
+            }
+
+            /* ── Header ── */
+            .koko-header-block {
+                padding: 0 3.5rem 4rem 0;
+            }
+            .koko-header-block h2 {
+                font-size: clamp(2rem, 3.5vw, 2.5rem);
+                font-weight: 400;
+                margin-bottom: 1.5rem;
+                color: #fff;
+                margin-top: 0;
+            }
+            .koko-header-block p {
+                font-size: 1.05rem;
+                color: rgba(255, 255, 255, 0.75);
+                line-height: 1.6;
+                margin: 0;
+            }
+
+            /* ── Text blocks ── */
+            .koko-text-block {
+                padding: 2.5rem 3.5rem;
+            }
+            .koko-grid-col-left .koko-text-block {
+                text-align: right;
+                padding-right: 2.5rem;
+            }
+            .koko-grid-col-right .koko-text-block {
+                text-align: left;
+                padding-left: 2.5rem;
+            }
+            .koko-text-block h3 {
+                font-size: 1.6rem;
+                font-weight: 500;
+                margin-bottom: 0.8rem;
+                color: #fff;
+                margin-top: 0;
+            }
+            .koko-text-block p {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: rgba(255, 255, 255, 0.7);
+                margin: 0;
+            }
+
+            /* ── Dots (positioned by JS after layout) ── */
+            .koko-dot {
+                position: absolute;
+                width: 12px;
+                height: 12px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 0 16px 4px rgba(255,255,255,0.75);
+                z-index: 2;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+            }
+
+            /* ── Tail spacer ── */
+            .koko-tail-spacer { height: 120px; }
+
+            /* ── Mobile Layout (< 900px) ── */
+            @media (max-width: 900px) {
+                .koko-timeline-section {
+                    padding: 5rem 0;
+                }
+                .koko-timeline-desktop {
+                    display: none !important;
+                }
+                .koko-timeline-mobile {
+                    display: flex !important;
+                    flex-direction: column;
+                    gap: 2rem;
+                    width: 100%;
+                }
+                .koko-mobile-header {
+                    text-align: left;
+                    margin-bottom: 0.5rem;
+                }
+                .koko-mobile-header h2 {
+                    font-size: clamp(1.85rem, 5vw, 2.4rem);
+                    font-weight: 400;
+                    margin: 0 0 1rem 0;
+                    color: #fff;
+                    line-height: 1.2;
+                }
+                .koko-mobile-header p {
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    color: rgba(255, 255, 255, 0.8);
+                    margin: 0;
+                }
+                .koko-mobile-steps {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                    width: 100%;
+                }
+                .koko-mobile-card {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.25rem;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 16px;
+                    padding: 1.5rem;
+                    backdrop-filter: blur(10px);
+                    box-sizing: border-box;
+                    width: 100%;
+                }
+                .koko-mobile-badge {
+                    background: #166534;
+                    color: #fff;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    letter-spacing: 0.05em;
+                    padding: 0.35rem 0.65rem;
+                    border-radius: 8px;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                }
+                .koko-mobile-card-content {
+                    flex: 1;
+                }
+                .koko-mobile-card-content h3 {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: #fff;
+                    margin: 0 0 0.5rem 0;
+                }
+                .koko-mobile-card-content p {
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    color: rgba(255, 255, 255, 0.75);
+                    margin: 0;
+                }
+            }
+        </style>
+    </section>
+
+    <!-- 04 — MODULES SHOWCASE -->
+    <section class="ed-cs-section ed-cs-section--alt" id="cs-modules">
+        <div class="container">
+            <div class="ed-cs-section-header gs-ed-fade">
+                <span class="ed-section-label">03 — THE MODULES</span>
+                <h2 class="ed-cs-title gs-text-reveal" style="margin-top: 1rem;">Five Powerful Modules.<br>One Unified Platform.</h2>
+                <p class="ed-body-text" style="margin-top: 1.5rem; max-width: 800px;">Each module is designed to solve a specific operational challenge while working seamlessly together to create a connected estate management experience.</p>
+            </div>
+            
+            <!-- Module content placeholder to be filled next -->
+            <div class="modules-container">
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY / DASHBOARD SHOWCASE -->
+    <section class="ed-gallery" style="padding-top: 4rem;">
+        <div class="container">
+            <div class="ed-gallery-grid">
+                <div class="ed-gallery-img tall gs-ed-img">
+                    <img src="koko-laptop-mockup.jpg" alt="Koko Centralized Dashboard Mockup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE APP SHOWCASE — Sticky Scroll Scrub -->
+    <section class="koko-phones-section" id="koko-phones-section">
+        <div class="koko-phones-sticky">
+            <div class="container">
+                <div class="koko-phones-header">
+                    <span class="ed-section-label">MOBILE EXPERIENCE</span>
+                    <h2 class="koko-phones-title gs-text-reveal">Built for every role,<br>right in your pocket.</h2>
+                </div>
+                <div class="koko-phones-stage" id="koko-phones-stage">
+                    <div class="koko-phone-card" id="koko-phone-0">
+                        <span class="koko-mobile-label">Manager</span>
+                        <img src="koko-mobile-manager.png" alt="Koko Manager App">
+                    </div>
+                    <div class="koko-phone-card" id="koko-phone-1">
+                        <span class="koko-mobile-label">Supervisor</span>
+                        <img src="koko-mobile-supervisor.png" alt="Koko Supervisor App">
+                    </div>
+                    <div class="koko-phone-card" id="koko-phone-2">
+                        <span class="koko-mobile-label">Store Manager</span>
+                        <img src="koko-mobile-storemanager.png" alt="Koko Store Manager App">
+                    </div>
+                    <div class="koko-phone-card" id="koko-phone-3">
+                        <span class="koko-mobile-label">Owner</span>
+                        <img src="koko-mobile-owner.png" alt="Koko Owner App">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* Section height is controlled by GSAP pinSpacing, not CSS */
+            .koko-phones-section {
+                background: #F8F9FA;
+                position: relative;
+                overflow: hidden;
+            }
+            .koko-phones-sticky {
+                height: 100svh;
+                min-height: 540px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                overflow: hidden;
+                padding-top: calc(75px + clamp(0.75rem, 2.5vh, 2rem));
+                padding-bottom: clamp(1rem, 2vh, 2rem);
+                box-sizing: border-box;
+            }
+            .koko-phones-sticky .container {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                width: 100%;
+            }
+            .koko-phones-header {
+                text-align: center;
+                margin-bottom: clamp(0.75rem, 2vh, 2rem);
+                flex-shrink: 0;
+            }
+            .koko-phones-title {
+                font-family: 'Inter', sans-serif;
+                font-size: clamp(1.4rem, 3vw, 2.6rem);
+                font-weight: 300;
+                line-height: 1.18;
+                letter-spacing: -0.02em;
+                color: #111;
+                margin: 0.5rem 0 0;
+            }
+            /* Desktop (4 equal columns) */
+            .koko-phones-stage {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: clamp(0.75rem, 1.8vw, 1.5rem);
+                align-items: end;
+                flex: 1;
+                width: 100%;
+                min-height: 0;
+            }
+            .koko-phone-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.75rem;
+                will-change: transform, opacity;
+                transform-origin: bottom center;
+                height: 100%;
+            }
+            .koko-mobile-label {
+                font-family: 'Inter', sans-serif;
+                font-size: clamp(0.75rem, 1vw, 0.85rem);
+                font-weight: 600;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #888;
+                transition: color 0.3s ease;
+            }
+            .koko-mobile-label.is-active {
+                color: #111;
+            }
+            .koko-phone-card img {
+                width: auto;
+                max-width: 100%;
+                max-height: clamp(220px, 44svh, 480px);
+                height: auto;
+                object-fit: contain;
+                border-radius: 8px;
+                filter: drop-shadow(0 12px 28px rgba(0,0,0,0.1));
+            }
+
+            /* Responsive queries for laptops with short height */
+            @media (min-width: 769px) and (max-height: 800px) {
+                .koko-phones-sticky {
+                    padding-top: 75px;
+                    padding-bottom: 1rem;
+                }
+                .koko-phones-header {
+                    margin-bottom: 0.75rem;
+                }
+                .koko-phone-card img {
+                    max-height: clamp(200px, 40svh, 360px);
+                }
+            }
+
+            /* Mobile & Small Tablets: Stacked cross-fade stage */
+            @media (max-width: 768px) {
+                .koko-phones-sticky {
+                    height: 100svh;
+                    min-height: -webkit-fill-available;
+                    padding-top: calc(65px + clamp(0.5rem, 1.5vh, 1.25rem));
+                    padding-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
+                }
+                .koko-phones-header {
+                    margin-bottom: clamp(0.5rem, 1.2vh, 1rem);
+                }
+                .koko-phones-title {
+                    font-size: clamp(1.25rem, 4.5vw, 1.85rem);
+                }
+                .koko-phones-stage {
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    max-width: 320px;
+                    margin: 0 auto;
+                    flex: 1;
+                    min-height: 280px;
+                }
+                .koko-phone-card {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    transform-origin: center center;
+                }
+                .koko-phone-card img {
+                    max-height: clamp(240px, 46svh, 420px);
+                    width: auto;
+                    max-width: 90%;
+                }
+            }
+
+            /* Small mobile screens (iPhone SE, Galaxy A series, etc.) */
+            @media (max-width: 480px) and (max-height: 700px) {
+                .koko-phones-sticky {
+                    padding-top: 65px;
+                    padding-bottom: 0.5rem;
+                }
+                .koko-phones-title {
+                    font-size: 1.15rem;
+                }
+                .koko-phone-card img {
+                    max-height: clamp(200px, 42svh, 320px);
+                }
+            }
+        </style>
+    </section>
+
+
+    <!-- ─── DESIGN INSIGHTS ───────────────────────── -->
+    <section class="koko-insights-section" id="koko-insights-section">
+        <div class="container">
+            <div class="koko-insights-top gs-ed-fade">
+                <span class="ed-section-label">DESIGN REFLECTIONS</span>
+                <h2 class="koko-insights-title gs-text-reveal">What We Learned<br>Building KOKO</h2>
+            </div>
+
+            <div class="koko-insights-grid">
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Role-first thinking unlocks clarity</h4>
+                        <p>Designing for four distinct roles — Owner, Manager, Supervisor, Store — forced us to strip each interface to exactly what that role needs. No noise, no cognitive overload.</p>
+                    </div>
+                </div>
+
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Modular systems scale naturally</h4>
+                        <p>Building each of the five modules (Workforce, Harvest, Inventory, Finance, BI) as independent components meant new features could be added without disrupting existing flows.</p>
+                    </div>
+                </div>
+
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Field users need radically different UX</h4>
+                        <p>Store Managers and Supervisors operate in the field with variable connectivity. We designed offline-first mobile workflows with minimal taps, large touch targets, and visual-first data input.</p>
+                    </div>
+                </div>
+
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Real-time data changes decision speed</h4>
+                        <p>Replacing daily paper reports with live dashboards reduced the decision-making lag from 24 hours to near-instant. Owners could act on harvest data the moment it was logged.</p>
+                    </div>
+                </div>
+
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Approval flows need visual trust signals</h4>
+                        <p>Finance approvals across estates required audit trails and visual status indicators at every step. Users needed to trust the system before they'd let go of paper records.</p>
+                    </div>
+                </div>
+
+                <div class="koko-insight-item">
+                    <div class="koko-insight-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                            <path d="M2 22 12 12"/>
+                        </svg>
+                    </div>
+                    <div class="koko-insight-body">
+                        <h4>Domain knowledge is the real design tool</h4>
+                        <p>Understanding estate operations — crop cycles, weight-based harvesting, estate transfers — was more valuable than any UI pattern library. The best interface decisions came from plantation floor visits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .koko-insights-section {
+                background: #F8F9FA;
+                padding: 8rem 0;
+            }
+            .koko-insights-top {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: end;
+                gap: 3rem;
+                margin-bottom: 4rem;
+                padding-bottom: 3rem;
+                border-bottom: 1px solid #E5E7EB;
+            }
+            .koko-insights-title {
+                font-family: 'Inter', sans-serif;
+                font-size: clamp(2rem, 4vw, 3rem);
+                font-weight: 400;
+                color: #111;
+                line-height: 1.2;
+                margin: 0;
+                letter-spacing: -0.02em;
+            }
+
+            /* ── Grid ─────────────────────────────────────────── */
+            .koko-insights-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0;
+                /* De-emphasis state: set on the grid, cards opt-out when hovered */
+            }
+
+            /* ── When grid is in "focus" mode, dim everything... */
+            .koko-insights-grid.has-hover .koko-insight-item {
+                opacity: 0.72;
+                transition: opacity 0.28s ease, transform 0.28s ease, background 0.2s ease, box-shadow 0.28s ease;
+            }
+            /* ...except the hovered card */
+            .koko-insights-grid.has-hover .koko-insight-item:hover {
+                opacity: 1;
+            }
+
+            /* ── Card base ─────────────────────────────────────── */
+            .koko-insight-item {
+                padding: 2.5rem;
+                border-right: 1px solid #E5E7EB;
+                border-bottom: 1px solid #E5E7EB;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                /* Performance: will-change for GPU compositing */
+                will-change: transform, opacity;
+                transform-origin: center bottom;
+                /* Default transition for leave state */
+                transition:
+                    background 0.28s ease,
+                    opacity 0.28s ease,
+                    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.28s ease;
+                /* Inset border that becomes visible on hover */
+                box-shadow: inset 0 0 0 1.5px transparent;
+                position: relative;
+                z-index: 0;
+            }
+
+            /* ── Hover: card becomes focus ─────────────────────── */
+            .koko-insight-item:hover {
+                background: #fff;
+                transform: translateY(-5px) scale(1.02);
+                box-shadow:
+                    inset 0 0 0 1.5px rgba(22, 101, 52, 0.18),
+                    0 8px 32px rgba(22, 101, 52, 0.06),
+                    0 2px 8px rgba(0,0,0,0.04);
+                z-index: 2;
+            }
+
+            /* ── Border corners accent on hover ───────────────── */
+            .koko-insight-item::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border: 1.5px solid transparent;
+                border-radius: 0;
+                pointer-events: none;
+                transition: border-color 0.28s ease;
+            }
+            .koko-insight-item:hover::before {
+                border-color: rgba(22, 101, 52, 0.18);
+            }
+
+            /* ── Grid border rules (unchanged) ─────────────────── */
+            .koko-insight-item:nth-child(3n) { border-right: none; }
+            .koko-insight-item:nth-child(4),
+            .koko-insight-item:nth-child(5),
+            .koko-insight-item:nth-child(6) { border-bottom: none; }
+
+            /* ── Icon ──────────────────────────────────────────── */
+            .koko-insight-icon {
+                width: 52px;
+                height: 52px;
+                background: #F0FDF4;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #166534;
+                flex-shrink: 0;
+                /* Icon micro-animation */
+                transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.28s ease;
+                will-change: transform;
+            }
+            .koko-insight-item:hover .koko-insight-icon {
+                transform: translateY(-2px) scale(1.06);
+                background: #DCFCE7;
+            }
+
+            /* ── Typography interaction ─────────────────────────── */
+            .koko-insight-body h4 {
+                font-family: 'Inter', sans-serif;
+                font-size: 1.05rem;
+                font-weight: 500;
+                color: #111;
+                margin: 0 0 0.75rem;
+                line-height: 1.4;
+                transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+                will-change: transform;
+            }
+            .koko-insight-item:hover .koko-insight-body h4 {
+                transform: translateY(-2px);
+                color: #0a0a0a;
+            }
+            .koko-insight-body p {
+                font-size: 0.92rem;
+                color: #6B7280;
+                line-height: 1.65;
+                margin: 0;
+                transition: color 0.28s ease;
+            }
+            .koko-insight-item:hover .koko-insight-body p {
+                color: #374151;
+            }
+
+            /* ── Responsive ─────────────────────────────────────── */
+            @media (max-width: 1024px) {
+                .koko-insights-grid { grid-template-columns: repeat(2, 1fr); }
+                .koko-insights-top { grid-template-columns: 1fr; gap: 1.5rem; }
+                .koko-insight-item:nth-child(2n) { border-right: none; }
+                .koko-insight-item:nth-child(3n) { border-right: 1px solid #E5E7EB; }
+                .koko-insight-item:nth-child(5),
+                .koko-insight-item:nth-child(6) { border-bottom: none; }
+                .koko-insight-item:nth-child(4) { border-bottom: 1px solid #E5E7EB; }
+                /* No hover de-emphasis at tablet — too small to feel natural */
+                .koko-insights-grid.has-hover .koko-insight-item { opacity: 1; }
+                .koko-insight-item:hover { transform: none; }
+            }
+            @media (max-width: 640px) {
+                .koko-insights-grid { grid-template-columns: 1fr; }
+                .koko-insight-item {
+                    border-right: none !important;
+                    border-bottom: 1px solid #E5E7EB !important;
+                    padding: 1.75rem 1.25rem;
+                }
+                .koko-insight-item:last-child { border-bottom: none !important; }
+                .koko-insights-section { padding: 4.5rem 0; }
+                .koko-insight-item:hover { transform: none; box-shadow: none; }
+            }
+        </style>
+    </section>
+
+    <!-- ─── KEY CAPABILITIES ───────────────────────── -->
+    <section class="koko-caps-section" id="koko-capabilities">
+        <div class="container">
+            <h2 class="koko-caps-title koko-cap-anim">Key Capabilities</h2>
+
+            <div class="koko-caps-list">
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Workforce Management</span>
+                    <span class="koko-cap-desc">Each module is designed to solve a specific operational challenge while working seamlessly together to create a connected estate management experience.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Harvest Tracking</span>
+                    <span class="koko-cap-desc">Capture every harvesting activity with complete field-level visibility.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Attendance</span>
+                    <span class="koko-cap-desc">Monitor employee attendance through accurate digital records.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Estate Administration</span>
+                    <span class="koko-cap-desc">Oversee daily estate operations from a centralized workspace.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Warehouse</span>
+                    <span class="koko-cap-desc">Keep warehouse operations organised with real-time stock control.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Inventory</span>
+                    <span class="koko-cap-desc">Maintain accurate inventory levels across all estate locations.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Financial Management</span>
+                    <span class="koko-cap-desc">Track financial transactions and maintain complete cost visibility.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Reports</span>
+                    <span class="koko-cap-desc">Generate detailed reports that support informed business decisions.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Analytics</span>
+                    <span class="koko-cap-desc">Transform operational data into meaningful business insights.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Approvals</span>
+                    <span class="koko-cap-desc">Accelerate operational workflows through structured approval processes.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Employee Transfer</span>
+                    <span class="koko-cap-desc">Manage employee movements between estates with ease.</span>
+                </div>
+                <div class="koko-cap-row koko-cap-anim">
+                    <span class="koko-cap-name">Business Intelligence</span>
+                    <span class="koko-cap-desc">Gain strategic insights that drive smarter operational decisions.</span>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .koko-caps-section {
+                background: linear-gradient(180deg, #0d2818 0%, #0a1f10 100%);
+                padding: 7rem 0 8rem;
+            }
+            .koko-caps-title {
+                font-family: 'Inter', sans-serif;
+                font-size: clamp(1.8rem, 4vw, 2.6rem);
+                font-weight: 400;
+                color: #ffffff;
+                letter-spacing: -0.02em;
+                margin: 0 0 3.5rem;
+            }
+            .koko-caps-list {
+                display: flex;
+                flex-direction: column;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .koko-cap-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                padding: 1.6rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                align-items: start;
+                transition: background 0.2s ease;
+            }
+            .koko-cap-row:hover {
+                background: rgba(255,255,255,0.03);
+            }
+            @media (min-width: 768px) {
+                .koko-cap-row:hover {
+                    margin: 0 -2rem;
+                    padding-left: 2rem;
+                    padding-right: 2rem;
+                }
+            }
+            .koko-cap-name {
+                font-family: 'Inter', sans-serif;
+                font-size: 0.95rem;
+                font-weight: 400;
+                color: rgba(255,255,255,0.85);
+                letter-spacing: 0.01em;
+            }
+            .koko-cap-desc {
+                font-family: 'Inter', sans-serif;
+                font-size: 0.88rem;
+                font-weight: 300;
+                color: rgba(255,255,255,0.45);
+                line-height: 1.65;
+            }
+            @media (max-width: 767px) {
+                .koko-cap-row {
+                    grid-template-columns: 1fr;
+                    gap: 0.5rem;
+                    padding: 1.2rem 0;
+                }
+                .koko-caps-section { padding: 4.5rem 0 5.5rem; }
+            }
+        </style>
+    </section>
+
+    <!-- ─── FOOTER (Woodenclouds Light Design System) ─── -->
+    <style>
+        .wc-site-footer {
+            background-color: #F7F6F2;
+            border-top: 1px solid rgba(10, 10, 10, 0.08);
+            padding: 5rem 0 3.5rem;
+            color: #2c2a26;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            z-index: 10;
+        }
+        .wc-site-footer .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .wc-site-footer .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1.15fr 1fr 1.35fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        .wc-site-footer .footer-brand-logo {
+            display: inline-block;
+            text-decoration: none;
+        }
+        .wc-site-footer .footer-brand-logo img {
+            width: 180px;
+            height: auto;
+            display: block;
+        }
+        .wc-site-footer .footer-brand-desc {
+            margin-top: 1.35rem;
+            font-size: 0.94rem;
+            color: #55534e;
+            line-height: 1.65;
+            max-width: 270px;
+            font-weight: 400;
+        }
+        .wc-site-footer .footer-socials-row {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-top: 1.75rem;
+        }
+        .wc-site-footer .footer-socials-row a {
+            font-size: 0.88rem;
+            color: #55534e;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+        .wc-site-footer .footer-socials-row a:hover {
+            color: #000000;
+        }
+        .wc-site-footer .footer-col-header {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #8c8880;
+            margin: 0 0 1.25rem 0;
+        }
+        .wc-site-footer .footer-col-header.spaced {
+            margin-top: 2rem;
+        }
+        .wc-site-footer .footer-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .wc-site-footer .footer-nav-list a {
+            font-size: 0.92rem;
+            color: #2c2a26;
+            text-decoration: none;
+            font-weight: 400;
+            line-height: 1.5;
+            transition: color 0.2s ease;
+        }
+        .wc-site-footer .footer-nav-list a:hover {
+            color: #000000;
+        }
+        .wc-site-footer .footer-contact-info p {
+            margin: 0 0 0.45rem 0;
+            font-size: 0.92rem;
+            color: #2c2a26;
+            line-height: 1.5;
+        }
+        .wc-site-footer .footer-contact-info a {
+            color: #2c2a26;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .wc-site-footer .footer-contact-info a:hover {
+            color: #000000;
+        }
+        .wc-site-footer .footer-address-text {
+            font-size: 0.88rem;
+            color: #55534e;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 400;
+        }
+        .wc-site-footer .footer-bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(10, 10, 10, 0.08);
+            font-size: 0.82rem;
+            color: #8c8880;
+        }
+        .wc-site-footer .footer-bottom-bar a {
+            color: #8c8880;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .wc-site-footer .footer-bottom-bar a:hover {
+            color: #000000;
+        }
+        @media (max-width: 1024px) {
+            .wc-site-footer .footer-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 2.5rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .wc-site-footer .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .wc-site-footer .footer-bottom-bar {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+        }
+    </style>
+    <footer class="wc-site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-brand-col">
+                    <a href="/" class="footer-brand-logo">
+                        <img src="/brand/logo-dark.png" alt="Woodenclouds" width="180" height="20" style="width: 180px; height: auto;">
+                    </a>
+                    <p class="footer-brand-desc">
+                        A digital product studio for teams who need technology, brand, and growth to move as one.
+                    </p>
+                    <div class="footer-socials-row">
+                        <a href="https://www.linkedin.com/company/woodenclouds" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://www.facebook.com/woodenclouds" target="_blank" rel="noopener noreferrer">Facebook</a>
+                        <a href="https://www.instagram.com/woodenclouds" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    </div>
+                </div>
+
+                <!-- Company Column -->
+                <div class="footer-links-col">
+                    <h6 class="footer-col-header">Company</h6>
+                    <div class="footer-nav-list">
+                        <a href="/about">About</a>
+                        <a href="/services">Services</a>
+                        <a href="/solutions">Solutions</a>
+                        <a href="/industries">Industries</a>
+                        <a href="/career">Career</a>
+                        <a href="/contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Services Column -->
+                <div class="footer-links-col">
+                    <h6 class="footer-col-header">Services</h6>
+                    <div class="footer-nav-list">
+                        <a href="/services/technology">Technology Services</a>
+                        <a href="/services/business-support">Startup &amp; Business Support</a>
+                        <a href="/services/digital-marketing">Branding &amp; Digital Marketing</a>
+                        <a href="/services/dedicated-team">Hire Dedicated Team</a>
+                    </div>
+                </div>
+
+                <!-- Useful Links Column -->
+                <div class="footer-links-col">
+                    <h6 class="footer-col-header">Useful Links</h6>
+                    <div class="footer-nav-list">
+                        <a href="/blog">Blog</a>
+                        <a href="/partner-with-us">Partner with us</a>
+                        <a href="/future-woodenclouds">Future Woodenclouds</a>
+                    </div>
+                </div>
+
+                <!-- Say Hello & Address Column -->
+                <div class="footer-contact-col">
+                    <h6 class="footer-col-header">Say Hello</h6>
+                    <div class="footer-contact-info">
+                        <p><a href="mailto:hello@woodenclouds.com">hello@woodenclouds.com</a></p>
+                        <p><a href="tel:+918921708606">+91 892 170 8606</a></p>
+                    </div>
+                    <h6 class="footer-col-header spaced">Address</h6>
+                    <p class="footer-address-text">
+                        1st floor, Door No - 27/165,<br>
+                        Modisseril building, Nr. Pipeline<br>
+                        Junction, Thrikkakara, Edappally,<br>
+                        Kochi, Kerala, India - 682022
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom-bar">
+                <p>Woodenclouds &copy; 2026. All rights reserved.</p>
+                <p>
+                    <a href="#">Privacy Policy</a> &middot; <a href="#">Terms &amp; Conditions</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
