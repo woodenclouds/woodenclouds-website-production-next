@@ -35,7 +35,7 @@ export const industries: Industry[] = [
     description:
       "We partner with hospitals, clinics, labs, and healthcare startups on portals, telehealth, and ops platforms that simplify care without slowing clinicians down.",
     image: "/industries/healthcare.jpg",
-    imageAlt: "Healthcare digital systems",
+    imageAlt: "Microscope and lab samples on a clinical workbench",
     focus: [
       "Patient & provider portals",
       "Appointment & ops workflows",
@@ -55,7 +55,7 @@ export const industries: Industry[] = [
     description:
       "Fintech products and internal banking tools — interfaces and systems that feel precise, audit-ready, and calm under pressure.",
     image: "/industries/finance.jpg",
-    imageAlt: "Financial technology platform",
+    imageAlt: "Hands reviewing financial documents and a data dashboard",
     focus: [
       "Fintech products",
       "Internal ops tools",
@@ -74,8 +74,8 @@ export const industries: Industry[] = [
     tagline: "Storefronts and systems built to convert",
     description:
       "From online stores and loyalty apps to omnichannel ops — commerce experiences that turn browsing into orders and inventory into insight.",
-    image: "/industries/retail.jpg",
-    imageAlt: "Retail ecommerce experience",
+    image: "/industries/retail-cover.jpg",
+    imageAlt: "Shopper walking through a glowing doorway into a boutique inside a giant smartphone",
     focus: [
       "Storefronts & catalogs",
       "Checkout & payments",
@@ -97,8 +97,8 @@ export const industries: Industry[] = [
     tagline: "Field-to-market systems that scale",
     description:
       "Farms, cooperatives, and agri brands — portals, supply visibility, marketplace platforms, and ops tools that connect produce, logistics, and buyers.",
-    image: "/industries/agriculture.jpg",
-    imageAlt: "Agriculture and AgriTech digital systems",
+    image: "/industries/agriculture-cover.jpg",
+    imageAlt: "Agronomist in a crop field reviewing farm data on a tablet, with a tractor behind her",
     focus: [
       "Farm & crop portals",
       "Supply chain visibility",
@@ -117,8 +117,8 @@ export const industries: Industry[] = [
     tagline: "Projects tracked. Sites aligned.",
     description:
       "Builders, contractors, and infrastructure teams — project portals, progress tracking, bidding tools, and field apps that keep delivery on schedule.",
-    image: "/industries/construction.jpg",
-    imageAlt: "Construction and infrastructure digital tools",
+    image: "/industries/construction-cover.jpg",
+    imageAlt: "Urban construction site with a tower crane rising against a city skyline",
     focus: [
       "Project portals",
       "Progress & site reports",
@@ -137,8 +137,8 @@ export const industries: Industry[] = [
     tagline: "Learning products people actually return to",
     description:
       "Schools, institutes, and edu-tech platforms — LMS experiences, portals, and content systems that keep learners, educators, and admins in sync.",
-    image: "/industries/education.jpg",
-    imageAlt: "Education technology platform",
+    image: "/industries/education-cover.jpg",
+    imageAlt: "Student at a desk following an online lesson on a laptop",
     focus: [
       "Learning platforms",
       "Student portals",
@@ -157,8 +157,8 @@ export const industries: Industry[] = [
     tagline: "Journeys that feel effortless end to end",
     description:
       "Travel agencies, hotels, and destination brands — booking flows, guest apps, and service ops that reduce friction from discovery to return visit.",
-    image: "/industries/hospitality.jpg",
-    imageAlt: "Travel and hospitality digital experience",
+    image: "/industries/hospitality-cover.jpg",
+    imageAlt: "Hotel reception staff using tablets at a marble concierge desk",
     focus: [
       "Booking & reservations",
       "Guest apps",
@@ -177,8 +177,8 @@ export const industries: Industry[] = [
     tagline: "Property journeys with less friction",
     description:
       "Builders, developers, and consultants — project showcase sites, virtual tours, CRM, and enquiry systems that keep deals moving.",
-    image: "/industries/real-estate.jpg",
-    imageAlt: "Real estate digital platform",
+    image: "/industries/real-estate-cover.jpg",
+    imageAlt: "Modern residential towers along a landscaped street under a clear sky",
     focus: [
       "Listing platforms",
       "Broker CRMs",
@@ -197,8 +197,8 @@ export const industries: Industry[] = [
     tagline: "Operations software that keeps pace",
     description:
       "Plants, freight, and supply networks — dashboards, tracking, and workflow tools that connect teams with real-time visibility.",
-    image: "/industries/manufacturing.jpg",
-    imageAlt: "Manufacturing and logistics operations software",
+    image: "/industries/manufacturing-cover.jpg",
+    imageAlt: "Warehouse operator checking inventory on a tablet in front of pallet racks",
     focus: [
       "Ops dashboards",
       "Inventory & tracking",
@@ -220,8 +220,8 @@ export const industries: Industry[] = [
     tagline: "Infrastructure digital, quietly reliable",
     description:
       "Energy providers and utility operators — monitoring dashboards, customer portals, and field workflows built for uptime and trust.",
-    image: "/industries/energy.jpg",
-    imageAlt: "Energy and utilities digital platform",
+    image: "/industries/energy-cover.jpg",
+    imageAlt: "Wind turbines on a forested mountain ridge at dusk",
     focus: [
       "Ops monitoring",
       "Customer portals",
@@ -258,8 +258,8 @@ export const industries: Industry[] = [
     tagline: "Content experiences that hold attention",
     description:
       "Media houses, OTT, and creators — publishing platforms, streaming companions, and brand systems audiences return to.",
-    image: "/industries/media.jpg",
-    imageAlt: "Media and entertainment digital product",
+    image: "/industries/media-cover.jpg",
+    imageAlt: "Film crew and cameras on a hazy studio set with cinematic lighting",
     focus: [
       "Content platforms",
       "Audience apps",
@@ -277,8 +277,8 @@ export const industries: Industry[] = [
     tagline: "Products that ship, then keep shipping",
     description:
       "SaaS products, IT services, and B2B platforms — conversion-driven sites, portals, and product squads built for the next release.",
-    image: "/industries/saas.jpg",
-    imageAlt: "Technology and SaaS product team",
+    image: "/industries/saas-cover-v2.jpg",
+    imageAlt: "Holographic Premium Concierge System dashboard in a luxury office",
     focus: [
       "MVP & product builds",
       "Design systems",
@@ -296,8 +296,8 @@ export const industries: Industry[] = [
     tagline: "Digital as fast as the customer",
     description:
       "Brands, dealers, and service networks — vehicle showcases, booking journeys, and after-sales tools that move at market speed.",
-    image: "/industries/automobile.jpg",
-    imageAlt: "Automobile digital experience",
+    image: "/industries/automobile-cover.jpg",
+    imageAlt: "Hatchback driving a forest road at golden hour with headlights on",
     focus: [
       "Vehicle showcase sites",
       "Dealer portals",
@@ -315,8 +315,8 @@ export const industries: Industry[] = [
     tagline: "Tools that hire and retain faster",
     description:
       "HR agencies and internal teams — career portals, ATS dashboards, candidate databases, and onboarding workflows that cut manual work.",
-    image: "/industries/hr-staffing.jpg",
-    imageAlt: "HR and staffing digital tools",
+    image: "/industries/hr-staffing-cover.jpg",
+    imageAlt: "HR team collaborating around a laptop with workforce analytics on a whiteboard",
     focus: [
       "Career portals",
       "Application tracking",
@@ -334,8 +334,8 @@ export const industries: Industry[] = [
     tagline: "Experiences that keep people active",
     description:
       "Gyms, academies, and fitness brands — booking systems, training apps, and membership journeys that keep users engaged.",
-    image: "/industries/sports-fitness.jpg",
-    imageAlt: "Sports and fitness digital product",
+    image: "/industries/sports-fitness-cover.jpg",
+    imageAlt: "Aerial view of a runner on a terracotta track in mid-stride",
     focus: [
       "Class booking",
       "Membership apps",

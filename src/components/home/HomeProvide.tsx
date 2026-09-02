@@ -12,7 +12,7 @@ const products = [
     background: "/BG 1.png",
     titleLines: ["Give Your Business a Voice", "That Never Sleeps"],
     body: "Deploy AI voice agents that answer every call, support every customer, and help your business grow with intelligent.",
-    explore: { label: "Explore WAI", href: "/solutions#ai" },
+    explore: { label: "Explore WAI", href: "/solutions/wai" },
     connect: { label: "Connect Us Now", href: "/contact" },
   },
   {

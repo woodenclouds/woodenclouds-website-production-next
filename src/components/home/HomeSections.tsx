@@ -6,47 +6,46 @@ import { getFeaturedWorks } from "@/data/works";
 import { formatBlogDate, type BlogPost } from "@/data/blog";
 import { clients } from "@/data/clients";
 import { homeServiceCards } from "@/data/content";
-import { getHomeIndustries, industries } from "@/data/industries";
-import { homeWhy } from "@/data/home";
+import { getHomeIndustries } from "@/data/industries";
 import { type HomeTestimonial } from "@/data/testimonials";
 import { HomeReveal } from "./HomeReveal";
+import "./home-services.css";
+import "./home-works.css";
+import "./home-clients.css";
+import "./home-industries.css";
 
 export function HomeWhatWeDo() {
   return (
-    <section id="what-we-do" className="wc-services wc-services--light">
-      <div className="wc-services-bg" aria-hidden />
-      <div className="wc-container relative z-10">
-        <HomeReveal as="header" className="wc-services-head">
-          <p className="wc-services-kicker">What we do</p>
-          <div className="wc-services-head-row">
-            <h2 className="wc-services-title">
-              Services built to
+    <section id="what-we-do" className="wc-home-svcs">
+      <div className="wc-container">
+        <HomeReveal as="header" className="wc-home-svcs-head">
+          <div className="wc-home-svcs-head-row">
+            <h2 className="wc-home-svcs-title">
+              Services built to ship
               <br />
-              ship and scale.
+              and scale.
             </h2>
-            <p className="wc-services-intro">
+            <p className="wc-home-svcs-intro">
               Three ways we partner — product engineering, business support, and brand growth.
             </p>
           </div>
         </HomeReveal>
 
-        <div className="wc-services-list">
+        <div className="wc-home-svcs-list">
           {homeServiceCards.map((card, i) => (
-            <HomeReveal key={card.title} delay={i * 80}>
-              <Link href={card.href} className="wc-services-row group">
-                <span className="wc-services-index">{String(i + 1).padStart(2, "0")}</span>
-                <div className="wc-services-copy">
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                </div>
-                <div className="wc-services-media">
-                  <img src={card.image} alt="" draggable={false} />
-                </div>
-                <span className="wc-services-go" aria-hidden>
-                  →
-                </span>
-              </Link>
-            </HomeReveal>
+            <Link key={card.href} href={card.href} className="wc-home-svcs-row">
+              <span className="wc-home-svcs-index">{String(i + 1).padStart(2, "0")}</span>
+              <span className="wc-home-svcs-copy">
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
+              </span>
+              <span className="wc-home-svcs-media">
+                <img src={card.image} alt="" draggable={false} />
+              </span>
+              <span className="wc-home-svcs-go" aria-hidden>
+                →
+              </span>
+            </Link>
           ))}
         </div>
       </div>
@@ -56,131 +55,63 @@ export function HomeWhatWeDo() {
 
 export function HomeFeaturedWork() {
   const studies = getFeaturedWorks(4);
-  const [lead, ...rest] = studies;
 
   return (
-    <section id="case-studies" className="wc-home-block wc-home-cases">
+    <section id="case-studies" className="wc-home-block wc-home-works">
       <div className="wc-container">
-        <HomeReveal as="header" className="wc-home-cases-head">
-          <p className="wc-home-kicker">Case studies</p>
-          <div className="wc-home-cases-head-row">
-            <h2 className="wc-home-title">
-              Work that moved
-              <br />
-              the needle.
-            </h2>
-            <p className="wc-home-lede">
-              Selected product, commerce, and brand engagements — each tied to a measurable result.
-            </p>
-          </div>
+        <HomeReveal as="header" className="wc-home-works-head">
+          <h2 className="wc-home-works-heading">Featured works.</h2>
+          <Link href="/works" className="wc-home-works-all">
+            View All Works
+            <span aria-hidden>→</span>
+          </Link>
         </HomeReveal>
 
-        {lead ? (
-          <HomeReveal>
-            <Link href={`/works/${lead.slug}`} className="wc-home-case wc-home-case--lead group">
-              <span className="wc-home-case-media">
-                {lead.cover ? (
-                  <>
-                    <img
-                      className="wc-home-case-cover"
-                      src={lead.cover}
-                      alt=""
-                      draggable={false}
-                    />
-                    <span className="wc-home-case-product">
-                      <img src={lead.thumbnail} alt={lead.title} draggable={false} />
-                    </span>
-                  </>
-                ) : (
-                  <img src={lead.thumbnail} alt={lead.title} draggable={false} />
-                )}
-              </span>
-              <span className="wc-home-case-copy">
-                <span className="wc-home-case-meta">
-                  <span>{lead.category}</span>
-                  <span aria-hidden>·</span>
-                  <span>{lead.client}</span>
+        <ul className="wc-home-works-grid">
+          {studies.map((work, i) => (
+            <HomeReveal key={work.slug} as="li" delay={i * 70}>
+              <Link href={`/works/${work.slug}`} className="wc-home-work">
+                <span className="wc-home-work-media">
+                  <img src={work.cover || work.thumbnail} alt={work.title} draggable={false} />
                 </span>
-                <h3>{lead.title}</h3>
-                <p className="wc-home-case-lede">{lead.title1}</p>
-                <p>{lead.description1}</p>
-                {lead.result ? <span className="wc-home-case-result">{lead.result}</span> : null}
-                <span className="wc-home-case-go">
-                  View case study
-                  <span aria-hidden>→</span>
-                </span>
-              </span>
-            </Link>
-          </HomeReveal>
-        ) : null}
-
-        <ul className="wc-home-cases-grid">
-          {rest.map((work, i) => (
-            <HomeReveal key={work.slug} as="li" delay={i * 80}>
-              <Link href={`/works/${work.slug}`} className="wc-home-case group">
-                <span className="wc-home-case-media">
-                  <img src={work.thumbnail} alt={work.title} draggable={false} />
-                </span>
-                <span className="wc-home-case-copy">
-                  <span className="wc-home-case-meta">
-                    <span>{work.category}</span>
-                    <span aria-hidden>·</span>
-                    <span>{work.client}</span>
-                  </span>
-                  <h3>{work.title}</h3>
-                  <p>{work.title1}</p>
-                  {work.result ? <span className="wc-home-case-result">{work.result}</span> : null}
+                <span className="wc-home-work-copy">
+                  <span className="wc-home-work-title">{work.title}</span>
+                  <span className="wc-home-work-desc">{work.description1}</span>
                 </span>
               </Link>
             </HomeReveal>
           ))}
         </ul>
-
-        <HomeReveal className="mt-10">
-          <Link href="/works" className="wc-home-link">
-            View all case studies
-            <span aria-hidden>→</span>
-          </Link>
-        </HomeReveal>
       </div>
     </section>
   );
 }
 
 export function HomeClients() {
-  return (
-    <section id="clients" className="wc-clients wc-section text-ink">
-      <div className="wc-clients-bg" aria-hidden />
+  const wall: { name: string; logo: string }[] = [
+    ...clients.flatMap((client) => (client.logo ? [{ name: client.name, logo: client.logo }] : [])),
+    { name: "HISPAN", logo: "/works/hispan/hispan-logo.png" },
+  ];
 
-      <div className="wc-container relative z-10 grid items-center gap-12 lg:grid-cols-2">
-        <HomeReveal>
-          <p className="wc-home-kicker">Clients</p>
-          <h2 className="wc-home-title">Our Clients</h2>
-          <p className="wc-home-lede mt-5">
-            The brands and businesses we design, build, and grow alongside.
-          </p>
-          <div className="mt-8">
-            <Link href="/clients" className="wc-home-link">
-              View all clients
-              <span aria-hidden>→</span>
-            </Link>
-          </div>
+  return (
+    <section id="clients" className="wc-home-block wc-home-clients">
+      <div className="wc-container">
+        <HomeReveal as="header" className="wc-home-clients-head">
+          <h2 className="wc-home-clients-heading">Our clients.</h2>
+          <Link href="/clients" className="wc-home-clients-all">
+            View All Clients
+            <span aria-hidden>→</span>
+          </Link>
         </HomeReveal>
 
-        <ul className="wc-clients-grid">
-          {clients.map((client, i) => (
-            <HomeReveal key={client.name} as="li" delay={i * 60}>
-              <div className="wc-clients-tile">
-                <span>{client.name}</span>
-              </div>
+        <ul className="wc-home-clients-grid">
+          {wall.map((client, i) => (
+            <HomeReveal key={client.name} as="li" delay={i * 50}>
+              <span className="wc-home-clients-logo">
+                <img src={client.logo} alt={client.name} draggable={false} />
+              </span>
             </HomeReveal>
           ))}
-          <HomeReveal as="li" delay={clients.length * 60}>
-            <Link href="/clients" className="wc-clients-more">
-              View more
-              <span aria-hidden>→</span>
-            </Link>
-          </HomeReveal>
         </ul>
       </div>
     </section>
@@ -194,24 +125,23 @@ export function HomeIndustries() {
     <section id="industries" className="wc-home-block wc-home-industries">
       <div className="wc-container">
         <HomeReveal as="header" className="wc-home-industries-head">
-          <p className="wc-home-kicker">Industries we serve</p>
           <div className="wc-home-industries-head-row">
             <h2 className="wc-home-title">
-              Built for how
+              Designing for the realities
               <br />
-              your market moves.
+              of your industry
             </h2>
-            <p className="wc-home-lede">
-              Healthcare, finance, agriculture, construction, commerce, and more — sector-aware work,
-              not generic playbooks.
-            </p>
+            <Link href="/industries" className="wc-home-industries-all">
+              View All Industries
+              <span aria-hidden>→</span>
+            </Link>
           </div>
         </HomeReveal>
 
         <ul className="wc-home-industries-mosaic">
           {items.map((item, i) => (
             <HomeReveal key={item.id} as="li" delay={Math.min(i, 8) * 50}>
-              <Link href={`/industries/${item.id}`} className="wc-home-industry-card">
+              <Link href={`/industries/${item.id}`} className={`wc-home-industry-card is-${item.id}`}>
                 <span className="wc-home-industry-card-media" aria-hidden>
                   <img src={item.image} alt="" draggable={false} />
                 </span>
@@ -230,47 +160,6 @@ export function HomeIndustries() {
                   </span>
                 </span>
               </Link>
-            </HomeReveal>
-          ))}
-        </ul>
-
-        <HomeReveal className="wc-home-industries-foot">
-          <p className="wc-home-industries-count">
-            {industries.length} industries · agriculture, construction, energy & more
-          </p>
-          <Link href="/industries" className="wc-home-link">
-            View all industries
-            <span aria-hidden>→</span>
-          </Link>
-        </HomeReveal>
-      </div>
-    </section>
-  );
-}
-
-export function HomeWhy() {
-  return (
-    <section id="why" className="wc-home-block wc-home-why">
-      <div className="wc-container">
-        <HomeReveal as="header" className="wc-home-why-head">
-          <p className="wc-home-kicker">Why Woodenclouds</p>
-          <div className="wc-home-why-head-row">
-            <h2 className="wc-home-title">
-              A partner built
-              <br />
-              for lasting progress.
-            </h2>
-            <p className="wc-home-lede">
-              One accountable team, clear decisions, and systems that hold as you grow.
-            </p>
-          </div>
-        </HomeReveal>
-
-        <ul className="wc-home-why-grid">
-          {homeWhy.map((item, i) => (
-            <HomeReveal key={item.title} as="li" delay={i * 70} className="wc-home-why-card">
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
             </HomeReveal>
           ))}
         </ul>
@@ -296,7 +185,6 @@ export function HomeTestimonials({
   items?: HomeTestimonial[];
 }) {
   const trackRef = useRef<HTMLUListElement | null>(null);
-  // 0 until the track has been measured, so controls never flash before layout is known.
   const [perView, setPerView] = useState(0);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

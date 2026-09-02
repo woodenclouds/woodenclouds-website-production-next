@@ -90,7 +90,7 @@ export function Navbar() {
     isWorksCaseStudy
       ? "is-clear is-dark"
       : isLightShell
-        ? "is-clear is-light"
+        ? "is-solid is-light"
         : isFuture
           ? scrolled
             ? "is-blur is-dark"
@@ -107,6 +107,7 @@ export function Navbar() {
   ].join(" ");
 
   const headerPos = (() => {
+    if (isHome) return "fixed top-0";
     if (isWorksCaseStudy) return "fixed top-0";
     if (isLightShell) return "relative";
     if (isFuture || isSolutions || isDarkPage) return "absolute top-0";
@@ -121,7 +122,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${scrolled ? " is-scrolled" : ""}${
+      className={`wc-nav inset-x-0 z-50 w-full ${headerPos}${lightNav ? " is-light" : ""}${scrolled ? " is-scrolled" : ""}${
         isWorksCaseStudy
           ? showSiteNavOnCase
             ? " opacity-100"
@@ -132,7 +133,7 @@ export function Navbar() {
       aria-hidden={isWorksCaseStudy && !showSiteNavOnCase}
     >
       <div className={shell}>
-        <div className="wc-container wc-nav-inner">
+        <div className="wc-nav-inner">
           <Link href="/" className="wc-nav-logo">
             <img
               src={logoLight ? "/brand/logo-light.png" : "/brand/logo-dark.png"}
@@ -142,21 +143,6 @@ export function Navbar() {
               className="wc-logo"
             />
           </Link>
-
-          <button
-            type="button"
-            className={`wc-nav-burger ${drawerDark ? "is-dark" : "is-light"}`}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="sr-only">Menu</span>
-            <span className="wc-nav-burger-lines" aria-hidden>
-              <span className={open ? "is-open" : ""} />
-              <span className={open ? "is-open" : ""} />
-              <span className={open ? "is-open" : ""} />
-            </span>
-          </button>
 
           <nav className="wc-nav-desktop" aria-label="Primary">
             <ul className="wc-nav-list">
@@ -185,6 +171,23 @@ export function Navbar() {
               {cta.label}
             </Link>
           </nav>
+
+          <div className="wc-nav-end">
+            <button
+              type="button"
+              className={`wc-nav-burger ${drawerDark ? "is-dark" : "is-light"}`}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="sr-only">Menu</span>
+              <span className="wc-nav-burger-lines" aria-hidden>
+                <span className={open ? "is-open" : ""} />
+                <span className={open ? "is-open" : ""} />
+                <span className={open ? "is-open" : ""} />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 

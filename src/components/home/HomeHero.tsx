@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { heroContent } from "@/data/hero";
+import { HeroStrings, heroStringsCanInteract } from "./HeroStrings";
+import "./home-hero.css";
 
 export function HomeHero() {
-  const stageRef = useRef<HTMLElement>(null);
   const [ready, setReady] = useState(false);
-  const [tick, setTick] = useState(0);
-  const pointer = useRef({ x: 0, y: 0 });
-  const smooth = useRef({ x: 0, y: 0 });
-  const raf = useRef(0);
+  const [hint, setHint] = useState(false);
+  const dismissed = useRef(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);
@@ -18,110 +19,75 @@ export function HomeHero() {
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = window.setInterval(
-      () => setTick((t) => (t + 1) % heroContent.ticks.length),
-      2400,
-    );
-    return () => window.clearInterval(id);
+    if (heroStringsCanInteract()) setHint(true);
   }, []);
 
   useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const hero = heroRef.current;
+    const label = labelRef.current;
+    if (!hero || !label || !hint) return;
 
-    const onMove = (e: PointerEvent) => {
-      const rect = stage.getBoundingClientRect();
-      pointer.current = {
-        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
-        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
-      };
+    const place = (e: PointerEvent) => {
+      if (dismissed.current) return;
+      const overLink = Boolean((e.target as Element | null)?.closest("a"));
+      if (overLink) {
+        label.classList.remove("is-visible");
+        return;
+      }
+      const rect = hero.getBoundingClientRect();
+      label.style.transform = `translate3d(${e.clientX - rect.left + 14}px, ${e.clientY - rect.top + 18}px, 0)`;
+      label.classList.add("is-visible");
     };
 
-    const loop = () => {
-      smooth.current.x += (pointer.current.x - smooth.current.x) * 0.06;
-      smooth.current.y += (pointer.current.y - smooth.current.y) * 0.06;
-      const { x, y } = smooth.current;
-      stage.style.setProperty("--hx", x.toFixed(4));
-      stage.style.setProperty("--hy", y.toFixed(4));
-      raf.current = requestAnimationFrame(loop);
-    };
+    const hide = () => label.classList.remove("is-visible");
 
-    stage.addEventListener("pointermove", onMove, { passive: true });
-    raf.current = requestAnimationFrame(loop);
+    hero.addEventListener("pointermove", place);
+    hero.addEventListener("pointerleave", hide);
     return () => {
-      stage.removeEventListener("pointermove", onMove);
-      cancelAnimationFrame(raf.current);
+      hero.removeEventListener("pointermove", place);
+      hero.removeEventListener("pointerleave", hide);
     };
-  }, []);
+  }, [hint]);
 
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const onScroll = () => {
-      const rect = stage.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height * 0.65, 1)));
-      stage.style.setProperty("--hscroll", p.toFixed(4));
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const dismissHint = () => {
+    if (dismissed.current) return;
+    dismissed.current = true;
+    setHint(false);
+  };
 
   return (
-    <header ref={stageRef} className={`wc-hero${ready ? " is-ready" : ""}`}>
-      <div className="wc-hero-grain" aria-hidden />
-      <div className="wc-hero-orb wc-hero-orb--a" aria-hidden />
-      <div className="wc-hero-orb wc-hero-orb--b" aria-hidden />
-      <div className="wc-hero-orb wc-hero-orb--c" aria-hidden />
+    <header ref={heroRef} className={`wc-hero wc-hero-strings-stage${ready ? " is-ready" : ""}`}>
+      <HeroStrings onFirstClick={dismissHint} />
 
       <div className="wc-container wc-hero-frame">
-        <span className="wc-hero-corner wc-hero-corner--tl" aria-hidden />
-        <span className="wc-hero-corner wc-hero-corner--tr" aria-hidden />
-        <span className="wc-hero-corner wc-hero-corner--bl" aria-hidden />
-        <span className="wc-hero-corner wc-hero-corner--br" aria-hidden />
-
         <div className="wc-hero-top">
-          <h1 className="wc-hero-statement">{heroContent.statement}</h1>
-          <p className="wc-hero-ticks" aria-live="polite">
-            <span className="wc-hero-ticks-label">{heroContent.prefix}</span>
-            <span key={heroContent.ticks[tick]} className="wc-hero-tick">
-              {heroContent.ticks[tick]}
-            </span>
-          </p>
-        </div>
-
-        <div className="wc-hero-mid">
-          <Link href={heroContent.cta.href} className="wc-hero-cta">
-            <span>{heroContent.cta.label}</span>
-            <span className="wc-hero-cta-arrow" aria-hidden>
-              ↓
-            </span>
-          </Link>
-        </div>
-
-        <div className="wc-hero-bottom">
-          <p className="wc-hero-headline">{heroContent.headline}</p>
-          <button
-            type="button"
-            className="wc-hero-scroll-cue"
-            aria-label="Scroll to explore"
-            onClick={() => {
-              document.getElementById("process")?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }}
-          >
-            <span className="wc-hero-scroll-line" aria-hidden />
-            Scroll
-          </button>
+          <h1 className="wc-hero-statement">
+            {heroContent.statementLines.map((line, i) => (
+              <span key={line}>
+                {i > 0 ? <br /> : null}
+                {line}
+              </span>
+            ))}
+          </h1>
+          <div className="wc-hero-actions">
+            {heroContent.actions.map((action) => (
+              <Link
+                key={action.href}
+                href={action.href}
+                className={`wc-hero-btn wc-hero-btn-${action.variant}`}
+              >
+                {action.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
+
+      {hint ? (
+        <span ref={labelRef} className="wc-hero-click-hint" aria-hidden>
+          Click Anywhere
+        </span>
+      ) : null}
     </header>
   );
 }

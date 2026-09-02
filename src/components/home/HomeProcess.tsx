@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { homeProcess } from "@/data/home";
 import { ProcessMission } from "./ProcessMission";
+import "./home-process.css";
 
 function clamp(n: number, min = 0, max = 1) {
   return Math.min(max, Math.max(min, n));
@@ -17,13 +18,8 @@ function StaticProcess() {
   return (
     <section id="process" className="wc-home-block wc-home-process">
       <div className="wc-container">
-        <header className="mb-10 md:mb-14">
-          <p className="wc-home-kicker">Our process</p>
-          <h2 className="wc-home-title">
-            A clear path
-            <br />
-            from brief to launch.
-          </h2>
+        <header className="mb-10 md:mb-14 text-center">
+          <h2 className="wc-home-title w-full text-center">How We Make It Happen</h2>
         </header>
         <ol className="wc-home-process-list">
           {homeProcess.map((step) => (
@@ -43,7 +39,7 @@ function StaticProcess() {
 }
 
 export function HomeProcess() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [reduced, setReduced] = useState(false);
   const steps = homeProcess;
@@ -108,74 +104,72 @@ export function HomeProcess() {
   const copyShift = (1 - copyOpacity) * 24 * Math.sign(stepFloat - active || 1);
 
   return (
-    <section
-      ref={sectionRef}
-      id="process"
-      className="wc-process-scroll"
-      style={{ height: `${Math.max(stepCount, 3) * 100}vh` }}
-      aria-label="Our process"
-    >
-      <div className="wc-process-sticky">
-        <div className="wc-container wc-process-inner">
-          <header className="wc-process-head">
-            <p className="wc-home-kicker">Our process</p>
-            <h2 className="wc-home-title">
-              From concept
-              <br />
-              to launch.
-            </h2>
-          </header>
+    <section id="process" className="wc-process-block" aria-label="Our process">
+      <div className="wc-container">
+        <header className="wc-process-head">
+          <h2 className="wc-home-title">How We Make It Happen</h2>
+        </header>
+      </div>
 
-          <div className="wc-process-stage">
-            <div className="wc-process-copy" aria-live="polite">
-              <article
-                className="wc-process-step is-active"
-                style={{
-                  opacity: copyOpacity,
-                  transform: `translate3d(0, ${copyShift}px, 0)`,
-                }}
-              >
-                <span className="wc-process-step-index">{activeStep.index}</span>
-                <p className="wc-process-step-mission">{activeStep.mission}</p>
-                <h3>{activeStep.title}</h3>
-                <p>{activeStep.body}</p>
-              </article>
-            </div>
+      <div
+        ref={sectionRef}
+        className="wc-process-scroll"
+        style={{ height: `${Math.max(stepCount, 3) * 100}vh` }}
+      >
+        <div className="wc-process-sticky">
+          <div className="wc-container wc-process-inner">
+            <div className="wc-process-stage min-[900px]:items-center">
+              <div className="wc-process-left min-[900px]:justify-center min-[900px]:self-center">
+                <div className="wc-process-copy" aria-live="polite">
+                  <article
+                    className="wc-process-step is-active"
+                    style={{
+                      opacity: copyOpacity,
+                      transform: `translate3d(0, ${copyShift}px, 0)`,
+                    }}
+                  >
+                    <span className="wc-process-step-index">{activeStep.index}</span>
+                    <p className="wc-process-step-mission">{activeStep.mission}</p>
+                    <h3>{activeStep.title}</h3>
+                    <p>{activeStep.body}</p>
+                  </article>
+                </div>
 
-            <div className="wc-process-visual">
-              <ProcessMission
-                progress={progress}
-                activeStep={active}
-                stepCount={stepCount}
-              />
+                <ol className="wc-process-rail" aria-label="Process steps">
+                  {steps.map((step, i) => {
+                    const on = i === active;
+                    const passed = i <= active;
+                    return (
+                      <li
+                        key={step.index}
+                        className={[on ? "is-on" : "", passed ? "is-passed" : ""]
+                          .filter(Boolean)
+                          .join(" ")}
+                      >
+                        <button
+                          type="button"
+                          className="wc-process-rail-btn"
+                          onClick={() => scrollToStep(i)}
+                          aria-current={on ? "step" : undefined}
+                        >
+                          <span className="wc-process-rail-dot" />
+                          <span className="wc-process-rail-label">{step.title}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+
+              <div className="wc-process-visual">
+                <ProcessMission
+                  progress={progress}
+                  activeStep={active}
+                  stepCount={stepCount}
+                />
+              </div>
             </div>
           </div>
-
-          <ol className="wc-process-rail" aria-label="Process steps">
-            {steps.map((step, i) => {
-              const on = i === active;
-              const passed = i <= active;
-              return (
-                <li key={step.index} className={[on ? "is-on" : "", passed ? "is-passed" : ""].filter(Boolean).join(" ")}>
-                  <button
-                    type="button"
-                    className="wc-process-rail-btn"
-                    onClick={() => scrollToStep(i)}
-                    aria-current={on ? "step" : undefined}
-                  >
-                    <span className="wc-process-rail-dot" />
-                    <span className="wc-process-rail-label">{step.title}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-
-          <div
-            className="wc-process-progress"
-            aria-hidden
-            style={{ transform: `scaleX(${ease(progress)})` }}
-          />
         </div>
       </div>
     </section>

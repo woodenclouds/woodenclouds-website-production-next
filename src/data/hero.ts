@@ -1,16 +1,23 @@
+export type HeroAction = {
+  label: string;
+  href: string;
+  variant: "solid" | "outline";
+};
+
 export type HeroContent = {
-  statement: string;
-  headline: string;
-  prefix: string;
-  cta: { label: string; href: string };
-  ticks: string[];
+  statementLines: string[];
+  actions: HeroAction[];
 };
 
 export const heroContent: HeroContent = {
-  statement:
-    "We design and build websites, apps, and digital systems your customers can use — and your business can grow on.",
-  headline: "From first sketch to a product in the market.",
-  prefix: "We build",
-  cta: { label: "See how we work", href: "#process" },
-  ticks: ["Websites", "Apps", "Brands", "Teams"],
+  statementLines: [
+    "Digital Products That Close The Gap",
+    "Between How A Brand Sees Itself",
+    "And How The World",
+    "Experiences It.",
+  ],
+  actions: [
+    { label: "View Our Works", href: "/works", variant: "solid" },
+    { label: "Book a Free Consultation", href: "/contact", variant: "outline" },
+  ],
 };

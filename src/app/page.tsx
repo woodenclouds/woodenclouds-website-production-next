@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/home/HomeHero";
+import { HomeProvide } from "@/components/home/HomeProvide";
 import {
   HomeWhatWeDo,
   HomeFeaturedWork,
   HomeClients,
   HomeIndustries,
-  HomeWhy,
   HomeTestimonials,
   HomeInsights,
 } from "@/components/home/HomeSections";
+import { HomeWhy } from "@/components/home/HomeWhy";
 import { HomeProcess } from "@/components/home/HomeProcess";
 import { HomeVisitNotice } from "@/components/home/HomeVisitNotice";
 import { EnquireCta } from "@/components/shared/PageBits";
@@ -39,6 +40,7 @@ export default async function HomePage() {
       <HomeProcess />
       <HomeWhatWeDo />
       <HomeFeaturedWork />
+      <HomeProvide />
       <HomeClients />
       <HomeTestimonials items={testimonials} />
       <HomeIndustries />

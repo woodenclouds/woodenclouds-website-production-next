@@ -7,6 +7,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { GetProposal } from "./GetProposal";
 import { ProgressWrap } from "./ProgressWrap";
+import "@/lib/pianoAudio";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -58,7 +59,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <div
         className={
           isLightShell
-            ? "min-h-screen bg-paper text-ink"
+            ? "min-h-screen bg-[#F8F8F8] text-ink"
             : isWorksCaseStudy
               ? "min-h-screen bg-[#FAFAFC] text-ink"
               : isDarkPage
@@ -72,7 +73,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                       isFuture
                     ? "min-h-screen bg-[#05070b] text-white"
                     : "min-h-screen bg-black text-white"
-                : "min-h-screen bg-paper text-ink"
+                : "min-h-screen bg-[#F8F8F8] text-ink"
         }
       >
         <Navbar />

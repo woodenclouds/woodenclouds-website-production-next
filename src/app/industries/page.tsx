@@ -80,7 +80,7 @@ export default function IndustriesPage() {
                 >
                   <div className="lg:col-span-6">
                     <Link href={`/industries/${industry.id}`} className="group block">
-                      <div className="wc-ind-media overflow-hidden bg-ink/5">
+                      <div className={`wc-ind-media overflow-hidden bg-ink/5 is-${industry.id}`}>
                         <img
                           src={industry.image}
                           alt={industry.imageAlt}

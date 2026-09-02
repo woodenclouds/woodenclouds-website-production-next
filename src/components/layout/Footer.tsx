@@ -1,30 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { site } from "@/data/content";
-import { isWorksCaseStudyPath } from "@/data/works";
+import { FooterDots } from "./FooterDots";
 
 export function Footer() {
-  const pathname = usePathname();
-  const isLightShell =
-    pathname === "/" ||
-    pathname === "/services" ||
-    pathname === "/industries" ||
-    pathname.startsWith("/industries/") ||
-    pathname === "/works" ||
-    pathname === "/about" ||
-    pathname === "/contact" ||
-    pathname === "/blog" ||
-    isWorksCaseStudyPath(pathname);
-
   return (
-    <footer className={isLightShell ? "wc-footer wc-footer--light" : "wc-footer"}>
-      <div className="wc-footer-bg" aria-hidden />
+    <footer className="wc-footer">
+      <FooterDots />
 
-      <div className="wc-container relative z-10 py-16 md:py-20">
+      <div className="wc-container wc-footer-content">
         <div className="wc-footer-mast">
-          <p className="wc-footer-mast-kicker">Woodenclouds</p>
           <h2 className="wc-footer-mast-title">
             Designing your
             <br />
@@ -45,7 +31,7 @@ export function Footer() {
           <div className="wc-footer-brand">
             <Link href="/" className="inline-block">
               <img
-                src={isLightShell ? "/brand/logo-dark.png" : "/brand/logo-light.png"}
+                src="/brand/logo-light.png"
                 alt="Woodenclouds"
                 width={180}
                 height={10}
