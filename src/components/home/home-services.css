@@ -1,0 +1,146 @@
+.wc-home-svcs {
+  padding: 5.5rem 0 6rem;
+  background: #f8f8f8;
+  color: #0a0a0a;
+}
+
+.wc-home-svcs-head {
+  margin-bottom: 3.25rem;
+}
+
+.wc-home-svcs-head-row {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.wc-home-svcs-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: #0a0a0a;
+}
+
+.wc-home-svcs-intro {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 0.98rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.wc-home-svcs-list {
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+.wc-home-svcs-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "index copy"
+    "media media";
+  gap: 1rem 1.25rem;
+  align-items: center;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.wc-home-svcs-index {
+  grid-area: index;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: rgba(10, 10, 10, 0.4);
+  padding-top: 0.35rem;
+  align-self: start;
+}
+
+.wc-home-svcs-copy {
+  grid-area: copy;
+}
+
+.wc-home-svcs-copy h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+}
+
+.wc-home-svcs-copy p {
+  margin: 0.55rem 0 0;
+  max-width: 34rem;
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.wc-home-svcs-media {
+  grid-area: media;
+  display: block;
+  width: 100%;
+  max-width: 16rem;
+  height: 7rem;
+  overflow: hidden;
+}
+
+.wc-home-svcs-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wc-home-svcs-go {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .wc-home-svcs-head-row {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+    gap: 3rem;
+  }
+
+  .wc-home-svcs-intro {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .wc-home-svcs-row {
+    grid-template-columns: 3.5rem minmax(0, 1fr) 11rem 2.5rem;
+    grid-template-areas: "index copy media go";
+    gap: 1.5rem 2rem;
+    padding: 1.85rem 0;
+  }
+
+  .wc-home-svcs-index {
+    align-self: center;
+    padding-top: 0;
+  }
+
+  .wc-home-svcs-media {
+    width: 11rem;
+    max-width: none;
+    height: 7rem;
+  }
+
+  .wc-home-svcs-go {
+    grid-area: go;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: rgba(10, 10, 10, 0.3);
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .wc-home-svcs-row:hover .wc-home-svcs-go {
+    color: #0a0a0a;
+    transform: translateX(4px);
+  }
+}

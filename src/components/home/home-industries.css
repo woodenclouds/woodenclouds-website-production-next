@@ -1,0 +1,33 @@
+.wc-home-industries-head-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.wc-home-industries-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #0a0a0a;
+  text-decoration: none;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.wc-home-industries-all:hover {
+  gap: 0.7rem;
+  color: #1b6eff;
+}
+
+@media (min-width: 768px) {
+  .wc-home-industries-head-row {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+}

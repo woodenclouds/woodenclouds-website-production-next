@@ -1,0 +1,15 @@
+@media (min-width: 900px) {
+  .wc-process-inner > .wc-process-stage {
+    align-items: center;
+  }
+
+  .wc-process-stage > .wc-process-left {
+    justify-content: center;
+    align-self: center;
+  }
+}
+
+.wc-process-rail-btn:hover .wc-process-rail-dot {
+  background: #1b6eff;
+  opacity: 1;
+}

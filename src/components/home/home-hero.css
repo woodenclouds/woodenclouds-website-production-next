@@ -1,0 +1,164 @@
+.wc-hero.wc-hero-strings-stage {
+  background: #ffffff;
+}
+
+body.is-home .wc-nav.is-light {
+  background: transparent;
+}
+
+body.is-home .wc-nav.is-light:not(.is-scrolled) .wc-nav-bar.is-solid.is-light {
+  background: transparent;
+}
+
+body.is-home .wc-nav.is-light.is-scrolled {
+  background: #ffffff;
+}
+
+.wc-hero-strings {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.wc-hero-strings path {
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.wc-hero-strings-stage .wc-container.wc-hero-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding-top: 6.5rem;
+  padding-bottom: 5rem;
+  opacity: 1;
+  transform: none;
+}
+
+.wc-hero-strings-stage .wc-hero-top {
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wc-hero-strings-stage .wc-hero-statement {
+  margin: 0 auto;
+  max-width: 28em;
+  font-size: clamp(1.85rem, 3.95vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.28;
+  color: #0a0a0a;
+}
+
+.wc-hero-strings-stage .wc-hero-statement span {
+  white-space: nowrap;
+}
+
+.wc-hero-strings-stage .wc-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2.4rem;
+}
+
+.wc-hero-strings-stage .wc-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  padding: 0.72rem 1.55rem;
+  border-radius: 9999px;
+  border: 1px solid #0a0a0a;
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.wc-hero-strings-stage .wc-hero-btn-solid {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+.wc-hero-strings-stage .wc-hero-btn-solid:hover {
+  background: #1b6eff;
+  border-color: #1b6eff;
+  color: #fff;
+  transform: none;
+}
+
+.wc-hero-strings-stage .wc-hero-btn-outline {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.wc-hero-strings-stage .wc-hero-btn-outline:hover {
+  background: #fff;
+  border-color: #1b6eff;
+  color: #1b6eff;
+}
+
+.wc-hero-click-hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  margin: 0;
+  color: #0a0a0a;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  opacity: 0;
+  will-change: transform;
+}
+
+.wc-hero-click-hint.is-visible {
+  opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+  .wc-hero-strings-stage .wc-hero-statement {
+    max-width: none;
+  }
+
+  .wc-hero-strings-stage .wc-hero-statement span {
+    white-space: normal;
+  }
+
+  .wc-hero-strings-stage .wc-hero-btn {
+    width: auto;
+    min-width: 11.5rem;
+  }
+
+  .wc-hero-click-hint {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .wc-hero-click-hint {
+    display: none;
+  }
+}

@@ -1,0 +1,142 @@
+.wc-home-why {
+  background: #ffffff;
+  color: #0a0a0a;
+  padding: 5.5rem 0 6.5rem;
+}
+
+.wc-home-why-head {
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.wc-home-why-title {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.6vw, 3.35rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: #0a0a0a;
+}
+
+.wc-home-why-quote {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 0.98rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+.wc-home-why-layout {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.wc-home-why-photo {
+  overflow: hidden;
+  border-radius: 1.85rem;
+  aspect-ratio: 4 / 5;
+  background: #ececec;
+}
+
+.wc-home-why-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% 40%;
+}
+
+.wc-home-why-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+.wc-home-why-item {
+  border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+}
+
+.wc-home-why-row {
+  display: grid;
+  grid-template-columns: 2.15rem 1fr;
+  gap: 0.95rem;
+  padding: 1.45rem 0 1.35rem;
+}
+
+.wc-home-why-num {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  margin-top: 0.15rem;
+  border: 1px solid rgba(10, 10, 10, 0.35);
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #0a0a0a;
+}
+
+.wc-home-why-copy {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.wc-home-why-item-title {
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: #0a0a0a;
+}
+
+.wc-home-why-item-body {
+  max-width: 32rem;
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(10, 10, 10, 0.52);
+}
+
+@media (min-width: 900px) {
+  .wc-home-why {
+    padding: 6.25rem 0 7.25rem;
+  }
+
+  .wc-home-why-head {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+    gap: 3.5rem 4.25rem;
+    margin-bottom: 2.75rem;
+  }
+
+  .wc-home-why-quote {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .wc-home-why-layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.5rem 4.25rem;
+    align-items: stretch;
+  }
+
+  .wc-home-why-figure {
+    height: 100%;
+  }
+
+  .wc-home-why-photo {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .wc-home-why-row {
+    padding: 1.55rem 0 1.45rem;
+    gap: 1.1rem;
+  }
+}
