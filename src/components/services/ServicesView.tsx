@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { servicesFaqs } from "@/data/content";
 import {
   servicePractices,
@@ -17,7 +17,10 @@ export function ServicesView() {
   const [openFaq, setOpenFaq] = useState(0);
   const [ready, setReady] = useState(false);
   const featured = getFeaturedWorks(2);
-  const jumpItems = servicePractices.map(({ id, name }) => ({ id, name }));
+  const jumpItems = useMemo(
+    () => servicePractices.map(({ id, name }) => ({ id, name })),
+    [],
+  );
 
   useEffect(() => {
     const id = window.setTimeout(() => setReady(true), 40);

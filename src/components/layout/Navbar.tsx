@@ -63,7 +63,7 @@ export function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       const next = window.scrollY > 48;
-      setScrolled(next);
+      setScrolled((prev) => (prev === next ? prev : next));
       if (isWorksCaseStudy && next) setOpen(false);
     };
     onScroll();

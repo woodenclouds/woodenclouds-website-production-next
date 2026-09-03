@@ -36,12 +36,19 @@ export function FooterDots() {
     let running = false;
 
     const resize = () => {
-      const rect = wrap.getBoundingClientRect();
+      const rect = stage.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = Math.max(1, Math.min(MAX_DIM, Math.round(rect.width)));
-      height = Math.max(1, Math.min(MAX_DIM, Math.round(rect.height)));
+      const nextWidth = Math.max(1, Math.min(MAX_DIM, Math.round(rect.width)));
+      const nextHeight = Math.max(1, Math.min(MAX_DIM, Math.round(rect.height)));
+      if (nextWidth === width && nextHeight === height && canvas.style.width) return;
+      cancelAnimationFrame(raf);
+      running = false;
+      width = nextWidth;
+      height = nextHeight;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       draw();
     };
@@ -98,7 +105,7 @@ export function FooterDots() {
     };
 
     const onMove = (e: PointerEvent) => {
-      const rect = wrap.getBoundingClientRect();
+      const rect = stage.getBoundingClientRect();
       pointer.x = e.clientX - rect.left;
       pointer.y = e.clientY - rect.top;
       start();
@@ -112,7 +119,7 @@ export function FooterDots() {
 
     resize();
     const ro = new ResizeObserver(resize);
-    ro.observe(wrap);
+    ro.observe(stage);
     stage.addEventListener("pointermove", onMove, { passive: true });
     stage.addEventListener("pointerleave", onLeave);
 
@@ -125,9 +132,13 @@ export function FooterDots() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="wc-footer-dots-wrap" aria-hidden>
-      <div className="wc-footer-dots-static" />
-      <canvas ref={canvasRef} className="wc-footer-dots" />
+    <div
+      ref={wrapRef}
+      className="wc-footer-dots-wrap pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      aria-hidden
+    >
+      <div className="wc-footer-dots-static pointer-events-none absolute inset-0 z-0" />
+      <canvas ref={canvasRef} className="wc-footer-dots pointer-events-none absolute inset-0 z-0 block h-full w-full" />
     </div>
   );
 }

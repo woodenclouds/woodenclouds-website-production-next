@@ -85,24 +85,24 @@
             border-radius: 2px;
         }
         .wc-nav-btn {
-            background: #ffffff;
-            color: #111111;
-            padding: 0.55rem 1.45rem;
+            background: transparent;
+            color: #ffffff;
+            padding: 0.5rem 1.35rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 9999px;
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 0.88rem;
+            font-weight: 400;
+            font-size: 0.875rem;
             text-decoration: none;
             margin-left: 0.5rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
         .wc-nav-btn:hover {
-            background: #f3f4f6;
-            transform: scale(1.03);
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+            background: #ffffff;
+            color: #0a0a0a;
         }
         .wc-header-burger {
             display: none;
@@ -159,12 +159,17 @@
         }
         .wc-mobile-cta {
             margin-top: 1rem;
-            background: #ffffff !important;
-            color: #111111 !important;
+            background: transparent !important;
+            color: #ffffff !important;
             padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.9);
             border-radius: 9999px;
             text-align: center;
-            font-weight: 600 !important;
+            font-weight: 400 !important;
+        }
+        .wc-mobile-cta:hover {
+            background: #ffffff !important;
+            color: #0a0a0a !important;
         }
 
         @media (max-width: 1080px) {
@@ -194,8 +199,6 @@
                 <a href="/services" class="wc-nav-item">Services</a>
                 <a href="/solutions" class="wc-nav-item">Solutions</a>
                 <a href="/industries" class="wc-nav-item">Industries</a>
-                <a href="/partner-with-us" class="wc-nav-item">Partner</a>
-                <a href="/services/dedicated-team" class="wc-nav-item">Hire team</a>
                 <a href="/works" class="wc-nav-item is-active">Works</a>
                 <a href="/about" class="wc-nav-item">About</a>
                 <a href="/contact" class="wc-nav-btn">Contact</a>
@@ -213,8 +216,6 @@
             <a href="/services">Services</a>
             <a href="/solutions">Solutions</a>
             <a href="/industries">Industries</a>
-            <a href="/partner-with-us">Partner</a>
-            <a href="/services/dedicated-team">Hire team</a>
             <a href="/works" class="is-active">Works</a>
             <a href="/about">About</a>
             <a href="/contact" class="wc-mobile-cta">Contact</a>

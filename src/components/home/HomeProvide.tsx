@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Phone, ShoppingCart, Sparkles, TrendingUp } from "lucide-react";
 import { HomeReveal } from "./HomeReveal";
 import "./home-provide.css";
 
@@ -11,8 +12,8 @@ const products = [
     logoAlt: "WAI",
     titleLines: ["Give Your Business a Voice", "That Never Sleeps"],
     body: "Deploy AI voice agents that answer every call, support every customer, and help your business grow with intelligent.",
-    explore: { label: "Explore WAI", href: "/solutions/wai" },
-    connect: { label: "Connect Us Now", href: "/contact" },
+    explore: { label: "Explore WAI", href: "/solutions/wai", Icon: Sparkles },
+    connect: { label: "Connect Us Now", href: "/contact", Icon: Phone },
   },
   {
     id: "wobcart",
@@ -20,8 +21,8 @@ const products = [
     logoAlt: "Wobcart",
     titleLines: ["Complete eCommerce", "Growth Platform"],
     body: "An all-in-one eCommerce platform for building, launching, and growing online businesses.",
-    explore: { label: "Explore Wobcart", href: "/solutions#commerce" },
-    connect: { label: "Connect Us Now", href: "/contact" },
+    explore: { label: "Explore Wobcart", href: "/solutions#commerce", Icon: ShoppingCart },
+    connect: { label: "Connect Us Now", href: "/contact", Icon: TrendingUp },
   },
 ] as const;
 
@@ -41,6 +42,12 @@ export function HomeProvide() {
           {products.map((product, i) => (
             <HomeReveal key={product.id} as="li" delay={i * 80}>
               <article className={`wc-home-provide-card is-${product.id}`}>
+                <span className="wc-home-provide-deco" aria-hidden>
+                  <span className="wc-home-provide-deco-pattern" />
+                  <span className="wc-home-provide-deco-wave wc-home-provide-deco-wave--a" />
+                  <span className="wc-home-provide-deco-wave wc-home-provide-deco-wave--b" />
+                  <span className="wc-home-provide-deco-wave wc-home-provide-deco-wave--c" />
+                </span>
                 <div className="wc-home-provide-card-inner">
                   <img
                     className="wc-home-provide-logo"
@@ -56,12 +63,15 @@ export function HomeProvide() {
                       </span>
                     ))}
                   </h3>
+                  <span className="wc-home-provide-rule" />
                   <p>{product.body}</p>
                   <div className="wc-home-provide-actions">
-                    <Link href={product.explore.href} className="wc-home-provide-btn is-light">
+                    <Link href={product.explore.href} className="wc-home-provide-btn is-outline">
+                      <product.explore.Icon size={15} strokeWidth={2} aria-hidden />
                       {product.explore.label}
                     </Link>
-                    <Link href={product.connect.href} className="wc-home-provide-btn is-dark">
+                    <Link href={product.connect.href} className="wc-home-provide-btn is-fill">
+                      <product.connect.Icon size={15} strokeWidth={2} aria-hidden />
                       {product.connect.label}
                     </Link>
                   </div>

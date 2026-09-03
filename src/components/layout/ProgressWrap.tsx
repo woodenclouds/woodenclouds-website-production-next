@@ -6,7 +6,10 @@ export function ProgressWrap() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setActive(window.scrollY > 120);
+    const onScroll = () => {
+      const next = window.scrollY > 120;
+      setActive((prev) => (prev === next ? prev : next));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

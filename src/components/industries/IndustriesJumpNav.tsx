@@ -14,6 +14,8 @@ export function IndustriesJumpNav({
   const [active, setActive] = useState(items[0]?.id ?? "");
   const listRef = useRef<HTMLUListElement>(null);
 
+  const itemKey = items.map((item) => item.id).join();
+
   useEffect(() => {
     const sections = items
       .map((item) => document.getElementById(item.id))
@@ -26,14 +28,15 @@ export function IndustriesJumpNav({
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target?.id) setActive(visible.target.id);
+        const id = visible?.target?.id;
+        if (id) setActive((prev) => (prev === id ? prev : id));
       },
       { rootMargin: "-20% 0px -50% 0px", threshold: [0.15, 0.4, 0.7] },
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [items]);
+  }, [itemKey]);
 
   useEffect(() => {
     const list = listRef.current;
@@ -42,11 +45,10 @@ export function IndustriesJumpNav({
     const activeLink = list.querySelector<HTMLElement>(
       `[data-industry-id="${CSS.escape(active)}"]`,
     );
-    activeLink?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+    if (!activeLink) return;
+
+    const left = activeLink.offsetLeft - list.clientWidth / 2 + activeLink.clientWidth / 2;
+    list.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [active]);
 
   return (

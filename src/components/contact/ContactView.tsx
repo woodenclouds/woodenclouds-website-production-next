@@ -74,11 +74,13 @@ export function ContactView() {
               </div>
             </div>
 
-            <div className="wc-contact-stage-visual" aria-hidden>
+            <div className="wc-contact-stage-visual !bg-transparent overflow-visible">
               <div className="wc-contact-stage-visual-media">
-                <img src="/hero/hero-lead.jpg" alt="" />
+                <img
+                  src="/contact/working-together.svg"
+                  alt="Two people collaborating at computers"
+                />
               </div>
-              <div className="wc-contact-stage-visual-shade" />
               <div className="wc-contact-stage-visual-meta">
                 <span>Based in Kochi</span>
                 <strong>We reply with clarity</strong>

@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="wc-footer">
       <FooterDots />
 
-      <div className="wc-container wc-footer-content">
+      <div className="wc-container wc-footer-content relative z-10">
         <div className="wc-footer-mast">
           <h2 className="wc-footer-mast-title">
             Designing your
@@ -123,7 +123,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="wc-footer-bar">
+      <div className="wc-footer-bar relative z-10">
         <div className="wc-container wc-footer-bar-row">
           <p>Woodenclouds © {new Date().getFullYear()}. All rights reserved.</p>
           <p>
