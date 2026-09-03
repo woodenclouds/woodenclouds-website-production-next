@@ -9,7 +9,6 @@ const products = [
     id: "wai",
     logo: "/WAI.png",
     logoAlt: "WAI",
-    background: "/BG 1.png",
     titleLines: ["Give Your Business a Voice", "That Never Sleeps"],
     body: "Deploy AI voice agents that answer every call, support every customer, and help your business grow with intelligent.",
     explore: { label: "Explore WAI", href: "/solutions/wai" },
@@ -19,7 +18,6 @@ const products = [
     id: "wobcart",
     logo: "/Wobcart.png",
     logoAlt: "Wobcart",
-    background: "/BG 2.png",
     titleLines: ["Complete eCommerce", "Growth Platform"],
     body: "An all-in-one eCommerce platform for building, launching, and growing online businesses.",
     explore: { label: "Explore Wobcart", href: "/solutions#commerce" },
@@ -43,10 +41,6 @@ export function HomeProvide() {
           {products.map((product, i) => (
             <HomeReveal key={product.id} as="li" delay={i * 80}>
               <article className={`wc-home-provide-card is-${product.id}`}>
-                <span className="wc-home-provide-card-bg" aria-hidden>
-                  <img src={product.background} alt="" draggable={false} />
-                  <span className="wc-home-provide-card-motion" />
-                </span>
                 <div className="wc-home-provide-card-inner">
                   <img
                     className="wc-home-provide-logo"
