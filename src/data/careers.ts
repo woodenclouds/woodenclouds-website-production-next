@@ -15,7 +15,7 @@ export const careerOpenings: CareerOpening[] = [
     location: "Kochi · Hybrid",
     type: "Full-time",
     summary:
-      "Build and ship web products end to end — modern frontends, solid APIs, and cloud-ready delivery with client teams.",
+      "Build websites and apps from start to finish — modern screens, solid APIs, and delivery with client teams.",
   },
   {
     id: "product-designer",
@@ -24,7 +24,7 @@ export const careerOpenings: CareerOpening[] = [
     location: "Kochi · Hybrid",
     type: "Full-time",
     summary:
-      "Own product UI and brand systems — from flows and prototypes to polished interfaces that feel intentional.",
+      "Design product screens and brand systems people enjoy using — from first flow to a finished look.",
   },
   {
     id: "digital-marketer",
@@ -33,7 +33,7 @@ export const careerOpenings: CareerOpening[] = [
     location: "Kochi",
     type: "Full-time",
     summary:
-      "Plan and run campaigns across SEO, social, and performance — turning attention into measurable outcomes.",
+      "Plan and run campaigns across SEO, social, and ads — turning attention into results you can measure.",
   },
   {
     id: "mobile-developer",
@@ -42,7 +42,7 @@ export const careerOpenings: CareerOpening[] = [
     location: "Kochi · Hybrid",
     type: "Full-time",
     summary:
-      "Ship iOS and Android experiences with React Native or native stacks — clean architecture, real release cycles.",
+      "Build iOS and Android apps with React Native or native stacks — clean structure, real release cycles.",
   },
   {
     id: "project-coordinator",
@@ -51,6 +51,6 @@ export const careerOpenings: CareerOpening[] = [
     location: "Kochi",
     type: "Full-time",
     summary:
-      "Keep delivery clear and moving — timelines, client communication, and the glue between design, eng, and growth.",
+      "Keep delivery clear and moving — timelines, client communication, and the glue between design, engineering, and growth.",
   },
 ];

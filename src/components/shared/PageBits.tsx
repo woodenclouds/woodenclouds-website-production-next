@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function EnquireCta({
   background = "/backgrounds/1.jpg",
-  buttonLabel = "Enquire Now",
+  buttonLabel = "Get in touch",
   variant = "photo",
 }: {
   background?: string;
@@ -19,7 +19,7 @@ export function EnquireCta({
             Ready to build what’s next?
           </h3>
           <p className="mx-auto mt-4 max-w-md text-base font-light text-muted">
-            Tell us where you are — we’ll help shape the product, brand, and growth path from there.
+            Tell us where you are. We&apos;ll help with the product, the brand, and how you grow.
           </p>
           <Link href="/contact" className="wc-btn wc-btn-solid mt-8">
             {buttonLabel}
@@ -40,7 +40,7 @@ export function EnquireCta({
           Ready to build what’s next?
         </h3>
         <p className="mx-auto mt-4 max-w-md text-base font-light text-white/65">
-          Tell us where you are — we’ll help shape the product, brand, and growth path from there.
+            Tell us where you are. We&apos;ll help with the product, the brand, and how you grow.
         </p>
         <Link href="/contact" className="wc-btn wc-btn-light mt-8">
           {buttonLabel}

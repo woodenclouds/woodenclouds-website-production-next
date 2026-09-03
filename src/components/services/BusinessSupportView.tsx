@@ -166,7 +166,7 @@ export function BusinessSupportView() {
 
       <EnquireCta
         background="/services/startup-business-support.jpg"
-        buttonLabel="Enquire now"
+        buttonLabel="Get in touch"
       />
     </div>
   );

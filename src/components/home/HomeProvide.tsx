@@ -12,8 +12,8 @@ const products = [
     logoAlt: "WAI",
     titleLines: ["Give Your Business a Voice", "That Never Sleeps"],
     body: "Deploy AI voice agents that answer every call, support every customer, and help your business grow with intelligent.",
-    explore: { label: "Explore WAI", href: "/solutions/wai", Icon: Sparkles },
-    connect: { label: "Connect Us Now", href: "/contact", Icon: Phone },
+    explore: { label: "Learn more", href: "/solutions/wai", Icon: Sparkles },
+    connect: { label: "Talk to us", href: "/contact", Icon: Phone },
   },
   {
     id: "wobcart",
@@ -21,8 +21,8 @@ const products = [
     logoAlt: "Wobcart",
     titleLines: ["Complete eCommerce", "Growth Platform"],
     body: "An all-in-one eCommerce platform for building, launching, and growing online businesses.",
-    explore: { label: "Explore Wobcart", href: "/solutions#commerce", Icon: ShoppingCart },
-    connect: { label: "Connect Us Now", href: "/contact", Icon: TrendingUp },
+    explore: { label: "Learn more", href: "/solutions#commerce", Icon: ShoppingCart },
+    connect: { label: "Talk to us", href: "/contact", Icon: TrendingUp },
   },
 ] as const;
 

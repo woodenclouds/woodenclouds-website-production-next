@@ -52,19 +52,20 @@ export function ServicesView() {
         <div className="wc-container relative z-10 wc-svc-stage-frame pointer-events-none !pt-0 !pb-0 !min-h-[100svh] flex items-center justify-center">
           <div className="wc-svc-stage-main text-center flex flex-col items-center max-w-4xl">
             <p className="wc-svc-stage-kicker">{servicesHero.kicker}</p>
-            <h1 className="wc-svc-stage-title">
-              {servicesHero.titleLine1}
-              <br />
-              {servicesHero.titleLine2}
+            <h1 className="wc-svc-stage-title !max-w-none text-center">
+              <span className="block">{servicesHero.titleLine1}</span>
+              <span className="block">{servicesHero.titleLine2}</span>
             </h1>
-            <p className="wc-svc-stage-lede mx-auto">{servicesHero.description}</p>
+            <p className="wc-svc-stage-lede mx-auto max-w-xl text-pretty">
+              {servicesHero.description}
+            </p>
             <div className="wc-svc-stage-actions pointer-events-auto justify-center">
               <a href={`#${jumpItems[0]?.id ?? "technology"}`} className="wc-btn wc-btn-solid">
                 Explore services
                 <span aria-hidden>↓</span>
               </a>
               <Link href="/contact" className="wc-btn wc-btn-dark">
-                Enquire now
+                Get in touch
               </Link>
             </div>
           </div>

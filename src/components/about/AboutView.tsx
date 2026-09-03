@@ -7,22 +7,22 @@ import { EnquireCta } from "@/components/shared/PageBits";
 const values = [
   {
     title: "Innovation",
-    body: "We thrive on fresh ideas and creative solutions, constantly seeking better ways to drive success in the digital world.",
+    body: "We like fresh ideas. We keep looking for better ways to help you succeed online.",
   },
   {
     title: "Collaboration",
-    body: "Teamwork is how we work. Together we achieve more — and create a lasting impact for every client we partner with.",
+    body: "We work as a team — with you and with each other — so the work lasts.",
   },
   {
     title: "Integrity",
-    body: "Honest, transparent, and ethical practices define our approach. We build relationships on trust in everything we do.",
+    body: "We tell the truth. We build relationships on trust in everything we do.",
   },
 ];
 
 const milestones = [
   { label: "Since", value: "2020" },
   { label: "Clients worldwide", value: "50+" },
-  { label: "Projects shipped", value: "100+" },
+  { label: "Projects delivered", value: "100+" },
 ];
 
 export function AboutView() {
@@ -51,8 +51,8 @@ export function AboutView() {
                 Our expertise.
               </h1>
               <p className="wc-about-stage-lede">
-                A digital partner for products, brands, and teams that need clarity, craft, and
-                outcomes that compound.
+                We help companies with products, brands, and teams. We keep things clear, do careful
+                work, and aim for results that last.
               </p>
               <div className="wc-about-stage-actions">
                 <a href="#story" className="wc-btn wc-btn-solid">
@@ -95,15 +95,14 @@ export function AboutView() {
             </div>
             <div className="wc-about-story-copy">
               <p className="wc-about-kicker">Who we are</p>
-              <h2 className="wc-about-story-title">A digital partner built for lasting progress</h2>
+              <h2 className="wc-about-story-title">A partner you can grow with</h2>
               <p className="wc-about-story-body">
-                We are a leading IT and digital partner. Our goal is to cover the full arc of a
-                business — development, survival, progress, reputation, and the relationships that
-                keep customers coming back.
+                We started in 2020 in Kochi. We design, build, and grow digital products — websites,
+                apps, brands, and the work that helps customers come back.
               </p>
               <p className="wc-about-story-body">
-                From product engineering to growth and brand systems, we work as an extension of
-                your team — focused on clarity, speed, and work you can stand behind.
+                From product building to growth and brand, we work like part of your team — focused
+                on clarity, speed, and work you can stand behind.
               </p>
               <ul className="wc-about-milestones">
                 {milestones.map((item) => (
@@ -123,7 +122,7 @@ export function AboutView() {
           <header className="wc-about-values-head">
             <div>
               <p className="wc-about-kicker">What drives us</p>
-              <h2 className="wc-about-values-title">Principles that shape every engagement</h2>
+              <h2 className="wc-about-values-title">What we believe</h2>
             </div>
           </header>
 
@@ -144,10 +143,9 @@ export function AboutView() {
           <div className="wc-about-lens-grid">
             <div className="wc-about-lens-copy">
               <p className="wc-about-kicker">Inside Woodenclouds</p>
-              <h2 className="wc-about-lens-title">People, craft, and the work behind the work</h2>
+              <h2 className="wc-about-lens-title">People, and the work behind the work</h2>
               <p className="wc-about-lens-body">
-                Join us if you want to build the next chapter with Woodenclouds — craft, clarity,
-                and work that lasts.
+                Want to build the next chapter with us? Come work here.
               </p>
               <div className="wc-about-lens-actions">
                 <Link href="/career" className="wc-btn wc-btn-dark">

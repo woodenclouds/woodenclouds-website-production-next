@@ -12,13 +12,13 @@ export function Footer() {
       <div className="wc-container wc-footer-content relative z-10">
         <div className="wc-footer-mast">
           <h2 className="wc-footer-mast-title">
-            Designing your
+            Let&apos;s build
             <br />
-            Digital Future
+            what&apos;s next.
           </h2>
           <div className="wc-footer-mast-row">
             <p className="wc-footer-mast-lede">
-              Technology, brand, and growth — built with clarity from Kochi to the world.
+              Technology, brand, and growth — from Kochi to everywhere you work.
             </p>
             <Link href="/contact" className="wc-footer-mast-cta">
               Start a project

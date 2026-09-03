@@ -60,9 +60,9 @@ export function HomeFeaturedWork() {
     <section id="case-studies" className="wc-home-block wc-home-works">
       <div className="wc-container">
         <HomeReveal as="header" className="wc-home-works-head">
-          <h2 className="wc-home-works-heading">Featured works.</h2>
+          <h2 className="wc-home-works-heading">Work we’re proud of.</h2>
           <Link href="/works" className="wc-home-works-all">
-            View All Works
+            See all work
             <span aria-hidden>→</span>
           </Link>
         </HomeReveal>
@@ -88,10 +88,7 @@ export function HomeFeaturedWork() {
 }
 
 export function HomeClients() {
-  const wall: { name: string; logo: string }[] = [
-    ...clients.flatMap((client) => (client.logo ? [{ name: client.name, logo: client.logo }] : [])),
-    { name: "HISPAN", logo: "/works/hispan/hispan-logo.png" },
-  ];
+  const wall = clients.filter((client) => client.logo);
 
   return (
     <section id="clients" className="wc-home-block wc-home-clients">
@@ -99,7 +96,7 @@ export function HomeClients() {
         <HomeReveal as="header" className="wc-home-clients-head">
           <h2 className="wc-home-clients-heading">Our clients.</h2>
           <Link href="/clients" className="wc-home-clients-all">
-            View All Clients
+            See all clients
             <span aria-hidden>→</span>
           </Link>
         </HomeReveal>
@@ -108,7 +105,7 @@ export function HomeClients() {
           {wall.map((client, i) => (
             <HomeReveal key={client.name} as="li" delay={i * 50}>
               <span className="wc-home-clients-logo">
-                <img src={client.logo} alt={client.name} draggable={false} />
+                <img src={encodeURI(client.logo!)} alt={client.name} draggable={false} />
               </span>
             </HomeReveal>
           ))}
@@ -127,9 +124,9 @@ export function HomeIndustries() {
         <HomeReveal as="header" className="wc-home-industries-head">
           <div className="wc-home-industries-head-row">
             <h2 className="wc-home-title">
-              Designing for the realities
+              We know how your
               <br />
-              of your industry
+              industry works.
             </h2>
             <Link href="/industries" className="wc-home-industries-all">
               View All Industries
@@ -256,7 +253,7 @@ export function HomeTestimonials({
         <HomeReveal as="header" className="wc-home-testimonials-head">
           <div>
             <p className="wc-home-kicker">Testimonials</p>
-            <h2 className="wc-home-title">What partners say.</h2>
+            <h2 className="wc-home-title">What clients say.</h2>
           </div>
           {stops > 1 ? (
             <div className="wc-home-testimonials-nav">
@@ -342,7 +339,7 @@ export function HomeInsights({ posts = [] }: { posts?: BlogPost[] }) {
         <HomeReveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="wc-home-kicker">Insights</p>
-            <h2 className="wc-home-title">Notes from the studio</h2>
+            <h2 className="wc-home-title">From our blog</h2>
           </div>
           <Link href="/blog" className="text-sm text-ink/60 hover:text-ink">
             View all →

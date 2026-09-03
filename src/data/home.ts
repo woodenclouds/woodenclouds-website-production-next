@@ -2,56 +2,50 @@ export const homeProcess = [
   {
     index: "01",
     title: "Discover",
-    mission: "Mission Brief",
-    body: "We map goals, constraints, and success metrics so the work starts from clarity — not assumptions.",
+    body: "We start by learning your goals and what success looks like — so we don’t guess.",
   },
   {
     index: "02",
     title: "Define",
-    mission: "Blueprint",
-    body: "Scope, architecture, and experience principles get locked early so every sprint moves with intent.",
+    body: "We agree the plan, the look, and how it will work before we build.",
   },
   {
     index: "03",
     title: "Design",
-    mission: "Product Assembly",
-    body: "Interfaces and systems shaped around real users — clear, calm, and ready to build.",
+    body: "We design screens people actually understand and enjoy using.",
   },
   {
     index: "04",
     title: "Build",
-    mission: "Systems Check",
-    body: "Engineering that ships in measurable increments, with quality and performance held as defaults.",
+    body: "We build in small steps you can see and test along the way.",
   },
   {
     index: "05",
     title: "Launch",
-    mission: "Lift Off",
-    body: "Release with confidence — environments, handoff, and measurement set up for the next chapter.",
+    body: "We go live carefully, with training and tracking in place.",
   },
   {
     index: "06",
     title: "Evolve",
-    mission: "Orbit & Growth",
-    body: "Ongoing support and iteration so the product keeps pace as the business grows.",
+    body: "We stay with you after launch and keep improving as you grow.",
   },
 ];
 
 export const homeWhy = [
   {
-    title: "Outcome ownership",
-    body: "One team from brief to launch — fewer handoffs, clearer accountability, stronger results.",
+    title: "We own the result",
+    body: "One team from first chat to launch — so you always know who is responsible.",
   },
   {
-    title: "Craft with speed",
-    body: "Thoughtful design and solid engineering without the ceremony that slows delivery down.",
+    title: "Good work, on time",
+    body: "Careful design and solid building, without extra process that slows you down.",
   },
   {
-    title: "Systems that last",
-    body: "Architecture and brand foundations built to hold up as scope, traffic, and teams expand.",
+    title: "Built to last",
+    body: "We set up your product and brand so they still work as you grow.",
   },
   {
-    title: "Partners, not vendors",
-    body: "We work as an extension of your team — focused on clarity, honesty, and work you can stand behind.",
+    title: "We work like part of your team",
+    body: "We’re honest, clear, and focused on work you can stand behind.",
   },
 ];

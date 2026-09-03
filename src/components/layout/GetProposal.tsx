@@ -2,11 +2,9 @@
 
 import { FormEvent, useEffect, useId, useState } from "react";
 import { usePathname } from "next/navigation";
-import { site } from "@/data/content";
+import { site, whatsappHref } from "@/data/content";
 
-const WHATSAPP_HREF = `https://wa.me/918921708606?text=${encodeURIComponent(
-  "Hi Woodenclouds — I'd like a project proposal.",
-)}`;
+const WHATSAPP_HREF = whatsappHref("Hi Woodenclouds — I'd like a project proposal.");
 
 export function GetProposal() {
   const pathname = usePathname();
@@ -92,7 +90,7 @@ export function GetProposal() {
               Speak with our team
             </h2>
             <p className="wc-proposal-lede">
-              Tell us a little about the work — we’ll come back with a clear next step.
+              Tell us a little about the work. We&apos;ll come back with a clear next step.
             </p>
 
             <div className="wc-proposal-actions">

@@ -252,7 +252,7 @@ export function TechnologyDetailView({ page }: { page: TechDetail }) {
         </div>
       </section>
 
-      <EnquireCta background={page.image} buttonLabel="Enquire now" />
+      <EnquireCta background={page.image} buttonLabel="Get in touch" />
     </div>
   );
 }

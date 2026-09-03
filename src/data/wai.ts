@@ -16,7 +16,7 @@ export const waiProduct = {
   fullName: "Woodenclouds AI — WAI",
   tagline: "Smarter Conversations. Better Business.",
   description:
-    "AI voice agents for sales, support, reception, and appointments — natural conversations in English and Malayalam.",
+    "An AI that answers calls in English and Malayalam, like a helpful teammate.",
   valueProp: "Your 24/7 AI employee for calls, sales, and customer support.",
   slogan: "Smart. Natural. Reliable.",
   image: "/solutions/wai-agent-hq.png",

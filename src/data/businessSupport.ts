@@ -2,13 +2,13 @@ export const businessSupportHero = {
   eyebrow: "Startup & Business Support",
   title: "Support that grows with the business.",
   description:
-    "Consulting, research, strategy, and operations — partnership for founders who need clarity beyond the product.",
+    "Advice, research, strategy, and operations — a partner for founders who need a clear plan beyond the product.",
   image: "/services/startup-business-support.jpg",
 };
 
 export const businessSupportBrief = {
-  title: "Built for teams shipping under pressure",
-  body: "We sit beside founders and operators — clarifying priorities, sharpening the offer, and putting practical systems around growth so momentum does not stall when things get messy.",
+  title: "Built for teams working under pressure",
+  body: "We sit beside founders and operators — helping you set priorities, sharpen the offer, and put simple systems around growth so momentum does not stall when things get messy.",
   image: "/about/img2.jpg",
 };
 
@@ -29,7 +29,7 @@ export const businessSupportOfferings = [
     title: "Strategic planning",
     tagline: "A roadmap you can execute",
     description:
-      "Goals, milestones, and resource plans shaped around your stage — ambitious enough to grow, honest enough to ship.",
+      "Goals, milestones, and resource plans shaped around your stage — ambitious enough to grow, honest enough to finish.",
   },
   {
     title: "Financial analysis",
@@ -41,7 +41,7 @@ export const businessSupportOfferings = [
     title: "Operational support",
     tagline: "Systems that keep pace",
     description:
-      "Process, tooling, and day-to-day support that reduce friction as your team and customers scale.",
+      "Process, tooling, and day-to-day support that reduce friction as your team and customers grow.",
   },
   {
     title: "Ongoing partnership",
@@ -65,7 +65,7 @@ export const howWeHelpAll = [
   {
     stage: "03",
     title: "Scale & systems",
-    body: "Refresh strategy, modernize workflows, and plug in specialist depth where you need it — without rebuilding everything in-house.",
+    body: "Refresh strategy, modernize workflows, and plug in specialist help where you need it — without rebuilding everything in-house.",
   },
 ];
 

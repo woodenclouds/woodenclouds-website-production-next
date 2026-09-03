@@ -18,56 +18,56 @@ export const technologyHero = {
   title: "Build products",
   titleAccent: "people rely on.",
   description:
-    "Websites, apps, platforms, and commerce — engineered for clarity, performance, and the next release.",
+    "Websites, apps, and shops built to be clear, fast, and easy to update.",
   image: "/services/technology.jpg",
 };
 
 export const technologyCapabilities = [
   {
     title: "Website Development",
-    tagline: "Presence that converts",
+    tagline: "A website that turns visitors into customers",
     description:
-      "Brochure sites and marketing experiences built for speed, clarity, and the moments that turn visitors into customers.",
+      "Brochure sites and marketing pages built to be fast, clear, and ready for the moments that turn visitors into customers.",
     image: "/patterns/tech/tech-pattern-01.png",
     href: "/services/technology/website-development",
   },
   {
     title: "Web Application Development",
-    tagline: "Software shaped around work",
+    tagline: "Software built around how you work",
     description:
-      "CRMs, dashboards, and custom web apps designed around how your teams actually operate — not generic templates.",
+      "CRMs, dashboards, and custom web apps designed around how your teams actually work — not generic templates.",
     image: "/patterns/tech/tech-pattern-02.png",
     href: "/services/technology/web-application-development",
   },
   {
     title: "Mobile App Development",
-    tagline: "Apps people return to",
+    tagline: "Apps people come back to",
     description:
-      "Native and cross-platform products for iOS and Android with calm interfaces, reliable performance, and lasting polish.",
+      "iOS and Android apps with calm screens, reliable speed, and lasting polish.",
     image: "/patterns/tech/tech-pattern-03.png",
     href: "/services/technology/mobile-app-development",
   },
   {
     title: "Custom Software Development",
-    tagline: "Systems that fit your ops",
+    tagline: "Systems that fit how you work",
     description:
-      "ERP, CRM, and bespoke platforms built around your workflows — secure, integrable, and ready to evolve.",
+      "ERP, CRM, and custom platforms built around your workflows — secure, connected, and ready to grow.",
     image: "/patterns/tech/tech-pattern-04.png",
     href: "/services/technology/custom-software-development",
   },
   {
     title: "E-commerce Development",
-    tagline: "Commerce built to grow",
+    tagline: "Shops built to grow",
     description:
-      "Storefronts and commerce backends tuned for conversion, multi-channel selling, and long-term scale.",
+      "Online shops and backends tuned to sell more, stay fast, and connect to your other tools.",
     image: "/patterns/tech/tech-pattern-05.png",
     href: "/services/technology/ecommerce-development",
   },
   {
     title: "Extension Development",
-    tagline: "Tools that extend the workflow",
+    tagline: "Tools that make daily work easier",
     description:
-      "Browser extensions and plugins that remove friction, connect systems, and keep teams in flow.",
+      "Browser extensions and plugins that remove extra steps, connect systems, and keep teams in flow.",
     image: "/patterns/tech/tech-pattern-06.png",
     href: "/services/technology/extension-development",
   },
@@ -77,51 +77,51 @@ export const technologyProcess = [
   {
     index: "01",
     title: "Requirement analysis",
-    body: "We map goals, constraints, and success metrics so the build starts from clarity — not assumptions.",
+    body: "We learn your goals and what success looks like — so we don’t guess.",
   },
   {
     index: "02",
     title: "Structuring",
-    body: "Architecture, information design, and delivery plan come first — so scope stays honest and shippable.",
+    body: "We agree the plan and how it will work before we build — so the scope stays honest.",
   },
   {
     index: "03",
     title: "Designing",
-    body: "Interfaces and flows shaped for real users: calm hierarchy, clear actions, and conversion-minded craft.",
+    body: "We design screens people understand: clear layout, obvious next steps, and a calm look.",
   },
   {
     index: "04",
     title: "Development",
-    body: "Clean, maintainable engineering with visible progress — short cycles, shared demos, no black boxes.",
+    body: "Clean code with progress you can see — short cycles, shared demos, no surprises.",
   },
   {
     index: "05",
     title: "Deployment",
-    body: "Launch with confidence: environments, monitoring, and a go-live plan that protects the experience.",
+    body: "We go live carefully, with tracking and a plan that protects the experience.",
   },
   {
     index: "06",
     title: "Support & maintenance",
-    body: "After ship, we stay close — updates, performance, and iteration as your product and market evolve.",
+    body: "After launch, we stay close — updates, speed, and improvements as you grow.",
   },
 ];
 
 export const technologyStandards = [
   {
-    title: "Outcome ownership",
-    body: "One team from brief to launch — fewer handoffs, clearer accountability, stronger results.",
+    title: "We own the result",
+    body: "One team from first chat to launch — so you always know who is responsible.",
   },
   {
-    title: "Performance by default",
-    body: "Speed, accessibility, and reliability are design constraints — not afterthoughts.",
+    title: "Fast and reliable",
+    body: "Speed, accessibility, and reliability are part of the design — not add-ons later.",
   },
   {
-    title: "Secure foundations",
-    body: "Careful integrations, sensible defaults, and practices aligned with how modern products ship.",
+    title: "Secure from the start",
+    body: "Careful connections, sensible defaults, and habits that keep your product safe.",
   },
   {
-    title: "Built to iterate",
-    body: "Architecture and process that leave room to learn, adapt, and keep shipping after v1.",
+    title: "Easy to improve",
+    body: "We leave room to learn, adapt, and keep building after the first version.",
   },
 ];
 
@@ -129,9 +129,9 @@ export const techPages: TechDetail[] = [
   {
     slug: "website-development",
     title: "Website Development",
-    tagline: "Sites built to convert and endure",
+    tagline: "Sites built to convert and last",
     description:
-      "From brochure presence to conversion-led marketing sites — responsive, fast, and shaped around the journeys that grow your business.",
+      "From a simple brochure site to a marketing site that sells — responsive, fast, and shaped around the journeys that grow your business.",
     image: "/patterns/tech/tech-pattern-01.png",
     highlights: [
       "Responsive, conversion-led UX",
@@ -287,15 +287,15 @@ export const techPages: TechDetail[] = [
   {
     slug: "ecommerce-development",
     title: "Ecommerce Development",
-    tagline: "Commerce engineered for conversion",
+    tagline: "Shops built to sell",
     description:
-      "Immersive storefronts with refined UX, resilient backends, and the integrations your commerce team needs to grow.",
+      "Clear storefronts, reliable backends, and the connections your shop team needs to grow.",
     image: "/patterns/tech/tech-pattern-05.png",
     highlights: [
       "Conversion-focused storefronts",
       "Payments and inventory sync",
-      "Headless-ready when needed",
-      "Post-launch growth support",
+      "Ready to connect when needed",
+      "Help after launch",
     ],
     logos: [],
     platforms: [
@@ -324,7 +324,7 @@ export const techPages: TechDetail[] = [
       {
         question: "What stands out about your ecommerce approach?",
         answer:
-          "We combine conversion-focused design, reliable architecture, and platform expertise to ship stores that perform.",
+          "We combine clear design, reliable setup, and platform know-how to build shops that perform.",
       },
       {
         question: "Which platforms do you work with?",

@@ -25,7 +25,6 @@ function StaticProcess() {
           {homeProcess.map((step) => (
             <li key={step.index} className="wc-home-process-item">
               <div>
-                <p className="wc-home-process-mission">{step.mission}</p>
                 <h3>{step.title}</h3>
                 <p>{step.body}</p>
               </div>
@@ -127,7 +126,6 @@ export function HomeProcess() {
                       transform: `translate3d(0, ${copyShift}px, 0)`,
                     }}
                   >
-                    <p className="wc-process-step-mission">{activeStep.mission}</p>
                     <h3>{activeStep.title}</h3>
                     <p>{activeStep.body}</p>
                   </article>

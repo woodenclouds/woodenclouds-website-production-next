@@ -158,7 +158,7 @@ export function TechnologyView() {
         </div>
       </section>
 
-      <EnquireCta background="/services/technology.jpg" buttonLabel="Enquire now" />
+      <EnquireCta background="/services/technology.jpg" buttonLabel="Get in touch" />
     </div>
   );
 }

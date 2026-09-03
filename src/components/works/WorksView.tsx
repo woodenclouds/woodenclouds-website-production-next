@@ -27,12 +27,12 @@ export function WorksView() {
           <div className="wc-works-stage-split">
             <div className="wc-works-stage-main">
               <h1 className="wc-works-stage-title">
-                Selected work.
+                Work we&apos;ve done.
                 <br />
-                Real outcomes.
+                Results you can see.
               </h1>
               <p className="wc-works-stage-lede">
-                Products, brands, and experiences shaped with clarity — from first sketch to launch.
+                Websites, apps, and brands we built with our clients — from first idea to launch.
               </p>
               <div className="wc-works-stage-actions">
                 <a href="#index" className="wc-btn wc-btn-solid">
@@ -72,7 +72,7 @@ export function WorksView() {
           <header className="wc-works-index-head">
             <div>
               <p className="wc-works-index-kicker">Project index</p>
-              <h2 className="wc-works-index-title">Browse by craft</h2>
+              <h2 className="wc-works-index-title">Browse by type</h2>
             </div>
             <p className="wc-works-index-count">
               {filtered.length} {filtered.length === 1 ? "project" : "projects"}

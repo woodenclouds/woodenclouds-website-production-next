@@ -33,21 +33,19 @@ export const homeServiceCards: ServiceCard[] = [
 
 export const servicesFaqs: Faq[] = [
   {
-    question: "What types of services does Woodenclouds offer for technology solutions?",
+    question: "What technology work do you do?",
     answer:
-      "Woodenclouds offers website development, mobile app development, custom software, e-commerce platforms, cloud solutions, and more — tailored to your business goals.",
+      "We build websites, mobile apps, custom software, online shops, and cloud setups — matched to your business goals.",
   },
   {
-    question:
-      "How does Woodenclouds support startups and businesses beyond technology solutions?",
+    question: "Do you help with more than technology?",
     answer:
-      "We provide consulting, research, planning, financial analysis, and operational support to help startups and growing businesses move with clarity.",
+      "Yes. We also help with research, planning, numbers, and day-to-day support so startups and growing teams can move with confidence.",
   },
   {
-    question:
-      "What digital marketing services does Woodenclouds provide to elevate brands?",
+    question: "What marketing services do you offer?",
     answer:
-      "Our digital marketing services include SEO, social media management, PPC, email marketing, content creation, and analytics-driven campaigns.",
+      "SEO, social media, ads, email, content, and reporting — so people can find you, trust you, and choose you.",
   },
 ];
 
@@ -110,6 +108,7 @@ export const site = {
   email: "hello@woodenclouds.com",
   phone: "+91 892 170 8606",
   phoneHref: "tel:+918921708606",
+  whatsapp: "918921708606",
   careersEmail: "careers@woodenclouds.com",
   address:
     "1st floor, Door No - 27/165, Modisseril building, Nr. Pipeline Junction, Thrikkakara, Edappally, Kochi, Kerala, India - 682022",
@@ -119,3 +118,7 @@ export const site = {
     instagram: "https://www.instagram.com/teamwoodenclouds/",
   },
 };
+
+export function whatsappHref(text: string) {
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
+}

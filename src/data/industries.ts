@@ -19,10 +19,10 @@ export type IndustryStandard = {
 
 export const industriesHero = {
   kicker: "Industries we serve",
-  titleLine1: "Know the market.",
-  titleLine2: "Ship what fits.",
+  titleLine1: "We know your market.",
+  titleLine2: "We build what fits.",
   description:
-    "Products and growth systems built around how each industry buys, operates, and scales — not a recycled template.",
+    "Websites and tools made for how your industry really works — not a one-size-fits-all template.",
   primaryCta: "Talk to us",
   secondaryCta: "Browse industries",
 };
@@ -33,7 +33,7 @@ export const industries: Industry[] = [
     name: "Healthcare & Life Sciences",
     tagline: "Care systems patients and teams can trust",
     description:
-      "We partner with hospitals, clinics, labs, and healthcare startups on portals, telehealth, and ops platforms that simplify care without slowing clinicians down.",
+      "We work with hospitals, clinics, and health startups on websites and tools that make care easier — without slowing doctors down.",
     image: "/industries/healthcare.jpg",
     imageAlt: "Microscope and lab samples on a clinical workbench",
     focus: [
@@ -51,9 +51,9 @@ export const industries: Industry[] = [
   {
     id: "finance",
     name: "Financial Services",
-    tagline: "Clarity, control, and confidence at scale",
+    tagline: "Clarity, control, and confidence as you grow",
     description:
-      "Fintech products and internal banking tools — interfaces and systems that feel precise, audit-ready, and calm under pressure.",
+      "We build fintech products and banking tools that feel precise, stay audit-ready, and stay calm under pressure.",
     image: "/industries/finance.jpg",
     imageAlt: "Hands reviewing financial documents and a data dashboard",
     focus: [
@@ -71,9 +71,9 @@ export const industries: Industry[] = [
   {
     id: "retail",
     name: "Retail & Ecommerce",
-    tagline: "Storefronts and systems built to convert",
+    tagline: "Stores and tools built to sell",
     description:
-      "From online stores and loyalty apps to omnichannel ops — commerce experiences that turn browsing into orders and inventory into insight.",
+      "We build online stores, loyalty apps, and shop tools that turn browsing into orders and inventory into clear numbers.",
     image: "/industries/retail-cover.jpg",
     imageAlt: "Shopper walking through a glowing doorway into a boutique inside a giant smartphone",
     focus: [
@@ -94,9 +94,9 @@ export const industries: Industry[] = [
   {
     id: "agriculture",
     name: "Agriculture & AgriTech",
-    tagline: "Field-to-market systems that scale",
+    tagline: "Field-to-market tools that grow with you",
     description:
-      "Farms, cooperatives, and agri brands — portals, supply visibility, marketplace platforms, and ops tools that connect produce, logistics, and buyers.",
+      "We work with farms, cooperatives, and agri brands on portals and supply tools that connect produce, logistics, and buyers.",
     image: "/industries/agriculture-cover.jpg",
     imageAlt: "Agronomist in a crop field reviewing farm data on a tablet, with a tractor behind her",
     focus: [
@@ -116,7 +116,7 @@ export const industries: Industry[] = [
     name: "Construction & Infrastructure",
     tagline: "Projects tracked. Sites aligned.",
     description:
-      "Builders, contractors, and infrastructure teams — project portals, progress tracking, bidding tools, and field apps that keep delivery on schedule.",
+      "We work with builders and contractors on project portals, progress tracking, and field apps that keep delivery on schedule.",
     image: "/industries/construction-cover.jpg",
     imageAlt: "Urban construction site with a tower crane rising against a city skyline",
     focus: [
@@ -134,9 +134,9 @@ export const industries: Industry[] = [
   {
     id: "education",
     name: "Education & E-Learning",
-    tagline: "Learning products people actually return to",
+    tagline: "Learning products people actually come back to",
     description:
-      "Schools, institutes, and edu-tech platforms — LMS experiences, portals, and content systems that keep learners, educators, and admins in sync.",
+      "We work with schools and edu-tech teams on learning platforms and portals that keep learners, teachers, and admins in sync.",
     image: "/industries/education-cover.jpg",
     imageAlt: "Student at a desk following an online lesson on a laptop",
     focus: [
@@ -156,7 +156,7 @@ export const industries: Industry[] = [
     name: "Travel & Hospitality",
     tagline: "Journeys that feel effortless end to end",
     description:
-      "Travel agencies, hotels, and destination brands — booking flows, guest apps, and service ops that reduce friction from discovery to return visit.",
+      "We work with travel agencies and hotels on booking flows, guest apps, and service tools that make the trip easier from first look to return visit.",
     image: "/industries/hospitality-cover.jpg",
     imageAlt: "Hotel reception staff using tablets at a marble concierge desk",
     focus: [
@@ -176,7 +176,7 @@ export const industries: Industry[] = [
     name: "Real Estate",
     tagline: "Property journeys with less friction",
     description:
-      "Builders, developers, and consultants — project showcase sites, virtual tours, CRM, and enquiry systems that keep deals moving.",
+      "We work with builders and developers on project sites, virtual tours, CRM, and enquiry tools that keep deals moving.",
     image: "/industries/real-estate-cover.jpg",
     imageAlt: "Modern residential towers along a landscaped street under a clear sky",
     focus: [
@@ -194,9 +194,9 @@ export const industries: Industry[] = [
   {
     id: "manufacturing",
     name: "Manufacturing & Logistics",
-    tagline: "Operations software that keeps pace",
+    tagline: "Operations software that keeps up",
     description:
-      "Plants, freight, and supply networks — dashboards, tracking, and workflow tools that connect teams with real-time visibility.",
+      "We work with plants and logistics teams on dashboards, tracking, and workflow tools that give everyone a live view of the work.",
     image: "/industries/manufacturing-cover.jpg",
     imageAlt: "Warehouse operator checking inventory on a tablet in front of pallet racks",
     focus: [
@@ -219,7 +219,7 @@ export const industries: Industry[] = [
     name: "Energy & Utilities",
     tagline: "Infrastructure digital, quietly reliable",
     description:
-      "Energy providers and utility operators — monitoring dashboards, customer portals, and field workflows built for uptime and trust.",
+      "We work with energy providers on monitoring dashboards, customer portals, and field tools built for uptime and trust.",
     image: "/industries/energy-cover.jpg",
     imageAlt: "Wind turbines on a forested mountain ridge at dusk",
     focus: [
@@ -238,7 +238,7 @@ export const industries: Industry[] = [
     name: "Food & Beverage",
     tagline: "Menus, markets, and ops that stay fresh",
     description:
-      "Restaurants, F&B brands, and food tech — ordering journeys, kitchen/ops tools, and brand platforms that keep demand and delivery in sync.",
+      "We work with restaurants and food brands on ordering, kitchen tools, and brand sites that keep demand and delivery in sync.",
     image: "/industries/food.jpg",
     imageAlt: "Food and beverage digital experience",
     focus: [
@@ -257,7 +257,7 @@ export const industries: Industry[] = [
     name: "Media & Entertainment",
     tagline: "Content experiences that hold attention",
     description:
-      "Media houses, OTT, and creators — publishing platforms, streaming companions, and brand systems audiences return to.",
+      "We work with media houses and creators on publishing platforms, streaming companions, and brand systems audiences come back to.",
     image: "/industries/media-cover.jpg",
     imageAlt: "Film crew and cameras on a hazy studio set with cinematic lighting",
     focus: [
@@ -274,9 +274,9 @@ export const industries: Industry[] = [
   {
     id: "saas",
     name: "Technology & SaaS",
-    tagline: "Products that ship, then keep shipping",
+    tagline: "Products that launch, then keep improving",
     description:
-      "SaaS products, IT services, and B2B platforms — conversion-driven sites, portals, and product squads built for the next release.",
+      "We work with SaaS and IT teams on conversion-driven sites, portals, and product teams built for the next release.",
     image: "/industries/saas-cover-v2.jpg",
     imageAlt: "Holographic Premium Concierge System dashboard in a luxury office",
     focus: [
@@ -295,7 +295,7 @@ export const industries: Industry[] = [
     name: "Automobile",
     tagline: "Digital as fast as the customer",
     description:
-      "Brands, dealers, and service networks — vehicle showcases, booking journeys, and after-sales tools that move at market speed.",
+      "We work with brands and dealers on vehicle sites, booking journeys, and after-sales tools that move at market speed.",
     image: "/industries/automobile-cover.jpg",
     imageAlt: "Hatchback driving a forest road at golden hour with headlights on",
     focus: [
@@ -314,7 +314,7 @@ export const industries: Industry[] = [
     name: "HR & Staffing",
     tagline: "Tools that hire and retain faster",
     description:
-      "HR agencies and internal teams — career portals, ATS dashboards, candidate databases, and onboarding workflows that cut manual work.",
+      "We work with HR agencies and internal teams on career portals, tracking dashboards, and onboarding flows that cut manual work.",
     image: "/industries/hr-staffing-cover.jpg",
     imageAlt: "HR team collaborating around a laptop with workforce analytics on a whiteboard",
     focus: [
@@ -333,7 +333,7 @@ export const industries: Industry[] = [
     name: "Sports & Fitness",
     tagline: "Experiences that keep people active",
     description:
-      "Gyms, academies, and fitness brands — booking systems, training apps, and membership journeys that keep users engaged.",
+      "We work with gyms and fitness brands on booking systems, training apps, and membership journeys that keep people engaged.",
     image: "/industries/sports-fitness-cover.jpg",
     imageAlt: "Aerial view of a runner on a terracotta track in mid-stride",
     focus: [
@@ -372,19 +372,19 @@ export function getIndustriesProjectTotal(list: Industry[] = industries): number
 
 export const industriesApproach: IndustryStandard[] = [
   {
-    title: "Sector context first",
-    body: "We learn the constraints of your market — regulation, buyers, seasonality — before we propose a stack or a campaign.",
+    title: "Your market first",
+    body: "We learn the rules of your market — buyers, season, and regulation — before we suggest a product or a campaign.",
   },
   {
-    title: "Outcomes over features",
-    body: "Every build ties back to a measurable result: faster ops, clearer journeys, higher conversion, or lower support load.",
+    title: "Results over feature lists",
+    body: "Every build ties back to a real result: faster work, clearer journeys, more sales, or less support load.",
   },
   {
     title: "Secure by default",
-    body: "Access, integrations, and data handling designed for how regulated and high-trust industries actually operate.",
+    body: "Access, connections, and data handling designed for industries where trust really matters.",
   },
   {
     title: "Teams that stay",
-    body: "From discovery through iteration — one accountable partner across product, brand, and growth when you need them together.",
+    body: "From first chat through launch and after — one partner across product, brand, and growth when you need them together.",
   },
 ];

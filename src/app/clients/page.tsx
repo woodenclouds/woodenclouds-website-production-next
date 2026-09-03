@@ -15,8 +15,8 @@ const disciplines = ["Product", "Brand", "Technology", "Growth"];
 
 const partnership = [
   {
-    title: "Start with clarity",
-    copy: "We map the problem, the users, and the outcome before a single screen or line of code exists.",
+    title: "Start by understanding",
+    copy: "We learn the problem and the goal before we design or code.",
   },
   {
     title: "Build in the open",
@@ -24,7 +24,7 @@ const partnership = [
   },
   {
     title: "Stay past launch",
-    copy: "Measuring, iterating, and scaling with you once the product is live and in real hands.",
+    copy: "Measuring, iterating, and growing with you once the product is live and in real hands.",
   },
 ];
 
@@ -38,8 +38,7 @@ export default function ClientsPage() {
             <p className="wc-clientspage-kicker">Clients</p>
             <h1 className="wc-clientspage-title">Our Clients</h1>
             <p className="wc-clientspage-lede">
-              From first ideas to products in the market — the brands and businesses we design,
-              build, and grow alongside.
+              From first ideas to live products — the brands we design, build, and grow with.
             </p>
             <ul className="wc-clientspage-tags">
               {disciplines.map((item) => (
@@ -55,15 +54,25 @@ export default function ClientsPage() {
           <HomeReveal as="header" className="wc-clientspage-wall-head">
             <h2 className="wc-clientspage-wall-title">Selected clients</h2>
             <p className="wc-clientspage-wall-note">
-              A mix of ventures, sister brands, and long-running partnerships across creatives,
-              education, production, and technology.
+              Brands and businesses we design, build, and grow with — from product to brand and
+              technology.
             </p>
           </HomeReveal>
 
-          <ul className="wc-clientspage-grid">
+          <ul className="wc-clientspage-grid min-[900px]:grid-cols-5">
             {clients.map((client, i) => (
               <HomeReveal as="li" key={client.name} delay={i * 70}>
                 <div className="wc-clientspage-cell">
+                  {client.logo && (
+                    <span className="wc-clientspage-logo">
+                      <img
+                        src={encodeURI(client.logo)}
+                        alt=""
+                        draggable={false}
+                        className="!filter-none"
+                      />
+                    </span>
+                  )}
                   <span className="wc-clientspage-meta">
                     <span className="wc-clientspage-name">{client.name}</span>
                     {client.sector && (

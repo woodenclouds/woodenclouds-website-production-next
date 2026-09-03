@@ -11,11 +11,11 @@ export type HeroContent = {
 
 export const heroContent: HeroContent = {
   statementLines: [
-    "Building the digital foundation",
-    "for brands ready to define their industry.",
+    "We help brands build the digital tools",
+    "they need to lead their industry.",
   ],
   actions: [
-    { label: "View Our Works", href: "/works", variant: "solid" },
-    { label: "Book a Free Consultation", href: "/contact", variant: "outline" },
+    { label: "See our work", href: "/works", variant: "solid" },
+    { label: "Book a free call", href: "/contact", variant: "outline" },
   ],
 };

@@ -8,12 +8,12 @@ export function HomeWhy() {
       <div className="wc-container">
         <HomeReveal as="header" className="wc-home-why-head">
           <h2 className="wc-home-why-title">
-            A partner built
+            A partner who
             <br />
-            for lasting progress.
+            stays with you.
           </h2>
           <p className="wc-home-why-quote">
-            One accountable team, clear decisions, and systems that hold as you grow.
+            One team, clear decisions, and work that still holds up as you grow.
           </p>
         </HomeReveal>
 

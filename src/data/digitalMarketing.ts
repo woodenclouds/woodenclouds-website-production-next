@@ -45,7 +45,7 @@ export const digitalMarketingServices = [
     title: "SEO optimization",
     tagline: "Show up when buyers are searching",
     description:
-      "Technical fixes and content that help the right people find you — steady organic visibility that compounds month after month.",
+      "Technical fixes and content that help the right people find you — steady search visibility that grows month after month.",
     image: "/about/img5.jpg",
   },
 ];
@@ -64,7 +64,7 @@ export const digitalMarketingApproach = [
   {
     index: "03",
     title: "Launch and learn",
-    body: "We ship campaigns and content, then refine with data — what works scales, what does not gets cut fast.",
+    body: "We launch campaigns and content, then refine with data — what works grows, what does not gets cut fast.",
   },
 ];
 

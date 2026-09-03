@@ -36,7 +36,7 @@ const steps = [
 
 const categories = [
   { title: "Technology", body: "Developers, engineers, QA, DevOps." },
-  { title: "Design & creative", body: "UI/UX, brand, and digital craft." },
+  { title: "Design & creative", body: "UI/UX, brand, and digital design." },
   { title: "Growth & business", body: "Marketing, BDE, sales, operations." },
   { title: "Specialists", body: "Any remote-ready skilled category." },
 ];
@@ -122,8 +122,8 @@ export function FutureView() {
                 </span>
               </h1>
               <p className="wc-fw-hero-lede">
-                Building the world&apos;s #1 company-managed remote network — skilled people
-                across every category, connected and ready to work from anywhere on earth.
+                We&apos;re building a company-run remote team — skilled people, ready to work from
+                anywhere.
               </p>
               <div className="wc-fw-hero-actions">
                 <Link href="/career" className="wc-btn wc-btn-light">

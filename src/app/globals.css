@@ -3822,6 +3822,17 @@
   display: none;
 }
 
+.wc-contact-stage-visual-media img,
+.wc-clientspage-logo img {
+  filter: none !important;
+}
+
+@media (min-width: 900px) {
+  .wc-clientspage-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
 .wc-footer-dots-wrap,
 .wc-footer-dots,
 .wc-footer-dots-static {
@@ -4936,13 +4947,15 @@ body:not(.is-dark-page) .wc-progress {
 }
 
 .wc-svc-stage-title {
-  margin: 0;
-  max-width: 16ch;
+  margin: 0 auto;
+  max-width: none;
   color: var(--color-ink);
-  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-size: clamp(2.5rem, 5.6vw, 4.35rem);
   font-weight: 300;
   letter-spacing: -0.05em;
-  line-height: 1.02;
+  line-height: 1.08;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .wc-svc-stage-lede {
@@ -6461,7 +6474,7 @@ body:not(.is-dark-page) .wc-progress {
 
 .wc-works-stage-title {
   margin: 0;
-  max-width: 14ch;
+  max-width: 22ch;
   font-size: clamp(2.75rem, 6.8vw, 4.75rem);
   font-weight: 300;
   letter-spacing: -0.05em;
@@ -7863,6 +7876,7 @@ body:not(.is-dark-page) .wc-progress {
   height: auto;
   max-height: 32rem;
   object-fit: contain;
+  filter: none !important;
   transform-origin: center 58%;
   animation: wc-contact-illust 6.5s ease-in-out infinite;
 }
@@ -12017,7 +12031,7 @@ body:not(.is-dark-page) .wc-progress {
 
 @media (min-width: 900px) {
   .wc-clientspage-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
@@ -12047,13 +12061,11 @@ body:not(.is-dark-page) .wc-progress {
 
 .wc-clientspage-logo img {
   display: block;
-  max-height: 3rem;
+  max-height: 3.5rem;
   max-width: 11rem;
   width: auto;
   object-fit: contain;
-  opacity: 0.78;
-  /* Logos ship as light-on-dark artwork — flatten to ink so they read on paper */
-  filter: brightness(0) invert(0.1);
+  opacity: 0.92;
   transition:
     opacity 0.3s ease,
     transform 0.35s ease;

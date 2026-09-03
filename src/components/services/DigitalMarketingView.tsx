@@ -173,7 +173,7 @@ export function DigitalMarketingView() {
         </div>
       </section>
 
-      <EnquireCta background="/services/marketing.jpg" buttonLabel="Enquire now" />
+      <EnquireCta background="/services/marketing.jpg" buttonLabel="Get in touch" />
     </div>
   );
 }

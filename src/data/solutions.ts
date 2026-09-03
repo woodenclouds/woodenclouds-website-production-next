@@ -16,10 +16,12 @@ export type Standard = {
 
 export const solutionsHero = {
   brand: "Woodenclouds",
-  kicker: "Built for scale",
-  title: "Solutions engineered to grow with you",
+  kicker: "Built to grow with you",
+  title: "Ready-made products that grow with you",
+  titleLine1: "Ready-made products",
+  titleLine2: "that grow with you.",
   description:
-    "Productized platforms and delivery models that turn complex digital needs into clear, measurable outcomes.",
+    "Clear products for AI, shops, and custom software — so you know what you’re getting.",
   cta: { label: "Explore solutions", href: "#wai" },
 };
 
@@ -29,7 +31,7 @@ export const solutions: Solution[] = [
     name: "WAI",
     tagline: "AI voice agents that take the call",
     description:
-      "Woodenclouds AI for sales, support, reception, and appointments — natural voice in English and Malayalam, on Indian infrastructure, billed only for what you use.",
+      "An AI that answers calls in English and Malayalam, like a helpful teammate — for sales, support, reception, and appointments, billed only for what you use.",
     image: "/solutions/wai-agent-hq.png",
     imageAlt: "Woodenclouds AI WAI voice agent",
     features: [
@@ -45,27 +47,27 @@ export const solutions: Solution[] = [
   {
     id: "commerce",
     name: "Commerce Cloud",
-    tagline: "High-performance ecommerce ecosystems",
+    tagline: "Online shops built to sell",
     description:
-      "Headless-ready storefronts and commerce backends built for conversion, multi-channel selling, and long-term scale — from Shopify and Magento to custom stacks.",
+      "Online shops built to sell more, stay fast, and connect to your other tools — from Shopify and Magento to a custom setup.",
     image: "/services/technology/ecommerce.png",
     imageAlt: "Ecommerce platform interface",
     features: [
-      "Headless & API-first",
-      "Omnichannel ready",
-      "Conversion-led UX",
+      "API-first when you need it",
+      "Sell across channels",
+      "Clear checkout",
       "Secure payments",
       "Inventory & ERP sync",
-      "Performance tuned",
+      "Fast by design",
     ],
     cta: { label: "Learn more", href: "/services/technology/ecommerce-development" },
   },
   {
     id: "platforms",
     name: "Custom Platforms",
-    tagline: "Software shaped around your operations",
+    tagline: "Software built around how you work",
     description:
-      "Web applications, CRMs, ERPs, and internal tools designed around how your teams actually work — not generic templates that force you to adapt.",
+      "Web apps, CRMs, ERPs, and internal tools designed around how your teams already work — not generic templates that force you to change.",
     image: "/services/technology/web-application.png",
     imageAlt: "Custom web platform",
     features: [
@@ -81,9 +83,9 @@ export const solutions: Solution[] = [
   {
     id: "mobile",
     name: "Mobile Experiences",
-    tagline: "Apps people return to",
+    tagline: "Apps people come back to",
     description:
-      "Native and cross-platform mobile products with calm interfaces, reliable performance, and the polish that turns first-time users into daily habits.",
+      "iOS and Android apps with calm screens, reliable speed, and the polish that turns a first visit into a daily habit.",
     image: "/services/technology/mobile-app.png",
     imageAlt: "Mobile application experience",
     features: [
@@ -101,7 +103,7 @@ export const solutions: Solution[] = [
     name: "AI Solutions",
     tagline: "Intelligent layers for real workflows",
     description:
-      "Conversational assistants, automation, and AI-assisted product features that reduce support load, qualify leads, and speed up decisions — wired into your existing systems.",
+      "Chat assistants, automation, and AI features that cut support load, qualify leads, and speed up decisions — wired into the tools you already use.",
     image: "/services/technology.jpg",
     imageAlt: "AI-powered digital solution",
     features: [
@@ -119,7 +121,7 @@ export const solutions: Solution[] = [
     name: "Growth Systems",
     tagline: "Brand and demand, working as one",
     description:
-      "Branding, content, SEO, and performance marketing orchestrated as a single growth system — so every campaign compounds instead of competing with the last.",
+      "Branding, content, SEO, and ads working as one plan — so every campaign helps the next instead of competing with it.",
     image: "/services/marketing.jpg",
     imageAlt: "Brand and digital growth",
     features: [
@@ -137,7 +139,7 @@ export const solutions: Solution[] = [
     name: "Dedicated Squads",
     tagline: "Teams that plug into your product",
     description:
-      "Cross-functional squads for engineering, design, and marketing that embed with your roadmap — flexible capacity without the overhead of building every role in-house.",
+      "Design, engineering, and marketing teams that join your roadmap — extra hands without hiring every role in-house.",
     image: "/team/team-work.jpg",
     imageAlt: "Dedicated product team",
     features: [
@@ -158,19 +160,19 @@ export function getSolutionById(id: string) {
 
 export const solutionsStandards: Standard[] = [
   {
-    title: "Full-stack ownership",
-    body: "From infrastructure to interface, one team owns the outcome — fewer handoffs, clearer accountability.",
+    title: "One team, one result",
+    body: "From servers to screens, one team owns the result — so you always know who to talk to.",
   },
   {
-    title: "Conversion-led craft",
-    body: "Design and engineering decisions are measured against performance, clarity, and business results.",
+    title: "Built to convert",
+    body: "Design and engineering choices are judged on speed, clarity, and business results.",
   },
   {
     title: "Security first",
-    body: "Secure defaults, careful integrations, and practices aligned with how modern enterprises ship software.",
+    body: "Safe defaults, careful connections, and habits that keep your product trustworthy.",
   },
   {
     title: "Agile delivery",
-    body: "Short cycles, visible progress, and room to adapt as your market and product evolve.",
+    body: "Short cycles, visible progress, and room to adapt as your market and product change.",
   },
 ];

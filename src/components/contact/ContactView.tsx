@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { site } from "@/data/content";
+import { site, whatsappHref } from "@/data/content";
+import "./contact-hero.css";
 
 const channels = [
   {
@@ -36,8 +37,24 @@ export function ContactView() {
     return () => window.clearTimeout(id);
   }, []);
 
-  function onSubmit(e: FormEvent) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+    const text = [
+      "Hi Woodenclouds — I'd like to get in touch.",
+      "",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Email: ${email}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n");
+    window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
     setDone(true);
   }
 
@@ -59,8 +76,8 @@ export function ContactView() {
                 Start here.
               </h1>
               <p className="wc-contact-stage-lede">
-                Tell us about a project, partnership, or role — we&apos;ll reply with the right next
-                step from Kochi.
+                Tell us about a project, a partnership, or a job. We&apos;ll reply with a clear next
+                step.
               </p>
               <div className="wc-contact-stage-actions">
                 <a href="#message" className="wc-btn wc-btn-solid">
@@ -77,13 +94,15 @@ export function ContactView() {
             <div className="wc-contact-stage-visual !bg-transparent overflow-visible">
               <div className="wc-contact-stage-visual-media">
                 <img
-                  src="/contact/working-together.svg"
-                  alt="Two people collaborating at computers"
+                  src="/contact/pair-programming.svg"
+                  alt="Two people collaborating at a computer"
+                  className="!filter-none"
+                  style={{ filter: "none" }}
                 />
               </div>
               <div className="wc-contact-stage-visual-meta">
                 <span>Based in Kochi</span>
-                <strong>We reply with clarity</strong>
+                <strong>We reply clearly</strong>
                 <em>{site.email}</em>
               </div>
             </div>
@@ -96,11 +115,10 @@ export function ContactView() {
           <header className="wc-contact-reach-head">
             <div>
               <p className="wc-contact-kicker">Reach us</p>
-              <h2 className="wc-contact-reach-title">Direct lines to the team</h2>
+              <h2 className="wc-contact-reach-title">Call or email us</h2>
             </div>
             <p className="wc-contact-reach-intro">
-              Prefer a call, email, or careers note? Pick the channel that fits — we reply from
-              Kochi.
+              Prefer a call, email, or careers note? Pick the channel that fits.
             </p>
           </header>
 
@@ -134,8 +152,7 @@ export function ContactView() {
               <p className="wc-contact-kicker">Write to us</p>
               <h2 className="wc-contact-form-title">Tell us what you&apos;re building</h2>
               <p className="wc-contact-form-copy">
-                Share a bit about your project or question. We&apos;ll get back with the right next
-                step.
+                A few lines about your project or question is enough. We&apos;ll take it from there.
               </p>
               <a href={`mailto:${site.email}`} className="wc-contact-form-mail">
                 {site.email}
@@ -145,7 +162,8 @@ export function ContactView() {
             <div className="wc-contact-form-panel">
               {done ? (
                 <p className="wc-contact-success">
-                  Thanks — your message was received. We&apos;ll be in touch soon.
+                  Thanks — WhatsApp should open with your message. Send it there and we&apos;ll get
+                  back to you.
                 </p>
               ) : (
                 <form onSubmit={onSubmit} className="wc-contact-form">

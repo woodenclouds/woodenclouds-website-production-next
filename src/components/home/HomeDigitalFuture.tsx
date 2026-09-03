@@ -101,7 +101,7 @@ export function HomeDigitalFuture() {
                 transform: `translate3d(0, ${(1 - subProgress) * 18}px, 0)`,
               }}
             >
-              Technology, design, and intelligence — shaped around outcomes, not feature lists.
+              We care about what the work does for your business — not a long list of features.
             </p>
           </div>
         </div>

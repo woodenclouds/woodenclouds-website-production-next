@@ -13,11 +13,11 @@ export type ServicePractice = {
 
 export const servicesHero = {
   kicker: "Services",
-  title: "Building strong capabilities to empower your brand",
-  titleLine1: "Building strong",
-  titleLine2: "capabilities",
+  title: "Everything you need to grow your brand",
+  titleLine1: "Everything you need",
+  titleLine2: "to grow your brand.",
   description:
-    "Five practices. One standard. Branding, experience, technology, growth, and business support — planned together so the work compounds.",
+    "Branding, design, technology, marketing, and business support — planned together so each piece helps the next.",
 };
 
 export type ServiceOffer = {
@@ -43,7 +43,7 @@ export const serviceCatalog: ServiceCatalogGroup[] = [
     cta: "Explore branding",
     tagline: "A mark people remember",
     description:
-      "We help you decide what the brand stands for, then turn that into assets teams can actually ship — not a PDF that dies in a folder.",
+      "We help you decide what the brand stands for, then turn that into files and designs your team can actually use — not a PDF that sits unused.",
     items: [
       { title: "Brand Consulting", note: "What you say, who it’s for, and what you refuse to be." },
       { title: "Logo Design", note: "A mark, type, and colour that hold on a site, a pack, or a pitch." },
@@ -73,7 +73,7 @@ export const serviceCatalog: ServiceCatalogGroup[] = [
     cta: "Explore technology",
     tagline: "Software your team can run",
     description:
-      "We build the product, then leave you with something your people can host, extend, and ship again — not a black box that only we understand.",
+      "We build the product, then leave you with something your people can host, change, and launch again — not a system only we know how to change.",
     items: [
       { title: "AI & Machine Learning", note: "Features that save time or money — not a chatbot bolted on for the deck." },
       { title: "DevOps Consulting", note: "Pipelines, environments, and releases that don’t break Friday night." },
@@ -93,12 +93,12 @@ export const serviceCatalog: ServiceCatalogGroup[] = [
     cta: "Explore digital marketing",
     tagline: "Attention that becomes a customer",
     description:
-      "We pick channels that fit the offer, write for how people search now, and keep spend pointed at one story — so you can see what to cut and what to scale.",
+      "We pick channels that fit the offer, write for how people search now, and keep spend on one clear story — so you can see what to stop and what to grow.",
     items: [
       { title: "Search Engine Optimisation", note: "Pages and structure people — and Google — can understand." },
       { title: "Generative Engine Optimization", note: "Content shaped so assistants and overviews can cite you." },
-      { title: "Social Media Management", note: "A cadence that sounds like the brand, not a content farm." },
-      { title: "Performance Marketing", note: "Campaigns judged on cost per lead or sale, not vanity reach." },
+      { title: "Social Media Management", note: "A regular rhythm that sounds like you, not a content farm." },
+      { title: "Performance Marketing", note: "Campaigns judged on cost per lead or sale, not empty reach." },
       { title: "Content Marketing", note: "Pieces that answer a real question and point to a next step." },
       { title: "Marketing Automation", note: "Nurture and follow-up that doesn’t feel like a drip of spam." },
       { title: "Analytics", note: "Dashboards that tell you what to stop, not just what happened." },
@@ -130,7 +130,7 @@ export const servicePractices: ServicePractice[] = [
     title: "Technology Services",
     tagline: "Products people rely on",
     description:
-      "Websites, apps, platforms, and commerce — engineered for clarity, performance, and the next release. We ship systems your teams can run and extend.",
+      "Websites, apps, platforms, and shops — built to be clear, fast, and easy to update. We leave you with systems your team can run.",
     image: "/services/technology.jpg",
     imageAlt: "Technology services — product and engineering",
     focus: [
@@ -150,7 +150,7 @@ export const servicePractices: ServicePractice[] = [
     title: "Startup & Business Support",
     tagline: "Clarity beyond the product",
     description:
-      "Consulting, research, strategy, and operations for founders and teams under pressure — so priorities stay sharp while the work keeps moving.",
+      "Advice, research, strategy, and operations for founders and teams under pressure — so you know what matters while the work keeps moving.",
     image: "/services/startup-business-support.jpg",
     imageAlt: "Business support — strategy and operations",
     focus: [
@@ -170,7 +170,7 @@ export const servicePractices: ServicePractice[] = [
     title: "Branding & Digital Marketing",
     tagline: "Attention that turns into customers",
     description:
-      "Identity, campaigns, content, and growth systems that earn attention — and pull every channel in the same direction.",
+      "Identity, campaigns, content, and growth work that earns attention — and keeps every channel telling the same story.",
     image: "/services/marketing.jpg",
     imageAlt: "Branding and digital marketing",
     focus: [
@@ -189,18 +189,18 @@ export const servicePractices: ServicePractice[] = [
 export const servicesApproach = [
   {
     title: "Value-driven research",
-    body: "We study your market, competitors, and constraints so every decision earns its place — and every build creates real business value.",
+    body: "We study your market, competitors, and limits so every decision earns its place — and every build helps the business.",
   },
   {
     title: "Specialized planning",
-    body: "Before a line of code or a campaign goes live, we map a strategy aligned with your vision, timeline, and budget.",
+    body: "Before we write code or launch a campaign, we map a plan that fits your vision, timeline, and budget.",
   },
   {
     title: "Precise delivery",
-    body: "We implement with focus — shipping high-quality work on schedule, then staying close through launch and beyond.",
+    body: "We work with focus — high-quality work on schedule, then we stay close through launch and beyond.",
   },
   {
-    title: "Compounding partnership",
-    body: "After launch we keep iterating — measurement, refinements, and the next release so momentum does not stall.",
+    title: "A partnership that grows",
+    body: "After launch we keep improving — measuring, refining, and planning the next release so momentum does not stall.",
   },
 ];

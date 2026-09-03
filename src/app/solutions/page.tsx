@@ -57,9 +57,9 @@ export default function SolutionsPage() {
             {solutionsHero.kicker}
           </p>
           <h1 className="mx-auto max-w-4xl text-4xl font-light leading-[1.12] md:text-6xl">
-            Solutions engineered to
+            {solutionsHero.titleLine1}
             <br />
-            <span className="wc-gradient-text">grow with you</span>
+            <span className="wc-gradient-text">{solutionsHero.titleLine2}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-white/70 md:text-lg">
             {solutionsHero.description}
