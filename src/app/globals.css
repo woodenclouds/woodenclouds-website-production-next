@@ -4950,12 +4950,11 @@ body:not(.is-dark-page) .wc-progress {
   margin: 0 auto;
   max-width: none;
   color: var(--color-ink);
-  font-size: clamp(2.5rem, 5.6vw, 4.35rem);
+  font-size: clamp(2.75rem, 7vw, 5rem);
   font-weight: 300;
   letter-spacing: -0.05em;
-  line-height: 1.08;
+  line-height: 1.05;
   text-align: center;
-  text-wrap: balance;
 }
 
 .wc-svc-stage-lede {

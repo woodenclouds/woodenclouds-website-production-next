@@ -107,8 +107,12 @@ export default function SolutionsPage() {
                   <div className="lg:col-span-6">
                     <div
                       className={[
-                        "overflow-hidden rounded-2xl bg-ink/5",
-                        solution.id === "wai" ? "wai-list-media" : "",
+                        "overflow-hidden rounded-2xl",
+                        solution.id === "wai"
+                          ? "wai-list-media"
+                          : solution.id === "commerce"
+                            ? "bg-[#e8e8e8]"
+                            : "bg-ink/5",
                       ].join(" ")}
                     >
                       <img
@@ -116,7 +120,9 @@ export default function SolutionsPage() {
                         alt={solution.imageAlt}
                         className={[
                           "aspect-[4/3] w-full transition duration-700 hover:scale-[1.03]",
-                          solution.id === "wai" ? "object-contain object-center p-6" : "object-cover",
+                          solution.id === "wai" || solution.id === "commerce"
+                            ? "object-contain object-center p-4 md:p-6"
+                            : "object-cover",
                         ].join(" ")}
                       />
                     </div>

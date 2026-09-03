@@ -50,8 +50,8 @@ export const solutions: Solution[] = [
     tagline: "Online shops built to sell",
     description:
       "Online shops built to sell more, stay fast, and connect to your other tools — from Shopify and Magento to a custom setup.",
-    image: "/services/technology/ecommerce.png",
-    imageAlt: "Ecommerce platform interface",
+    image: "/solutions/commerce-cloud.png",
+    imageAlt: "Online shop on a tablet — search, cart, and product storefront",
     features: [
       "API-first when you need it",
       "Sell across channels",
@@ -68,8 +68,8 @@ export const solutions: Solution[] = [
     tagline: "Software built around how you work",
     description:
       "Web apps, CRMs, ERPs, and internal tools designed around how your teams already work — not generic templates that force you to change.",
-    image: "/services/technology/web-application.png",
-    imageAlt: "Custom web platform",
+    image: "/solutions/custom-platforms.jpg",
+    imageAlt: "Designing and coding a custom web app — screens on one monitor, code on the other",
     features: [
       "Bespoke architecture",
       "Role-based access",
@@ -86,8 +86,8 @@ export const solutions: Solution[] = [
     tagline: "Apps people come back to",
     description:
       "iOS and Android apps with calm screens, reliable speed, and the polish that turns a first visit into a daily habit.",
-    image: "/services/technology/mobile-app.png",
-    imageAlt: "Mobile application experience",
+    image: "/solutions/mobile-experiences.jpg",
+    imageAlt: "A phone showing a calm live-data app, designed for everyday use",
     features: [
       "iOS & Android",
       "Shared design system",
@@ -104,8 +104,8 @@ export const solutions: Solution[] = [
     tagline: "Intelligent layers for real workflows",
     description:
       "Chat assistants, automation, and AI features that cut support load, qualify leads, and speed up decisions — wired into the tools you already use.",
-    image: "/services/technology.jpg",
-    imageAlt: "AI-powered digital solution",
+    image: "/solutions/ai-solutions.jpg",
+    imageAlt: "An AI assistant on a phone — ask, code, summarise, or analyse",
     features: [
       "Conversational AI",
       "Lead qualification",
@@ -122,8 +122,8 @@ export const solutions: Solution[] = [
     tagline: "Brand and demand, working as one",
     description:
       "Branding, content, SEO, and ads working as one plan — so every campaign helps the next instead of competing with it.",
-    image: "/services/marketing.jpg",
-    imageAlt: "Brand and digital growth",
+    image: "/solutions/growth-systems.jpg",
+    imageAlt: "A growth dashboard with users, maps, and campaign analytics",
     features: [
       "Brand systems",
       "SEO foundations",
