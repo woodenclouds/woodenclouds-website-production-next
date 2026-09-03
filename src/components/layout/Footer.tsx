@@ -12,13 +12,13 @@ export function Footer() {
       <div className="wc-container wc-footer-content relative z-10">
         <div className="wc-footer-mast">
           <h2 className="wc-footer-mast-title">
-            Let&apos;s build
+            Designing your
             <br />
-            what&apos;s next.
+            Digital Future
           </h2>
           <div className="wc-footer-mast-row">
             <p className="wc-footer-mast-lede">
-              Technology, brand, and growth — from Kochi to everywhere you work.
+              Technology, brand, and growth — built with clarity from Kochi to the world.
             </p>
             <Link href="/contact" className="wc-footer-mast-cta">
               Start a project
@@ -68,9 +68,6 @@ export function Footer() {
                 <Link href="/solutions">Solutions</Link>
               </li>
               <li>
-                <Link href="/solutions/wai">WAI Voice Agents</Link>
-              </li>
-              <li>
                 <Link href="/industries">Industries</Link>
               </li>
               <li>
@@ -94,6 +91,9 @@ export function Footer() {
               <li>
                 <Link href="/services/digital-marketing">Branding & Digital Marketing</Link>
               </li>
+              <li>
+                <Link href="/contact">Hire Dedicated Team</Link>
+              </li>
             </ul>
           </div>
 
@@ -102,6 +102,9 @@ export function Footer() {
             <ul className="wc-footer-links">
               <li>
                 <Link href="/blog">Blog</Link>
+              </li>
+              <li>
+                <Link href="/contact">Partner with us</Link>
               </li>
               <li>
                 <Link href="/future-woodenclouds">Future Woodenclouds</Link>

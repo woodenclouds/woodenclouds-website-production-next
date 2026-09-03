@@ -3869,7 +3869,7 @@
 
 .wc-footer-mast-title {
   margin: 0;
-  max-width: 14ch;
+  max-width: 16ch;
   font-size: clamp(2.75rem, 7.5vw, 5.5rem);
   font-weight: 300;
   letter-spacing: -0.045em;
