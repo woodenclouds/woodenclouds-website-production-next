@@ -13,9 +13,9 @@ export type ServicePractice = {
 
 export const servicesHero = {
   kicker: "Services",
-  title: "Everything you need to grow your brand",
-  titleLine1: "Everything you need",
-  titleLine2: "to grow your brand.",
+  title: "Build to ship and ready to scale",
+  titleLine1: "Build to ship",
+  titleLine2: "and ready to scale.",
   description:
     "Branding, design, technology, marketing, and business support — planned together so each piece helps the next.",
 };
