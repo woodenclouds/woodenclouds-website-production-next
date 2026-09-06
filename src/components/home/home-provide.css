@@ -306,6 +306,12 @@
   background: linear-gradient(90deg, #b07cdc 0%, #7546a8 100%);
 }
 
+@media (max-width: 767px) {
+  .wc-home-provide-heading {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 479px) {
   .wc-home-provide-card.is-wai h3 span,
   .wc-home-provide-card.is-wobcart h3 span {
