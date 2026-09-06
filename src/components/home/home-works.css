@@ -123,6 +123,10 @@
 }
 
 @media (max-width: 767px) {
+  .wc-home-works-heading {
+    font-size: 32px;
+  }
+
   .wc-home-work-media {
     aspect-ratio: 4 / 3;
   }
