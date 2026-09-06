@@ -43,16 +43,6 @@
     gap: 0.55rem;
   }
 
-  .wc-home-svcs-index {
-    display: none;
-  }
-
-  .wc-home-svcs-row {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "copy"
-      "media";
-  }
 }
 
 .wc-home-svcs-intro {
@@ -175,5 +165,30 @@
   .wc-home-svcs-row:hover .wc-home-svcs-go {
     color: #0a0a0a;
     transform: translateX(4px);
+  }
+}
+
+@media (max-width: 767px) {
+  .wc-home-svcs-index {
+    display: none;
+  }
+
+  .wc-home-svcs-row {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "media";
+    gap: 1rem;
+  }
+
+  .wc-home-svcs-copy,
+  .wc-home-svcs-copy h3,
+  .wc-home-svcs-copy p {
+    text-align: left;
+  }
+
+  .wc-home-svcs-copy p {
+    max-width: none;
+    margin-top: 0.25rem;
   }
 }
