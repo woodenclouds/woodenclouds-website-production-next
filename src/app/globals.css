@@ -12209,6 +12209,12 @@ body:not(.is-dark-page) .wc-progress {
   background: #141414;
 }
 
+@media (max-width: 767px) {
+  .wc-proposal-dock {
+    display: none;
+  }
+}
+
 @keyframes wc-proposal-light {
   0% {
     transform: translateY(0);

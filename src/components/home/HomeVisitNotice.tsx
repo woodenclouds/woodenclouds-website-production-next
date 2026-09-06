@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import "./HomeVisitNotice.css";
 
 const ASSISTANT_URL = "https://woodenclouds.tech";
-const STORAGE_KEY = "wc-visit-notice-dismissed";
+const MOBILE_QUERY = "(max-width: 767px)";
+const MOBILE_DELAY_MS = 2000;
+const DESKTOP_DELAY_MS = 5000;
 
 function playNoticeChime(ctx: AudioContext) {
   const now = ctx.currentTime;
@@ -30,40 +33,32 @@ function playNoticeChime(ctx: AudioContext) {
   }, 700);
 }
 
-function wasDismissed() {
-  try {
-    return window.localStorage.getItem(STORAGE_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function persistDismissed() {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, "1");
-  } catch {
-    // Ignore quota / private-mode errors
-  }
-}
-
 export function HomeVisitNotice() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(true); // hide until we know storage state
+  const [dismissed, setDismissed] = useState(false);
   const playedSound = useRef(false);
 
   useEffect(() => {
-    if (wasDismissed()) {
-      setDismissed(true);
-      return;
-    }
+    if (dismissed) return;
 
-    setDismissed(false);
-    const id = window.setTimeout(() => setVisible(true), 5000);
-    return () => window.clearTimeout(id);
-  }, []);
+    const media = window.matchMedia(MOBILE_QUERY);
+    let id = 0;
+
+    const schedule = () => {
+      window.clearTimeout(id);
+      const delay = media.matches ? MOBILE_DELAY_MS : DESKTOP_DELAY_MS;
+      id = window.setTimeout(() => setVisible(true), delay);
+    };
+
+    schedule();
+    media.addEventListener("change", schedule);
+    return () => {
+      window.clearTimeout(id);
+      media.removeEventListener("change", schedule);
+    };
+  }, [dismissed]);
 
   const dismiss = () => {
-    persistDismissed();
     setDismissed(true);
     setVisible(false);
   };
