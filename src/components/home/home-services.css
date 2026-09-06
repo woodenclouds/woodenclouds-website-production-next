@@ -42,6 +42,17 @@
   .wc-home-svcs-head-row {
     gap: 0.55rem;
   }
+
+  .wc-home-svcs-index {
+    display: none;
+  }
+
+  .wc-home-svcs-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "media";
+  }
 }
 
 .wc-home-svcs-intro {
