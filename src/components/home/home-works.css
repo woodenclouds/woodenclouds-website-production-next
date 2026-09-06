@@ -121,3 +121,9 @@
     gap: 2.5rem 1.35rem;
   }
 }
+
+@media (max-width: 767px) {
+  .wc-home-work-media {
+    aspect-ratio: 4 / 3;
+  }
+}
