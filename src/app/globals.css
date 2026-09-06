@@ -3131,6 +3131,66 @@
   order: 2;
 }
 
+@media (max-width: 767px) {
+  .wc-process-inner {
+    justify-content: center;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .wc-process-head {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    z-index: 3;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 1rem;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  .wc-process-head .wc-home-title {
+    text-align: center;
+  }
+
+  .wc-process-stage {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .wc-process-copy {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .wc-process-step {
+    text-align: center;
+    margin-inline: auto;
+  }
+
+  .wc-process-step > p:last-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wc-process-rail {
+    justify-content: center;
+  }
+
+  .wc-process-visual {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Mission Control SVG */
 .wc-mission {
   position: relative;
@@ -3424,12 +3484,12 @@
 /* Narrow phones: simplify mission diagram + rail */
 @media (max-width: 640px) {
   .wc-process-inner {
-    padding-top: 4rem;
-    padding-bottom: 2.25rem;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .wc-process-head {
-    margin-bottom: 0.65rem;
+    margin-bottom: 0;
   }
 
   .wc-process-head .wc-home-title {
@@ -3539,6 +3599,35 @@
     right: 0.95rem;
     font-size: 0.68rem;
     letter-spacing: 0.14em;
+  }
+}
+
+@media (max-width: 767px) {
+  .wc-container.wc-process-inner {
+    justify-content: center;
+    align-items: center;
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .wc-process-head {
+    position: relative;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+
+  .wc-process-stage {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .wc-process-rail {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.15rem;
+    margin: 0;
+    justify-content: center;
   }
 }
 

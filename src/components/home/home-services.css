@@ -22,6 +22,28 @@
   color: #0a0a0a;
 }
 
+.wc-home-svcs-break--mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .wc-home-svcs-break--mobile {
+    display: inline;
+  }
+
+  .wc-home-svcs-break--desktop {
+    display: none;
+  }
+
+  .wc-home-svcs-title-end {
+    white-space: nowrap;
+  }
+
+  .wc-home-svcs-head-row {
+    gap: 0.55rem;
+  }
+}
+
 .wc-home-svcs-intro {
   margin: 0;
   max-width: 22rem;

@@ -103,12 +103,6 @@ export function HomeProcess() {
 
   return (
     <section id="process" className="wc-process-block" aria-label="Our process">
-      <div className="wc-container">
-        <header className="wc-process-head">
-          <h2 className="wc-home-title">How We Make It Happen</h2>
-        </header>
-      </div>
-
       <div
         ref={sectionRef}
         className="wc-process-scroll"
@@ -116,6 +110,9 @@ export function HomeProcess() {
       >
         <div className="wc-process-sticky">
           <div className="wc-container wc-process-inner">
+            <header className="wc-process-head">
+              <h2 className="wc-home-title">How We Make It Happen</h2>
+            </header>
             <div className="wc-process-stage min-[900px]:items-center">
               <div className="wc-process-left min-[900px]:justify-center min-[900px]:self-center">
                 <div className="wc-process-copy" aria-live="polite">

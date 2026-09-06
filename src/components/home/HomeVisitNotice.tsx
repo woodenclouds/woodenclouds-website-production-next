@@ -146,14 +146,6 @@ export function HomeVisitNotice() {
       >
         Open AI assistant
       </a>
-      <span className="wc-visit-notice-ai" aria-hidden>
-        <span className="wc-visit-notice-ai-spin">
-          <span className="wc-visit-notice-ai-layer wc-visit-notice-ai-layer--a" />
-          <span className="wc-visit-notice-ai-layer wc-visit-notice-ai-layer--b" />
-          <span className="wc-visit-notice-ai-layer wc-visit-notice-ai-layer--c" />
-          <span className="wc-visit-notice-ai-layer wc-visit-notice-ai-layer--d" />
-        </span>
-      </span>
     </aside>
   );
 }

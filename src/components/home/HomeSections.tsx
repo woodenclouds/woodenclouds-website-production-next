@@ -21,9 +21,13 @@ export function HomeWhatWeDo() {
         <HomeReveal as="header" className="wc-home-svcs-head">
           <div className="wc-home-svcs-head-row">
             <h2 className="wc-home-svcs-title">
-              Services built to ship
-              <br />
-              and scale.
+              Services built to{" "}
+              <br className="wc-home-svcs-break wc-home-svcs-break--mobile" />
+              <span className="wc-home-svcs-title-end">
+                ship{" "}
+                <br className="wc-home-svcs-break wc-home-svcs-break--desktop" />
+                and scale.
+              </span>
             </h2>
             <p className="wc-home-svcs-intro">
               Three ways we partner — product engineering, business support, and brand growth.
