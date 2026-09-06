@@ -5,7 +5,7 @@ import "./HomeVisitNotice.css";
 
 const ASSISTANT_URL = "https://woodenclouds.tech";
 const MOBILE_QUERY = "(max-width: 767px)";
-const MOBILE_DELAY_MS = 2000;
+const MOBILE_DELAY_MS = 1000;
 const DESKTOP_DELAY_MS = 5000;
 
 function playNoticeChime(ctx: AudioContext) {
